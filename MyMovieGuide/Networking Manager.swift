@@ -16,19 +16,26 @@ static let sharedManager = NetworkManager()
 
 private let apiKey = "edd0a1862823ffe4afff6c230daf2c92"
 private let readAccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZGQwYTE4NjI4MjNmZmU0YWZmZjZjMjMwZGFmMmM5MiIsInN1YiI6IjU4ODhlN2YzOTI1MTQxMTk1YTAwYjgxYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9wkhVTvuTslhD5LHAUdRmUR-BQw7qb3I_hwfXZOUcvI"
-private let baseURL = "https://api.themoviedb.org/3/movie/"
+private let baseURL = "https://api.themoviedb.org/3/"
+private let baseImageURL = "https://image.tmdb.org/t/p/w500"
 
   
   lazy var configuration: URLSessionConfiguration = URLSessionConfiguration.default
   lazy var session: URLSession = URLSession(configuration: self.configuration)
   
+  
+  
+//  https://api.themoviedb.org/3/genre/movie/list?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US
+  
+//  https://api.themoviedb.org/3/movie/popular?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&page=1
+
+// https://api.themoviedb.org/3/person/popular?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&page=1
+  
   typealias JSONData = ((Data) -> Void)
   
-  
-  
-  func getJSONData(urlExtension: String, completion: @escaping JSONData) {
+  func getJSONData(type: String, urlExtension: String, completion: @escaping JSONData) {
     
-    let request = URLRequest(url: URL(string:"\(baseURL)\(urlExtension)?api_key=\(apiKey)")! )
+    let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)")! )
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
       if error == nil {
@@ -54,7 +61,8 @@ private let baseURL = "https://api.themoviedb.org/3/movie/"
   }
   
   
-  func parseJSONFromData(_ jsonData: Data?) -> [String : AnyObject]?
+  
+  func parseJSONData(_ jsonData: Data?) -> [String : AnyObject]?
   {
     if let data = jsonData {
       
@@ -68,6 +76,34 @@ private let baseURL = "https://api.themoviedb.org/3/movie/"
     }
     
     return nil
+  }
+  
+  
+  
+  typealias ImageDataHandler = ((Data) -> Void)
+  
+  func downloadImage(imageExtension: String, _ completion: @escaping ImageDataHandler) //used to download image from URL
+  {
+    let request = URLRequest(url: URL(string: "\(baseImageURL)\(imageExtension)" )!)
+    let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+      
+      if error == nil {
+        if let httpResponse = response as? HTTPURLResponse {
+          switch (httpResponse.statusCode) {
+          case 200:
+            if let data = data {
+              completion(data)
+            }
+          default:
+            print(httpResponse.statusCode)
+          }
+        }
+      } else {
+        print("Error: \(error?.localizedDescription)")
+      }
+    })
+    
+    dataTask.resume()
   }
 
 }

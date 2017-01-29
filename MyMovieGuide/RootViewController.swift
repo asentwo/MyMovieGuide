@@ -12,12 +12,13 @@ import UIKit
 class ViewController: UIViewController {
 
   let networkSessionCreator = NetworkManager.sharedManager
-  let alamofireSessionManager = AlamoFireNetworkManager.sharedManager
   
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    PopularData.updateAllData(urlExtension:"popular", completionHandler: { results in
+    //urlExtensions for Movies: "popular", "upcoming", "now_playing"
+    
+    MovieData.updateAllData(urlExtension:"now_playing", completionHandler: { results in
       
             guard let results = results else {
       
@@ -28,9 +29,12 @@ class ViewController: UIViewController {
       print(results)
       
     })
-
-
-
   }
+  
+  
+  
+  
+  
+  
 }
 

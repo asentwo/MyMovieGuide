@@ -11,9 +11,10 @@ import Gloss
 
 
 
-public struct PopularResults: Decodable {
+// Used for Popular/ Now Playing and Upcoming Movie Objects
+public struct ResultsMovieData: Decodable {
   
-  public let results: [PopularData]?
+  public let results: [MovieData]?
   
   public init?(json: JSON) {
     
@@ -21,53 +22,56 @@ public struct PopularResults: Decodable {
   }
 }
 
-
-public struct PopularData: Decodable {
+public struct MovieData: Decodable {
   
   public let poster : String
   public let overView : String
   public let title : String
   public let backdrop : String
+  public let id: NSNumber
   
   public init? (json: JSON) {
     
     guard let poster : String = "poster_path" <~~ json,
       let overview : String  = "overview" <~~ json,
       let title : String  = "title" <~~ json,
-      let backdrop : String  = "backdrop_path" <~~ json
+      let backdrop : String  = "backdrop_path" <~~ json,
+      let id : NSNumber = "id" <~~ json
       else { return nil }
     
     self.poster = poster
     self.overView = overview
     self.title = title
     self.backdrop = backdrop
+    self.id = id
   }
   
   
-  
-  static func updateAllData(urlExtension: String, completionHandler:@escaping (_ details: [PopularData]?) -> Void){
+
+//urlExtensions: "popular", "upcoming", "now_playing"
+static func updateAllData(urlExtension: String, completionHandler:@escaping (_ details: [MovieData]?) -> Void){
     
     let nm = NetworkManager.sharedManager
     
-    nm.getJSONData(urlExtension: urlExtension, completion: {
+  nm.getJSONData(type:"movie", urlExtension: urlExtension, completion: {
       data in
       
       if let jsonDictionary = nm.parseJSONFromData(data)
       {
-        guard let popularResults = PopularResults(json: jsonDictionary)
+        guard let movieResults = ResultsMovieData(json: jsonDictionary)
           
           else {
             print("Error initializing object")
             return
         }
-
-        guard let popularData = popularResults.results
+        
+        guard let movieData = movieResults.results
           else {
             print("No such item")
             return
         }
         
-        completionHandler(popularData)
+        completionHandler(movieData)
       }
     })
   }
