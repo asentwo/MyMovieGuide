@@ -1,0 +1,6 @@
+framework module Pods_MyMovieGuide {
+  umbrella header "Pods-MyMovieGuide-umbrella.h"
+
+  export *
+  module * { export * }
+}
