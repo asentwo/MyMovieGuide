@@ -33,8 +33,8 @@ public struct MovieData: Decodable {
   public init? (json: JSON) {
     
     guard let poster : String = "poster_path" <~~ json,
-      let overview : String  = "overview" <~~ json,
-      let title : String  = "title" <~~ json,
+      let overview : String  = "overview" <~~ json ?? "N/A",
+      let title : String  = "title" <~~ json ?? "N/A",
       let backdrop : String  = "backdrop_path" <~~ json,
       let id : NSNumber = "id" <~~ json
       else { return nil }
@@ -47,16 +47,16 @@ public struct MovieData: Decodable {
   }
   
   
-
-//urlExtensions: "popular", "upcoming", "now_playing"
-static func updateAllData(urlExtension: String, completionHandler:@escaping (_ details: [MovieData]?) -> Void){
+  
+  //urlExtensions: "popular", "upcoming", "now_playing"
+  static func updateAllData(urlExtension: String, completionHandler:@escaping (_ details: [MovieData]?) -> Void){
     
     let nm = NetworkManager.sharedManager
     
-  nm.getJSONData(type:"movie", urlExtension: urlExtension, completion: {
+    nm.getJSONData(type:"movie", urlExtension: urlExtension, completion: {
       data in
       
-      if let jsonDictionary = nm.parseJSONFromData(data)
+      if let jsonDictionary = nm.parseJSONData(data)
       {
         guard let movieResults = ResultsMovieData(json: jsonDictionary)
           
@@ -64,6 +64,8 @@ static func updateAllData(urlExtension: String, completionHandler:@escaping (_ d
             print("Error initializing object")
             return
         }
+        
+        //  print(jsonDictionary)
         
         guard let movieData = movieResults.results
           else {
