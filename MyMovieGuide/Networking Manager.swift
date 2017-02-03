@@ -19,6 +19,7 @@ class NetworkManager {
   private let baseImageURL = "https://image.tmdb.org/t/p/w500"
   
   
+  
   lazy var configuration: URLSessionConfiguration = URLSessionConfiguration.default
   lazy var session: URLSession = URLSession(configuration: self.configuration)
   
@@ -71,6 +72,9 @@ class NetworkManager {
   typealias ImageDataHandler = ((Data) -> Void)
   
   func downloadImage(imageExtension: String, _ completion: @escaping ImageDataHandler)  {
+    
+//    print(imageExtension)
+//    print("\(baseImageURL)\(imageExtension)")
     let request = URLRequest(url: URL(string: "\(baseImageURL)\(imageExtension)" )!)
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
