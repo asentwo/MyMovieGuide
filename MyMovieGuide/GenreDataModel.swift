@@ -99,8 +99,6 @@ public struct GenrePosters: Decodable, Equatable{
   //urlExtension for GenrePosters: "movies"
   static func updateGenrePoster(genreID: NSNumber, urlExtension: String, completionHandler:@escaping (_ details: [String]) -> Void){
     
-    var posterArray: [GenrePosters] = []
-
     let nm = NetworkManager.sharedManager
     
     nm.getJSONData(type:"genre/\(genreID)", urlExtension: urlExtension, completion: {
@@ -115,26 +113,19 @@ public struct GenrePosters: Decodable, Equatable{
             return
         }
         
-       guard let posters = genrePosters.results
-        
-   
+        guard let posters = genrePosters.results
+          
+          
           else {
             print("No such item")
             return
         }
         
-        for poster in posters {
-          
-          if posterArray.contains(poster) {
-            continue //checks to see if local array contains item, if it does it continues until it finds an item that is not in array
-          } else {
-            posterArray.append(poster)
-          }
-        }
+        let postersArray = posters.map {$0.poster}// converts custom object "GenrePosters" to String(poster value)
+        completionHandler(postersArray)
+        
       }
-      let posters = posterArray.map {$0.poster}// converts custom object "GenrePosters" to String
-     
-      completionHandler(posters)
+      
     })
   }
   
