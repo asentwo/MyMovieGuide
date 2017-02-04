@@ -36,7 +36,7 @@ public struct GenreData : Decodable {
     self.name = name
     
   }
- //https://api.themoviedb.org/3/genre/movie/list?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US
+  //https://api.themoviedb.org/3/genre/movie/list?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US
   
   //urlExtension for Genres: "list"
   static func updateAllData(urlExtension: String, completionHandler:@escaping (_ details: [GenreData]?) -> Void){
@@ -55,7 +55,7 @@ public struct GenreData : Decodable {
             return
         }
         
-      //  print(jsonDictionary)
+        //  print(jsonDictionary)
         
         guard let genreData = genres.genres
           else {
@@ -79,24 +79,28 @@ public struct ResultsGenrePosters: Decodable {
   }
 }
 
-
-public struct GenrePosters: Decodable {
+//Made of type Equatable to make it comparable so can check for duplicatesGenre
+public struct GenrePosters: Decodable, Equatable{
   
   public let poster : String
   
   public init? (json: JSON) {
-
+    
     guard let poster: String = "poster_path" <~~ json
-    else {return nil}
-  self.poster = poster
+      else {return nil}
+    self.poster = poster
   }
-
- // https://api.themoviedb.org/3/genre/28/movies?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US
- //urlExtension for GenrePosters: "movies"
+  
+  public static func ==(lhs: GenrePosters, rhs: GenrePosters) -> Bool {
+    return lhs.poster == rhs.poster
+  }
+  
+  // https://api.themoviedb.org/3/genre/28/movies?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US
+  //urlExtension for GenrePosters: "movies"
   static func updateGenrePoster(genreID: NSNumber, urlExtension: String, completionHandler:@escaping (_ details: [String]) -> Void){
     
-    var posterArray: [String] = []
-    
+    var posterArray: [GenrePosters] = []
+
     let nm = NetworkManager.sharedManager
     
     nm.getJSONData(type:"genre/\(genreID)", urlExtension: urlExtension, completion: {
@@ -104,22 +108,35 @@ public struct GenrePosters: Decodable {
       
       if let jsonDictionary = nm.parseJSONData(data)
       {
-        guard let genrePoster = ResultsGenrePosters(json: jsonDictionary)
+        guard let genrePosters = ResultsGenrePosters(json: jsonDictionary)
           
           else {
             print("Error initializing object")
             return
         }
-        guard let posterString = genrePoster.results?[0].poster//This is where I want to check to see if array already contains the string
-          
+        
+       guard let posters = genrePosters.results
+        
+   
           else {
             print("No such item")
             return
         }
-        posterArray.append(posterString)
         
+        for poster in posters {
+          
+          if posterArray.contains(poster) {
+            continue //checks to see if local array contains item, if it does it continues until it finds an item that is not in array
+          } else {
+            posterArray.append(poster)
+          }
+        }
       }
-      completionHandler(posterArray)
+      let posters = posterArray.map {$0.poster}// converts custom object "GenrePosters" to String
+     
+      completionHandler(posters)
     })
   }
+  
 }
+
