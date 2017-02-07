@@ -65,7 +65,7 @@ public struct MovieData: Decodable {
             return
         }
         
-        //  print(jsonDictionary)
+       // print(jsonDictionary)
         
         guard let movieData = movieResults.results
           else {
