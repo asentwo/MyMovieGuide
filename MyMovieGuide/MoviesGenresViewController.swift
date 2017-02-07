@@ -16,8 +16,8 @@ class MoviesGenresViewController: UIViewController , UITableViewDelegate, UITabl
   let networkManager = NetworkManager.sharedManager
   
   var genreDataArray: [GenreData] = []
-  var genrePostersArray:[String] = []
-  var genrePosterAlreadyPresented = [Bool](repeating: false, count:20)
+  var posterStringArray: [String] = []
+  var posterImageArray: [UIImage] = []
 
   //MARK: Lifecycle
   
@@ -31,7 +31,27 @@ class MoviesGenresViewController: UIViewController , UITableViewDelegate, UITabl
         return
       }
       self.genreDataArray = results
-      self.genrePosterAlreadyPresented = [Bool](repeating: false, count: self.genreDataArray.count)
+    
+      GenrePosters.updateGenrePoster(genreID: self.genreDataArray[0].id!, urlExtension: "movies", completionHandler: {posters in
+        
+        for poster in posters {
+          
+          if self.posterStringArray.contains(poster){
+            continue
+          } else {
+            self.posterStringArray.append(poster)
+            
+            self.networkManager.downloadImage(imageExtension: "\(poster)",
+              { (imageData) //imageData = Image data downloaded from web
+                in
+                let image = UIImage(data: imageData as Data)
+                self.posterImageArray.append(image!)
+
+            })
+          }
+        }
+      })
+      
       
       DispatchQueue.main.async {
         self.genresTableView.reloadData()
@@ -50,64 +70,11 @@ class MoviesGenresViewController: UIViewController , UITableViewDelegate, UITabl
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = genresTableView.dequeueReusableCell(withIdentifier: "GenresTableViewCell") as! GenresTableViewCell
     
- 
-    
-    if let genreID = genreDataArray[indexPath.row].id {
-      
-      print(genreID)
-      
-      GenrePosters.updateGenrePoster(genreID: genreID, urlExtension: "movies", completionHandler: { posters in
-      
-        if self.genrePosterAlreadyPresented[indexPath.row] == false {
-        
-        for poster in posters {
-          if self.genrePostersArray.contains(poster) { continue} else {
-            self.genrePostersArray.append(poster)
-            
-            self.networkManager.downloadImage(imageExtension: "\(poster)", {(imageData) in
-              if let image = UIImage(data: imageData as Data) {
-                cell.genreCatagoryLabel.text = self.genreDataArray[indexPath.row].name
-                cell.mainImageView.image = image
-              }
-            })
-          }
-        }
-          
-        self.genrePosterAlreadyPresented[indexPath.row] = true
-          
-        } else {
-          print("image has already been presented")
-        }
-      })
-    }
+    cell.genreCatagoryLabel.text = genreDataArray[indexPath.row].name
+    cell.mainImageView.image = posterImageArray[indexPath.row]
+
     return cell
   }
-  
-  
-  //      GenrePosters.updateGenrePoster(genreID: genreID, urlExtension: genrePoster.poster, completionHandler: {
-  //      poster in
-  //
-  //        self.networkManager.downloadImage(imageExtension: "\(poster)", {
-  //          (imageData) in
-  //          let image = UIImage(data: imageData as Data)
-  //
-  //          DispatchQueue.main.async {
-  //          cell.mainImageView.image = image
-  //          }
-  //
-  //
-  //
-  //        })
-  //
-  //
-  //
-  //      })
-  
-  
-  
-  
-  
-  
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     

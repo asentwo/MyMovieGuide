@@ -59,7 +59,7 @@ public struct GenreData : Decodable {
         
         guard let genreData = genres.genres
           else {
-            print("No such item")
+            print("No genre data exists")
             return
         }
         
@@ -115,19 +115,15 @@ public struct GenrePosters: Decodable, Equatable{
         
         guard let posters = genrePosters.results
           
-          
           else {
-            print("No such item")
+            print("No poster exists")
             return
         }
         
         let postersArray = posters.map {$0.poster}// converts custom object "GenrePosters" to String(poster value)
         completionHandler(postersArray)
-        
       }
-      
     })
   }
-  
 }
 
