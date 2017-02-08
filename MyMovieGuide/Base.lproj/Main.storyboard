@@ -136,7 +136,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Spu-zr-KDh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6207" y="-1433"/>
+            <point key="canvasLocation" x="6710" y="-1433"/>
         </scene>
         <!--Movies In Theatres View Controller-->
         <scene sceneID="LXX-QT-uqj">
@@ -163,7 +163,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ReH-nz-83q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7388" y="-1433"/>
+            <point key="canvasLocation" x="5780" y="-1433"/>
         </scene>
         <!--Movies Genres View Controller-->
         <scene sceneID="2Pw-mr-GeO">

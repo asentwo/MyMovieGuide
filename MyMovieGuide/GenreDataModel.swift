@@ -90,12 +90,12 @@ public struct GenrePosters: Decodable, Equatable{
       else {return nil}
     self.poster = poster
   }
-  
   public static func ==(lhs: GenrePosters, rhs: GenrePosters) -> Bool {
     return lhs.poster == rhs.poster
   }
   
-  // https://api.themoviedb.org/3/genre/28/movies?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US
+  
+  //https://api.themoviedb.org/3/genre/99/movies?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US
   //urlExtension for GenrePosters: "movies"
   static func updateGenrePoster(genreID: NSNumber, urlExtension: String, completionHandler:@escaping (_ details: [String]) -> Void){
     
@@ -103,6 +103,8 @@ public struct GenrePosters: Decodable, Equatable{
     
     nm.getJSONData(type:"genre/\(genreID)", urlExtension: urlExtension, completion: {
       data in
+      
+      
       
       if let jsonDictionary = nm.parseJSONData(data)
       {
@@ -112,11 +114,11 @@ public struct GenrePosters: Decodable, Equatable{
             print("Error initializing object")
             return
         }
-        
+
         guard let posters = genrePosters.results
           
           else {
-            print("No poster exists")
+            print("No poster exists for genre: \(genreID)")
             return
         }
         
