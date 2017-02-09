@@ -12,20 +12,37 @@ import UIKit
 
 class MoviesUpcomingViewController: UICollectionViewController {
   
-  //urlExtensions for Movies: "popular", "upcoming", "now_playing"
-  //urlExtension for People: "popular"
-  //urlExtension for Genres: "list"
-//  GenreData.updateAllData(urlExtension:"list", completionHandler: { results in
-//  
-//  guard let results = results else {
-//  
-//  print("There was an error retrieving info")
-//  
-//  return
-//  }
-//  print(results)
-//  })
+  @IBOutlet var upcomingCollectionView: UICollectionView!
   
+  let networkManager = NetworkManager.sharedManager
+  
+  var upcomingDataArray: [MovieData] = []
+  var upcomingImageArray: [UIImage] = []
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    MovieData.updateAllData(urlExtension: "upcoming", completionHandler: { results in
+      
+      guard let results = results else {
+        print("There was an error retrieving upcoming movie data")
+        return
+      }
+      self.upcomingDataArray = results
+      
+      for movie in upcomingDataArray {
+        
+        if let moviePoster = movie.poster {
+          self.networkManager.downloadImage(imageExtension: "\(moviePoster)", {
+            (imageData) in
+            if let image = UIImage(data: imageData as Data){
+              self.upcomingImageArray.append(image)
+            }
+          })
+        }
+      }
+    })
+  }
 }
 
 
@@ -33,7 +50,7 @@ class MoviesUpcomingViewController: UICollectionViewController {
 extension MoviesUpcomingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
+    return upcomingImageArray.count
   }
   
   
@@ -48,8 +65,3 @@ extension MoviesUpcomingViewController: UICollectionViewDelegate, UICollectionVi
 
 
 
-//extension MoviesUpcomingViewController : UICollectionViewLayout {
-//  
-//  
-//  
-//}

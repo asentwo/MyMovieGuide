@@ -260,6 +260,9 @@
                             <outlet property="delegate" destination="Gr4-GQ-0Y6" id="seO-iE-qM2"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <outlet property="upcomingCollectionView" destination="re7-JH-5ky" id="uKf-KO-IJO"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wiv-aU-7ET" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

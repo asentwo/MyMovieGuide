@@ -27,7 +27,7 @@ class MoviesGenresViewController: UIViewController {
     GenreData.updateAllData(urlExtension:"list", completionHandler: { results in
       
       guard let results = results else {
-        print("There was an error retrieving genre data info")
+        print("There was an error retrieving genre data")
         return
       }
       self.genreDataArray = results
@@ -40,7 +40,7 @@ class MoviesGenresViewController: UIViewController {
           GenrePosters.updateGenrePoster(genreID: movieGenreID, urlExtension: "movies", completionHandler: {posters in
             
             guard let posters = posters else {
-              print("There was an error retrieving poster data info")
+              print("There was an error retrieving poster data")
               return
             }
             

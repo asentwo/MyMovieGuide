@@ -24,7 +24,7 @@ class MoviesInTheatresViewController: UICollectionViewController {
     MovieData.updateAllData(urlExtension: "now_playing", completionHandler: {results in
       
       guard let results = results else {
-        print("There was an error retrieving genre data info")
+        print("There was an error retrieving in theatres movie data")
         return
       }
       
@@ -51,6 +51,7 @@ extension MoviesInTheatresViewController: UICollectionViewDelegate, UICollection
   
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return moviePosterArray.count
     
   }
   
