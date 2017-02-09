@@ -198,11 +198,10 @@
 		6EA9F3921E401CC000F96A5D /* Movies */ = {
 			isa = PBXGroup;
 			children = (
-				6E1A0B591E391CFE00F18892 /* MoviesMasterViewController.swift */,
-				6EA9F3951E401D0B00F96A5D /* MoviesGenresViewController.swift */,
-				6EF740391E4A7E8500BDA5BE /* MoviesGenresDetailViewController.swift */,
-				6EC4234B1E41450200CCCBBD /* MoviesInTheatresViewController.swift */,
-				6EA9F3931E401CD800F96A5D /* MoviesUpcomingViewController.swift */,
+				6EFC68BE1E4CF9C800150989 /* Master */,
+				6EFC68BC1E4CF9A700150989 /* Genres */,
+				6EFC68BD1E4CF9B900150989 /* Theatres */,
+				6EFC68BF1E4CF9D100150989 /* Upcoming */,
 			);
 			name = Movies;
 			sourceTree = "<group>";
@@ -221,6 +220,39 @@
 				6EC4234F1E4270B700CCCBBD /* GenresTableViewCell.swift */,
 			);
 			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		6EFC68BC1E4CF9A700150989 /* Genres */ = {
+			isa = PBXGroup;
+			children = (
+				6EA9F3951E401D0B00F96A5D /* MoviesGenresViewController.swift */,
+				6EF740391E4A7E8500BDA5BE /* MoviesGenresDetailViewController.swift */,
+			);
+			name = Genres;
+			sourceTree = "<group>";
+		};
+		6EFC68BD1E4CF9B900150989 /* Theatres */ = {
+			isa = PBXGroup;
+			children = (
+				6EC4234B1E41450200CCCBBD /* MoviesInTheatresViewController.swift */,
+			);
+			name = Theatres;
+			sourceTree = "<group>";
+		};
+		6EFC68BE1E4CF9C800150989 /* Master */ = {
+			isa = PBXGroup;
+			children = (
+				6E1A0B591E391CFE00F18892 /* MoviesMasterViewController.swift */,
+			);
+			name = Master;
+			sourceTree = "<group>";
+		};
+		6EFC68BF1E4CF9D100150989 /* Upcoming */ = {
+			isa = PBXGroup;
+			children = (
+				6EA9F3931E401CD800F96A5D /* MoviesUpcomingViewController.swift */,
+			);
+			name = Upcoming;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

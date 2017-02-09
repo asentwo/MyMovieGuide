@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class MoviesUpcomingViewController: UIViewController {
+class MoviesUpcomingViewController: UICollectionViewController {
   
   //urlExtensions for Movies: "popular", "upcoming", "now_playing"
   //urlExtension for People: "popular"
@@ -27,3 +27,29 @@ class MoviesUpcomingViewController: UIViewController {
 //  })
   
 }
+
+
+//MARK: CollectionView Delegate/ DataSource
+extension MoviesUpcomingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+  
+  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
+  }
+  
+  
+  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    <#code#>
+  }
+  
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    <#code#>
+  }
+}
+
+
+
+//extension MoviesUpcomingViewController : UICollectionViewLayout {
+//  
+//  
+//  
+//}
