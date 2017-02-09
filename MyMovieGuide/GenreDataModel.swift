@@ -82,30 +82,27 @@ public struct ResultsGenrePosters: Decodable {
 //Made of type Equatable to make it comparable so can check for duplicatesGenre
 public struct GenrePosters: Decodable, Equatable{
   
-  public let poster : String
+  public let backdrop : String?
+  public let poster : String?
   
   public init? (json: JSON) {
-    
-    guard let poster: String = "poster_path" <~~ json
-      else {return nil}
-    self.poster = poster
+    backdrop = "backdrop_path" <~~ json
+    poster  = "poster_path" <~~ json
   }
   public static func ==(lhs: GenrePosters, rhs: GenrePosters) -> Bool {
-    return lhs.poster == rhs.poster
+   return lhs.backdrop == rhs.backdrop
   }
   
   
   //https://api.themoviedb.org/3/genre/99/movies?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US
   //urlExtension for GenrePosters: "movies"
-  static func updateGenrePoster(genreID: NSNumber, urlExtension: String, completionHandler:@escaping (_ details: [String]) -> Void){
+  static func updateGenrePoster(genreID: NSNumber, urlExtension: String, completionHandler:@escaping (_ details: [String?]?) -> Void){
     
     let nm = NetworkManager.sharedManager
     
     nm.getJSONData(type:"genre/\(genreID)", urlExtension: urlExtension, completion: {
       data in
-      
-      
-      
+    
       if let jsonDictionary = nm.parseJSONData(data)
       {
         guard let genrePosters = ResultsGenrePosters(json: jsonDictionary)
@@ -118,11 +115,11 @@ public struct GenrePosters: Decodable, Equatable{
         guard let posters = genrePosters.results
           
           else {
-            print("No poster exists for genre: \(genreID)")
+            print("No data exists for genre: \(genreID)")
             return
         }
-        
-        let postersArray = posters.map {$0.poster}// converts custom object "GenrePosters" to String(poster value)
+     
+        let postersArray = posters.map {$0.backdrop} // converts custom object "GenrePosters" to String(backdrop value)
         completionHandler(postersArray)
       }
     })

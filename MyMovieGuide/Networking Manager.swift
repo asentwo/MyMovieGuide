@@ -29,7 +29,7 @@ class NetworkManager {
   
   func getJSONData(type: String, urlExtension: String, completion: @escaping JSONData) {
     
-    let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&language=en-US&include_adult=false&sort_by=created_at.asc")! )
+    let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)")! )
     
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
@@ -76,7 +76,7 @@ class NetworkManager {
     
 //    print(imageExtension)
 //    print("\(baseImageURL)\(imageExtension)")
-    let request = URLRequest(url: URL(string: "\(baseImageURL)\(imageExtension)&language=en-US&include_adult=false&sort_by=created_at.asc" )!)
+    let request = URLRequest(url: URL(string: "\(baseImageURL)\(imageExtension)" )!)
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
       if error == nil {

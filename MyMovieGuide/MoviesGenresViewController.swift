@@ -9,7 +9,7 @@
 import UIKit
 
 
-class MoviesGenresViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
+class MoviesGenresViewController: UIViewController {
   
   @IBOutlet weak var genresTableView: UITableView!
   
@@ -36,37 +36,37 @@ class MoviesGenresViewController: UIViewController , UITableViewDelegate, UITabl
         
         if let movieGenreID = movie.id
         {
-
           //Update posters based on genreID
           GenrePosters.updateGenrePoster(genreID: movieGenreID, urlExtension: "movies", completionHandler: {posters in
             
+            guard let posters = posters else {
+              print("There was an error retrieving poster data info")
+              return
+            }
+            
             //Must iterate through multiple arrays with many containing the same poster strings
             for poster in posters {
-  
-              //Check to see if array already has the current poster string, if it does continue, if not append to array
-              if self.posterStringArray.contains(poster){
-                continue
-              } else {
-                self.posterStringArray.append(poster)
-                print(movieGenreID)
-                print(movie.name)
-                print(poster)
-                //Use the poster string to download the corresponding poster
-                self.networkManager.downloadImage(imageExtension: "\(poster)",
-                  { (imageData) //imageData = Image data downloaded from web
-                    in
               
-                    if let image = UIImage(data: imageData as Data){
-                    
-                      self.posterImageArray.append(image)
-                      
-                    }
-                })
+              if let newPoster = poster {
                 
-                break// Use to exit out of array after appending the corresponding poster string
+                //Check to see if array already has the current poster string, if it does continue, if not append to array
+                if self.posterStringArray.contains(newPoster){
+                  continue
+                } else {
+                  self.posterStringArray.append(newPoster)
+                  
+                  //Use the poster string to download the corresponding poster
+                  self.networkManager.downloadImage(imageExtension: "\(newPoster)",
+                    { (imageData) //imageData = Image data downloaded from web
+                      in
+                      if let image = UIImage(data: imageData as Data){
+                        self.posterImageArray.append(image)
+                      }
+                  })
+                  break// Use to exit out of array after appending the corresponding poster string
+                }
               }
             }
-            print(self.posterStringArray.count)
           })
         }
       }
@@ -76,12 +76,14 @@ class MoviesGenresViewController: UIViewController , UITableViewDelegate, UITabl
     })
   }
   
-  
-  
-  //MARK: TableView
-  
+}
+
+
+//MARK: TableView Delegates/ DataSource
+extension MoviesGenresViewController:  UITableViewDelegate, UITableViewDataSource {
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return genreDataArray.count
+    return posterImageArray.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

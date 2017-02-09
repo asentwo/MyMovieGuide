@@ -194,15 +194,15 @@
                                                     <color key="backgroundColor" red="0.0" green="0.079419953939999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre Catagory" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="432-cG-3bP">
-                                                    <rect key="frame" x="8" y="170" width="121" height="21"/>
+                                                    <rect key="frame" x="8" y="8" width="121" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="432-cG-3bP" firstAttribute="bottom" secondItem="yml-7N-3w3" secondAttribute="bottomMargin" id="Wbt-Ku-rsb"/>
                                                 <constraint firstItem="432-cG-3bP" firstAttribute="leading" secondItem="yml-7N-3w3" secondAttribute="leadingMargin" id="oSh-iP-1jv"/>
+                                                <constraint firstItem="432-cG-3bP" firstAttribute="top" secondItem="yml-7N-3w3" secondAttribute="topMargin" id="rii-Jp-vqc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
