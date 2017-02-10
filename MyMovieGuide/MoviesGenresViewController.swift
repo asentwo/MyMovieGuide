@@ -33,7 +33,7 @@ class MoviesGenresViewController: UIViewController {
       self.genreDataArray = results
       
       for movie in self.genreDataArray {
-        
+      
         if let movieGenreID = movie.id
         {
           //Update posters based on genreID
@@ -46,36 +46,39 @@ class MoviesGenresViewController: UIViewController {
             
             //Must iterate through multiple arrays with many containing the same poster strings
             for poster in posters {
-              
+            
               if let newPoster = poster {
-                
+              
                 //Check to see if array already has the current poster string, if it does continue, if not append to array
                 if self.posterStringArray.contains(newPoster){
                   continue
                 } else {
                   self.posterStringArray.append(newPoster)
-                  
+          
                   //Use the poster string to download the corresponding poster
                   self.networkManager.downloadImage(imageExtension: "\(newPoster)",
                     { (imageData) //imageData = Image data downloaded from web
                       in
                       if let image = UIImage(data: imageData as Data){
                         self.posterImageArray.append(image)
-                      }
+                        
+                        DispatchQueue.main.async {
+                          self.genresTableView.reloadData()
+                        }
+                    }
                   })
                   break// Use to exit out of array after appending the corresponding poster string
                 }
+              } else {
+                print("There was a problem retrieving poster images")
+                continue
               }
             }
           })
         }
       }
-      DispatchQueue.main.async {
-        self.genresTableView.reloadData()
-      }
     })
   }
-  
 }
 
 
@@ -88,7 +91,6 @@ extension MoviesGenresViewController:  UITableViewDelegate, UITableViewDataSourc
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = genresTableView.dequeueReusableCell(withIdentifier: "GenresTableViewCell") as! GenresTableViewCell
-    
     cell.genreCatagoryLabel.text = genreDataArray[indexPath.row].name
     cell.mainImageView.image = posterImageArray[indexPath.row]
     

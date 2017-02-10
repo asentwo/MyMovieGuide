@@ -16,10 +16,13 @@ class MoviesInTheatresViewController: UICollectionViewController {
   let networkManager = NetworkManager.sharedManager
   
   var movieDataArray: [MovieData] = []
-  var moviePosterArray: [UIImage] = {}
+  var moviePosterArray: [UIImage] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    //Must register CollectionView Cells
+    inTheatresCollectionView.register(InTheatresCollectionViewCell.self, forCellWithReuseIdentifier: "upcomingCollectionViewCell")
     
     MovieData.updateAllData(urlExtension: "now_playing", completionHandler: {results in
       
@@ -30,15 +33,17 @@ class MoviesInTheatresViewController: UICollectionViewController {
       
       self.movieDataArray = results
       
-      for movie in movieDataArray {
-        
-        if let moviePoster = movie.poster {
-          self.networkManager.downloadImage(imageExtension: "\(moviePoster)", {(imageData) in
+      for movie in self.movieDataArray {
+          self.networkManager.downloadImage(imageExtension: "\(movie.poster)", {(imageData) in
             if let image = UIImage(data: imageData as Data){
               self.moviePosterArray.append(image)
+              print(self.moviePosterArray.count)
+              DispatchQueue.main.async {
+                self.inTheatresCollectionView.reloadData()
+              }
+              
             }
           })
-        }
       }
     })
   }
@@ -47,23 +52,28 @@ class MoviesInTheatresViewController: UICollectionViewController {
 
 
 //MARK: CollectionView Delegate/ DataSource
-extension MoviesInTheatresViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MoviesInTheatresViewController {
   
+  override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    return 1
+  }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return moviePosterArray.count
     
   }
   
-  
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
+    let cell = inTheatresCollectionView.dequeueReusableCell(withReuseIdentifier: "upcomingCollectionViewCell", for: indexPath)
+    cell.backgroundColor = UIColor.black
+  
+    return cell
   }
   
-  
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
-  }
+//  
+//  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//    
+//  }
 }
 
 

@@ -183,7 +183,7 @@
         <!--Movies In Theatres View Controller-->
         <scene sceneID="zPY-OT-ljr">
             <objects>
-                <collectionViewController id="KuU-99-SSV" customClass="MoviesInTheatresViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="MoviesInTheatresViewController" id="KuU-99-SSV" customClass="MoviesInTheatresViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="6dX-rW-Pzh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -202,7 +202,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="fF5-VU-gJk">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="inTheatresCollectionViewCell" id="fF5-VU-gJk" customClass="InTheatresCollectionViewCell" customModule="MyMovieGuide" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -224,10 +224,10 @@
             </objects>
             <point key="canvasLocation" x="5842" y="-1433"/>
         </scene>
-        <!--Movies Upcoming View Controller-->
+        <!--MoviesUpcomingViewController-->
         <scene sceneID="axl-N1-cp2">
             <objects>
-                <collectionViewController id="Gr4-GQ-0Y6" customClass="MoviesUpcomingViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="MoviesUpcomingViewController" title="MoviesUpcomingViewController" clearsSelectionOnViewWillAppear="NO" id="Gr4-GQ-0Y6" customClass="MoviesUpcomingViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="re7-JH-5ky">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -246,7 +246,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="GXx-e1-d1S">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="upcomingCollectionViewCell " id="GXx-e1-d1S" customClass="UpcomingCollectionViewCell" customModule="MyMovieGuide" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
