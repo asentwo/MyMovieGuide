@@ -12,6 +12,7 @@ import UIKit
 
 class UpcomingCollectionViewCell: UICollectionViewCell {
   
+  @IBOutlet weak var posterImage: UIImageView!
   
   
 }

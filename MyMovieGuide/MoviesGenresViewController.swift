@@ -10,7 +10,8 @@ import UIKit
 
 
 class MoviesGenresViewController: UIViewController {
-  
+ 
+  //MARK: Constants, IBOutlets
   @IBOutlet weak var genresTableView: UITableView!
   
   let networkManager = NetworkManager.sharedManager
@@ -18,6 +19,7 @@ class MoviesGenresViewController: UIViewController {
   var genreDataArray: [GenreData] = []
   var posterStringArray: [String] = []
   var posterImageArray: [UIImage] = []
+  
   
   //MARK: Lifecycle
   
@@ -54,7 +56,7 @@ class MoviesGenresViewController: UIViewController {
                   continue
                 } else {
                   self.posterStringArray.append(newPoster)
-          
+        
                   //Use the poster string to download the corresponding poster
                   self.networkManager.downloadImage(imageExtension: "\(newPoster)",
                     { (imageData) //imageData = Image data downloaded from web
@@ -70,8 +72,8 @@ class MoviesGenresViewController: UIViewController {
                   break// Use to exit out of array after appending the corresponding poster string
                 }
               } else {
-                print("There was a problem retrieving poster images")
-                continue
+                //print("There was a problem retrieving poster images: \(poster)")
+               continue// if the poster returned is nil, continue to iterate through arrays until there is one that is not nil
               }
             }
           })

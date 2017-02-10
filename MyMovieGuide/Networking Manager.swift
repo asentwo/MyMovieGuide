@@ -28,9 +28,9 @@ class NetworkManager {
   typealias JSONData = ((Data) -> Void)
   
   func getJSONData(type: String, urlExtension: String, completion: @escaping JSONData) {
-    
+    //&region=US
     let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)")! )
-    
+
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
       if error == nil {
@@ -73,9 +73,7 @@ class NetworkManager {
   typealias ImageDataHandler = ((Data) -> Void)
   
   func downloadImage(imageExtension: String, _ completion: @escaping ImageDataHandler)  {
-    
-//    print(imageExtension)
-//    print("\(baseImageURL)\(imageExtension)")
+
     let request = URLRequest(url: URL(string: "\(baseImageURL)\(imageExtension)" )!)
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       

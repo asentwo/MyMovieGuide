@@ -91,6 +91,7 @@ public struct GenrePosters: Decodable, Equatable{
   }
   public static func ==(lhs: GenrePosters, rhs: GenrePosters) -> Bool {
    return lhs.backdrop == rhs.backdrop
+    
   }
   
   

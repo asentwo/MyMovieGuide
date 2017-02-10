@@ -65,9 +65,10 @@ public struct MovieData: Decodable {
             return
         }
         
-       // print(jsonDictionary)
+        print(jsonDictionary)
+        print(movieResults.results)
         
-        guard let movieData = movieResults.results
+          guard let movieData = movieResults.results
           else {
             print("No such item")
             return

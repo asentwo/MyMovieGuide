@@ -12,6 +12,7 @@ import UIKit
 
 class InTheatresCollectionViewCell: UICollectionViewCell {
   
+  @IBOutlet weak var posterImage: UIImageView!
   
   
 }

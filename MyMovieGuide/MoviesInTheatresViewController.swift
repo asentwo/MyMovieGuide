@@ -11,6 +11,7 @@ import UIKit
 
 class MoviesInTheatresViewController: UICollectionViewController {
   
+  //MARK: Constants/ IBOutlets
   @IBOutlet var inTheatresCollectionView: UICollectionView!
   
   let networkManager = NetworkManager.sharedManager
@@ -18,11 +19,16 @@ class MoviesInTheatresViewController: UICollectionViewController {
   var movieDataArray: [MovieData] = []
   var moviePosterArray: [UIImage] = []
   
+  let reuseIdentifier = "inTheatresCollectionViewCell"
+  
+  //Layout
+  let itemsPerRow: CGFloat = 2
+  let sectionInsets = UIEdgeInsets(top: 35.0, left: 10.0, bottom: 35.0, right: 10.0)
+  
+  
+  //MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    //Must register CollectionView Cells
-    inTheatresCollectionView.register(InTheatresCollectionViewCell.self, forCellWithReuseIdentifier: "upcomingCollectionViewCell")
     
     MovieData.updateAllData(urlExtension: "now_playing", completionHandler: {results in
       
@@ -34,16 +40,16 @@ class MoviesInTheatresViewController: UICollectionViewController {
       self.movieDataArray = results
       
       for movie in self.movieDataArray {
-          self.networkManager.downloadImage(imageExtension: "\(movie.poster)", {(imageData) in
-            if let image = UIImage(data: imageData as Data){
-              self.moviePosterArray.append(image)
-              print(self.moviePosterArray.count)
-              DispatchQueue.main.async {
-                self.inTheatresCollectionView.reloadData()
-              }
-              
+        self.networkManager.downloadImage(imageExtension: "\(movie.poster)", {(imageData) in
+          if let image = UIImage(data: imageData as Data){
+            self.moviePosterArray.append(image)
+            
+            DispatchQueue.main.async {
+              self.inTheatresCollectionView.reloadData()
             }
-          })
+            
+          }
+        })
       }
     })
   }
@@ -64,17 +70,48 @@ extension MoviesInTheatresViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = inTheatresCollectionView.dequeueReusableCell(withReuseIdentifier: "upcomingCollectionViewCell", for: indexPath)
-    cell.backgroundColor = UIColor.black
-  
+    let cell = inTheatresCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! InTheatresCollectionViewCell
+    cell.posterImage.image = moviePosterArray[indexPath.row]
+    
     return cell
   }
   
-//  
-//  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    
-//  }
+  //
+  //  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+  //
+  //  }
 }
 
 
+//MARK: CollectionViewLayout
+extension MoviesInTheatresViewController: UICollectionViewDelegateFlowLayout {
+  
+  //Height and width of cells
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+    let paddingSpaceWidth = sectionInsets.left * (itemsPerRow + 1)
+    let paddingSpaceHeight = sectionInsets.top * (itemsPerRow + 2)
+    let availableWidth = view.frame.width - paddingSpaceWidth
+    let availableHeight = view.frame.height - paddingSpaceHeight
+    let widthPerItem = availableWidth / itemsPerRow
+    let heightPerItem = availableHeight / itemsPerRow
+    
+    return CGSize(width: widthPerItem, height: heightPerItem)
+  }
+  
+  //Returns space in between cells
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      insetForSectionAt section: Int) -> UIEdgeInsets {
+    return sectionInsets
+  }
+  
+  //Returns spacing in between each line
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return sectionInsets.left
+  }
+  
+}
 
