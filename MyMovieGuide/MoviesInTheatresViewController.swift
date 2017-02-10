@@ -38,9 +38,16 @@ class MoviesInTheatresViewController: UICollectionViewController {
       }
       
       self.movieDataArray = results
+    
       
       for movie in self.movieDataArray {
-        self.networkManager.downloadImage(imageExtension: "\(movie.poster)", {(imageData) in
+        
+        if movie.poster != nil {
+          
+          if let posterImage = movie.poster {
+            
+        self.networkManager.downloadImage(imageExtension: "\(posterImage)", {(imageData) in
+          
           if let image = UIImage(data: imageData as Data){
             self.moviePosterArray.append(image)
             
@@ -50,6 +57,11 @@ class MoviesInTheatresViewController: UICollectionViewController {
             
           }
         })
+        }
+        } else {
+          print("poster does not exist: \(movie.title)")
+          continue
+        }
       }
     })
   }

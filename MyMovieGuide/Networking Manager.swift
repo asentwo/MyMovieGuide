@@ -29,7 +29,7 @@ class NetworkManager {
   
   func getJSONData(type: String, urlExtension: String, completion: @escaping JSONData) {
     //&region=US
-    let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)")! )
+    let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&region=US")! )
 
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       

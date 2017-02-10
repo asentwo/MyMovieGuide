@@ -94,8 +94,7 @@ public struct GenrePosters: Decodable, Equatable{
     
   }
   
-  
-  //https://api.themoviedb.org/3/genre/99/movies?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US
+
   //urlExtension for GenrePosters: "movies"
   static func updateGenrePoster(genreID: NSNumber, urlExtension: String, completionHandler:@escaping (_ details: [String?]?) -> Void){
     

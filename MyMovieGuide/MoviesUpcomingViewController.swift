@@ -41,16 +41,25 @@ class MoviesUpcomingViewController: UICollectionViewController {
       
       for movie in self.upcomingDataArray {
         
-        self.networkManager.downloadImage(imageExtension: "\(movie.poster)", {
-          (imageData) in
-          if let image = UIImage(data: imageData as Data){
-            self.upcomingImageArray.append(image)
+        if movie.poster != nil {
+          
+          if let posterImage = movie.poster {
             
-            DispatchQueue.main.async {
-              self.upcomingCollectionView.reloadData()
-            }
+            self.networkManager.downloadImage(imageExtension: "\(posterImage)", {
+              (imageData) in
+              if let image = UIImage(data: imageData as Data){
+                self.upcomingImageArray.append(image)
+                
+                DispatchQueue.main.async {
+                  self.upcomingCollectionView.reloadData()
+                }
+              }
+            })
           }
-        })
+        } else {
+          print("poster does not exist: \(movie.title)")
+          continue
+        }
       }
     })
   }

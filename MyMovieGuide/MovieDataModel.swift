@@ -22,29 +22,28 @@ public struct ResultsMovieData: Decodable {
   }
 }
 
-public struct MovieData: Decodable {
+public struct MovieData: Decodable, Equatable {
   
-  public let poster : String
-  public let overView : String
-  public let title : String
-  public let backdrop : String
-  public let id: NSNumber
+  public let poster : String?
+  public let overView : String?
+  public let title : String?
+  public let backdrop : String?
+  public let id: NSNumber?
   
   public init? (json: JSON) {
     
-    guard let poster : String = "poster_path" <~~ json,
-      let overview : String  = "overview" <~~ json ?? "N/A",
-      let title : String  = "title" <~~ json ?? "N/A",
-      let backdrop : String  = "backdrop_path" <~~ json,
-      let id : NSNumber = "id" <~~ json
-      else { return nil }
-    
-    self.poster = poster
-    self.overView = overview
-    self.title = title
-    self.backdrop = backdrop
-    self.id = id
+    self.poster  = "poster_path" <~~ json ?? "N/A"
+    self.overView = "overview" <~~ json ?? "N/A"
+    self.title = "title" <~~ json ?? "N/A"
+    self.backdrop = "backdrop_path" <~~ json
+    self.id = "id" <~~ json
   }
+  
+  public static func ==(lhs: MovieData, rhs: MovieData) -> Bool {
+    return lhs.poster == rhs.poster
+    
+  }
+  
   
   
   
@@ -64,16 +63,14 @@ public struct MovieData: Decodable {
             print("Error initializing object")
             return
         }
-        
-        print(jsonDictionary)
-        print(movieResults.results)
-        
+
           guard let movieData = movieResults.results
-          else {
+            else {
             print("No such item")
             return
         }
-        
+     //   print(movieData)
+
         completionHandler(movieData)
       }
     })
