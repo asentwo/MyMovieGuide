@@ -48,7 +48,8 @@ class MoviesGenresViewController: UIViewController {
             
             //Must iterate through multiple arrays with many containing the same poster strings
             for poster in posters {
-            
+
+              
               if let newPoster = poster {
               
                 //Check to see if array already has the current poster string, if it does continue, if not append to array
