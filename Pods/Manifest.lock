@@ -1,12 +1,15 @@
 PODS:
-  - Gloss (1.2.0)
+  - Gloss (1.2.1)
+  - ZoomTransitioning (1.4.1)
 
 DEPENDENCIES:
   - Gloss
+  - ZoomTransitioning
 
 SPEC CHECKSUMS:
-  Gloss: ec49584b2e8144e39810b6db6285433316e0c1c7
+  Gloss: 9ab33b8ede01e4232571d43a6bf9259b85d1de69
+  ZoomTransitioning: 42d9ad29c83d896f3fe28c324a4fe98ac821f0dd
 
-PODFILE CHECKSUM: c1c33e2a4e9894e8e18979e78ba434196e8d1c8e
+PODFILE CHECKSUM: 7719a910ab970165221b0965808b5c2a3ef02967
 
 COCOAPODS: 1.2.0.beta.1

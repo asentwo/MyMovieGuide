@@ -9,18 +9,19 @@
 import UIKit
 
 
-
 class MoviesUpcomingViewController: UICollectionViewController {
   
-  //MARK: Constants/ IBOutlets
+   //MARK: Properties
   @IBOutlet var upcomingCollectionView: UICollectionView!
   
   let networkManager = NetworkManager.sharedManager
   
   var upcomingDataArray: [MovieData] = []
   var upcomingImageArray: [UIImage] = []
+  var movieID: NSNumber!
   
   let reuseIdentifier = "upcomingCollectionViewCell"
+  let segueIdentifier = "upcomingToDetailSegue"
   
   //Layout
   let itemsPerRow: CGFloat = 2
@@ -45,26 +46,36 @@ class MoviesUpcomingViewController: UICollectionViewController {
           
           if let posterImage = movie.poster {
             
-            self.networkManager.downloadImage(imageExtension: "\(posterImage)", {
-              (imageData) in
-              if let image = UIImage(data: imageData as Data){
-                self.upcomingImageArray.append(image)
-                
-                DispatchQueue.main.async {
-                  self.upcomingCollectionView.reloadData()
-                }
-              }
-            })
+            self.updateImage(poster: posterImage)
           }
-        } else {
-          print("poster does not exist: \(movie.title)")
-          continue
+        } else if movie.backdrop != nil {
+          
+          if let backdropImage = movie.backdrop {
+            self.updateImage(poster: backdropImage)
+        
+          } else {
+            print("poster does not exist: \(movie.title)")
+            continue
+          }
+        }
+      }
+    })
+  }
+  
+  func updateImage(poster: String) {
+    
+    self.networkManager.downloadImage(imageExtension: "\(poster)", {
+      (imageData) in
+      if let image = UIImage(data: imageData as Data){
+        self.upcomingImageArray.append(image)
+        
+        DispatchQueue.main.async {
+          self.upcomingCollectionView.reloadData()
         }
       }
     })
   }
 }
-
 
 //MARK: CollectionView Delegate/ DataSource
 extension MoviesUpcomingViewController {
@@ -84,9 +95,10 @@ extension MoviesUpcomingViewController {
     return cell
   }
   
-  //  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-  //
-  //  }
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    self.movieID = upcomingDataArray[indexPath.row].id
+    performSegue(withIdentifier: segueIdentifier, sender: self)
+  }
 }
 
 
@@ -123,6 +135,14 @@ extension MoviesUpcomingViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
+//MARK: Segue
+extension MoviesUpcomingViewController {
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     let upcomingVC = segue.destination as! MoviesUpcomingDetailViewController
+    upcomingVC.iD = self.movieID
+  }
+}
 
 
 

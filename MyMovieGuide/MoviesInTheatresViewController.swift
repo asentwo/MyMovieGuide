@@ -11,15 +11,17 @@ import UIKit
 
 class MoviesInTheatresViewController: UICollectionViewController {
   
-  //MARK: Constants/ IBOutlets
+  //MARK: Properties
   @IBOutlet var inTheatresCollectionView: UICollectionView!
   
   let networkManager = NetworkManager.sharedManager
   
-  var movieDataArray: [MovieData] = []
-  var moviePosterArray: [UIImage] = []
+  var inTheatresDataArray: [MovieData] = []
+  var inTheatresPosterArray: [UIImage] = []
+  var movieID: NSNumber!
   
   let reuseIdentifier = "inTheatresCollectionViewCell"
+  let segueIdentifier = "inTheatresToDetailSegue"
   
   //Layout
   let itemsPerRow: CGFloat = 2
@@ -36,28 +38,17 @@ class MoviesInTheatresViewController: UICollectionViewController {
         print("There was an error retrieving in theatres movie data")
         return
       }
+      self.inTheatresDataArray = results
       
-      self.movieDataArray = results
-    
-      
-      for movie in self.movieDataArray {
-        
+      for movie in self.inTheatresDataArray {
         if movie.poster != nil {
-          
           if let posterImage = movie.poster {
-            
-        self.networkManager.downloadImage(imageExtension: "\(posterImage)", {(imageData) in
-          
-          if let image = UIImage(data: imageData as Data){
-            self.moviePosterArray.append(image)
-            
-            DispatchQueue.main.async {
-              self.inTheatresCollectionView.reloadData()
+            self.updateImage(poster: posterImage)
+          } else if movie.backdrop != nil {
+            if let backdropImage = movie.backdrop {
+              self.updateImage(poster: backdropImage)
             }
-            
           }
-        })
-        }
         } else {
           print("poster does not exist: \(movie.title)")
           continue
@@ -65,9 +56,21 @@ class MoviesInTheatresViewController: UICollectionViewController {
       }
     })
   }
+  
+  func updateImage(poster: String) {
+    
+    self.networkManager.downloadImage(imageExtension: "\(poster)", {
+      (imageData) in
+      if let image = UIImage(data: imageData as Data){
+        self.inTheatresPosterArray.append(image)
+        
+        DispatchQueue.main.async {
+          self.inTheatresCollectionView.reloadData()
+        }
+      }
+    })
+  }
 }
-
-
 
 //MARK: CollectionView Delegate/ DataSource
 extension MoviesInTheatresViewController {
@@ -77,21 +80,23 @@ extension MoviesInTheatresViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return moviePosterArray.count
+    return inTheatresPosterArray.count
     
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = inTheatresCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! InTheatresCollectionViewCell
-    cell.posterImage.image = moviePosterArray[indexPath.row]
+    cell.posterImage.image = inTheatresPosterArray[indexPath.row]
     
     return cell
   }
   
-  //
-  //  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-  //
-  //  }
+  
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    self.movieID = inTheatresDataArray[indexPath.row].id
+    performSegue(withIdentifier: segueIdentifier, sender: self)
+    
+  }
 }
 
 
@@ -124,6 +129,14 @@ extension MoviesInTheatresViewController: UICollectionViewDelegateFlowLayout {
                       minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     return sectionInsets.left
   }
+}
+
+//MARK: Segue
+extension MoviesInTheatresViewController {
   
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    let inTheatresVC = segue.destination as! MoviesInTheatreDetailViewController
+    inTheatresVC.movieID = self.movieID
+  }
 }
 

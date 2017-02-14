@@ -178,17 +178,83 @@
                     <navigationItem key="navigationItem" id="Nse-tg-ucV"/>
                     <connections>
                         <outlet property="genresTableView" destination="7hj-KF-Rgx" id="rvE-fp-Tfo"/>
+                        <segue destination="Kxb-Nh-JMT" kind="show" id="eeh-Oh-oCX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SXD-ef-Eon" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4940" y="-1433.433283358321"/>
+            <point key="canvasLocation" x="4439" y="-3162"/>
+        </scene>
+        <!--Movies Genres Collection View Controller-->
+        <scene sceneID="Dg8-2Q-VCx">
+            <objects>
+                <collectionViewController id="Kxb-Nh-JMT" customClass="MoviesGenresCollectionViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ajf-dg-9rA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6id-6k-CuV">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="MFX-GC-Jj7">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Kxb-Nh-JMT" id="Ssm-og-d5a"/>
+                            <outlet property="delegate" destination="Kxb-Nh-JMT" id="8ai-ci-n26"/>
+                        </connections>
+                    </collectionView>
+                    <connections>
+                        <segue destination="gJW-WB-iNv" kind="show" id="ZOG-Sz-ITz"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QJ8-2P-qOT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5332" y="-3162"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="2sm-qX-kHv">
+            <objects>
+                <tableViewController id="gJW-WB-iNv" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="B4W-rn-Icf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="UjR-v4-xXs">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UjR-v4-xXs" id="cfO-FN-dsC">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gJW-WB-iNv" id="fsn-Tv-tJk"/>
+                            <outlet property="delegate" destination="gJW-WB-iNv" id="iHi-Js-Onr"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yUb-Pe-iwV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6119" y="-3162"/>
         </scene>
         <!--Movies In Theatres View Controller-->
         <scene sceneID="zPY-OT-ljr">
             <objects>
                 <collectionViewController storyboardIdentifier="MoviesInTheatresViewController" id="KuU-99-SSV" customClass="MoviesInTheatresViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="6dX-rW-Pzh">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="6dX-rW-Pzh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -227,19 +293,61 @@
                             <outlet property="delegate" destination="KuU-99-SSV" id="4yP-SN-YSa"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="1mg-vh-R3j"/>
                     <connections>
                         <outlet property="inTheatresCollectionView" destination="6dX-rW-Pzh" id="Hoa-M5-d9S"/>
+                        <segue destination="dRl-Br-Jld" kind="show" identifier="inTheatresToDetailSegue" id="Vli-8Y-7hL"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4TV-lx-mur" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5840.8000000000002" y="-1433.433283358321"/>
+            <point key="canvasLocation" x="4438" y="-2303"/>
+        </scene>
+        <!--Movies In Theatre Detail View Controller-->
+        <scene sceneID="e39-Yb-4kr">
+            <objects>
+                <tableViewController id="dRl-Br-Jld" customClass="MoviesInTheatreDetailViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="pVO-Bt-El3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="inTheatresDetailTableViewCell" id="Ucp-Gq-6gw" customClass="InTheatresDetailTableViewCell" customModule="MyMovieGuide" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ucp-Gq-6gw" id="hAv-YP-qlT">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VKr-I2-IgU">
+                                            <rect key="frame" x="132" y="-8" width="110" height="58"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="posterImage" destination="VKr-I2-IgU" id="2CD-rH-pwI"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="dRl-Br-Jld" id="uVi-vp-XJ5"/>
+                            <outlet property="delegate" destination="dRl-Br-Jld" id="9iB-Ng-fcn"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="inTheatresTableView" destination="pVO-Bt-El3" id="gKC-Ro-IWI"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="17X-0C-JZi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5332" y="-2303.2983508245879"/>
         </scene>
         <!--MoviesUpcomingViewController-->
         <scene sceneID="axl-N1-cp2">
             <objects>
                 <collectionViewController storyboardIdentifier="MoviesUpcomingViewController" title="MoviesUpcomingViewController" clearsSelectionOnViewWillAppear="NO" id="Gr4-GQ-0Y6" customClass="MoviesUpcomingViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="re7-JH-5ky">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="re7-JH-5ky">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -278,13 +386,55 @@
                             <outlet property="delegate" destination="Gr4-GQ-0Y6" id="seO-iE-qM2"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="oYr-fx-yMf"/>
                     <connections>
                         <outlet property="upcomingCollectionView" destination="re7-JH-5ky" id="uKf-KO-IJO"/>
+                        <segue destination="Rb1-YW-juW" kind="show" identifier="upcomingToDetailSegue" id="2cq-zA-sxJ"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wiv-aU-7ET" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6653.6000000000004" y="-1433.433283358321"/>
+            <point key="canvasLocation" x="4438" y="-1433"/>
+        </scene>
+        <!--Movies Upcoming Detail View Controller-->
+        <scene sceneID="Pjk-3C-XAY">
+            <objects>
+                <tableViewController id="Rb1-YW-juW" customClass="MoviesUpcomingDetailViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="cIy-Ju-koS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="upcomingDetailTableViewCell" id="EJm-y1-9Cj" customClass="UpcomingDetailTableViewCell" customModule="MyMovieGuide" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EJm-y1-9Cj" id="Px6-We-91p">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-Cy-Wiz">
+                                            <rect key="frame" x="124" y="-6" width="127" height="54"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="posterImage" destination="Ug1-Cy-Wiz" id="SQP-EY-bsu"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Rb1-YW-juW" id="eWE-xa-Pvr"/>
+                            <outlet property="delegate" destination="Rb1-YW-juW" id="coN-rz-2cT"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="upcomingTableView" destination="cIy-Ju-koS" id="Vp9-HB-3Y8"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bph-LJ-584" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5332" y="-1433.433283358321"/>
         </scene>
         <!--People-->
         <scene sceneID="SIh-l3-jmA">
@@ -379,7 +529,43 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qIn-AC-Lg6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4000.8000000000002" y="-1433.433283358321"/>
+            <point key="canvasLocation" x="3620" y="-3162"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5h5-ti-RKF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6rM-UN-2vM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FOE-7J-klo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="KuU-99-SSV" kind="relationship" relationship="rootViewController" id="xcq-nY-tV9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OYU-kL-ohH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3620" y="-2303"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="i6t-Wf-E6p">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o2H-ZM-yGi" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8KS-6d-79i">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Gr4-GQ-0Y6" kind="relationship" relationship="rootViewController" id="1Wh-1i-P63"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M2H-x2-kdZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3620" y="-1433"/>
         </scene>
     </scenes>
 </document>

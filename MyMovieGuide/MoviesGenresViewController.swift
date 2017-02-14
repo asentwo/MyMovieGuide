@@ -10,8 +10,8 @@ import UIKit
 
 
 class MoviesGenresViewController: UIViewController {
- 
-  //MARK: Constants, IBOutlets
+  
+  //MARK: Properties
   @IBOutlet weak var genresTableView: UITableView!
   
   let networkManager = NetworkManager.sharedManager
@@ -22,7 +22,6 @@ class MoviesGenresViewController: UIViewController {
   
   
   //MARK: Lifecycle
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -35,7 +34,7 @@ class MoviesGenresViewController: UIViewController {
       self.genreDataArray = results
       
       for movie in self.genreDataArray {
-      
+        
         if let movieGenreID = movie.id
         {
           //Update posters based on genreID
@@ -48,16 +47,16 @@ class MoviesGenresViewController: UIViewController {
             
             //Must iterate through multiple arrays with many containing the same poster strings
             for poster in posters {
-
+              
               
               if let newPoster = poster {
-              
+                
                 //Check to see if array already has the current poster string, if it does continue, if not append to array
                 if self.posterStringArray.contains(newPoster){
                   continue
                 } else {
                   self.posterStringArray.append(newPoster)
-        
+                  
                   //Use the poster string to download the corresponding poster
                   self.networkManager.downloadImage(imageExtension: "\(newPoster)",
                     { (imageData) //imageData = Image data downloaded from web
@@ -68,13 +67,13 @@ class MoviesGenresViewController: UIViewController {
                         DispatchQueue.main.async {
                           self.genresTableView.reloadData()
                         }
-                    }
+                      }
                   })
                   break// Use to exit out of array after appending the corresponding poster string
                 }
               } else {
-                //print("There was a problem retrieving poster images: \(poster)")
-               continue// if the poster returned is nil, continue to iterate through arrays until there is one that is not nil
+                print("There was a problem retrieving poster images: \(poster)")
+                continue// if the poster returned is nil, continue to iterate through arrays until there is one that is not nil
               }
             }
           })
@@ -85,9 +84,9 @@ class MoviesGenresViewController: UIViewController {
 }
 
 
-//MARK: TableView Delegates/ DataSource
+//MARK: TableView Delegate/ DataSource
 extension MoviesGenresViewController:  UITableViewDelegate, UITableViewDataSource {
-
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return posterImageArray.count
   }
