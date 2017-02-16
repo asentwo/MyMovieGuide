@@ -31,7 +31,7 @@ class NetworkManager {
 
     let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&region=US")! )
 
-  //  print(request)
+ //  print(request)
     
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
@@ -78,6 +78,8 @@ class NetworkManager {
 
     let request = URLRequest(url: URL(string: "\(baseImageURL)\(imageExtension)" )!)
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+  
+    //  print(request)
       
       if error == nil {
         if let httpResponse = response as? HTTPURLResponse {

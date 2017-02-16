@@ -33,13 +33,13 @@ public struct MovieDetailsData: Decodable {
       else {return nil}
 
     self.backdrop = "backdrop_path" <~~ json
-    self.budget = "budget" <~~ json ?? "N/A"
+    self.budget = "budget" <~~ json
     self.homepage = "homepage" <~~ json
     self.id = "id" <~~ json
     self.overview = "overview" <~~ json
     self.poster = "poster_path" <~~ json
     self.releaseData = "release_date" <~~ json
-    self.revenue = "revenue"  <~~ json ?? "N/A"
+    self.revenue = "revenue"  <~~ json 
     self.runtime = "runtime" <~~ json
     self.status = "status" <~~ json
     self.tagline = "tagline" <~~ json

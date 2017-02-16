@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ZoomTransitioning
 
 class UpcomingMoviesViewController: UICollectionViewController {
   
@@ -22,9 +21,6 @@ class UpcomingMoviesViewController: UICollectionViewController {
   
   let reuseIdentifier = "upcomingCollectionViewCell"
   let segueIdentifier = "upcomingToDetailSegue"
-  
-  //Zoom
-  //  fileprivate var selectedImageView: UIImageView?
   
   //Layout
   let itemsPerRow: CGFloat = 2
@@ -45,21 +41,23 @@ class UpcomingMoviesViewController: UICollectionViewController {
       self.upcomingDataArray = results
       
       for movie in self.upcomingDataArray {
+
         
         if movie.poster != nil {
           
           if let posterImage = movie.poster {
-            
             self.updateImage(poster: posterImage)
           }
-        } else if movie.backdrop != nil {
+        }
+        else if movie.backdrop != nil {
           
           if let backdropImage = movie.backdrop {
             self.updateImage(poster: backdropImage)
             
-          } else {
+          }
+          else {
             print("poster does not exist: \(movie.title)")
-            continue
+           continue
           }
         }
       }
@@ -107,8 +105,6 @@ extension UpcomingMoviesViewController {
 extension UpcomingMoviesViewController {
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //  let cell = upcomingCollectionView.cellForItem(at: indexPath) as! UpcomingCollectionViewCell
-    //   selectedImageView = cell.posterImage
     
     self.movieID = upcomingDataArray[indexPath.row].id
     performSegue(withIdentifier: segueIdentifier, sender: self)
@@ -159,31 +155,5 @@ extension UpcomingMoviesViewController {
   }
 }
 
-
-//MARK: ZoomTransitioning Delegate
-//extension UpcomingMoviesViewController: ZoomTransitionSourceDelegate {
-//
-//  func transitionSourceImageView() -> UIImageView {
-//    return selectedImageView ?? UIImageView()
-//  }
-//
-//  func transitionSourceImageViewFrame(forward: Bool) -> CGRect {
-//    guard let selectedImageView = selectedImageView else { return CGRect.zero }
-//    return selectedImageView.convert(selectedImageView.bounds, to: view)
-//  }
-//
-//  func transitionSourceWillBegin() {
-//    selectedImageView?.isHidden = true
-//  }
-//
-//  func transitionSourceDidEnd() {
-//    selectedImageView?.isHidden = false
-//  }
-//
-//  func transitionSourceDidCancel() {
-//    selectedImageView?.isHidden = false
-//  }
-//}
-//
 
 

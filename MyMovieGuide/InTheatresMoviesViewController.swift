@@ -9,7 +9,7 @@
 import UIKit
 
 
-class MoviesInTheatresViewController: UICollectionViewController {
+class InTheatresMoviesViewController: UICollectionViewController {
   
   //MARK: Properties
   @IBOutlet var inTheatresCollectionView: UICollectionView!
@@ -72,8 +72,8 @@ class MoviesInTheatresViewController: UICollectionViewController {
   }
 }
 
-//MARK: CollectionView Delegate/ DataSource
-extension MoviesInTheatresViewController {
+// MARK: - UICollectionViewDataSource
+extension InTheatresMoviesViewController {
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
@@ -92,6 +92,12 @@ extension MoviesInTheatresViewController {
   }
   
   
+
+}
+
+// MARK: - UICollectionViewDelegate
+extension InTheatresMoviesViewController {
+
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     self.movieID = inTheatresDataArray[indexPath.row].id
     performSegue(withIdentifier: segueIdentifier, sender: self)
@@ -100,8 +106,9 @@ extension MoviesInTheatresViewController {
 }
 
 
-//MARK: CollectionViewLayout
-extension MoviesInTheatresViewController: UICollectionViewDelegateFlowLayout {
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension InTheatresMoviesViewController: UICollectionViewDelegateFlowLayout {
   
   //Height and width of cells
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -132,10 +139,10 @@ extension MoviesInTheatresViewController: UICollectionViewDelegateFlowLayout {
 }
 
 //MARK: Segue
-extension MoviesInTheatresViewController {
+extension InTheatresMoviesViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    let inTheatresVC = segue.destination as! MoviesInTheatreDetailViewController
+    let inTheatresVC = segue.destination as! InTheatresMoviesDetailViewController
     inTheatresVC.movieID = self.movieID
   }
 }

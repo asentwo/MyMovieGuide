@@ -32,9 +32,9 @@ public struct MovieData: Decodable, Equatable {
   
   public init? (json: JSON) {
     
-    self.poster  = "poster_path" <~~ json ?? "N/A"
-    self.overView = "overview" <~~ json ?? "N/A"
-    self.title = "title" <~~ json ?? "N/A"
+    self.poster  = "poster_path" <~~ json
+    self.overView = "overview" <~~ json
+    self.title = "title" <~~ json 
     self.backdrop = "backdrop_path" <~~ json
     self.id = "id" <~~ json
   }

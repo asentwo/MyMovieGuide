@@ -250,10 +250,10 @@
             </objects>
             <point key="canvasLocation" x="6119" y="-3162"/>
         </scene>
-        <!--Movies In Theatre Detail View Controller-->
+        <!--In Theatres Movies Detail View Controller-->
         <scene sceneID="FU7-AI-lCQ">
             <objects>
-                <viewController id="SUf-Mi-LAY" customClass="MoviesInTheatreDetailViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InTheatresMoviesDetailViewController" id="SUf-Mi-LAY" customClass="InTheatresMoviesDetailViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qbh-16-FWO"/>
                         <viewControllerLayoutGuide type="bottom" id="gE0-eg-vJe"/>
@@ -289,18 +289,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="inTheatresTableView" destination="lnk-I3-B5N" id="OE9-Yl-2Kl"/>
+                        <outlet property="inTheatresTableView" destination="lnk-I3-B5N" id="jA7-U0-kME"/>
+                        <outlet property="largePosterImage" destination="lRT-bs-zhy" id="ism-86-mcs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FdJ-eH-L4x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5332" y="-2303"/>
         </scene>
-        <!--Movies In Theatres View Controller-->
+        <!--In Theatres Movies View Controller-->
         <scene sceneID="zPY-OT-ljr">
             <objects>
-                <collectionViewController storyboardIdentifier="MoviesInTheatresViewController" id="KuU-99-SSV" customClass="MoviesInTheatresViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="6dX-rW-Pzh">
+                <collectionViewController storyboardIdentifier="InTheatresMoviesViewController" id="KuU-99-SSV" customClass="InTheatresMoviesViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="6dX-rW-Pzh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -342,7 +343,7 @@
                     <navigationItem key="navigationItem" id="1mg-vh-R3j"/>
                     <connections>
                         <outlet property="inTheatresCollectionView" destination="6dX-rW-Pzh" id="Hoa-M5-d9S"/>
-                        <segue destination="SUf-Mi-LAY" kind="show" id="wWB-iO-5IC"/>
+                        <segue destination="SUf-Mi-LAY" kind="show" identifier="inTheatresToDetailSegue" id="wWB-iO-5IC"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4TV-lx-mur" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -542,11 +543,15 @@
                         <viewControllerLayoutGuide type="bottom" id="c27-hI-uDa"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tr4-Pz-XbI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NL3-zR-LW3">
+                                <rect key="frame" x="61" y="64" width="252" height="360"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qY4-AT-wrm">
-                                <rect key="frame" x="0.0" y="424" width="375" height="243"/>
+                                <rect key="frame" x="0.0" y="441" width="375" height="559"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -554,7 +559,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p4U-NS-azH" id="XJH-o4-saF">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -564,13 +569,11 @@
                                     <outlet property="delegate" destination="p8P-yw-kW9" id="2ol-ar-ozq"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NL3-zR-LW3">
-                                <rect key="frame" x="61" y="64" width="252" height="360"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="largePosterImage" destination="NL3-zR-LW3" id="3PQ-j6-Gk8"/>
                         <outlet property="upcomingTableView" destination="qY4-AT-wrm" id="ymU-eJ-HxW"/>
@@ -578,7 +581,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QMH-tX-FQH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5332" y="-1433"/>
+            <point key="canvasLocation" x="5332" y="-1433.8830584707648"/>
         </scene>
     </scenes>
 </document>

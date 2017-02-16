@@ -8,7 +8,7 @@
 //
 import Foundation
 import UIKit
-import ZoomTransitioning
+
 
 
 class UpcomingMoviesDetailViewController: UIViewController {
@@ -32,7 +32,7 @@ class UpcomingMoviesDetailViewController: UIViewController {
     super.viewDidLoad()
     
     if let movieID = self.iD {
-      
+     
       MovieDetailsData.updateAllData(urlExtension: "\(movieID)", completionHandler: { results in
         
         guard let results = results else {
@@ -45,31 +45,34 @@ class UpcomingMoviesDetailViewController: UIViewController {
         if self.movieDetailsData?.poster != nil {
           
           if let posterImage = self.movieDetailsData?.poster {
-            
             self.updateImage(poster: posterImage)
-          } else if self.movieDetailsData?.backdrop != nil {
+            
+          }
+            
+        } else if self.movieDetailsData?.backdrop != nil {
             
             if let backdropImage = self.movieDetailsData?.backdrop {
               self.updateImage(poster: backdropImage)
-            } else {
+            
+            }
+        } else {
+          
               print("poster does not exist: \(self.movieDetailsData?.title)")
               self.movieDetailsPoster = #imageLiteral(resourceName: "placeholder")
             }
-          }
-        }
       })
     }
   }
   
   func updateImage(poster: String) {
-    
+
     self.networkManager.downloadImage(imageExtension: "\(poster)", {
       (imageData) in
       if let image = UIImage(data: imageData as Data){
         self.movieDetailsPoster = image
-        self.largePosterImage.image = self.movieDetailsPoster
         
         DispatchQueue.main.async {
+          self.largePosterImage.image = self.movieDetailsPoster
           self.upcomingTableView.reloadData()
         }
       }
@@ -78,7 +81,7 @@ class UpcomingMoviesDetailViewController: UIViewController {
 }
 
 
-//MARK: TableView Datasource/ Delegate
+//MARK: TableView Datasource
 extension UpcomingMoviesDetailViewController: UITableViewDataSource{
   
   
@@ -94,33 +97,4 @@ extension UpcomingMoviesDetailViewController: UITableViewDataSource{
   }
   
 }
-  // MARK: - ZoomTransitionDestinationDelegate
-  
-//  extension UpcomingMoviesDetailViewController: ZoomTransitionDestinationDelegate {
-//    
-//    func transitionDestinationImageViewFrame(forward: Bool) -> CGRect {
-//      if forward {
-//        let x: CGFloat = 0.0
-//        let y = topLayoutGuide.length
-//        let width = view.frame.width
-//        let height = width * 2.0 / 3.0
-//        return CGRect(x: x, y: y, width: width, height: height)
-//      } else {
-//        return largePosterImage.convert(largePosterImage.bounds, to: view)
-//      }
-//    }
-//    
-//    func transitionDestinationWillBegin() {
-//      largePosterImage.isHidden = true
-//    }
-//    
-//    func transitionDestinationDidEnd(transitioningImageView imageView: UIImageView) {
-//      largePosterImage.isHidden = false
-//      largePosterImage.image = imageView.image
-//    }
-//    
-//    func transitionDestinationDidCancel() {
-//      largePosterImage.isHidden = false
-//    }
-//  }
 

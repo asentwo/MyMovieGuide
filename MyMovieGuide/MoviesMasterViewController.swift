@@ -121,12 +121,12 @@ class MoviesMasterViewController: UIViewController {
   }
   
   
-  private func createMoviesInTheatresViewController() -> MoviesInTheatresViewController {
+  private func createMoviesInTheatresViewController() -> InTheatresMoviesViewController {
     //Load Storyboard
     let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
     
     // Instaniate View Controller
-    let viewController = storyboard.instantiateViewController(withIdentifier: "MoviesInTheatresViewController") as! MoviesInTheatresViewController
+    let viewController = storyboard.instantiateViewController(withIdentifier: "InTheatresMoviesViewController") as! InTheatresMoviesViewController
     
     //Add View Controller as Child View Controller
     self.add(asChildViewController: viewController)

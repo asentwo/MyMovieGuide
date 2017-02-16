@@ -10,11 +10,12 @@ import Foundation
 import UIKit
 
 
-class MoviesInTheatreDetailViewController: UITableViewController {
+class InTheatresMoviesDetailViewController: UIViewController {
   
   //MARK: Properties
   
   @IBOutlet var inTheatresTableView: UITableView!
+  @IBOutlet weak var largePosterImage: UIImageView!
   
   let networkManager = NetworkManager.sharedManager
   
@@ -68,8 +69,9 @@ class MoviesInTheatreDetailViewController: UITableViewController {
       (imageData) in
       if let image = UIImage(data: imageData as Data){
         self.movieDetailsPoster = image
-        
+      
         DispatchQueue.main.async {
+          self.largePosterImage.image = self.movieDetailsPoster
           self.inTheatresTableView.reloadData()
         }
       }
@@ -80,15 +82,15 @@ class MoviesInTheatreDetailViewController: UITableViewController {
 
 
 //MARK: TableView Datasource
-extension MoviesInTheatreDetailViewController {
+extension InTheatresMoviesDetailViewController : UITableViewDataSource {
   
   
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 5
   }
   
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = inTheatresTableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! InTheatresDetailTableViewCell
     
     return cell
