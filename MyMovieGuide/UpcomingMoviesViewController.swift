@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import ZoomTransitioning
 
-
-class MoviesUpcomingViewController: UICollectionViewController {
+class UpcomingMoviesViewController: UICollectionViewController {
   
-   //MARK: Properties
+  //MARK: Properties
   @IBOutlet var upcomingCollectionView: UICollectionView!
   
   let networkManager = NetworkManager.sharedManager
@@ -23,6 +23,9 @@ class MoviesUpcomingViewController: UICollectionViewController {
   let reuseIdentifier = "upcomingCollectionViewCell"
   let segueIdentifier = "upcomingToDetailSegue"
   
+  //Zoom
+  //  fileprivate var selectedImageView: UIImageView?
+  
   //Layout
   let itemsPerRow: CGFloat = 2
   let sectionInsets = UIEdgeInsets(top: 35.0, left: 10.0, bottom: 35.0, right: 10.0)
@@ -31,6 +34,7 @@ class MoviesUpcomingViewController: UICollectionViewController {
   //MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     
     MovieData.updateAllData(urlExtension: "upcoming", completionHandler: { results in
       
@@ -52,7 +56,7 @@ class MoviesUpcomingViewController: UICollectionViewController {
           
           if let backdropImage = movie.backdrop {
             self.updateImage(poster: backdropImage)
-        
+            
           } else {
             print("poster does not exist: \(movie.title)")
             continue
@@ -77,8 +81,9 @@ class MoviesUpcomingViewController: UICollectionViewController {
   }
 }
 
-//MARK: CollectionView Delegate/ DataSource
-extension MoviesUpcomingViewController {
+
+// MARK: - UICollectionViewDataSource
+extension UpcomingMoviesViewController {
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
@@ -95,15 +100,25 @@ extension MoviesUpcomingViewController {
     return cell
   }
   
+  
+}
+
+// MARK: - UICollectionViewDelegate
+extension UpcomingMoviesViewController {
+  
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    //  let cell = upcomingCollectionView.cellForItem(at: indexPath) as! UpcomingCollectionViewCell
+    //   selectedImageView = cell.posterImage
+    
     self.movieID = upcomingDataArray[indexPath.row].id
     performSegue(withIdentifier: segueIdentifier, sender: self)
   }
 }
 
 
-//MARK: CollectionViewLayout
-extension MoviesUpcomingViewController: UICollectionViewDelegateFlowLayout {
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension UpcomingMoviesViewController: UICollectionViewDelegateFlowLayout {
   
   //Height and width of cells
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -136,13 +151,39 @@ extension MoviesUpcomingViewController: UICollectionViewDelegateFlowLayout {
 
 
 //MARK: Segue
-extension MoviesUpcomingViewController {
+extension UpcomingMoviesViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     let upcomingVC = segue.destination as! MoviesUpcomingDetailViewController
+    let upcomingVC = segue.destination as! UpcomingMoviesDetailViewController
     upcomingVC.iD = self.movieID
   }
 }
 
+
+//MARK: ZoomTransitioning Delegate
+//extension UpcomingMoviesViewController: ZoomTransitionSourceDelegate {
+//
+//  func transitionSourceImageView() -> UIImageView {
+//    return selectedImageView ?? UIImageView()
+//  }
+//
+//  func transitionSourceImageViewFrame(forward: Bool) -> CGRect {
+//    guard let selectedImageView = selectedImageView else { return CGRect.zero }
+//    return selectedImageView.convert(selectedImageView.bounds, to: view)
+//  }
+//
+//  func transitionSourceWillBegin() {
+//    selectedImageView?.isHidden = true
+//  }
+//
+//  func transitionSourceDidEnd() {
+//    selectedImageView?.isHidden = false
+//  }
+//
+//  func transitionSourceDidCancel() {
+//    selectedImageView?.isHidden = false
+//  }
+//}
+//
 
 

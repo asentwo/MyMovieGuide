@@ -79,7 +79,7 @@ class MoviesInTheatreDetailViewController: UITableViewController {
 }
 
 
-//MARK: TableView Datasource/ Delegate
+//MARK: TableView Datasource
 extension MoviesInTheatreDetailViewController {
   
   
@@ -91,12 +91,7 @@ extension MoviesInTheatreDetailViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = inTheatresTableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! InTheatresDetailTableViewCell
     
-    cell.posterImage.image = movieDetailsPoster
     return cell
   }
   
-  
-//  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    <#code#>
-//  }
 }

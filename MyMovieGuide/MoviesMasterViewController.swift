@@ -24,8 +24,6 @@ class MoviesMasterViewController: UIViewController {
   let networkSessionCreator = NetworkManager.sharedManager
   private var viewControllers = [Selection: UIViewController]()// referencing enum "Selection"
   
-  
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -136,12 +134,12 @@ class MoviesMasterViewController: UIViewController {
      return viewController
   }
   
-  private func createMoviesUpcomingViewController() -> MoviesUpcomingViewController {
+  private func createMoviesUpcomingViewController() -> UpcomingMoviesViewController {
     // Load Storyboard
     let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
     
-    // Instantiate View Controller
-    let viewController = storyboard.instantiateViewController(withIdentifier: "MoviesUpcomingViewController") as! MoviesUpcomingViewController
+    // Instantiate View Controller  MoviesUpcomingViewController
+    let viewController = storyboard.instantiateViewController(withIdentifier: "UpcomingMoviesViewController") as! UpcomingMoviesViewController
     // Add View Controller as Child View Controller
     self.add(asChildViewController: viewController)
     

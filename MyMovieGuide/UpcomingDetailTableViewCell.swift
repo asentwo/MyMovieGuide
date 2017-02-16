@@ -12,7 +12,7 @@ import UIKit
 
 class UpcomingDetailTableViewCell: UITableViewCell {
   
-  @IBOutlet weak var posterImage: UIImageView!
+
   
   
 }

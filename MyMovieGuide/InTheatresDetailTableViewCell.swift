@@ -14,7 +14,7 @@ import UIKit
 class InTheatresDetailTableViewCell: UITableViewCell{
   
   
-  @IBOutlet weak var posterImage: UIImageView!
+ 
   
   
 }

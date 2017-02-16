@@ -8,15 +8,16 @@
 //
 import Foundation
 import UIKit
+import ZoomTransitioning
 
 
-
-class MoviesUpcomingDetailViewController: UITableViewController {
+class UpcomingMoviesDetailViewController: UIViewController {
   
   
   //MARK: Properties
   @IBOutlet var upcomingTableView: UITableView!
-  
+  @IBOutlet weak var largePosterImage: UIImageView!
+ 
   let networkManager = NetworkManager.sharedManager
   
   var iD: NSNumber?
@@ -25,7 +26,6 @@ class MoviesUpcomingDetailViewController: UITableViewController {
   var movieDetailsPoster: UIImage?
   
   let reuseIdentifier = "upcomingDetailTableViewCell"
-  
   
   //MARK: Lifecycle
   override func viewDidLoad() {
@@ -67,6 +67,7 @@ class MoviesUpcomingDetailViewController: UITableViewController {
       (imageData) in
       if let image = UIImage(data: imageData as Data){
         self.movieDetailsPoster = image
+        self.largePosterImage.image = self.movieDetailsPoster
         
         DispatchQueue.main.async {
           self.upcomingTableView.reloadData()
@@ -74,30 +75,52 @@ class MoviesUpcomingDetailViewController: UITableViewController {
       }
     })
   }
-  
 }
 
 
 //MARK: TableView Datasource/ Delegate
-extension MoviesUpcomingDetailViewController {
+extension UpcomingMoviesDetailViewController: UITableViewDataSource{
   
   
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 5
   }
   
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = upcomingTableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! UpcomingDetailTableViewCell
-    
-    cell.posterImage.image = movieDetailsPoster
+  
     return cell
   }
   
-  
-  //  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-  //
-  //  }
-  //  
-  
 }
+  // MARK: - ZoomTransitionDestinationDelegate
+  
+//  extension UpcomingMoviesDetailViewController: ZoomTransitionDestinationDelegate {
+//    
+//    func transitionDestinationImageViewFrame(forward: Bool) -> CGRect {
+//      if forward {
+//        let x: CGFloat = 0.0
+//        let y = topLayoutGuide.length
+//        let width = view.frame.width
+//        let height = width * 2.0 / 3.0
+//        return CGRect(x: x, y: y, width: width, height: height)
+//      } else {
+//        return largePosterImage.convert(largePosterImage.bounds, to: view)
+//      }
+//    }
+//    
+//    func transitionDestinationWillBegin() {
+//      largePosterImage.isHidden = true
+//    }
+//    
+//    func transitionDestinationDidEnd(transitioningImageView imageView: UIImageView) {
+//      largePosterImage.isHidden = false
+//      largePosterImage.image = imageView.image
+//    }
+//    
+//    func transitionDestinationDidCancel() {
+//      largePosterImage.isHidden = false
+//    }
+//  }
+
