@@ -17,8 +17,7 @@ class NetworkManager {
   private let readAccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZGQwYTE4NjI4MjNmZmU0YWZmZjZjMjMwZGFmMmM5MiIsInN1YiI6IjU4ODhlN2YzOTI1MTQxMTk1YTAwYjgxYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9wkhVTvuTslhD5LHAUdRmUR-BQw7qb3I_hwfXZOUcvI"
   private let baseURL = "https://api.themoviedb.org/3/"
   private let baseImageURL = "https://image.tmdb.org/t/p/w500"
-  
-  
+  private let baseVideoURL =  "https://www.youtube.com/watch?v="
   
   lazy var configuration: URLSessionConfiguration = URLSessionConfiguration.default
   lazy var session: URLSession = URLSession(configuration: self.configuration)
@@ -29,7 +28,7 @@ class NetworkManager {
   
   func getJSONData(type: String, urlExtension: String, completion: @escaping JSONData) {
 
-    let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&region=US")! )
+    let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&region=US&append_to_response=videos,images")! )
 
  //  print(request)
     
@@ -80,6 +79,35 @@ class NetworkManager {
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
   
     //  print(request)
+      
+      if error == nil {
+        if let httpResponse = response as? HTTPURLResponse {
+          switch (httpResponse.statusCode) {
+          case 200:
+            if let data = data {
+              completion(data)
+            }
+          default:
+            print(httpResponse.statusCode)
+          }
+        }
+      } else {
+        print("Error: \(error?.localizedDescription)")
+      }
+    })
+    dataTask.resume()
+  }
+  
+  
+  //Video Downloader
+  typealias VideoDataHandler = ((Data) -> Void)
+  
+  func downloadVideo(videoKey: String, _ completion: @escaping VideoDataHandler)  {
+    
+    let request = URLRequest(url: URL(string: "\(baseVideoURL)\(videoKey)")!)
+    let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+      
+      //  print(request)
       
       if error == nil {
         if let httpResponse = response as? HTTPURLResponse {

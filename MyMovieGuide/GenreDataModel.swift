@@ -36,7 +36,7 @@ public struct GenreData : Decodable {
     self.name = name
     
   }
-  //https://api.themoviedb.org/3/genre/movie/list?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US
+
   
   //urlExtension for Genres: "list"
   static func updateAllData(urlExtension: String, completionHandler:@escaping (_ details: [GenreData]?) -> Void){

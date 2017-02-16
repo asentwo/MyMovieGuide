@@ -10,6 +10,131 @@ import Foundation
 import Gloss
 
 
+
+//MARK: Video Data
+public struct VideoResults : Decodable {
+  
+  public let videoResults: [VideoData]
+  
+  public init? (json: JSON){
+    
+    guard let videoResults: [VideoData] = "results"  <~~ json
+      else {return nil}
+    
+    self.videoResults = videoResults
+  }
+ }
+
+
+public struct VideoData : Decodable {
+  
+  public let key : String
+  public let id : String
+  public let name : String
+  public let site : String
+  
+  public init? (json: JSON) {
+    
+    guard let key : String = "key" <~~ json,
+      let id : String = "id" <~~ json,
+      let name : String = "name" <~~ json,
+      let site : String = "site" <~~ json
+      else {return nil}
+    
+    self.key = key
+    self.id = id
+    self.name = name
+    self.site = site
+  }
+}
+
+
+//MARK: Image Data
+public struct ImageResults : Decodable {
+  
+  public let posterImages : PosterResults?
+  public let backdropImages : BackdropResults?
+  
+  public init? (json: JSON) {
+    
+    posterImages = "posters" <~~ json
+    backdropImages = "backdrops" <~~ json
+    
+  }
+}
+
+
+public struct PosterResults : Decodable {
+  
+  public let posterResults : [PosterData]?
+  
+  public init? (json: JSON) {
+    
+    posterResults = "posters" <~~ json
+  }
+}
+
+
+public struct PosterData : Decodable {
+  
+  public let filePath : String
+  public let aspectRatio : NSNumber
+  public let height : NSNumber
+  public let width : NSNumber
+  
+  public init?(json: JSON) {
+    
+    guard let filePath : String = "file_path"  <~~ json,
+      let aspectRatio : NSNumber = "aspect_ratio" <~~ json,
+      let height : NSNumber = "height" <~~ json,
+      let width : NSNumber = "width" <~~ json
+      else {return nil}
+    
+    self.filePath = filePath
+    self.aspectRatio = aspectRatio
+    self.height = height
+    self.width = width
+  }
+  
+}
+
+
+public struct BackdropResults : Decodable {
+  
+  public let backdropResults : [BackdropData]?
+  
+  public init? (json: JSON) {
+    
+    backdropResults = "backdrops" <~~ json
+  }
+}
+
+
+public struct BackdropData : Decodable {
+  
+  public let filePath : String
+  public let aspectRatio : NSNumber
+  public let height : NSNumber
+  public let width : NSNumber
+  
+  public init?(json: JSON) {
+    
+    guard let filePath : String = "file_path"  <~~ json,
+      let aspectRatio : NSNumber = "aspect_ratio" <~~ json,
+      let height : NSNumber = "height" <~~ json,
+      let width : NSNumber = "width" <~~ json
+      else {return nil}
+    
+    self.filePath = filePath
+    self.aspectRatio = aspectRatio
+    self.height = height
+    self.width = width
+  }
+}
+
+
+
+//MARK: General Data
 public struct MovieDetailsData: Decodable {
   
   public let backdrop : String?
@@ -26,12 +151,15 @@ public struct MovieDetailsData: Decodable {
   public let videoAvailable : Bool
   public let averageRating : NSNumber?
   public let title : String?
+  public let genre : GenreData?
+  public let videos : VideoResults?
+  public let images : ImageResults?
   
   public init? (json: JSON) {
     
     guard let videoAvailable : Bool = "video" <~~ json
       else {return nil}
-
+    
     self.backdrop = "backdrop_path" <~~ json
     self.budget = "budget" <~~ json
     self.homepage = "homepage" <~~ json
@@ -39,16 +167,20 @@ public struct MovieDetailsData: Decodable {
     self.overview = "overview" <~~ json
     self.poster = "poster_path" <~~ json
     self.releaseData = "release_date" <~~ json
-    self.revenue = "revenue"  <~~ json 
+    self.revenue = "revenue"  <~~ json
     self.runtime = "runtime" <~~ json
     self.status = "status" <~~ json
     self.tagline = "tagline" <~~ json
     self.averageRating = "vote_average" <~~ json
     self.videoAvailable = videoAvailable
     self.title = "title" <~~ json
+    self.genre = "genres" <~~ json
+    self.videos = "videos" <~~ json
+    self.images = "images" <~~ json
   }
   
-   // https://api.themoviedb.org/3/movie/232?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US
+  
+  //MARK: Update Data Function
   
   //urlExtension for MovieDetail: ID number
   static func updateAllData(urlExtension: String, completionHandler:@escaping (_ details: MovieDetailsData?) -> Void){

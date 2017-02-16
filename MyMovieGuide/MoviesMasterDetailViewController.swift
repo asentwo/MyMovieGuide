@@ -11,11 +11,11 @@ import UIKit
 
 
 
-class UpcomingMoviesDetailViewController: UIViewController {
+class MoviesMasterDetailViewController: UIViewController {
   
   
   //MARK: Properties
-  @IBOutlet var upcomingTableView: UITableView!
+  @IBOutlet var detailTableView: UITableView!
   @IBOutlet weak var largePosterImage: UIImageView!
  
   let networkManager = NetworkManager.sharedManager
@@ -25,13 +25,16 @@ class UpcomingMoviesDetailViewController: UIViewController {
   var movieDetailsData: MovieDetailsData?
   var movieDetailsPoster: UIImage?
   
-  let reuseIdentifier = "upcomingDetailTableViewCell"
+  let overviewReuseIdentifier = "overviewCell"
+  
   
   //MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     
     if let movieID = self.iD {
+      
+    //  print(movieID)
      
       MovieDetailsData.updateAllData(urlExtension: "\(movieID)", completionHandler: { results in
         
@@ -46,7 +49,6 @@ class UpcomingMoviesDetailViewController: UIViewController {
           
           if let posterImage = self.movieDetailsData?.poster {
             self.updateImage(poster: posterImage)
-            
           }
             
         } else if self.movieDetailsData?.backdrop != nil {
@@ -73,7 +75,7 @@ class UpcomingMoviesDetailViewController: UIViewController {
         
         DispatchQueue.main.async {
           self.largePosterImage.image = self.movieDetailsPoster
-          self.upcomingTableView.reloadData()
+          self.detailTableView.reloadData()
         }
       }
     })
@@ -81,9 +83,13 @@ class UpcomingMoviesDetailViewController: UIViewController {
 }
 
 
+
 //MARK: TableView Datasource
-extension UpcomingMoviesDetailViewController: UITableViewDataSource{
+extension  MoviesMasterDetailViewController: UITableViewDataSource, UITableViewDelegate {
   
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 4
+  }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 5
@@ -91,7 +97,7 @@ extension UpcomingMoviesDetailViewController: UITableViewDataSource{
   
   
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = upcomingTableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! UpcomingDetailTableViewCell
+    let cell = detailTableView.dequeueReusableCell(withIdentifier: overviewReuseIdentifier) as! OverviewCell
   
     return cell
   }
