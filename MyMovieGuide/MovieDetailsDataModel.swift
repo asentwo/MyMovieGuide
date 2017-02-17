@@ -52,25 +52,17 @@ public struct VideoData : Decodable {
 //MARK: Image Data
 public struct ImageResults : Decodable {
   
-  public let posterImages : PosterResults?
-  public let backdropImages : BackdropResults?
+  public let posterImages : [PosterData]
+  public let backdropImages : [BackdropData]
   
   public init? (json: JSON) {
-    
-    posterImages = "posters" <~~ json
-    backdropImages = "backdrops" <~~ json
-    
-  }
-}
-
-
-public struct PosterResults : Decodable {
   
-  public let posterResults : [PosterData]?
-  
-  public init? (json: JSON) {
+    guard let posterImages : [PosterData] = "posters" <~~ json,
+      let backdropImages : [BackdropData] = "backdrops" <~~ json
+      else {return nil}
     
-    posterResults = "posters" <~~ json
+    self.posterImages = posterImages
+    self.backdropImages = backdropImages
   }
 }
 
@@ -96,17 +88,6 @@ public struct PosterData : Decodable {
     self.width = width
   }
   
-}
-
-
-public struct BackdropResults : Decodable {
-  
-  public let backdropResults : [BackdropData]?
-  
-  public init? (json: JSON) {
-    
-    backdropResults = "backdrops" <~~ json
-  }
 }
 
 
@@ -138,20 +119,20 @@ public struct BackdropData : Decodable {
 public struct MovieDetailsData: Decodable {
   
   public let backdrop : String?
-  public let budget : String?
+  public let budget : NSNumber?
   public let homepage : String?
   public let id : String?
   public let overview: String?
   public let poster : String?
   public let releaseData : String?
   public let revenue : String?
-  public let runtime : String?
+  public let runtime : NSNumber?
   public let status : String?
   public let tagline : String?
   public let videoAvailable : Bool
   public let averageRating : NSNumber?
   public let title : String?
-  public let genre : GenreData?
+  public let genre : [GenreData]?
   public let videos : VideoResults?
   public let images : ImageResults?
   
