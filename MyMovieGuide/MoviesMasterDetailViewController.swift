@@ -26,24 +26,28 @@ class MoviesMasterDetailViewController: UIViewController {
   
   var posterArray: [String] = []
   var overviewArray: [String] = []
-  var releaseInfoArray: [Any] = []
-  var boxOfficeArray: [Any] = []
-  var homePageArray: [Any] = []
+  var releaseInfoArray: [String] = []
+  var boxOfficeArray: [NSNumber] = []
+  var homePageArray: [String] = []
   var castArray: [CastData] = []
   var imageArray: [ImageResults] = []
   var videoArray: [VideoResults] = []
   
   let sectionTitles = ["","Overview","Release Info","Box Office", "Home Page","Cast", "Image Gallery", "Videos"]
-  let catagories = ["Overview", "Release Date", "Runtime", "Genre", "Budget", "Revenue", "Home Page", "Image Gallery", "Videos"]
+  let releaseCatagories = ["Release Date", "Runtime", "Genre"]
+  let boxOfficeCatagories = ["Budget", "Revenue"]
+
   
   let posterReuseIdentifier = "posterCell"
   let overviewReuseIdentifier = "overviewCell"
+  let movieDetailReuseIdentifier = "movieDetailCell"
   
   
   
   //MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+  
     
     if let movieID = self.iD {
       
@@ -55,6 +59,7 @@ class MoviesMasterDetailViewController: UIViewController {
         }
         
         self.movieDetailsData = results
+        self.navigationItem.title = self.movieDetailsData?.title
         self.appendAllData()
         
       })
@@ -80,104 +85,72 @@ class MoviesMasterDetailViewController: UIViewController {
   
   func appendAllData () {
     
-    
     if self.movieDetailsData?.poster != nil {
-      
       if let posterImage = self.movieDetailsData?.poster {
         self.updateImage(poster: posterImage)
         self.posterArray.append(posterImage)
       }
       
     } else if self.movieDetailsData?.backdrop != nil {
-      
       if let backdropImage = self.movieDetailsData?.backdrop {
         self.updateImage(poster: backdropImage)
         self.posterArray.append(backdropImage)
-        
       }
     } else {
-      
       print("poster does not exist: \(self.movieDetailsData?.title)")
       self.movieDetailsPoster = #imageLiteral(resourceName: "placeholder")
     }
     
     if self.movieDetailsData?.overview != nil {
       if let overview = self.movieDetailsData?.overview {
-        
-        print(overview)
-        
         self.overviewArray.append(overview)
       }
     }
     
     if self.movieDetailsData?.releaseData != nil {
       if let releaseDate = self.movieDetailsData?.releaseData {
-        
-        print(releaseDate)
-        
         self.releaseInfoArray.append(releaseDate)
       }
     }
     
     if self.movieDetailsData?.runtime != nil {
       if let runtime = self.movieDetailsData?.runtime {
-        
-        print(runtime)
-        
-        self.releaseInfoArray.append(runtime)
+        self.releaseInfoArray.append(String(describing: runtime))
       }
     }
     
     if self.movieDetailsData?.genre != nil {
       if let genre = self.movieDetailsData?.genre {
-        
-        print(genre)
-        
-        self.releaseInfoArray.append(genre)
+        self.releaseInfoArray.append(genre[0].name)
       }
     }
     
     if self.movieDetailsData?.budget != nil {
       if let budget = self.movieDetailsData?.budget {
-        
-        print(budget)
-        
         self.boxOfficeArray.append(budget)
       }
     }
     
     if self.movieDetailsData?.revenue != nil {
       if let revenue = self.movieDetailsData?.revenue {
-        
-        print(revenue)
-        
         self.boxOfficeArray.append(revenue)
       }
     }
     
     if self.movieDetailsData?.homepage != nil {
       if let homepage = self.movieDetailsData?.homepage {
-        
-        print(homepage)
-        
         self.homePageArray.append(homepage)
       }
     }
     
     if self.movieDetailsData?.images != nil {
       if let images = self.movieDetailsData?.images {
-        
-        print(images)
-        
         self.imageArray.append(images)
       }
     }
     
     if self.movieDetailsData?.videos != nil {
       if let videos = self.movieDetailsData?.videos {
-        
-        print(videos)
-        
         self.videoArray.append(videos)
       }
     }
@@ -215,12 +188,116 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource, UITableViewD
   
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = detailTableView.dequeueReusableCell(withIdentifier: posterReuseIdentifier) as! PosterCell
     
-    cell.mainPosterImage.image = self.movieDetailsPoster
+    let cell = UITableViewCell()
+    
+    switch indexPath.section {
+      
+    case 0:
+      let cell = detailTableView.dequeueReusableCell(withIdentifier: posterReuseIdentifier) as! PosterCell
+      
+      cell.mainPosterImage.image = self.movieDetailsPoster
+      
+      self.detailTableView.rowHeight = 400
+      detailTableView.allowsSelection = false
+      return cell
+      
+    case 1:
+      let cell = detailTableView.dequeueReusableCell(withIdentifier: overviewReuseIdentifier) as! OverviewCell
+      
+       let overviewText = overviewArray[indexPath.row]
+        cell.overviewTextLabel.text = overviewText
+      
+      self.detailTableView.rowHeight = 200
+      detailTableView.allowsSelection = false
+      return cell
+      
+    case 2:
+      let cell = detailTableView.dequeueReusableCell(withIdentifier: movieDetailReuseIdentifier)
+      as! MovieDetailCell
+      
+      let releaseInfo = releaseInfoArray[indexPath.row]
+      
+      cell.catagoryLabel.text = releaseCatagories[indexPath.row]
+      cell.catagoryDataLabel.text = releaseInfo as? String
+      
+      self.detailTableView.rowHeight = 50
+      detailTableView.allowsSelection = false
+      return cell
+      
+    case 3:
+      let cell = detailTableView.dequeueReusableCell(withIdentifier: movieDetailReuseIdentifier)
+        as! MovieDetailCell
+      
+      let boxOfficeInfo = boxOfficeArray[indexPath.row]
+      
+      cell.catagoryLabel.text = boxOfficeCatagories[indexPath.row]
+      cell.catagoryDataLabel.text = String(describing: boxOfficeInfo)
+      self.detailTableView.rowHeight = 50
+      detailTableView.allowsSelection = false
+      
+      return cell
+
+    case 4:
+      let cell = detailTableView.dequeueReusableCell(withIdentifier: movieDetailReuseIdentifier)
+        as! MovieDetailCell
+      
+      let homepage = homePageArray[indexPath.row]
+      
+      cell.catagoryLabel.text = "Homepage"
+      cell.catagoryDataLabel.text = homepage
+      
+      self.detailTableView.rowHeight = 50
+      detailTableView.allowsSelection = false
+      
+      return cell
+      
+    case 5:
+      let cell = detailTableView.dequeueReusableCell(withIdentifier: movieDetailReuseIdentifier)
+        as! MovieDetailCell
+      
+      let cast = castArray[indexPath.row]
+      cell.catagoryLabel.text = "Cast"
+      cell.catagoryDataLabel.text = cast as? String
+      
+      self.detailTableView.rowHeight = 50
+      detailTableView.allowsSelection = false
+      
+      return cell
+      
+    case 6:
+      let cell = detailTableView.dequeueReusableCell(withIdentifier: movieDetailReuseIdentifier)
+        as! MovieDetailCell
+      
+      let images = imageArray[indexPath.row]
+      
+      cell.catagoryLabel.text = "Images"
+      cell.catagoryDataLabel.text = images as? String
+      
+      self.detailTableView.rowHeight = 200
+      detailTableView.allowsSelection = false
+      
+      return cell
+      
+    case 7:
+      let cell = detailTableView.dequeueReusableCell(withIdentifier: movieDetailReuseIdentifier)
+        as! MovieDetailCell
+      
+      let video = videoArray[indexPath.row]
+      
+      cell.catagoryLabel.text = "Videos"
+      cell.catagoryDataLabel.text = video as? String
+      
+      self.detailTableView.rowHeight = 50
+      detailTableView.allowsSelection = false
+      
+      return cell
+      
+    default: _ = ""
+      
+    }
     
     return cell
   }
   
 }
-

@@ -125,7 +125,7 @@ public struct MovieDetailsData: Decodable {
   public let overview: String?
   public let poster : String?
   public let releaseData : String?
-  public let revenue : String?
+  public let revenue : NSNumber?
   public let runtime : NSNumber?
   public let status : String?
   public let tagline : String?

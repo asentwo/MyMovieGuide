@@ -471,15 +471,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qY4-AT-wrm">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="qY4-AT-wrm">
                                 <rect key="frame" x="0.0" y="64" width="375" height="936"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="posterCell" rowHeight="400" id="TEa-m0-mdK" customClass="PosterCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="400"/>
+                                        <rect key="frame" x="0.0" y="56" width="375" height="400"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TEa-m0-mdK" id="Wbo-Wp-JFe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="399.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="399"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pEf-fA-hTO">
@@ -497,13 +497,65 @@
                                             <outlet property="mainPosterImage" destination="pEf-fA-hTO" id="1Xo-Nd-nkf"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="overviewCell" rowHeight="80" id="p4U-NS-azH" customClass="OverviewCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="428" width="375" height="80"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="overviewCell" rowHeight="125" id="p4U-NS-azH" customClass="OverviewCell" customModule="MyMovieGuide" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="456" width="375" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p4U-NS-azH" id="XJH-o4-saF">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="j1f-py-MAu">
+                                                    <rect key="frame" x="8" y="8" width="359" height="109"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="j1f-py-MAu" secondAttribute="bottom" constant="8" id="2d0-Ig-ZlI"/>
+                                                <constraint firstItem="j1f-py-MAu" firstAttribute="leading" secondItem="XJH-o4-saF" secondAttribute="leading" constant="8" id="W0o-Qs-xRV"/>
+                                                <constraint firstAttribute="trailing" secondItem="j1f-py-MAu" secondAttribute="trailing" constant="8" id="gPW-K5-dzp"/>
+                                                <constraint firstItem="j1f-py-MAu" firstAttribute="top" secondItem="XJH-o4-saF" secondAttribute="top" constant="8" id="lNh-3N-xbl"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="overviewTextLabel" destination="j1f-py-MAu" id="Xsy-5z-xxX"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieDetailCell" id="QFL-qq-Bf6" customClass="MovieDetailCell" customModule="MyMovieGuide" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="581" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QFL-qq-Bf6" id="BZz-XW-WM8">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgF-L0-KvZ">
+                                                    <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fC-Qd-JUf">
+                                                    <rect key="frame" x="150" y="11" width="217" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="mgF-L0-KvZ" firstAttribute="top" secondItem="BZz-XW-WM8" secondAttribute="topMargin" constant="3" id="7Ab-Fc-v4z"/>
+                                                <constraint firstItem="mgF-L0-KvZ" firstAttribute="leading" secondItem="BZz-XW-WM8" secondAttribute="leadingMargin" id="BHR-yZ-oeI"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="mgF-L0-KvZ" secondAttribute="bottom" constant="3" id="Fbm-J0-dE8"/>
+                                                <constraint firstItem="9fC-Qd-JUf" firstAttribute="trailing" secondItem="BZz-XW-WM8" secondAttribute="trailingMargin" id="YAb-US-PBO"/>
+                                                <constraint firstItem="9fC-Qd-JUf" firstAttribute="top" secondItem="BZz-XW-WM8" secondAttribute="topMargin" constant="3" id="iZO-VA-f4k"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="9fC-Qd-JUf" secondAttribute="bottom" constant="3" id="jYW-6n-Ixr"/>
+                                                <constraint firstItem="9fC-Qd-JUf" firstAttribute="leading" secondItem="mgF-L0-KvZ" secondAttribute="trailing" constant="100" id="m86-rp-HKE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="catagoryDataLabel" destination="9fC-Qd-JUf" id="7St-Hm-Owg"/>
+                                            <outlet property="catagoryLabel" destination="mgF-L0-KvZ" id="VeJ-Re-FmE"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

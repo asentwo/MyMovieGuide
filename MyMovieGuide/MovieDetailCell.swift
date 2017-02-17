@@ -7,3 +7,11 @@
 //
 
 import Foundation
+import UIKit
+
+class MovieDetailCell: UITableViewCell {
+  
+  @IBOutlet weak var catagoryLabel: UILabel!
+  @IBOutlet weak var catagoryDataLabel: UILabel!
+  
+}

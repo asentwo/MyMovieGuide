@@ -12,7 +12,7 @@ import UIKit
 
 class OverviewCell : UITableViewCell {
   
+  @IBOutlet weak var overviewTextLabel: UILabel!
   
-  
-  
+
 }
