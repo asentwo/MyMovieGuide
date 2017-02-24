@@ -41,7 +41,6 @@ class UpcomingMoviesViewController: UICollectionViewController {
       self.upcomingDataArray = results
       
       for movie in self.upcomingDataArray {
-
         
         if movie.poster != nil {
           
@@ -153,7 +152,7 @@ extension UpcomingMoviesViewController {
     let upcomingVC = segue.destination as! MoviesMasterDetailViewController
     upcomingVC.iD = self.movieID
     
-   //print(self.movieID)
+    //print(self.movieID)
   }
 }
 

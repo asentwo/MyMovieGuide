@@ -7,3 +7,17 @@
 //
 
 import Foundation
+import UIKit
+
+
+
+class CastCell : UITableViewCell {
+  
+  
+  @IBOutlet weak var actorProfileImage: UIImageView!
+  
+  @IBOutlet weak var actorName: UILabel!
+  
+  @IBOutlet weak var characterName: UILabel!
+  
+}

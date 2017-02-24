@@ -7,3 +7,14 @@
 //
 
 import Foundation
+import UIKit
+
+
+class ImagesCell: UITableViewCell {
+  
+  
+  @IBOutlet weak var extraImage: UIImageView!
+  
+  
+  
+}

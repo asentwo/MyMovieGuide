@@ -44,7 +44,7 @@ public struct CastData : Decodable {
     
     let nm = NetworkManager.sharedManager
     
-    nm.getJSONData(type:"credits", urlExtension: urlExtension, completion: {
+    nm.getJSONData(type:"movie", urlExtension: urlExtension, completion: {
       data in
       
       if let jsonDictionary = nm.parseJSONData(data)
@@ -56,7 +56,7 @@ public struct CastData : Decodable {
             return
         }
         
-        //  print(jsonDictionary)
+        // print(jsonDictionary)
         
         guard let castData = cast.cast
           else {
