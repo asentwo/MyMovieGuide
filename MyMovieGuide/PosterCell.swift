@@ -14,6 +14,7 @@ class PosterCell : UITableViewCell {
   
   
   @IBOutlet weak var mainPosterImage: UIImageView!
+ 
   
   
 }

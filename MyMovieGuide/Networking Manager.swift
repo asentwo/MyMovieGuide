@@ -23,6 +23,8 @@ class NetworkManager {
   lazy var session: URLSession = URLSession(configuration: self.configuration)
   
   
+  //Working Link: https://api.themoviedb.org/3/movie/14564?api_key=edd0a1862823ffe4afff6c230daf2c92&region=US&append_to_response=videos,images
+  
   //Network session creater
   typealias JSONData = ((Data) -> Void)
   
@@ -30,7 +32,7 @@ class NetworkManager {
 
     let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&region=US&append_to_response=videos,images")! )
 
-  // print(request)
+   //print(request)
     
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       

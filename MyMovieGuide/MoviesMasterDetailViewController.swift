@@ -45,7 +45,7 @@ class MoviesMasterDetailViewController: UIViewController {
   let overviewReuseIdentifier = "overviewCell"
   let movieDetailReuseIdentifier = "movieDetailCell"
   let castResuseIdentifier = "castCell"
-  let imagesReuseIdentifier = "imagesCell"
+  let imagesReuseIdentifier = "extraImagesCell"
   let videoReuseIdentifier = "videoCell"
   
   
@@ -262,8 +262,8 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
     case 3: return boxOfficeArray.count
     case 4: return homePageArray.count
     case 5: return castImageArray.count
-    case 6: return imageArray.count
-    case 7: return 1
+    case 6: return min(1, imageArray.count)
+    case 7: return min(1, videoArray.count)
       
     default: fatalError("Unknown Selection")
     }
@@ -352,11 +352,10 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
       
     case 6:
       let cell = detailTableView.dequeueReusableCell(withIdentifier: imagesReuseIdentifier)
-        as! ImagesCell
+        as! ExtraImagesCell
       
-      
-       cell.extraImage.image = imageArray[indexPath.row]
-      
+      cell.photosArray = self.imageArray
+    
       self.detailTableView.rowHeight = 200
       
       
