@@ -11,6 +11,7 @@ import UIKit
 
 class ActorProfileCell : UITableViewCell {
   
+  @IBOutlet weak var actorProfileImage: UIImageView!
   
   @IBOutlet weak var actorNameLabel: UILabel!
   @IBOutlet weak var birthdayLabel: UILabel!

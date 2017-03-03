@@ -20,6 +20,9 @@ class MoviesGenresViewController: UIViewController {
   var posterStringArray: [String] = []
   var posterImageArray: [UIImage] = []
   
+  var genreID: NSNumber?
+  
+  let segueIdentifier = "genreToCollectSegue"
   
   //MARK: Lifecycle
   override func viewDidLoad() {
@@ -37,6 +40,7 @@ class MoviesGenresViewController: UIViewController {
         
         if let movieGenreID = movie.id
         {
+          
           //Update posters based on genreID
           GenrePosters.updateGenrePoster(genreID: movieGenreID, urlExtension: "movies", completionHandler: {posters in
             
@@ -84,8 +88,8 @@ class MoviesGenresViewController: UIViewController {
 }
 
 
-//MARK: TableView Delegate/ DataSource
-extension MoviesGenresViewController:  UITableViewDelegate, UITableViewDataSource {
+//MARK: TableView Delegate DataSource
+extension MoviesGenresViewController:  UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return posterImageArray.count
@@ -98,12 +102,37 @@ extension MoviesGenresViewController:  UITableViewDelegate, UITableViewDataSourc
     
     return cell
   }
+
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 150.00
+  }
+}
+
+
+extension MoviesGenresViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
+    if let id = genreDataArray[indexPath.row].id {
+      
+      self.genreID = id
+      
+    //  print(self.genreID)
+    }
+    
+    self.performSegue(withIdentifier: segueIdentifier, sender: self)
   }
   
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 150.00
+}
+
+
+//MARK: Segue
+extension MoviesGenresViewController {
+  
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    let genreCollectVC = segue.destination as! MoviesGenresCollectionViewController
+    genreCollectVC.genreID = self.genreID
+   
   }
 }

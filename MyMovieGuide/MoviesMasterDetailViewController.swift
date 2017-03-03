@@ -21,6 +21,7 @@ class MoviesMasterDetailViewController: UIViewController {
   let networkManager = NetworkManager.sharedManager
   
   var iD: NSNumber?
+  var castID: NSNumber?
   
   var movieDetailsData: MovieDetailsData?
   var movieDetailsPoster: UIImage?
@@ -48,7 +49,7 @@ class MoviesMasterDetailViewController: UIViewController {
   let imagesReuseIdentifier = "extraImagesCell"
   let videoReuseIdentifier = "videoCell"
   
-  
+  let detailToPeopleSegueIdentifier = "detailToPeopleSegue"
   
   //MARK: Lifecycle
   override func viewDidLoad() {
@@ -61,40 +62,44 @@ class MoviesMasterDetailViewController: UIViewController {
     if let movieID = self.iD {
       
       // print(movieID)
-      MovieDetailsData.updateAllData(urlExtension: "\(movieID)", completionHandler: { results in
+      
+      DispatchQueue.main.async {
         
-        guard let results = results else {
-          print("There was an error retrieving upcoming movie data")
-          return
-        }
-        
-        self.movieDetailsData = results
-        self.navigationItem.title = self.movieDetailsData?.title
-        
-        CastData.updateAllData(urlExtension: "\(movieID)/credits", completionHandler: { results in
+        MovieDetailsData.updateAllData(urlExtension: "\(movieID)", completionHandler: { results in
           
           guard let results = results else {
             print("There was an error retrieving upcoming movie data")
             return
           }
-          self.castArray = results
           
-          for cast in self.castArray {
+          self.movieDetailsData = results
+          self.navigationItem.title = self.movieDetailsData?.title
+          
+          CastData.updateAllData(urlExtension: "\(movieID)/credits", completionHandler: { results in
             
-            if cast.profilePic != nil {
-              if let castPic = cast.profilePic {
-                
-                self.updateActorProfileImage(actor: castPic)
-              }
-            } else {
-              print("actor pic does not exist: \(cast.name)")
-              continue
+            guard let results = results else {
+              print("There was an error retrieving upcoming movie data")
+              return
             }
-          }
+            self.castArray = results
+            
+            for cast in self.castArray {
+              
+              if cast.profilePic != nil {
+                if let castPic = cast.profilePic {
+                  
+                  self.updateActorProfileImage(actor: castPic)
+                }
+              } else {
+                print("actor pic does not exist: \(cast.name)")
+                continue
+              }
+            }
+          })
+          self.appendAllData()
+          
         })
-        self.appendAllData()
-        
-      })
+      }
     }
   }
 }
@@ -147,8 +152,6 @@ extension MoviesMasterDetailViewController {
         }
       }
     })
-    
-    
   }
   
   
@@ -227,7 +230,6 @@ extension MoviesMasterDetailViewController {
       if let images = self.movieDetailsData?.images {
         
         let posters = images.backdropImages
-        
         for poster in posters {
           
           self.updateExtraImages(extraImage:poster.filePath)
@@ -235,11 +237,11 @@ extension MoviesMasterDetailViewController {
       }
     }
     
-//    if self.movieDetailsData?.videos != nil {
-//      if let videos = self.movieDetailsData?.videos {
-//        self.videoArray.append(videos)
-//      }
-//    }
+    //    if self.movieDetailsData?.videos != nil {
+    //      if let videos = self.movieDetailsData?.videos {
+    //        self.videoArray.append(videos)
+    //      }
+    //    }
   }
 }
 
@@ -263,7 +265,7 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
     case 4: return homePageArray.count
     case 5: return castImageArray.count
     case 6: return min(1, imageArray.count)
-    case 7: return min(1, videoArray.count)
+    case 7: return 1
       
     default: fatalError("Unknown Selection")
     }
@@ -314,8 +316,11 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
       
       let boxOfficeInfo = boxOfficeArray[indexPath.row]
       
-      cell.catagoryLabel.text = boxOfficeCatagories[indexPath.row]
-      cell.catagoryDataLabel.text = String(describing: boxOfficeInfo)
+      if boxOfficeInfo != 0 {
+        cell.catagoryLabel.text = boxOfficeCatagories[indexPath.row]
+        cell.catagoryDataLabel.text = String(describing: boxOfficeInfo)
+      }
+      
       self.detailTableView.rowHeight = 50
       detailTableView.allowsSelection = false
       
@@ -344,7 +349,9 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
       cell.actorName.text = cast.name
       cell.characterName.text = cast.character
       cell.actorProfileImage.image = castImageArray[indexPath.row]
-      
+      cell.actorProfileImage.layer.cornerRadius = cell.actorProfileImage.frame.size.height/2
+      cell.actorProfileImage.clipsToBounds = true
+      cell.actorProfileImage.layer.masksToBounds = true
       self.detailTableView.rowHeight = 100
       detailTableView.allowsSelection = true
       
@@ -355,7 +362,7 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
         as! ExtraImagesCell
       
       cell.photosArray = self.imageArray
-    
+      
       self.detailTableView.rowHeight = 200
       
       
@@ -384,7 +391,11 @@ extension MoviesMasterDetailViewController : UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
-    print("you selected cell: \(indexPath.row)")
+    print("cast cell: \(castArray[indexPath.row].name) has been selected")
+    
+    self.castID = castArray[indexPath.row].id
+    
+    performSegue(withIdentifier: detailToPeopleSegueIdentifier, sender: self)
     
   }
   
@@ -433,6 +444,15 @@ extension MoviesMasterDetailViewController {
     }
     return headerHeight
   }
+}
+
+
+//Segue
+extension MoviesMasterDetailViewController {
   
-  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    let peopleVC = segue.destination as! PeopleDetailViewController
+    
+    peopleVC.id = self.castID
+  }
 }

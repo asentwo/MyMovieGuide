@@ -32,7 +32,7 @@ class InTheatresMoviesViewController: UICollectionViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    MovieData.updateAllData(urlExtension: "now_playing", completionHandler: {results in
+    MovieData.updateAllData(type:"movie", urlExtension: "now_playing", completionHandler: {results in
       
       guard let results = results else {
         print("There was an error retrieving in theatres movie data")

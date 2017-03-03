@@ -10,10 +10,34 @@ import Foundation
 import UIKit
 
 
-class ImagesPeopleCell : UITableViewCell {
+class ImagesPeopleCell : UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
   
+  var extraPhotosArray: [UIImage] = []
+  
+  let extraPeopleImageReuseIdentifier = "imagesCollectCell"
+  
+  @IBOutlet weak var extraPeopleImagesCollectionView: UICollectionView!
+  
+  override func awakeFromNib() {
+    extraPeopleImagesCollectionView.delegate = self
+    extraPeopleImagesCollectionView.dataSource = self
+  }
+  
+  
+  
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return extraPhotosArray.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = extraPeopleImagesCollectionView.dequeueReusableCell(withReuseIdentifier: extraPeopleImageReuseIdentifier, for: indexPath) as! PeopleImagesCollectionViewCell
+
+    cell.extraImages.image = extraPhotosArray[indexPath.row]
+    
+    return cell
+  }
+  
+
  
-  @IBOutlet weak var additionalImages: UIImageView!
-  
-  
+
 }

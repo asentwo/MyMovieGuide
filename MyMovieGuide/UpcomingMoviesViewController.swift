@@ -32,7 +32,7 @@ class UpcomingMoviesViewController: UICollectionViewController {
     super.viewDidLoad()
     
     
-    MovieData.updateAllData(urlExtension: "upcoming", completionHandler: { results in
+    MovieData.updateAllData(type: "movie", urlExtension: "upcoming", completionHandler: { results in
       
       guard let results = results else {
         print("There was an error retrieving upcoming movie data")

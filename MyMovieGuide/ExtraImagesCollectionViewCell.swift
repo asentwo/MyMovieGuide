@@ -13,10 +13,6 @@ import UIKit
 
 class extraImagesCollectionViewCell: UICollectionViewCell {
   
-  
-  
   @IBOutlet weak var extraImages: UIImageView!
-  
-  
   
 }

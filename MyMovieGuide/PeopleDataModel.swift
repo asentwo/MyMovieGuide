@@ -10,67 +10,92 @@ import Foundation
 import Gloss
 
 
-public struct ResultsPeopleData: Decodable {
-  
-  public let results: [PeopleData]?
-  
-  public init?(json: JSON) {
-    
-    results = "results" <~~ json
-  }
-}
-
 
 public struct knownForArray : Decodable {
   
-  public let poster : String
-  public let overview : String
-  public let releaseDate : String
-  public let title : String
-  public let id : NSNumber
-  public let backdrop : String
+  public let poster : String?
+  public let overview : String?
+  public let releaseDate : String?
+  public let title : String?
+  public let id : NSNumber?
+  public let backdrop : String?
   
   public init?(json: JSON) {
     
-    guard let poster : String = "poster_path" <~~ json,
-      let overview : String = "overview" <~~ json ?? "N/A",
-      let releaseDate : String = "release_date" <~~ json ?? "N/A",
-      let title : String = "title" <~~ json ?? "N/A",
-      let id : NSNumber = "id" <~~ json,
-      let backdrop : String = "backdrop_path" <~~ json
-      else { return nil }
-    
-    self.poster = poster
-    self.overview = overview
-    self.releaseDate = releaseDate
-    self.title = title
-    self.id = id
-    self.backdrop = backdrop
+    self.poster  = "poster_path" <~~ json
+    self.overview  = "overview" <~~ json
+    self.releaseDate = "release_date" <~~ json
+    self.title = "title" <~~ json
+    self.id = "id" <~~ json
+    self.backdrop = "backdrop_path" <~~ json
   }
 }
 
-public struct PeopleData: Decodable {
+//MARK: Image Data
+public struct PeopleImageResults : Decodable {
   
-  public let profile : String
-  public let id : NSNumber
-  public let knownFor : [knownForArray]?
-  public let name : String
+  public let images : [ImageData]
   
   public init? (json: JSON) {
     
-    guard let profile : String = "profile_path" <~~ json ?? "N/A",
-      let id : NSNumber = "id" <~~ json,
-      let name : String = "name" <~~ json
-      else { return nil }
+    guard let images : [ImageData] = "profiles" <~~ json
+      
+      else {return nil}
     
-    self.profile = profile
-    self.id = id
+    self.images = images
+    
+  }
+}
+
+public struct ImageData : Decodable {
+  
+  public let filePath : String
+  public let aspectRatio : NSNumber
+  public let height : NSNumber
+  public let width : NSNumber
+  
+  public init?(json: JSON) {
+    
+    guard let filePath : String = "file_path"  <~~ json,
+      let aspectRatio : NSNumber = "aspect_ratio" <~~ json,
+      let height : NSNumber = "height" <~~ json,
+      let width : NSNumber = "width" <~~ json
+      else {return nil}
+    
+    self.filePath = filePath
+    self.aspectRatio = aspectRatio
+    self.height = height
+    self.width = width
+  }
+  
+}
+
+
+public struct PeopleData: Decodable {
+  
+  public let profile : String?
+  public let id : NSNumber?
+  public let knownFor : [knownForArray]?
+  public let name : String?
+  public let birthPlace : String?
+  public let birthDay : String?
+  public let bio : String?
+  public let images : PeopleImageResults?
+  
+  public init? (json: JSON) {
+    
+    self.profile = "profile_path" <~~ json
+    self.id = "id" <~~ json
     self.knownFor = "known_for" <~~ json
-    self.name = name
+    self.name = "name" <~~ json
+    self.birthPlace = "place_of_birth" <~~ json
+    self.birthDay = "birthday" <~~ json
+    self.bio = "biography"  <~~ json
+    self.images = "images" <~~ json
   }
   
   //urlExtension for People: "popular"
-  static func updateAllData(urlExtension: String, completionHandler:@escaping (_ details: [PeopleData]?) -> Void){
+  static func updateAllData(urlExtension: String, completionHandler:@escaping (_ details: PeopleData?) -> Void){
     
     let nm = NetworkManager.sharedManager
     
@@ -79,22 +104,13 @@ public struct PeopleData: Decodable {
       
       if let jsonDictionary = nm.parseJSONData(data)
       {
-        guard let peopleResults = ResultsPeopleData(json: jsonDictionary)
+        guard let peopleResults = PeopleData(json: jsonDictionary)
           
           else {
             print("Error initializing object")
             return
         }
-        
-   //     print(jsonDictionary)
-        
-        guard let peopleData = peopleResults.results
-          else {
-            print("No such item")
-            return
-        }
-        
-        completionHandler(peopleData)
+        completionHandler(peopleResults)
       }
     })
   }

@@ -48,11 +48,11 @@ public struct MovieData: Decodable, Equatable {
   
   
   //urlExtensions: "popular", "upcoming", "now_playing"
-  static func updateAllData(urlExtension: String, completionHandler:@escaping (_ details: [MovieData]?) -> Void){
+  static func updateAllData(type: String, urlExtension: String,completionHandler:@escaping (_ details: [MovieData]?) -> Void){
     
     let nm = NetworkManager.sharedManager
     
-    nm.getJSONData(type:"movie", urlExtension: urlExtension, completion: {
+    nm.getJSONData(type:type, urlExtension: urlExtension, completion: {
       data in
       
       if let jsonDictionary = nm.parseJSONData(data)
