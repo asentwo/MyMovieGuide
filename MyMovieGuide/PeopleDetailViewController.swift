@@ -10,34 +10,43 @@ import Foundation
 import UIKit
 
 
+enum DownloadPic {
+  
+  case profile
+  case personal
+  case knownFor
+  
+}
+
+
 class PeopleDetailViewController : UIViewController {
   
   
   @IBOutlet weak var peopleDetailTableView: UITableView!
   
   let networkManager = NetworkManager.sharedManager
- 
+  
   var id: NSNumber?
   
   var profileImage: UIImage?
   
   var profileData: PeopleData?
+  var knownForData: CastExtended?
   var bioArray: [String] = []
   var castCrewArray: [String] = []
   var personalImagesArray: [UIImage] = []
-  var moviePostersArray: [UIImage] = []
+  var knownForArray: [UIImage] = []
   
-  var setionTitles = ["", "Bio", "Credits", "Known For"]
+  var setionTitles = ["", "Bio", "Images", "Known For"]
   
   
   //Reuse Identifiers
   let profileCellIdentifier = "actorProfileCell"
   let titleCellIndetifier = "titleCell"
   let bioCellIdentifier = "bioCell"
-  let castDetailCellIdentifier = "castDetailsCell"
   let crewDetailCellIdentifier = "crewDetailsCell"
   let imagesCellIdentifier = "imagesCell"
-  
+  let knownForCellIdentifier = "knownForCell"
   
   
   override func viewDidLoad() {
@@ -67,56 +76,66 @@ class PeopleDetailViewController : UIViewController {
               
               for profile in profileImage {
                 
-                self.updateExtraImages(extraImage: profile.filePath)
+                self.updateImage(ImageType: DownloadPic.personal, ImageString: profile.filePath)
                 
               }
             }
           }
           if let actorProfileImage = self.profileData?.profile {
             
-            self.updateProfileImage(profilePic: actorProfileImage)
+            self.updateImage(ImageType: DownloadPic.profile, ImageString: actorProfileImage)
             
           } else {
             print("actor pic doesn't exist")
           }
-        })
+          
+          CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
+            
+            guard let results = results else {
+              print("There was an error retrieving cast extended data")
+              return
+            }
+            
+            self.knownForData = results
+            
+            if self.knownForData?.castExtended != nil {
+              
+              if let knownFor = self.knownForData?.castExtended {
+                for knownForImage in knownFor {
+                  
+                  if let poster = knownForImage.poster {
+                    
+                    self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster)
+                  }
+                }
+              }
+            }
+          })
+        }
+        )
       }
     }
   }
   
-  
-  func updateProfileImage (profilePic: String) {
+  func updateImage (ImageType: DownloadPic, ImageString: String) {
     
-    self.networkManager.downloadImage(imageExtension: "\(profilePic)", { (imageData) in
+    self.networkManager.downloadImage(imageExtension: "\(ImageString)", { (imageData) in
       
       if let image = UIImage(data: imageData as Data) {
-        self.profileImage = image
         
+        switch ImageType {
+        case DownloadPic.profile: self.profileImage = image
+        case DownloadPic.personal: if let image = UIImage(data: imageData as Data){ self.personalImagesArray.append(image)}
+        case DownloadPic.knownFor: if let image = UIImage(data: imageData as Data){self.knownForArray.append(image)}
+          break
+        }
         DispatchQueue.main.async {
           self.peopleDetailTableView.reloadData()
         }
       }
     })
   }
-  
-  
-  func updateExtraImages (extraImage: String) {
-    self.networkManager.downloadImage(imageExtension: "\(extraImage)", {
-      (imageData) in
-      if let image = UIImage(data: imageData as Data){
-        self.personalImagesArray.append(image)
- 
-        DispatchQueue.main.async {
-          self.peopleDetailTableView.reloadData()
-        }
-      }
-    })
-  }
-  
 }
-
-
-
 
 
 extension PeopleDetailViewController : UITableViewDataSource {
@@ -130,7 +149,7 @@ extension PeopleDetailViewController : UITableViewDataSource {
     switch section {
     case 0: return 1
     case 1: return 1
-    case 2: return 2
+    case 2: return min(1, personalImagesArray.count)
     case 3: return min(1, personalImagesArray.count)
     default: fatalError("Unknown Selection")
       
@@ -179,30 +198,21 @@ extension PeopleDetailViewController : UITableViewDataSource {
       self.peopleDetailTableView.rowHeight = 200
       
       return cell
+      
     case 2:
-      let cell = peopleDetailTableView.dequeueReusableCell(withIdentifier: castDetailCellIdentifier) as! CastDetailCell
-      
-      switch indexPath.row {
-      case 0:
-        cell.castLabel.text = "Cast"
-        cell.totalLabel.text = ""
-      default:
-        cell.castLabel.text = "Crew"
-        cell.totalLabel.text = ""
-      }
-      
-      self.peopleDetailTableView.rowHeight = 44
-      
-      return cell
-    case 3:
       let cell = peopleDetailTableView.dequeueReusableCell(withIdentifier: imagesCellIdentifier) as! ImagesPeopleCell
       cell.extraPhotosArray = self.personalImagesArray
-  
-    //  print(self.personalImagesArray.count)
-     // print(cell.extraPhotosArray.count)
-    
-      self.peopleDetailTableView.rowHeight = 200
+      
+      self.peopleDetailTableView.rowHeight = 150
       return cell
+      
+    case 3:
+      let cell = peopleDetailTableView.dequeueReusableCell(withIdentifier: knownForCellIdentifier) as! KnownForCell
+      
+      cell.knownForArray = self.knownForArray
+      self.peopleDetailTableView.rowHeight = 150
+      return cell
+      
     default:
       _ = ""
     }

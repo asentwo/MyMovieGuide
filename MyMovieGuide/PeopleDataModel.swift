@@ -11,25 +11,25 @@ import Gloss
 
 
 
-public struct knownForArray : Decodable {
-  
-  public let poster : String?
-  public let overview : String?
-  public let releaseDate : String?
-  public let title : String?
-  public let id : NSNumber?
-  public let backdrop : String?
-  
-  public init?(json: JSON) {
-    
-    self.poster  = "poster_path" <~~ json
-    self.overview  = "overview" <~~ json
-    self.releaseDate = "release_date" <~~ json
-    self.title = "title" <~~ json
-    self.id = "id" <~~ json
-    self.backdrop = "backdrop_path" <~~ json
-  }
-}
+//public struct knownForArray : Decodable {
+//  
+//  public let poster : String?
+//  public let overview : String?
+//  public let releaseDate : String?
+//  public let title : String?
+//  public let id : NSNumber?
+//  public let backdrop : String?
+//  
+//  public init?(json: JSON) {
+//    
+//    self.poster  = "poster_path" <~~ json
+//    self.overview  = "overview" <~~ json
+//    self.releaseDate = "release_date" <~~ json
+//    self.title = "title" <~~ json
+//    self.id = "id" <~~ json
+//    self.backdrop = "backdrop_path" <~~ json
+//  }
+//}
 
 //MARK: Image Data
 public struct PeopleImageResults : Decodable {
@@ -75,7 +75,7 @@ public struct PeopleData: Decodable {
   
   public let profile : String?
   public let id : NSNumber?
-  public let knownFor : [knownForArray]?
+ // public let knownFor : [knownForArray]?
   public let name : String?
   public let birthPlace : String?
   public let birthDay : String?
@@ -86,7 +86,7 @@ public struct PeopleData: Decodable {
     
     self.profile = "profile_path" <~~ json
     self.id = "id" <~~ json
-    self.knownFor = "known_for" <~~ json
+   // self.knownFor = "known_for" <~~ json
     self.name = "name" <~~ json
     self.birthPlace = "place_of_birth" <~~ json
     self.birthDay = "birthday" <~~ json
