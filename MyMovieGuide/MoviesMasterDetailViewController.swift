@@ -1,5 +1,5 @@
 ////
-////  MoviesUpcomingDetailViewController.swift
+////  MoviesDetailViewController.swift
 ////  MyMovieGuide
 ////
 ////  Created by Justin Doo on 2/13/17.
@@ -9,7 +9,11 @@
 import Foundation
 import UIKit
 
-
+enum imageDownload {
+  case poster
+  case cast
+  case extra
+}
 
 class MoviesMasterDetailViewController: UIViewController {
   
@@ -88,8 +92,7 @@ class MoviesMasterDetailViewController: UIViewController {
               if cast.profilePic != nil {
                 if let castPic = cast.profilePic {
                   
-                  self.updateActorProfileImage(actor: castPic)
-                }
+                  self.updateImage(imageType: imageDownload.cast, ext: castPic)                }
               } else {
                 print("actor pic does not exist: \(cast.name)")
                 continue
@@ -108,51 +111,82 @@ class MoviesMasterDetailViewController: UIViewController {
 //MARK: Update and Append all Data Functions
 extension MoviesMasterDetailViewController {
   
-  func updatePosterImage(poster: String) {
+  func updateImage(imageType: imageDownload, ext: String) {
     
-    self.networkManager.downloadImage(imageExtension: "\(poster)", {
+    self.networkManager.downloadImage(imageExtension: "\(ext)", {
       (imageData) in
-      if let image = UIImage(data: imageData as Data){
-        self.movieDetailsPoster = image
+      if let image = UIImage(data: imageData as Data) {
         
+        switch imageType {
+          
+        case imageDownload.poster:
+          self.movieDetailsPoster = image
+          DispatchQueue.main.async {
+            
+            //Set background image and blur
+            self.backgroundImage.image = self.movieDetailsPoster
+            self.backgroundImage.addBlurEffect()
+          }
+        case imageDownload.cast:
+          self.castImageArray.append(image)
+        case imageDownload.extra:      self.imageArray.append(image)
+          break
+        }
         DispatchQueue.main.async {
-          
-          //Set background image and blur
-          self.backgroundImage.image = self.movieDetailsPoster
-          self.backgroundImage.addBlurEffect()
-          
           self.detailTableView.reloadData()
         }
+        
       }
     })
   }
   
-  func updateActorProfileImage(actor: String) {
-    
-    self.networkManager.downloadImage(imageExtension: "\(actor)", {
-      (imageData) in
-      if let image = UIImage(data: imageData as Data){
-        self.castImageArray.append(image)
-        
-        DispatchQueue.main.async {
-          self.detailTableView.reloadData()
-        }
-      }
-    })
-  }
   
-  func updateExtraImages (extraImage: String) {
-    self.networkManager.downloadImage(imageExtension: "\(extraImage)", {
-      (imageData) in
-      if let image = UIImage(data: imageData as Data){
-        self.imageArray.append(image)
-        
-        DispatchQueue.main.async {
-          self.detailTableView.reloadData()
-        }
-      }
-    })
-  }
+  
+//  func updatePosterImage(poster: String) {
+//    
+//    self.networkManager.downloadImage(imageExtension: "\(poster)", {
+//      (imageData) in
+//      if let image = UIImage(data: imageData as Data){
+//        self.movieDetailsPoster = image
+//        
+//        DispatchQueue.main.async {
+//          
+//          //Set background image and blur
+//          self.backgroundImage.image = self.movieDetailsPoster
+//          self.backgroundImage.addBlurEffect()
+//          
+//          self.detailTableView.reloadData()
+//        }
+//      }
+//    })
+//  }
+//  
+//  func updateActorProfileImage(actor: String) {
+//    
+//    self.networkManager.downloadImage(imageExtension: "\(actor)", {
+//      (imageData) in
+//      if let image = UIImage(data: imageData as Data){
+//        self.castImageArray.append(image)
+//        
+//        DispatchQueue.main.async {
+//          self.detailTableView.reloadData()
+//        }
+//      }
+//    })
+//  }
+//  
+//  func updateExtraImages (extraImage: String) {
+//    self.networkManager.downloadImage(imageExtension: "\(extraImage)", {
+//      (imageData) in
+//      if let image = UIImage(data: imageData as Data){
+//        self.imageArray.append(image)
+//        
+//        DispatchQueue.main.async {
+//          self.detailTableView.reloadData()
+//        }
+//      }
+//    })
+//  }
   
   
   //
@@ -167,13 +201,15 @@ extension MoviesMasterDetailViewController {
     
     if self.movieDetailsData?.poster != nil {
       if let posterImage = self.movieDetailsData?.poster {
-        self.updatePosterImage(poster: posterImage)
+        self.updateImage(imageType: imageDownload.poster, ext: posterImage)
+       // self.updatePosterImage(poster: posterImage)
         self.posterArray.append(posterImage)
       }
       
     } else if self.movieDetailsData?.backdrop != nil {
       if let backdropImage = self.movieDetailsData?.backdrop {
-        self.updatePosterImage(poster: backdropImage)
+        self.updateImage(imageType: imageDownload.poster, ext: backdropImage)
+       // self.updatePosterImage(poster: backdropImage)
         self.posterArray.append(backdropImage)
       }
     } else {
@@ -232,7 +268,8 @@ extension MoviesMasterDetailViewController {
         let posters = images.backdropImages
         for poster in posters {
           
-          self.updateExtraImages(extraImage:poster.filePath)
+          self.updateImage(imageType: imageDownload.extra, ext: poster.filePath)
+         // self.updateExtraImages(extraImage:poster.filePath)
         }
       }
     }
