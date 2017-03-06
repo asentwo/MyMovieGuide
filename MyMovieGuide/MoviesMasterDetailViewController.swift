@@ -15,6 +15,7 @@ enum imageDownload {
   case extra
 }
 
+
 class MoviesMasterDetailViewController: UIViewController {
   
   
@@ -140,55 +141,6 @@ extension MoviesMasterDetailViewController {
     })
   }
   
-  
-  
-//  func updatePosterImage(poster: String) {
-//    
-//    self.networkManager.downloadImage(imageExtension: "\(poster)", {
-//      (imageData) in
-//      if let image = UIImage(data: imageData as Data){
-//        self.movieDetailsPoster = image
-//        
-//        DispatchQueue.main.async {
-//          
-//          //Set background image and blur
-//          self.backgroundImage.image = self.movieDetailsPoster
-//          self.backgroundImage.addBlurEffect()
-//          
-//          self.detailTableView.reloadData()
-//        }
-//      }
-//    })
-//  }
-//  
-//  func updateActorProfileImage(actor: String) {
-//    
-//    self.networkManager.downloadImage(imageExtension: "\(actor)", {
-//      (imageData) in
-//      if let image = UIImage(data: imageData as Data){
-//        self.castImageArray.append(image)
-//        
-//        DispatchQueue.main.async {
-//          self.detailTableView.reloadData()
-//        }
-//      }
-//    })
-//  }
-//  
-//  func updateExtraImages (extraImage: String) {
-//    self.networkManager.downloadImage(imageExtension: "\(extraImage)", {
-//      (imageData) in
-//      if let image = UIImage(data: imageData as Data){
-//        self.imageArray.append(image)
-//        
-//        DispatchQueue.main.async {
-//          self.detailTableView.reloadData()
-//        }
-//      }
-//    })
-//  }
-  
-  
   //
   //  func append<T> (movieDetail: MovieDetailsData, customArray: [T] ) ->T {
   //    if let constant = self.movieDetailsData {
@@ -202,14 +154,12 @@ extension MoviesMasterDetailViewController {
     if self.movieDetailsData?.poster != nil {
       if let posterImage = self.movieDetailsData?.poster {
         self.updateImage(imageType: imageDownload.poster, ext: posterImage)
-       // self.updatePosterImage(poster: posterImage)
         self.posterArray.append(posterImage)
       }
       
     } else if self.movieDetailsData?.backdrop != nil {
       if let backdropImage = self.movieDetailsData?.backdrop {
         self.updateImage(imageType: imageDownload.poster, ext: backdropImage)
-       // self.updatePosterImage(poster: backdropImage)
         self.posterArray.append(backdropImage)
       }
     } else {
@@ -269,16 +219,9 @@ extension MoviesMasterDetailViewController {
         for poster in posters {
           
           self.updateImage(imageType: imageDownload.extra, ext: poster.filePath)
-         // self.updateExtraImages(extraImage:poster.filePath)
         }
       }
     }
-    
-    //    if self.movieDetailsData?.videos != nil {
-    //      if let videos = self.movieDetailsData?.videos {
-    //        self.videoArray.append(videos)
-    //      }
-    //    }
   }
 }
 
