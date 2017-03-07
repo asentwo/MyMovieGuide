@@ -52,9 +52,10 @@ class PeopleDetailViewController : UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    //keeps top of tableview from going under nav bar
+    self.peopleDetailTableView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
+   
     
-    DispatchQueue.main.async {
-      
       if let personID = self.id {
         
         PeopleData.updateAllData(urlExtension: "\(personID)", completionHandler: { results in
@@ -81,6 +82,15 @@ class PeopleDetailViewController : UIViewController {
               }
             }
           }
+          
+          if self.profileData?.bio != nil {
+            if let bio = self.profileData?.bio {
+              
+              self.bioArray.append(bio)
+            }
+            
+          }
+          
           if let actorProfileImage = self.profileData?.profile {
             
             self.updateImage(ImageType: DownloadPic.profile, ImageString: actorProfileImage)
@@ -114,7 +124,6 @@ class PeopleDetailViewController : UIViewController {
         }
         )
       }
-    }
   }
   
   func updateImage (ImageType: DownloadPic, ImageString: String) {
@@ -148,7 +157,7 @@ extension PeopleDetailViewController : UITableViewDataSource {
     
     switch section {
     case 0: return 1
-    case 1: return 1
+    case 1: return bioArray.count
     case 2: return min(1, personalImagesArray.count)
     case 3: return min(1, personalImagesArray.count)
     default: fatalError("Unknown Selection")

@@ -26,6 +26,8 @@
 		6E250C1D1E6A289100EB4D3A /* PeopleExtendedDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E250C1C1E6A289100EB4D3A /* PeopleExtendedDataModel.swift */; };
 		6E250C1F1E6A3F9400EB4D3A /* KnownForCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E250C1E1E6A3F9400EB4D3A /* KnownForCell.swift */; };
 		6E250C211E6A40A500EB4D3A /* KnownForCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E250C201E6A40A500EB4D3A /* KnownForCollectionViewCell.swift */; };
+		6E250C231E6E282000EB4D3A /* CastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E250C221E6E282000EB4D3A /* CastCollectionViewCell.swift */; };
+		6E250C251E6E5CC300EB4D3A /* MoviesMasterImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E250C241E6E5CC300EB4D3A /* MoviesMasterImageController.swift */; };
 		6E2CDCF41E650360006E58EF /* GenreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2CDCF31E650360006E58EF /* GenreCollectionViewCell.swift */; };
 		6E2CDCF61E66122F006E58EF /* MoviesMasterVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2CDCF51E66122F006E58EF /* MoviesMasterVideoController.swift */; };
 		6E2CDCF81E663AB8006E58EF /* PeopleImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2CDCF71E663AB8006E58EF /* PeopleImagesCollectionViewCell.swift */; };
@@ -89,6 +91,8 @@
 		6E250C1C1E6A289100EB4D3A /* PeopleExtendedDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleExtendedDataModel.swift; sourceTree = "<group>"; };
 		6E250C1E1E6A3F9400EB4D3A /* KnownForCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnownForCell.swift; sourceTree = "<group>"; };
 		6E250C201E6A40A500EB4D3A /* KnownForCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnownForCollectionViewCell.swift; sourceTree = "<group>"; };
+		6E250C221E6E282000EB4D3A /* CastCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastCollectionViewCell.swift; sourceTree = "<group>"; };
+		6E250C241E6E5CC300EB4D3A /* MoviesMasterImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesMasterImageController.swift; sourceTree = "<group>"; };
 		6E2CDCF31E650360006E58EF /* GenreCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreCollectionViewCell.swift; sourceTree = "<group>"; };
 		6E2CDCF51E66122F006E58EF /* MoviesMasterVideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesMasterVideoController.swift; sourceTree = "<group>"; };
 		6E2CDCF71E663AB8006E58EF /* PeopleImagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleImagesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -361,6 +365,7 @@
 				6E1A0B591E391CFE00F18892 /* MoviesMasterViewController.swift */,
 				6E1C6DC11E52530400B61ECD /* MoviesMasterDetailViewController.swift */,
 				6E2CDCF51E66122F006E58EF /* MoviesMasterVideoController.swift */,
+				6E250C241E6E5CC300EB4D3A /* MoviesMasterImageController.swift */,
 			);
 			name = Master;
 			sourceTree = "<group>";
@@ -382,6 +387,7 @@
 				6E2CDCF31E650360006E58EF /* GenreCollectionViewCell.swift */,
 				6E2CDCF71E663AB8006E58EF /* PeopleImagesCollectionViewCell.swift */,
 				6E250C201E6A40A500EB4D3A /* KnownForCollectionViewCell.swift */,
+				6E250C221E6E282000EB4D3A /* CastCollectionViewCell.swift */,
 			);
 			name = CollectionViewCells;
 			sourceTree = "<group>";
@@ -560,6 +566,8 @@
 				6E6D7C8B1E5CE65D002E3A56 /* BioCell.swift in Sources */,
 				6ED250F81E57AC3D008BE813 /* ExtraImagesCell.swift in Sources */,
 				6EDEBAA61E566DA200C0AC71 /* PosterCell.swift in Sources */,
+				6E250C231E6E282000EB4D3A /* CastCollectionViewCell.swift in Sources */,
+				6E250C251E6E5CC300EB4D3A /* MoviesMasterImageController.swift in Sources */,
 				6E6D7C841E5CC3AE002E3A56 /* PeopleDetailViewController.swift in Sources */,
 				6E0308A51E554513004A04DD /* OverviewCell.swift in Sources */,
 				6EFD9FC51E4D02D80030D8AA /* InTheatresCollectionViewCell.swift in Sources */,

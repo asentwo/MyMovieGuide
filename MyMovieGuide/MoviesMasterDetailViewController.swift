@@ -15,8 +15,13 @@ enum imageDownload {
   case extra
 }
 
+enum segueController {
+  case image
+  case cast
+}
 
-class MoviesMasterDetailViewController: UIViewController {
+
+class MoviesMasterDetailViewController: UIViewController, handleCastData, handleExtraImage  {
   
   
   //MARK: Properties
@@ -26,7 +31,10 @@ class MoviesMasterDetailViewController: UIViewController {
   let networkManager = NetworkManager.sharedManager
   
   var iD: NSNumber?
+  
+  var segueType: segueController?
   var castID: NSNumber?
+  var extraImage: UIImage?
   
   var movieDetailsData: MovieDetailsData?
   var movieDetailsPoster: UIImage?
@@ -45,8 +53,7 @@ class MoviesMasterDetailViewController: UIViewController {
   let sectionTitles = ["","Overview","Release Info","Box Office", "Home Page","Cast", "Image Gallery", "Videos"]
   let releaseCatagories = ["Release Date", "Runtime", "Genre"]
   let boxOfficeCatagories = ["Budget", "Revenue"]
-  
-  
+
   let posterReuseIdentifier = "posterCell"
   let overviewReuseIdentifier = "overviewCell"
   let movieDetailReuseIdentifier = "movieDetailCell"
@@ -54,7 +61,8 @@ class MoviesMasterDetailViewController: UIViewController {
   let imagesReuseIdentifier = "extraImagesCell"
   let videoReuseIdentifier = "videoCell"
   
-  let detailToPeopleSegueIdentifier = "detailToPeopleSegue"
+ let detailToPeopleSegueIdentifier = "detailToPeopleSegue"
+ let detailToImageSegueIdentifier = "detailToImageSegue"
   
   //MARK: Lifecycle
   override func viewDidLoad() {
@@ -86,22 +94,28 @@ class MoviesMasterDetailViewController: UIViewController {
               print("There was an error retrieving upcoming movie data")
               return
             }
-            self.castArray = results
+           self.castArray = results
+            
+           //  print("cast array count:\(self.castArray.count)")
             
             for cast in self.castArray {
-              
+            
               if cast.profilePic != nil {
                 if let castPic = cast.profilePic {
                   
-                  self.updateImage(imageType: imageDownload.cast, ext: castPic)                }
+                  self.updateImage(imageType: imageDownload.cast, ext: castPic)
+                 print("cast pic appended:\(castPic)")
+                }
               } else {
                 print("actor pic does not exist: \(cast.name)")
                 continue
               }
             }
+            print("cast image array count:\(self.castImageArray.count)")
+
           })
-          self.appendAllData()
           
+                  self.appendAllData()
         })
       }
     }
@@ -130,24 +144,34 @@ extension MoviesMasterDetailViewController {
           }
         case imageDownload.cast:
           self.castImageArray.append(image)
-        case imageDownload.extra:      self.imageArray.append(image)
+
+          
+        case imageDownload.extra:
+          self.imageArray.removeAll()
+          self.imageArray.append(image)
           break
         }
+        
         DispatchQueue.main.async {
+        
           self.detailTableView.reloadData()
         }
         
       }
     })
   }
+
   
-  //
-  //  func append<T> (movieDetail: MovieDetailsData, customArray: [T] ) ->T {
-  //    if let constant = self.movieDetailsData {
-  //      return constant as! T
-  //    }
-  //  }
-  
+//  func appendMovieData(dataType: MovieDetailsData){
+//    
+//    switch dataType {
+//      case
+//      
+//      
+//    }
+//    
+//  }
+//  
   
   func appendAllData () {
     
@@ -243,7 +267,7 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
     case 2: return releaseInfoArray.count
     case 3: return boxOfficeArray.count
     case 4: return homePageArray.count
-    case 5: return castImageArray.count
+    case 5: return min(1, castImageArray.count)
     case 6: return min(1, imageArray.count)
     case 7: return 1
       
@@ -324,14 +348,14 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
       let cell = detailTableView.dequeueReusableCell(withIdentifier: castResuseIdentifier)
         as! CastCell
       
-      let cast = castArray[indexPath.row]
+      cell.castPhotosArray = castArray
+      cell.castImagesArray = castImageArray
       
-      cell.actorName.text = cast.name
-      cell.characterName.text = cast.character
-      cell.actorProfileImage.image = castImageArray[indexPath.row]
-      cell.actorProfileImage.layer.cornerRadius = cell.actorProfileImage.frame.size.height/2
-      cell.actorProfileImage.clipsToBounds = true
-      cell.actorProfileImage.layer.masksToBounds = true
+      print("cast image array count:\(self.castImageArray.count)")
+    //  print("cell cast image array count:\(cell.castImagesArray.count)")
+      
+      cell.imageDelegate = self
+      
       self.detailTableView.rowHeight = 100
       detailTableView.allowsSelection = true
       
@@ -342,9 +366,10 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
         as! ExtraImagesCell
       
       cell.photosArray = self.imageArray
+      cell.imageDelegate = self
       
       self.detailTableView.rowHeight = 200
-      
+      detailTableView.allowsSelection = true
       
       return cell
       
@@ -353,6 +378,7 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
         as! VideoCell
       
       self.detailTableView.rowHeight = 50
+      detailTableView.allowsSelection = true
       
       return cell
       
@@ -366,17 +392,10 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
 }
 
 
-//MARK: TableView Delegate
-extension MoviesMasterDetailViewController : UITableViewDelegate {
+extension MoviesMasterDetailViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
-    print("cast cell: \(castArray[indexPath.row].name) has been selected")
-    
-    self.castID = castArray[indexPath.row].id
-    
-    performSegue(withIdentifier: detailToPeopleSegueIdentifier, sender: self)
-    
+    print("row pressed: \(indexPath.row)")
   }
   
 }
@@ -431,8 +450,35 @@ extension MoviesMasterDetailViewController {
 extension MoviesMasterDetailViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+   
+    if self.segueType == segueController.cast {
+    
     let peopleVC = segue.destination as! PeopleDetailViewController
     
     peopleVC.id = self.castID
+    
+    }
+    else if self.segueType == segueController.image {
+      
+    let imageVC = segue.destination as! MoviesMasterImageController
+      
+    imageVC.image = self.extraImage
+      
+    }
   }
 }
+
+//Protocols
+extension MoviesMasterDetailViewController {
+  
+  func imageTapped(ID castID: NSNumber, segueType: segueController) {
+    self.castID = castID
+    self.segueType = segueType
+    performSegue(withIdentifier: detailToPeopleSegueIdentifier, sender: self)
+  }
+  
+  func extraImageTapped(Image: UIImage, segueType: segueController) {
+    self.extraImage = Image
+    self.segueType = segueType
+    performSegue(withIdentifier: detailToImageSegueIdentifier, sender: self)
+  }}

@@ -9,12 +9,19 @@
 import Foundation
 import UIKit
 
+protocol handleExtraImage {
+  func extraImageTapped(Image: UIImage, segueType: segueController)
+}
 
-class ExtraImagesCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
+
+class ExtraImagesCell: UITableViewCell {
   
   var photosArray: [UIImage] = []
   
   let extraImageReuseIdentifier = "extraImageCollectionViewCell"
+  
+  var imageDelegate: handleExtraImage?
+  var currentImage : UIImage?
   
   @IBOutlet weak var extraImagesCollectionView: UICollectionView!
   
@@ -22,13 +29,16 @@ class ExtraImagesCell: UITableViewCell, UICollectionViewDataSource, UICollection
     extraImagesCollectionView.delegate = self
     extraImagesCollectionView.dataSource = self
   }
-  
-  
+}
+
+
+
+extension ExtraImagesCell : UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return photosArray.count
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = extraImagesCollectionView.dequeueReusableCell(withReuseIdentifier: extraImageReuseIdentifier, for: indexPath) as! extraImagesCollectionViewCell
     
@@ -36,5 +46,17 @@ class ExtraImagesCell: UITableViewCell, UICollectionViewDataSource, UICollection
     
     return cell
   }
- 
+}
+
+
+
+extension ExtraImagesCell : UICollectionViewDelegate {
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    self.currentImage = photosArray[indexPath.row]
+    
+    guard let currentImage = currentImage else { return }
+    imageDelegate?.extraImageTapped(Image: currentImage, segueType: segueController.image)
+    
+  }
 }
