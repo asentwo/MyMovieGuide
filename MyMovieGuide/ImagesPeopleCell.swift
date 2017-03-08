@@ -13,6 +13,7 @@ import UIKit
 class ImagesPeopleCell : UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
   
   var extraPhotosArray: [UIImage] = []
+  var profileImagesArray: [ImageData] = []
   
   let extraPeopleImageReuseIdentifier = "imagesCollectCell"
   
@@ -31,13 +32,16 @@ class ImagesPeopleCell : UITableViewCell, UICollectionViewDelegate, UICollection
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = extraPeopleImagesCollectionView.dequeueReusableCell(withReuseIdentifier: extraPeopleImageReuseIdentifier, for: indexPath) as! PeopleImagesCollectionViewCell
-
-    cell.extraImages.image = extraPhotosArray[indexPath.row]
+    
+    DispatchQueue.main.async {
+      cell.extraImages.sd_setImage(with: URL(string: "\(baseImageURL)\(self.profileImagesArray[indexPath.row].filePath)"))
+      
+    }
     
     return cell
   }
   
-
- 
-
+  
+  
+  
 }

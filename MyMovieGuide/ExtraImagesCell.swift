@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 protocol handleExtraImage {
   func extraImageTapped(Image: UIImage, segueType: segueController)
@@ -17,6 +18,7 @@ protocol handleExtraImage {
 class ExtraImagesCell: UITableViewCell {
   
   var photosArray: [UIImage] = []
+  var extraImagesArray: [BackdropData]?
   
   let extraImageReuseIdentifier = "extraImageCollectionViewCell"
   
@@ -42,8 +44,15 @@ extension ExtraImagesCell : UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = extraImagesCollectionView.dequeueReusableCell(withReuseIdentifier: extraImageReuseIdentifier, for: indexPath) as! extraImagesCollectionViewCell
     
-    cell.extraImages.image = photosArray[indexPath.row]
     
+    //  cell.extraImages.image = photosArray[indexPath.row]
+    
+    if let xtraImage = extraImagesArray {
+      
+      DispatchQueue.main.async {
+        cell.extraImages.sd_setImage(with: URL(string: "\(baseImageURL)\(xtraImage[indexPath.row].filePath)"))
+      }
+    }
     return cell
   }
 }

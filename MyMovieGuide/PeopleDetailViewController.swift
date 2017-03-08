@@ -34,8 +34,12 @@ class PeopleDetailViewController : UIViewController {
   var knownForData: CastExtended?
   var bioArray: [String] = []
   var castCrewArray: [String] = []
+  
   var personalImagesArray: [UIImage] = []
+  var profileImagesArray: [ImageData] = []
+  
   var knownForArray: [UIImage] = []
+  var knownForExtendedArray: [CastExtendedData] = []
   
   var setionTitles = ["", "Bio", "Images", "Known For"]
   
@@ -68,10 +72,13 @@ class PeopleDetailViewController : UIViewController {
           
           self.profileData = results
           
-          
           if self.profileData?.images != nil {
             
+            
+            
             if let profileImages = self.profileData?.images{
+              
+              self.profileImagesArray = profileImages.images
               
               let profileImage = profileImages.images
               
@@ -107,10 +114,14 @@ class PeopleDetailViewController : UIViewController {
             }
             
             self.knownForData = results
+      
             
             if self.knownForData?.castExtended != nil {
               
               if let knownFor = self.knownForData?.castExtended {
+                
+                self.knownForExtendedArray = knownFor
+              
                 for knownForImage in knownFor {
                   
                   if let poster = knownForImage.poster {
@@ -210,7 +221,9 @@ extension PeopleDetailViewController : UITableViewDataSource {
       
     case 2:
       let cell = peopleDetailTableView.dequeueReusableCell(withIdentifier: imagesCellIdentifier) as! ImagesPeopleCell
+    
       cell.extraPhotosArray = self.personalImagesArray
+      cell.profileImagesArray = self.profileImagesArray
       
       self.peopleDetailTableView.rowHeight = 150
       return cell
@@ -218,8 +231,10 @@ extension PeopleDetailViewController : UITableViewDataSource {
     case 3:
       let cell = peopleDetailTableView.dequeueReusableCell(withIdentifier: knownForCellIdentifier) as! KnownForCell
       
+      cell.knownForExtendedArray = self.knownForExtendedArray
       cell.knownForArray = self.knownForArray
       self.peopleDetailTableView.rowHeight = 150
+      
       return cell
       
     default:

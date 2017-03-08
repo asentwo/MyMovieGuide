@@ -1,15 +1,17 @@
 PODS:
   - Gloss (1.2.1)
-  - ZoomTransitioning (1.4.1)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
 
 DEPENDENCIES:
   - Gloss
-  - ZoomTransitioning
+  - SDWebImage
 
 SPEC CHECKSUMS:
   Gloss: 9ab33b8ede01e4232571d43a6bf9259b85d1de69
-  ZoomTransitioning: 42d9ad29c83d896f3fe28c324a4fe98ac821f0dd
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
 
-PODFILE CHECKSUM: 7719a910ab970165221b0965808b5c2a3ef02967
+PODFILE CHECKSUM: 601edcf1647ca815d1fcdab3d09c0a4cae881e8f
 
 COCOAPODS: 1.2.0.beta.1

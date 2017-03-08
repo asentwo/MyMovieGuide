@@ -13,6 +13,7 @@ import UIKit
 class KnownForCell : UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
   
   var knownForArray: [UIImage] = []
+  var knownForExtendedArray: [CastExtendedData] = []
   
   let knownForReuseIdentifier = "knownForCollectCell"
   
@@ -31,9 +32,14 @@ class KnownForCell : UITableViewCell, UICollectionViewDelegate, UICollectionView
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = knownForCollectionView.dequeueReusableCell(withReuseIdentifier: knownForReuseIdentifier, for: indexPath) as! KnownForCollectionViewCell
-    
-    cell.knownForImages.image = knownForArray[indexPath.row]
-    
+
+    if let knownPoster = knownForExtendedArray[indexPath.row].poster{
+      
+      DispatchQueue.main.async {
+        cell.knownForImages.sd_setImage(with: URL(string: "\(baseImageURL)\(knownPoster)"))
+      }
+      
+    }
     return cell
   }
   

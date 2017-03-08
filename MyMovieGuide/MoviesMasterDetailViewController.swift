@@ -35,6 +35,7 @@ class MoviesMasterDetailViewController: UIViewController, handleCastData, handle
   var segueType: segueController?
   var castID: NSNumber?
   var extraImage: UIImage?
+  var extraImagesArray: [BackdropData]?
   
   var movieDetailsData: MovieDetailsData?
   var movieDetailsPoster: UIImage?
@@ -53,7 +54,7 @@ class MoviesMasterDetailViewController: UIViewController, handleCastData, handle
   let sectionTitles = ["","Overview","Release Info","Box Office", "Home Page","Cast", "Image Gallery", "Videos"]
   let releaseCatagories = ["Release Date", "Runtime", "Genre"]
   let boxOfficeCatagories = ["Budget", "Revenue"]
-
+  
   let posterReuseIdentifier = "posterCell"
   let overviewReuseIdentifier = "overviewCell"
   let movieDetailReuseIdentifier = "movieDetailCell"
@@ -61,8 +62,8 @@ class MoviesMasterDetailViewController: UIViewController, handleCastData, handle
   let imagesReuseIdentifier = "extraImagesCell"
   let videoReuseIdentifier = "videoCell"
   
- let detailToPeopleSegueIdentifier = "detailToPeopleSegue"
- let detailToImageSegueIdentifier = "detailToImageSegue"
+  let detailToPeopleSegueIdentifier = "detailToPeopleSegue"
+  let detailToImageSegueIdentifier = "detailToImageSegue"
   
   //MARK: Lifecycle
   override func viewDidLoad() {
@@ -87,6 +88,9 @@ class MoviesMasterDetailViewController: UIViewController, handleCastData, handle
           
           self.movieDetailsData = results
           self.navigationItem.title = self.movieDetailsData?.title
+         
+          //
+         self.extraImagesArray = self.movieDetailsData?.images?.backdropImages
           
           CastData.updateAllData(urlExtension: "\(movieID)/credits", completionHandler: { results in
             
@@ -94,28 +98,22 @@ class MoviesMasterDetailViewController: UIViewController, handleCastData, handle
               print("There was an error retrieving upcoming movie data")
               return
             }
-           self.castArray = results
-            
-           //  print("cast array count:\(self.castArray.count)")
+            self.castArray = results
             
             for cast in self.castArray {
-            
+              
               if cast.profilePic != nil {
                 if let castPic = cast.profilePic {
                   
                   self.updateImage(imageType: imageDownload.cast, ext: castPic)
-                 print("cast pic appended:\(castPic)")
                 }
               } else {
                 print("actor pic does not exist: \(cast.name)")
                 continue
               }
             }
-            print("cast image array count:\(self.castImageArray.count)")
-
           })
-          
-                  self.appendAllData()
+          self.appendAllData()
         })
       }
     }
@@ -144,34 +142,33 @@ extension MoviesMasterDetailViewController {
           }
         case imageDownload.cast:
           self.castImageArray.append(image)
-
+          
           
         case imageDownload.extra:
-          self.imageArray.removeAll()
           self.imageArray.append(image)
           break
         }
         
         DispatchQueue.main.async {
-        
+          
           self.detailTableView.reloadData()
         }
         
       }
     })
   }
-
   
-//  func appendMovieData(dataType: MovieDetailsData){
-//    
-//    switch dataType {
-//      case
-//      
-//      
-//    }
-//    
-//  }
-//  
+  
+  //  func appendMovieData(dataType: MovieDetailsData){
+  //
+  //    switch dataType {
+  //      case
+  //
+  //
+  //    }
+  //
+  //  }
+  //
   
   func appendAllData () {
     
@@ -350,10 +347,6 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
       
       cell.castPhotosArray = castArray
       cell.castImagesArray = castImageArray
-      
-      print("cast image array count:\(self.castImageArray.count)")
-    //  print("cell cast image array count:\(cell.castImagesArray.count)")
-      
       cell.imageDelegate = self
       
       self.detailTableView.rowHeight = 100
@@ -365,6 +358,7 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
       let cell = detailTableView.dequeueReusableCell(withIdentifier: imagesReuseIdentifier)
         as! ExtraImagesCell
       
+      cell.extraImagesArray = self.extraImagesArray
       cell.photosArray = self.imageArray
       cell.imageDelegate = self
       
@@ -450,19 +444,19 @@ extension MoviesMasterDetailViewController {
 extension MoviesMasterDetailViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   
+    
     if self.segueType == segueController.cast {
-    
-    let peopleVC = segue.destination as! PeopleDetailViewController
-    
-    peopleVC.id = self.castID
-    
+      
+      let peopleVC = segue.destination as! PeopleDetailViewController
+      
+      peopleVC.id = self.castID
+      
     }
     else if self.segueType == segueController.image {
       
-    let imageVC = segue.destination as! MoviesMasterImageController
+      let imageVC = segue.destination as! MoviesMasterImageController
       
-    imageVC.image = self.extraImage
+      imageVC.image = self.extraImage
       
     }
   }

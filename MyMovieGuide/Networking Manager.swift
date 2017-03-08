@@ -8,6 +8,8 @@
 
 import Foundation
 
+public let baseImageURL = "https://image.tmdb.org/t/p/w500"
+
 
 class NetworkManager {
   
@@ -16,8 +18,8 @@ class NetworkManager {
   private let apiKey = "edd0a1862823ffe4afff6c230daf2c92"
   private let readAccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZGQwYTE4NjI4MjNmZmU0YWZmZjZjMjMwZGFmMmM5MiIsInN1YiI6IjU4ODhlN2YzOTI1MTQxMTk1YTAwYjgxYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9wkhVTvuTslhD5LHAUdRmUR-BQw7qb3I_hwfXZOUcvI"
   private let baseURL = "https://api.themoviedb.org/3/"
-  private let baseImageURL = "https://image.tmdb.org/t/p/w500"
   private let baseVideoURL =  "https://www.youtube.com/watch?v="
+  
   
   lazy var configuration: URLSessionConfiguration = URLSessionConfiguration.default
   lazy var session: URLSession = URLSession(configuration: self.configuration)
@@ -77,6 +79,7 @@ class NetworkManager {
     return nil
   }
   
+  //Image extension https://image.tmdb.org/t/p/w500/
   
   //Image Downloader
   typealias ImageDataHandler = ((Data) -> Void)
@@ -86,7 +89,7 @@ class NetworkManager {
     let request = URLRequest(url: URL(string: "\(baseImageURL)\(imageExtension)" )!)
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
-      //  print(request)
+       // print(request)
       
       if error == nil {
         if let httpResponse = response as? HTTPURLResponse {

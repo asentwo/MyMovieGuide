@@ -1,8 +1,8 @@
-platform :ios, '10.0'
+platform :ios, '8.0'
 use_frameworks!
 
 target 'MyMovieGuide' do
 pod 'Gloss'
-pod 'ZoomTransitioning'
+pod 'SDWebImage'
 end
 
