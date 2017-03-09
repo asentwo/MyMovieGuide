@@ -44,39 +44,39 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
           return
         }
         self.genreDataArray = results
-        
-        for movie in self.genreDataArray {
-          if movie.poster != nil {
-            if let posterImage = movie.poster {
-              self.updateImage(poster: posterImage)
-            } else if movie.backdrop != nil {
-              if let backdropImage = movie.backdrop {
-                self.updateImage(poster: backdropImage)
-              }
-            }
-          } else {
-            print("poster does not exist: \(movie.title)")
-            continue
-          }
-        }
+//        
+//        for movie in self.genreDataArray {
+//          if movie.poster != nil {
+//            if let posterImage = movie.poster {
+//              self.updateImage(poster: posterImage)
+//            } else if movie.backdrop != nil {
+//              if let backdropImage = movie.backdrop {
+//                self.updateImage(poster: backdropImage)
+//              }
+//            }
+//          } else {
+//            print("poster does not exist: \(movie.title)")
+//            continue
+//          }
+//        }
       })
     }
   }
   
   
-  func updateImage(poster: String) {
-    
-    self.networkManager.downloadImage(imageExtension: "\(poster)", {
-      (imageData) in
-      if let image = UIImage(data: imageData as Data){
-        self.genrePosterArray.append(image)
-        
-        DispatchQueue.main.async {
-          self.genreCollectionView.reloadData()
-        }
-      }
-    })
-  }
+//  func updateImage(poster: String) {
+//    
+//    self.networkManager.downloadImage(imageExtension: "\(poster)", {
+//      (imageData) in
+//      if let image = UIImage(data: imageData as Data){
+//        self.genrePosterArray.append(image)
+//        
+//        DispatchQueue.main.async {
+//          self.genreCollectionView.reloadData()
+//        }
+//      }
+//    })
+//  }
 }
 
 
@@ -96,8 +96,12 @@ extension MoviesGenresCollectionViewController {
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = genreCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! genreCollectionViewCell
-    cell.genreImageView.image = genrePosterArray[indexPath.row]
     
+    if let genrePoster = genreDataArray[indexPath.row].poster {
+    cell.genreImageView.sd_setImage(with: URL(string: genrePoster))
+      
+  //    genrePosterArray[indexPath.row]
+    }
     return cell
   }
   

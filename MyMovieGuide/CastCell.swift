@@ -50,7 +50,10 @@ extension CastCell: UICollectionViewDataSource {
     
     cell.actorName.text = self.castPhotosArray[indexPath.row].name
     cell.characterName.text = self.castPhotosArray[indexPath.row].character
-    cell.actorProfileImage.sd_setImage(with: URL(string:  "\(baseImageURL)\(self.castPhotosArray[indexPath.row].profilePic!)"))
+    
+    if let profilePic = self.castPhotosArray[indexPath.row].profilePic {
+    cell.actorProfileImage.sd_setImage(with: URL(string:  "\(baseImageURL)\(profilePic)"))
+    }
     cell.actorProfileImage.layer.cornerRadius = cell.actorProfileImage.frame.size.height/2
     cell.actorProfileImage.clipsToBounds = true
     cell.actorProfileImage.layer.masksToBounds = true

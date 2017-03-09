@@ -44,9 +44,6 @@ extension ExtraImagesCell : UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = extraImagesCollectionView.dequeueReusableCell(withReuseIdentifier: extraImageReuseIdentifier, for: indexPath) as! extraImagesCollectionViewCell
     
-    
-    //  cell.extraImages.image = photosArray[indexPath.row]
-    
     if let xtraImage = extraImagesArray {
       
       DispatchQueue.main.async {

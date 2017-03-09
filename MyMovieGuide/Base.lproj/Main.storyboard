@@ -767,7 +767,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="posterCell" rowHeight="400" id="TEa-m0-mdK" customClass="PosterCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="343" height="400"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="343" height="400"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TEa-m0-mdK" id="Wbo-Wp-JFe">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="399"/>
@@ -799,7 +799,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="overviewCell" rowHeight="125" id="p4U-NS-azH" customClass="OverviewCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="456" width="343" height="125"/>
+                                        <rect key="frame" x="0.0" y="455.5" width="343" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p4U-NS-azH" id="XJH-o4-saF">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="124"/>
@@ -825,7 +825,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieDetailCell" id="QFL-qq-Bf6" customClass="MovieDetailCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="581" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="580.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QFL-qq-Bf6" id="BZz-XW-WM8">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
@@ -863,7 +863,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="castCell" rowHeight="100" id="1eQ-Jb-FYu" customClass="CastCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="625" width="343" height="100"/>
+                                        <rect key="frame" x="0.0" y="624.5" width="343" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1eQ-Jb-FYu" id="geo-7p-Fsg">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="99"/>
@@ -886,9 +886,9 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="210" height="100"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ltx-OZ-o1T">
-                                                                        <rect key="frame" x="100" y="66" width="102" height="18"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ltx-OZ-o1T">
+                                                                        <rect key="frame" x="100" y="67" width="102" height="15"/>
+                                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                                                                         <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
@@ -904,14 +904,14 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uhJ-xv-YaV">
-                                                                        <rect key="frame" x="100" y="16" width="102" height="21"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <rect key="frame" x="100" y="16" width="102" height="20"/>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                         <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="as" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ElE-Bv-aX6">
-                                                                        <rect key="frame" x="100" y="43" width="102" height="18"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                        <rect key="frame" x="100" y="42" width="102" height="20"/>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                         <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
@@ -919,7 +919,6 @@
                                                             </view>
                                                             <constraints>
                                                                 <constraint firstItem="8TP-xc-Aug" firstAttribute="top" secondItem="YFS-jG-0Cc" secondAttribute="topMargin" constant="1" id="3Jj-d9-npP"/>
-                                                                <constraint firstAttribute="bottomMargin" secondItem="Ltx-OZ-o1T" secondAttribute="bottom" constant="8" id="4Iu-9b-AEA"/>
                                                                 <constraint firstItem="uhJ-xv-YaV" firstAttribute="trailing" secondItem="YFS-jG-0Cc" secondAttribute="trailingMargin" id="6Ft-kO-DrP"/>
                                                                 <constraint firstItem="Ltx-OZ-o1T" firstAttribute="trailing" secondItem="YFS-jG-0Cc" secondAttribute="trailingMargin" id="FHm-9n-IwB"/>
                                                                 <constraint firstItem="uhJ-xv-YaV" firstAttribute="leading" secondItem="8TP-xc-Aug" secondAttribute="trailing" constant="10" id="HnF-nm-H3e"/>
@@ -955,7 +954,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="extraImagesCell" rowHeight="190" id="ee0-rk-nJU" customClass="ExtraImagesCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="725" width="343" height="190"/>
+                                        <rect key="frame" x="0.0" y="724.5" width="343" height="190"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ee0-rk-nJU" id="Wct-uO-Fm5">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="189"/>
@@ -1013,7 +1012,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="videoCell" id="5TZ-wr-6tV" customClass="VideoCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="915" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="914.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5TZ-wr-6tV" id="a44-0z-cWQ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
