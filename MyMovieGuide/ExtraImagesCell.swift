@@ -11,19 +11,19 @@ import UIKit
 import SDWebImage
 
 protocol handleExtraImage {
-  func extraImageTapped(Image: UIImage, segueType: segueController)
+  func extraImageTapped(Image: String, segueType: segueController)
 }
 
 
 class ExtraImagesCell: UITableViewCell {
   
-  var photosArray: [UIImage] = []
+  var photosArray: [String] = []
   var extraImagesArray: [BackdropData]?
   
   let extraImageReuseIdentifier = "extraImageCollectionViewCell"
   
   var imageDelegate: handleExtraImage?
-  var currentImage : UIImage?
+  var currentImage : String?
   
   @IBOutlet weak var extraImagesCollectionView: UICollectionView!
   

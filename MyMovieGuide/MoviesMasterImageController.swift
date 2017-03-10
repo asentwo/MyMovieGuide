@@ -13,7 +13,7 @@ import UIKit
 class MoviesMasterImageController: UIViewController {
   
   
-  var image: UIImage?
+  var image: String?
   
   @IBOutlet weak var detailImage: UIImageView!
   
@@ -22,8 +22,11 @@ class MoviesMasterImageController: UIViewController {
     super.viewDidLoad()
     
     DispatchQueue.main.async {
-         self.detailImage.image = self.image
+   //   self.detailImage.image = self.image
+      if let imagePic = self.image {
+      self.detailImage.sd_setImage(with: URL(string:"\(baseImageURL)\(imagePic)"))
     }
   }
-
+  }
+  
 }

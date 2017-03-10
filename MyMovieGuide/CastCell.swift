@@ -18,7 +18,7 @@ protocol handleCastData {
 class CastCell : UITableViewCell {
   
   var castPhotosArray: [CastData] = []
-  var castImagesArray: [String] = []
+ // var castImagesArray: [String] = []
   
   var imageDelegate: handleCastData?
   var castID: NSNumber?
@@ -41,7 +41,7 @@ class CastCell : UITableViewCell {
 extension CastCell: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return castImagesArray.count
+    return castPhotosArray.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -52,7 +52,7 @@ extension CastCell: UICollectionViewDataSource {
     cell.characterName.text = self.castPhotosArray[indexPath.row].character
     
     if let profilePic = self.castPhotosArray[indexPath.row].profilePic {
-    cell.actorProfileImage.sd_setImage(with: URL(string:  "\(baseImageURL)\(profilePic)"))
+      cell.actorProfileImage.sd_setImage(with: URL(string:  "\(baseImageURL)\(profilePic)"), placeholderImage: UIImage(named: "placeholder.png"))
     }
     cell.actorProfileImage.layer.cornerRadius = cell.actorProfileImage.frame.size.height/2
     cell.actorProfileImage.clipsToBounds = true
