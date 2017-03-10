@@ -12,7 +12,6 @@ import UIKit
 
 class BioCell: UITableViewCell {
   
-  
   @IBOutlet weak var bioText: UILabel!
   
 }

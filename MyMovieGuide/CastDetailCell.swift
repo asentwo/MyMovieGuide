@@ -13,7 +13,6 @@ class CastDetailCell: UITableViewCell {
   
   @IBOutlet weak var castLabel: UILabel!
   @IBOutlet weak var totalLabel: UILabel!
-  
   @IBOutlet weak var caratImage: UIImageView!
   
 }

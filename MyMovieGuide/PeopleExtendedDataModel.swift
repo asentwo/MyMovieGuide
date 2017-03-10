@@ -16,12 +16,9 @@ public struct CastExtended: Decodable {
   
   public init?(json: JSON) {
     
-castExtended = "cast" <~~ json
+    castExtended = "cast" <~~ json
   }
 }
-
-
-
 
 public struct CastExtendedData : Decodable {
   
@@ -29,21 +26,24 @@ public struct CastExtendedData : Decodable {
   public let title : String
   public let releaseDate : String?
   public let poster : String?
+  public let id: NSNumber
   
   public init?(json: JSON) {
     
     guard let character : String = "character" <~~ json,
-      let title : String  = "title" <~~ json
+      let title : String  = "title" <~~ json,
+      let id : NSNumber = "id" <~~ json
       else {return nil}
     
     self.character = character
     self.title = title
     self.releaseDate = "release_date" <~~ json
     self.poster = "poster_path" <~~ json
+    self.id = id
   }
   //https://api.themoviedb.org/3/person/73457/movie_credits?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US
-// https://api.themoviedb.org/3/movie/135397/credits?api_key=edd0a1862823ffe4afff6c230daf2c92&region=US&append_to_response=videos,images
- //https://api.themoviedb.org/3/person/73457?api_key=edd0a1862823ffe4afff6c230daf2c92&region=US&append_to_response=videos,images
+  // https://api.themoviedb.org/3/movie/135397/credits?api_key=edd0a1862823ffe4afff6c230daf2c92&region=US&append_to_response=videos,images
+  //https://api.themoviedb.org/3/person/73457?api_key=edd0a1862823ffe4afff6c230daf2c92&region=US&append_to_response=videos,images
   
   //urlExtension for CastExtended: "\(id)/movie_credits"
   static func updateAllData(urlExtension: String, completionHandler:@escaping (_ details: CastExtended?) -> Void){
@@ -64,12 +64,12 @@ public struct CastExtendedData : Decodable {
         
         // print(jsonDictionary)
         
-//        guard let castData = cast.castExtended
-//          else {
-//            print("No cast data exists")
-//            return
-//        }
-//        
+        //        guard let castData = cast.castExtended
+        //          else {
+        //            print("No cast data exists")
+        //            return
+        //        }
+        //
         completionHandler(cast)
       }
     })

@@ -10,12 +10,22 @@ import Foundation
 import UIKit
 
 
-class KnownForCell : UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+protocol handleKnownForImage {
+  func knownForImageTapped(movieID: NSNumber)
+}
+
+class KnownForCell : UITableViewCell {
   
   var knownForArray: [UIImage] = []
   var knownForExtendedArray: [CastExtendedData] = []
   
   let knownForReuseIdentifier = "knownForCollectCell"
+  let segueIdentifier = "peopleToMovieDetailSegue"
+  
+  let networkManager = NetworkManager.sharedManager
+  
+  var imageDelegete: handleKnownForImage?
+  var movieID: NSNumber?
   
   @IBOutlet weak var knownForCollectionView: UICollectionView!
   
@@ -23,8 +33,10 @@ class KnownForCell : UITableViewCell, UICollectionViewDelegate, UICollectionView
     knownForCollectionView.delegate = self
     knownForCollectionView.dataSource = self
   }
-  
-  
+}
+
+
+extension KnownForCell:  UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return knownForArray.count
@@ -32,7 +44,7 @@ class KnownForCell : UITableViewCell, UICollectionViewDelegate, UICollectionView
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = knownForCollectionView.dequeueReusableCell(withReuseIdentifier: knownForReuseIdentifier, for: indexPath) as! KnownForCollectionViewCell
-
+    
     if let knownPoster = knownForExtendedArray[indexPath.row].poster{
       
       DispatchQueue.main.async {
@@ -42,8 +54,32 @@ class KnownForCell : UITableViewCell, UICollectionViewDelegate, UICollectionView
     }
     return cell
   }
-  
-  
-  
-  
 }
+
+extension KnownForCell: UICollectionViewDataSource {
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+    print("Known For Cell Has Been Pressed")
+    
+    self.movieID = knownForExtendedArray[indexPath.row].id
+    
+    
+    guard let movieID = movieID else {return}
+    imageDelegete?.knownForImageTapped(movieID: movieID)
+  }
+}
+
+////MARK: Segue
+//extension KnownForCell {
+//  
+//  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//    let destinationVC = segue.destination as! MoviesMasterDetailViewController
+//    
+//    destinationVC.iD = self.movieID
+//    
+//  }
+//  
+
+//  
+//}

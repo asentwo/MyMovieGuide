@@ -17,7 +17,4 @@ class KnownForCollectionViewCell: UICollectionViewCell {
   
   @IBOutlet weak var knownForImages: UIImageView!
   
-  
-  
-  
 }

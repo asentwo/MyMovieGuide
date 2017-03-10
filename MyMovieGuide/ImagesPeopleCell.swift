@@ -24,8 +24,6 @@ class ImagesPeopleCell : UITableViewCell, UICollectionViewDelegate, UICollection
     extraPeopleImagesCollectionView.dataSource = self
   }
   
-  
-  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return extraPhotosArray.count
   }
@@ -37,11 +35,6 @@ class ImagesPeopleCell : UITableViewCell, UICollectionViewDelegate, UICollection
       cell.extraImages.sd_setImage(with: URL(string: "\(baseImageURL)\(self.profileImagesArray[indexPath.row].filePath)"))
       
     }
-    
     return cell
   }
-  
-  
-  
-  
 }

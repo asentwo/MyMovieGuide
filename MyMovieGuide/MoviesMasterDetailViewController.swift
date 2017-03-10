@@ -9,11 +9,6 @@
 import Foundation
 import UIKit
 
-enum imageDownload {
-  case poster
-  case cast
-  case extra
-}
 
 enum segueController {
   case image
@@ -21,7 +16,7 @@ enum segueController {
 }
 
 
-class MoviesMasterDetailViewController: UIViewController, handleCastData, handleExtraImage  {
+class MoviesMasterDetailViewController: UIViewController {
   
   
   //MARK: Properties
@@ -47,11 +42,7 @@ class MoviesMasterDetailViewController: UIViewController, handleCastData, handle
   var boxOfficeArray: [NSNumber] = []
   var homePageArray: [String] = []
   var castArray: [CastData] = []
-//  var castImageArray: [String] = []
   var imageArray: [String] = []
-  
-//  var xImageArray: [UIImage] = []
-//  var xCastImageArray: [UIImage] = []
   
   var videoArray: [VideoResults] = []
   
@@ -98,47 +89,17 @@ class MoviesMasterDetailViewController: UIViewController, handleCastData, handle
           }
           self.castArray = results
           
-          print("Pre-cell castArray count:\(self.castArray.count)")
-          
-//          for cast in self.castArray {
-//            
-//            if cast.profilePic != nil {
-//              if let castPic = cast.profilePic {
-//                self.castImageArray.append(castPic)
-//           //     self.updateImage(imageType: imageDownload.cast, ext: castPic)
-//              }
-//            } else {
-//          //    print("actor pic does not exist: \(cast.name)")
-//              continue
-//            }
-//          }
-          
           self.appendAllData(completion: { _ in
-            //Nothing inside here gets called
             DispatchQueue.main.async {
-              
-              //   print(self.movieDetailsData?.poster )
-              
               if let bgImage = self.movieDetailsData?.poster {
                 self.backgroundImage.sd_setImage(with: URL(string:"\(baseImageURL)\(bgImage)"))
-                //    print("background pic loaded")
                 self.backgroundImage.addBlurEffect()
               }
-              
               self.detailTableView.reloadData()
             }
           })
         })
-       
       })
-      
-//      DispatchQueue.main.async {
-//        if let bgImage = self.movieDetailsData?.poster {
-//          self.backgroundImage.sd_setImage(with: URL(string:"\(baseImageURL)\(bgImage)"))
-//          print("background pic loaded")
-//          self.backgroundImage.addBlurEffect()
-//        }
-//      }
     }
   }
 }
@@ -147,46 +108,10 @@ class MoviesMasterDetailViewController: UIViewController, handleCastData, handle
 //MARK: Update and Append all Data Functions
 extension MoviesMasterDetailViewController {
   
-//  func updateImage(imageType: imageDownload, ext: String) {
-//    
-//    self.networkManager.downloadImage(imageExtension: "\(ext)", {
-//      (imageData) in
-//      if let image = UIImage(data: imageData as Data) {
-//        
-////                switch imageType {
-////        
-////                case imageDownload.poster:
-////                  self.movieDetailsPoster = image
-////                  DispatchQueue.main.async {
-////        
-////                    //Set background image and blur
-////                    self.backgroundImage.image = self.movieDetailsPoster
-////                    self.backgroundImage.addBlurEffect()
-////                  }
-////         case imageDownload.cast:
-////         self.xCastImageArray.append(image)
-////        
-//        
-//        //  case imageDownload.extra:
-//        self.xImageArray.append(image)
-//    
-//                }
-//        
-//        
-//  //    }
-//      DispatchQueue.main.async {
-//        
-//        self.detailTableView.reloadData()
-//      }
-//      
-//    })
-//  }
-//  
-  
   func appendAllData (completion: () -> Void) {
     
     guard let movieDetails = self.movieDetailsData else {
-      // handle nil case
+      print("Movie JSON data could not be retrieved")
       return;
     }
     
@@ -229,72 +154,6 @@ extension MoviesMasterDetailViewController {
     }
     completion()
   }
-//  func appendAllData (completion: () -> Void) {
-//    
-//    if self.movieDetailsData?.poster != nil {
-//      if let posterImage = self.movieDetailsData?.poster {
-//        self.updateImage(imageType: imageDownload.poster, ext: posterImage)
-//        self.posterArray.append(posterImage)
-//      }
-//    }
-//    
-//    if self.movieDetailsData?.overview != nil {
-//      if let overview = self.movieDetailsData?.overview {
-//        self.overviewArray.append(overview)
-//      }
-//    }
-//    
-//    if self.movieDetailsData?.releaseData != nil {
-//      if let releaseDate = self.movieDetailsData?.releaseData {
-//        self.releaseInfoArray.append(releaseDate)
-//      }
-//    }
-//    
-//    if self.movieDetailsData?.runtime != nil {
-//      if let runtime = self.movieDetailsData?.runtime {
-//        self.releaseInfoArray.append(String(describing: runtime))
-//      }
-//    }
-//    
-//    if self.movieDetailsData?.genre != nil {
-//      if let genre = self.movieDetailsData?.genre {
-//        if genre.isEmpty {
-//        } else {
-//          self.releaseInfoArray.append(genre[0].name)
-//        }
-//      }
-//    }
-//    
-//    if self.movieDetailsData?.budget != nil {
-//      if let budget = self.movieDetailsData?.budget {
-//        self.boxOfficeArray.append(budget)
-//      }
-//    }
-//    
-//    if self.movieDetailsData?.revenue != nil {
-//      if let revenue = self.movieDetailsData?.revenue {
-//        self.boxOfficeArray.append(revenue)
-//      }
-//    }
-//    
-//    if self.movieDetailsData?.homepage != nil {
-//      if let homepage = self.movieDetailsData?.homepage {
-//        self.homePageArray.append(homepage)
-//      }
-//    }
-//    
-//    if self.movieDetailsData?.images != nil {
-//      if let images = self.movieDetailsData?.images {
-//        
-//        let posters = images.backdropImages
-//        for poster in posters {
-//          
-//          self.imageArray.append(poster.filePath)
-//          self.updateImage(imageType: imageDownload.extra, ext: poster.filePath)
-//        }
-//      }
-//    }
-//  }
 }
 
 
@@ -333,16 +192,7 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
     case 0:
       let cell = detailTableView.dequeueReusableCell(withIdentifier: posterReuseIdentifier) as! PosterCell
       
-      // cell.mainPosterImage.image = self.movieDetailsPoster
-      
-      // print(movieDetailsData?.poster)
-      
-      //      if let poster = movieDetailsData?.poster {
       cell.mainPosterImage.sd_setImage(with: URL(string:"\(baseImageURL)\(posterArray[indexPath.row])"))
-      //
-      //  print(URL(string:"\(baseImageURL)\(posterArray[indexPath.row])"))
-      //   }
-      
       
       self.detailTableView.rowHeight = 400
       detailTableView.allowsSelection = false
@@ -405,11 +255,10 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
       let cell = detailTableView.dequeueReusableCell(withIdentifier: castResuseIdentifier)
         as! CastCell
       print("Cast Array Count:\(castArray.count)")
-              cell.castPhotosArray = self.castArray
-     //  cell.castImagesArray = self.castImageArray
-        cell.imageDelegate = self
-  
- 
+      cell.castPhotosArray = self.castArray
+      cell.imageDelegate = self
+      
+      
       self.detailTableView.rowHeight = 100
       detailTableView.allowsSelection = true
       
@@ -524,7 +373,7 @@ extension MoviesMasterDetailViewController {
 }
 
 //Protocols
-extension MoviesMasterDetailViewController {
+extension MoviesMasterDetailViewController : handleCastData, handleExtraImage  {
   
   func imageTapped(ID castID: NSNumber, segueType: segueController) {
     self.castID = castID

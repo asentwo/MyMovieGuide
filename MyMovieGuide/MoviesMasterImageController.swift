@@ -22,11 +22,9 @@ class MoviesMasterImageController: UIViewController {
     super.viewDidLoad()
     
     DispatchQueue.main.async {
-   //   self.detailImage.image = self.image
       if let imagePic = self.image {
-      self.detailImage.sd_setImage(with: URL(string:"\(baseImageURL)\(imagePic)"))
+        self.detailImage.sd_setImage(with: URL(string:"\(baseImageURL)\(imagePic)"))
+      }
     }
   }
-  }
-  
 }

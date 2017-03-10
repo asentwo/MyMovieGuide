@@ -27,9 +27,9 @@ class PeopleDetailViewController : UIViewController {
   let networkManager = NetworkManager.sharedManager
   
   var id: NSNumber?
+  var knownForID: NSNumber?
   
   var profileImage: UIImage?
-  
   var profileData: PeopleData?
   var knownForData: CastExtended?
   var bioArray: [String] = []
@@ -52,6 +52,8 @@ class PeopleDetailViewController : UIViewController {
   let imagesCellIdentifier = "imagesCell"
   let knownForCellIdentifier = "knownForCell"
   
+  let peopleToDetailSegue = "peopleToMovieDetailSegue"
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -231,6 +233,7 @@ extension PeopleDetailViewController : UITableViewDataSource {
     case 3:
       let cell = peopleDetailTableView.dequeueReusableCell(withIdentifier: knownForCellIdentifier) as! KnownForCell
       
+      cell.imageDelegete = self
       cell.knownForExtendedArray = self.knownForExtendedArray
       cell.knownForArray = self.knownForArray
       self.peopleDetailTableView.rowHeight = 150
@@ -284,5 +287,27 @@ extension PeopleDetailViewController {
   
 }
 
+//Segue
+extension PeopleDetailViewController{
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    let destinationVC = segue.destination as! MoviesMasterDetailViewController
+   
+    destinationVC.iD = self.knownForID
+  }
+  
+}
+
+
+//Protocol
+extension PeopleDetailViewController: handleKnownForImage {
+  
+  func knownForImageTapped(movieID: NSNumber) {
+    self.knownForID = movieID
+    performSegue(withIdentifier: peopleToDetailSegue, sender: self)
+  }
+  
+  
+}
 
 
