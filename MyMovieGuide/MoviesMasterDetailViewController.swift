@@ -47,7 +47,7 @@ class MoviesMasterDetailViewController: UIViewController, handleCastData, handle
   var boxOfficeArray: [NSNumber] = []
   var homePageArray: [String] = []
   var castArray: [CastData] = []
-  var castImageArray: [UIImage] = []
+  var castImageArray: [String] = []
   var imageArray: [UIImage] = []
   var videoArray: [VideoResults] = []
   
@@ -77,7 +77,7 @@ class MoviesMasterDetailViewController: UIViewController, handleCastData, handle
       
       // print(movieID)
       
-      DispatchQueue.main.async {
+    //  DispatchQueue.main.async {
         
         MovieDetailsData.updateAllData(urlExtension: "\(movieID)", completionHandler: { results in
           
@@ -99,13 +99,13 @@ class MoviesMasterDetailViewController: UIViewController, handleCastData, handle
               return
             }
             self.castArray = results
-            
+    
             for cast in self.castArray {
               
               if cast.profilePic != nil {
                 if let castPic = cast.profilePic {
-                  
-                  self.updateImage(imageType: imageDownload.cast, ext: castPic)
+                  self.castImageArray.append(castPic)
+                 // self.updateImage(imageType: imageDownload.cast, ext: castPic)
                 }
               } else {
                 print("actor pic does not exist: \(cast.name)")
@@ -115,9 +115,16 @@ class MoviesMasterDetailViewController: UIViewController, handleCastData, handle
           })
           self.appendAllData()
         })
+     // }
+      
+      DispatchQueue.main.async {
+        if let bgImage = self.movieDetailsData?.poster {
+          self.backgroundImage.sd_setImage(with: URL(string:"\(baseImageURL)\(bgImage)"))
+          self.backgroundImage.addBlurEffect()
+        }
       }
     }
-  }
+    }
 }
 
 
@@ -130,31 +137,34 @@ extension MoviesMasterDetailViewController {
       (imageData) in
       if let image = UIImage(data: imageData as Data) {
         
-        switch imageType {
+//        switch imageType {
+//          
+//        case imageDownload.poster:
+//          self.movieDetailsPoster = image
+//          DispatchQueue.main.async {
+//            
+//            //Set background image and blur
+//            self.backgroundImage.image = self.movieDetailsPoster
+//            self.backgroundImage.addBlurEffect()
+//          }
+       // case imageDownload.cast:
+         // self.castImageArray.append(image)
           
-        case imageDownload.poster:
-          self.movieDetailsPoster = image
-          DispatchQueue.main.async {
-            
-            //Set background image and blur
-            self.backgroundImage.image = self.movieDetailsPoster
-            self.backgroundImage.addBlurEffect()
-          }
-        case imageDownload.cast:
-          self.castImageArray.append(image)
           
-          
-        case imageDownload.extra:
+      //  case imageDownload.extra:
           self.imageArray.append(image)
-          break
-        }
+//          
+//        default:
+//          break
+//        }
         
-        DispatchQueue.main.async {
-          
-          self.detailTableView.reloadData()
-        }
         
       }
+      DispatchQueue.main.async {
+        
+        self.detailTableView.reloadData()
+      }
+
     })
   }
   
@@ -174,20 +184,21 @@ extension MoviesMasterDetailViewController {
     
     if self.movieDetailsData?.poster != nil {
       if let posterImage = self.movieDetailsData?.poster {
-        self.updateImage(imageType: imageDownload.poster, ext: posterImage)
+        //self.updateImage(imageType: imageDownload.poster, ext: posterImage)
         self.posterArray.append(posterImage)
       }
-      
-    } else if self.movieDetailsData?.backdrop != nil {
-      if let backdropImage = self.movieDetailsData?.backdrop {
-        self.updateImage(imageType: imageDownload.poster, ext: backdropImage)
-        self.posterArray.append(backdropImage)
-      }
-    } else {
-      print("poster does not exist: \(self.movieDetailsData?.title)")
-      self.movieDetailsPoster = #imageLiteral(resourceName: "placeholder")
     }
     
+//    } else if self.movieDetailsData?.backdrop != nil {
+//      if let backdropImage = self.movieDetailsData?.backdrop {
+//        self.updateImage(imageType: imageDownload.poster, ext: backdropImage)
+//        self.posterArray.append(backdropImage)
+//      }
+//    } else {
+//      print("poster does not exist: \(self.movieDetailsData?.title)")
+//      self.movieDetailsPoster = #imageLiteral(resourceName: "placeholder")
+//    }
+
     if self.movieDetailsData?.overview != nil {
       if let overview = self.movieDetailsData?.overview {
         self.overviewArray.append(overview)
@@ -239,7 +250,8 @@ extension MoviesMasterDetailViewController {
         let posters = images.backdropImages
         for poster in posters {
           
-          self.updateImage(imageType: imageDownload.extra, ext: poster.filePath)
+         // self.imageArray.append(poster.filePath)
+         self.updateImage(imageType: imageDownload.extra, ext: poster.filePath)
         }
       }
     }
@@ -282,7 +294,16 @@ extension  MoviesMasterDetailViewController: UITableViewDataSource {
     case 0:
       let cell = detailTableView.dequeueReusableCell(withIdentifier: posterReuseIdentifier) as! PosterCell
       
-      cell.mainPosterImage.image = self.movieDetailsPoster
+     // cell.mainPosterImage.image = self.movieDetailsPoster
+      
+     // print(movieDetailsData?.poster)
+      
+//      if let poster = movieDetailsData?.poster {
+     cell.mainPosterImage.sd_setImage(with: URL(string:"\(baseImageURL)\(posterArray[indexPath.row])"))
+//        
+      //  print(URL(string:"\(baseImageURL)\(posterArray[indexPath.row])"))
+   //   }
+      
       
       self.detailTableView.rowHeight = 400
       detailTableView.allowsSelection = false

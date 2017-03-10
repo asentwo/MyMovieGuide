@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 
 class InTheatresMoviesViewController: UICollectionViewController {
@@ -17,7 +18,7 @@ class InTheatresMoviesViewController: UICollectionViewController {
   let networkManager = NetworkManager.sharedManager
   
   var inTheatresDataArray: [MovieData] = []
-  var inTheatresPosterArray: [UIImage] = []
+  var inTheatresPosterArray: [String?] = []
   var movieID: NSNumber!
   
   let reuseIdentifier = "inTheatresCollectionViewCell"
@@ -42,32 +43,16 @@ class InTheatresMoviesViewController: UICollectionViewController {
       
       for movie in self.inTheatresDataArray {
         if movie.poster != nil {
-          if let posterImage = movie.poster {
-            self.updateImage(poster: posterImage)
-          } else if movie.backdrop != nil {
-            if let backdropImage = movie.backdrop {
-              self.updateImage(poster: backdropImage)
-            }
-          }
+          self.inTheatresPosterArray.append(movie.poster!)
         } else {
           print("poster does not exist: \(movie.title)")
           continue
         }
       }
-    })
-  }
-  
-  func updateImage(poster: String) {
-    
-    self.networkManager.downloadImage(imageExtension: "\(poster)", {
-      (imageData) in
-      if let image = UIImage(data: imageData as Data){
-        self.inTheatresPosterArray.append(image)
-        
-        DispatchQueue.main.async {
-          self.inTheatresCollectionView.reloadData()
-        }
+      DispatchQueue.main.async {
+        self.inTheatresCollectionView.reloadData()
       }
+      
     })
   }
 }
@@ -86,18 +71,20 @@ extension InTheatresMoviesViewController {
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = inTheatresCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! InTheatresCollectionViewCell
-    cell.posterImage.image = inTheatresPosterArray[indexPath.row]
     
+    if let inTheaters = inTheatresPosterArray[indexPath.row] {
+      cell.posterImage.sd_setImage(with: URL(string:"\(baseImageURL)\(inTheaters)"))
+    }
     return cell
   }
   
   
-
+  
 }
 
 // MARK: - UICollectionViewDelegate
 extension InTheatresMoviesViewController {
-
+  
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     self.movieID = inTheatresDataArray[indexPath.row].id
     performSegue(withIdentifier: segueIdentifier, sender: self)

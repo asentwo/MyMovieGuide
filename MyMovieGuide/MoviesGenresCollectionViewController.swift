@@ -20,7 +20,7 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
   let networkManager = NetworkManager.sharedManager
   
   var genreDataArray: [MovieData] = []
-  var genrePosterArray: [String] = []
+  var genrePosterArray: [String?] = []
   var genreID: NSNumber?
   var movieID: NSNumber?
   
@@ -48,13 +48,6 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
         for movie in self.genreDataArray {
           if movie.poster != nil {
             self.genrePosterArray.append(movie.poster!)
-            //            if let posterImage = movie.poster {
-            //              self.updateImage(poster: posterImage)
-            //            } else if movie.backdrop != nil {
-            //              if let backdropImage = movie.backdrop {
-            //                self.updateImage(poster: backdropImage)
-            //              }
-            //            }
           } else {
             print("poster does not exist: \(movie.title)")
             continue
@@ -67,24 +60,7 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
       })
     }
   }
-  
-  
-  //  func updateImage(poster: String) {
-  //
-  //    self.networkManager.downloadImage(imageExtension: "\(poster)", {
-  //      (imageData) in
-  //      if let image = UIImage(data: imageData as Data){
-  //        self.genrePosterArray.append(image)
-  //
-  //        DispatchQueue.main.async {
-  //          self.genreCollectionView.reloadData()
-  //        }
-  //      }
-  //    })
-  //  }
 }
-
-
 
 
 //MARK: CollectionView Datasource
@@ -95,23 +71,15 @@ extension MoviesGenresCollectionViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
-    print("at cell poster array count\(self.genrePosterArray.count)")
     return genrePosterArray.count
-    
-    //  return genreDataArray.count
   }
   
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = genreCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! genreCollectionViewCell
     
-    if let genrePoster = genreDataArray[indexPath.row].poster {
+    if let genrePoster = genrePosterArray[indexPath.row] {
       cell.genreImageView.sd_setImage(with: URL(string:"\(baseImageURL)\(genrePoster)"))
-      
-      //  print(URL(string:"\(baseImageURL)\(genrePoster)"))
-      
-      // cell.genreImageView.image = genrePosterArray[indexPath.row]
     }
     return cell
   }

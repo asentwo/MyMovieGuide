@@ -18,7 +18,7 @@ protocol handleCastData {
 class CastCell : UITableViewCell {
   
   var castPhotosArray: [CastData] = []
-  var castImagesArray: [UIImage] = []
+  var castImagesArray: [String] = []
   
   var imageDelegate: handleCastData?
   var castID: NSNumber?

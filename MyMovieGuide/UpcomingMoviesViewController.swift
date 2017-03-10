@@ -16,7 +16,7 @@ class UpcomingMoviesViewController: UICollectionViewController {
   let networkManager = NetworkManager.sharedManager
   
   var upcomingDataArray: [MovieData] = []
-  var upcomingImageArray: [UIImage] = []
+  var upcomingImageArray: [String?] = []
   var movieID: NSNumber!
   
   let reuseIdentifier = "upcomingCollectionViewCell"
@@ -45,34 +45,16 @@ class UpcomingMoviesViewController: UICollectionViewController {
         if movie.poster != nil {
           
           if let posterImage = movie.poster {
-            self.updateImage(poster: posterImage)
+            self.upcomingImageArray.append(posterImage)
           }
-        }
-        else if movie.backdrop != nil {
-          
-          if let backdropImage = movie.backdrop {
-            self.updateImage(poster: backdropImage)
-            
-          }
-          else {
-            print("poster does not exist: \(movie.title)")
-           continue
-          }
+        } else {
+          print("poster does not exist: \(movie.title)")
+          continue
         }
       }
-    })
-  }
-  
-  func updateImage(poster: String) {
-    
-    self.networkManager.downloadImage(imageExtension: "\(poster)", {
-      (imageData) in
-      if let image = UIImage(data: imageData as Data){
-        self.upcomingImageArray.append(image)
-        
-        DispatchQueue.main.async {
-          self.upcomingCollectionView.reloadData()
-        }
+      
+      DispatchQueue.main.async {
+        self.upcomingCollectionView.reloadData()
       }
     })
   }
@@ -93,7 +75,10 @@ extension UpcomingMoviesViewController {
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = upcomingCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UpcomingCollectionViewCell
-    cell.posterImage.image = upcomingImageArray[indexPath.row]
+    
+    if let upcomingImage = upcomingImageArray[indexPath.row] {
+      cell.posterImage.sd_setImage(with: URL(string:"\(baseImageURL)\(upcomingImage)"))
+    }
     return cell
   }
   
