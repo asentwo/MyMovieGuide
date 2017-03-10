@@ -20,7 +20,7 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
   let networkManager = NetworkManager.sharedManager
   
   var genreDataArray: [MovieData] = []
-  var genrePosterArray: [UIImage] = []
+  var genrePosterArray: [String] = []
   var genreID: NSNumber?
   var movieID: NSNumber?
   
@@ -44,39 +44,44 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
           return
         }
         self.genreDataArray = results
-//        
-//        for movie in self.genreDataArray {
-//          if movie.poster != nil {
-//            if let posterImage = movie.poster {
-//              self.updateImage(poster: posterImage)
-//            } else if movie.backdrop != nil {
-//              if let backdropImage = movie.backdrop {
-//                self.updateImage(poster: backdropImage)
-//              }
-//            }
-//          } else {
-//            print("poster does not exist: \(movie.title)")
-//            continue
-//          }
-//        }
+        
+        for movie in self.genreDataArray {
+          if movie.poster != nil {
+            self.genrePosterArray.append(movie.poster!)
+            //            if let posterImage = movie.poster {
+            //              self.updateImage(poster: posterImage)
+            //            } else if movie.backdrop != nil {
+            //              if let backdropImage = movie.backdrop {
+            //                self.updateImage(poster: backdropImage)
+            //              }
+            //            }
+          } else {
+            print("poster does not exist: \(movie.title)")
+            continue
+          }
+          DispatchQueue.main.async {
+            self.genreCollectionView.reloadData()
+          }
+          
+        }
       })
     }
   }
   
   
-//  func updateImage(poster: String) {
-//    
-//    self.networkManager.downloadImage(imageExtension: "\(poster)", {
-//      (imageData) in
-//      if let image = UIImage(data: imageData as Data){
-//        self.genrePosterArray.append(image)
-//        
-//        DispatchQueue.main.async {
-//          self.genreCollectionView.reloadData()
-//        }
-//      }
-//    })
-//  }
+  //  func updateImage(poster: String) {
+  //
+  //    self.networkManager.downloadImage(imageExtension: "\(poster)", {
+  //      (imageData) in
+  //      if let image = UIImage(data: imageData as Data){
+  //        self.genrePosterArray.append(image)
+  //
+  //        DispatchQueue.main.async {
+  //          self.genreCollectionView.reloadData()
+  //        }
+  //      }
+  //    })
+  //  }
 }
 
 
@@ -90,7 +95,11 @@ extension MoviesGenresCollectionViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
+    print("at cell poster array count\(self.genrePosterArray.count)")
     return genrePosterArray.count
+    
+    //  return genreDataArray.count
   }
   
   
@@ -98,9 +107,11 @@ extension MoviesGenresCollectionViewController {
     let cell = genreCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! genreCollectionViewCell
     
     if let genrePoster = genreDataArray[indexPath.row].poster {
-    cell.genreImageView.sd_setImage(with: URL(string: genrePoster))
+      cell.genreImageView.sd_setImage(with: URL(string:"\(baseImageURL)\(genrePoster)"))
       
-  //    genrePosterArray[indexPath.row]
+      //  print(URL(string:"\(baseImageURL)\(genrePoster)"))
+      
+      // cell.genreImageView.image = genrePosterArray[indexPath.row]
     }
     return cell
   }
@@ -157,9 +168,9 @@ extension MoviesGenresCollectionViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let destinationVC = segue.destination as! MoviesMasterDetailViewController
-      
-      destinationVC.iD = self.movieID
- 
+    
+    destinationVC.iD = self.movieID
+    
   }
- 
+  
 }
