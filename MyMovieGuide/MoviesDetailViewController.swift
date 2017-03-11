@@ -25,7 +25,8 @@ class MoviesDetailViewController: UIViewController {
   @IBOutlet weak var genre: UILabel!
   @IBOutlet weak var releaseDate: UILabel!
   @IBOutlet weak var tagLine: UILabel!
-  
+  @IBOutlet weak var titleTint: UIImageView!
+  @IBOutlet weak var overivewTint: UIImageView!
   @IBOutlet weak var imagesTableView: UITableView!
   
   let networkManager = NetworkManager.sharedManager
@@ -55,6 +56,11 @@ class MoviesDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    //Round tint background
+    titleTint.layer.cornerRadius = 8.0
+    titleTint.clipsToBounds = true
+    overivewTint.layer.cornerRadius = 8.0
+    overivewTint.clipsToBounds = true
     
     if let movieID = self.iD {
       
@@ -87,7 +93,7 @@ class MoviesDetailViewController: UIViewController {
             
             if let poster = self.movieDetailsData?.poster{
               self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(poster)"))
-              self.backgroundImage.addBlurEffect()
+            //  self.backgroundImage.addBlurEffect()
             }
             
             self.movieTitle.text = self.movieDetailsData?.title
@@ -180,7 +186,7 @@ extension MoviesDetailViewController: UITableViewDelegate {
 }
 
 
-//Segue
+//Segues
 extension MoviesDetailViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
