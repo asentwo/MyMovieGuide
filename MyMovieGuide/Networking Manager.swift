@@ -24,20 +24,19 @@ class NetworkManager {
   lazy var configuration: URLSessionConfiguration = URLSessionConfiguration.default
   lazy var session: URLSession = URLSession(configuration: self.configuration)
   
-  
+  //Now Playing: https://api.themoviedb.org/3/movie/now_playing?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&page=1
   //Movie Detail: https://api.themoviedb.org/3/movie/14564?api_key=edd0a1862823ffe4afff6c230daf2c92&region=US&append_to_response=videos,images
   //Genre: https://api.themoviedb.org/3/genre/28/movies?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&include_adult=false&sort_by=created_at.asc
-  //Now Playing: https://api.themoviedb.org/3/movie/now_playing?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&page=1
-  
+  //Discover: https://api.themoviedb.org/3/discover/movie?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=20&with_genres=28
   
   //Network session creater
   typealias JSONData = ((Data) -> Void)
   
   func getJSONData(type: String, urlExtension: String, completion: @escaping JSONData) {
     
-    let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&region=US&append_to_response=videos,images")! )
+    let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&region=US&append_to_response=videos,images,releases")! )
     
-    //  print(request)
+    print(request)
     
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
@@ -58,6 +57,33 @@ class NetworkManager {
     })
     dataTask.resume()
   }
+  
+  func getGenreData(type: String, urlExtension: String, genreID:NSNumber, completion: @escaping JSONData) {
+    
+    let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=20&with_genres=\(genreID)")! )
+    
+     print(request)
+    
+    let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+      
+      if error == nil {
+        if let httpResponse = response as? HTTPURLResponse {
+          switch (httpResponse.statusCode) {
+          case 200:
+            if let data = data {
+              completion(data)
+            }
+          default:
+            print(httpResponse.statusCode)
+          }
+        }
+      } else {
+        print("Error: \(error?.localizedDescription)")
+      }
+    })
+    dataTask.resume()
+  }
+
   
   
   //JSON Parser

@@ -23,10 +23,10 @@ class MoviesDetailViewController: UIViewController {
   @IBOutlet weak var overview: UILabel!
   @IBOutlet weak var runtime: UILabel!
   @IBOutlet weak var genre: UILabel!
-  @IBOutlet weak var releaseDate: UILabel!
-  @IBOutlet weak var tagLine: UILabel!
+  @IBOutlet weak var rating: UILabel!
   @IBOutlet weak var titleTint: UIImageView!
   @IBOutlet weak var overivewTint: UIImageView!
+  @IBOutlet weak var buttonsTint: UIImageView!
   @IBOutlet weak var imagesTableView: UITableView!
   
   let networkManager = NetworkManager.sharedManager
@@ -57,10 +57,10 @@ class MoviesDetailViewController: UIViewController {
     super.viewDidLoad()
     
     //Round tint background
-    titleTint.layer.cornerRadius = 8.0
-    titleTint.clipsToBounds = true
-    overivewTint.layer.cornerRadius = 8.0
-    overivewTint.clipsToBounds = true
+    roundImageViewCorners(imageView: titleTint)
+    roundImageViewCorners(imageView: overivewTint)
+    roundImageViewCorners(imageView: buttonsTint)
+    
     
     if let movieID = self.iD {
       
@@ -71,14 +71,36 @@ class MoviesDetailViewController: UIViewController {
           return
         }
         self.movieDetailsData = results
-        self.navigationItem.title = self.movieDetailsData?.title
         self.extraImagesArray = self.movieDetailsData?.images?.backdropImages
         
         if let images = self.movieDetailsData?.images {
           self.imageArray += images.backdropImages.map{ $0.filePath }
         }
         
-
+        if let rating = self.movieDetailsData?.rating {
+          
+          let allRatings = rating.releaseResults
+          
+          for country in allRatings {
+            
+            let countryCode = country.countryCode
+            
+            if countryCode == "US" {
+              
+              if let USRating = country.certification {
+                
+                DispatchQueue.main.async {
+                  
+                  if USRating == "" {
+                    self.rating.text = "N/A"
+                  } else {
+                    self.rating.text = USRating
+                  }
+                }
+              }
+            }
+          }
+        }
         
         CastData.updateAllData(urlExtension: "\(movieID)/credits", completionHandler: { results in
           
@@ -93,7 +115,6 @@ class MoviesDetailViewController: UIViewController {
             
             if let poster = self.movieDetailsData?.poster{
               self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(poster)"))
-            //  self.backgroundImage.addBlurEffect()
             }
             
             self.movieTitle.text = self.movieDetailsData?.title
@@ -103,10 +124,6 @@ class MoviesDetailViewController: UIViewController {
               self.runtime.text = String(describing: runtime)
             }
             
-            if let tagline = self.movieDetailsData?.tagline {
-              self.tagLine.text = tagline
-            }
-            
             self.imagesTableView.reloadData()
           }
         })
@@ -114,6 +131,11 @@ class MoviesDetailViewController: UIViewController {
     }
   }
   
+  //Round corners
+  func roundImageViewCorners(imageView: UIImageView) {
+    imageView.layer.cornerRadius = 8.0
+    imageView.clipsToBounds = true
+  }
   
   @IBAction func homepageButtonPressed(_ sender: Any) {
   }

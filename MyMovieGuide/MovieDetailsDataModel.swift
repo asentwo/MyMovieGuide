@@ -10,6 +10,33 @@ import Foundation
 import Gloss
 
 
+//MARK: Release (Ratings)
+public struct ReleaseResults : Decodable {
+  
+  public let releaseResults: [ReleaseData]
+  
+  public init? (json: JSON){
+    
+    guard let releaseResults: [ReleaseData] = "countries"  <~~ json
+      else {return nil}
+    
+    self.releaseResults = releaseResults
+  }
+}
+
+public struct ReleaseData : Decodable {
+  
+  public let certification : String?
+  public let countryCode : String?
+  
+  public init? (json: JSON) {
+    
+    self.certification = "certification" <~~ json
+    self.countryCode = "iso_3166_1" <~~ json
+  }
+}
+
+
 
 //MARK: Video Data
 public struct VideoResults : Decodable {
@@ -135,6 +162,7 @@ public struct MovieDetailsData: Decodable {
   public let genre : [GenreData]?
   public let videos : VideoResults?
   public let images : ImageResults?
+  public let rating : ReleaseResults?
   
   public init? (json: JSON) {
     
@@ -158,6 +186,7 @@ public struct MovieDetailsData: Decodable {
     self.genre = "genres" <~~ json
     self.videos = "videos" <~~ json
     self.images = "images" <~~ json
+    self.rating = "releases" <~~ json
   }
   
   
