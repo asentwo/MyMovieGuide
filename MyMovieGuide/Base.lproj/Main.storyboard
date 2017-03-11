@@ -359,7 +359,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RXt-7z-5Ki">
-                                <rect key="frame" x="1" y="64" width="373" height="936"/>
+                                <rect key="frame" x="1" y="20" width="373" height="980"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="zTC-NO-o2q">
@@ -613,7 +613,31 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GiP-wZ-NPf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5148" y="-950"/>
+            <point key="canvasLocation" x="5425" y="-960"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="JBG-Wn-Bzh">
+            <objects>
+                <viewController id="hyN-Ug-rmu" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wS8-VW-2fC"/>
+                        <viewControllerLayoutGuide type="bottom" id="iSI-8i-KAe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7QH-9r-Be8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NG6-Zq-zAY">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZUQ-Vq-cFo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6488.8000000000002" y="-1385.7571214392804"/>
         </scene>
         <!--People-->
         <scene sceneID="SIh-l3-jmA">
@@ -764,7 +788,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1020"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="qY4-AT-wrm">
-                                <rect key="frame" x="16" y="64" width="343" height="956"/>
+                                <rect key="frame" x="16" y="20" width="343" height="1000"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="posterCell" rowHeight="400" id="TEa-m0-mdK" customClass="PosterCell" customModule="MyMovieGuide" customModuleProvider="target">
