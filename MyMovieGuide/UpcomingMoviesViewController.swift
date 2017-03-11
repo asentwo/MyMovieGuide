@@ -134,7 +134,7 @@ extension UpcomingMoviesViewController: UICollectionViewDelegateFlowLayout {
 extension UpcomingMoviesViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    let upcomingVC = segue.destination as! MoviesMasterDetailViewController
+    let upcomingVC = segue.destination as! MoviesDetailViewController
     upcomingVC.iD = self.movieID
     
     //print(self.movieID)

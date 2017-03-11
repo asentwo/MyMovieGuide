@@ -135,7 +135,7 @@ extension MoviesGenresCollectionViewController: UICollectionViewDelegateFlowLayo
 extension MoviesGenresCollectionViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    let destinationVC = segue.destination as! MoviesMasterDetailViewController
+    let destinationVC = segue.destination as! MoviesDetailViewController
     
     destinationVC.iD = self.movieID
     

@@ -129,7 +129,7 @@ extension InTheatresMoviesViewController: UICollectionViewDelegateFlowLayout {
 extension InTheatresMoviesViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    let inTheatresVC = segue.destination as! MoviesMasterDetailViewController
+    let inTheatresVC = segue.destination as! MoviesDetailViewController
     inTheatresVC.iD = self.movieID
   }
 }
