@@ -68,6 +68,12 @@ class MoviesDetailViewController: UIViewController {
         self.navigationItem.title = self.movieDetailsData?.title
         self.extraImagesArray = self.movieDetailsData?.images?.backdropImages
         
+        if let images = self.movieDetailsData?.images {
+          self.imageArray += images.backdropImages.map{ $0.filePath }
+        }
+        
+
+        
         CastData.updateAllData(urlExtension: "\(movieID)/credits", completionHandler: { results in
           
           guard let results = results else {
@@ -75,6 +81,7 @@ class MoviesDetailViewController: UIViewController {
             return
           }
           self.castArray = results
+          
           
           DispatchQueue.main.async {
             
@@ -115,6 +122,10 @@ class MoviesDetailViewController: UIViewController {
 
 
 extension MoviesDetailViewController: UITableViewDataSource {
+  
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 2
+  }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch section {

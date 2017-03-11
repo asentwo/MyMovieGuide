@@ -38,6 +38,8 @@ class ExtraImagesCell: UITableViewCell {
 extension ExtraImagesCell : UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
+    print("On Image Cell Count \(photosArray.count)")
     return photosArray.count
   }
   

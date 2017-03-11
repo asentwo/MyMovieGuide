@@ -637,7 +637,7 @@
                                                 <rect key="frame" x="0.0" y="-17" width="375" height="1017"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hgR-Lh-ajU" userLabel="Tint View">
+                                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hgR-Lh-ajU" userLabel="Tint View">
                                                 <rect key="frame" x="0.0" y="-17" width="375" height="1017"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
@@ -656,12 +656,12 @@
                                                 <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g8i-NN-jh5">
-                                                <rect key="frame" x="7.5" y="170.5" width="359" height="418"/>
+                                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g8i-NN-jh5">
+                                                <rect key="frame" x="7.5" y="274.5" width="359" height="418"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8pQ-CK-3Wb" userLabel="Overview">
-                                                <rect key="frame" x="8" y="170.5" width="359" height="418"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8pQ-CK-3Wb" userLabel="Overview">
+                                                <rect key="frame" x="8" y="274.5" width="359" height="418"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <string key="text">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</string>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
@@ -671,7 +671,7 @@
                                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="L2x-MH-Fho" userLabel="Buttons Stack View">
-                                                <rect key="frame" x="67" y="715.5" width="241" height="36"/>
+                                                <rect key="frame" x="67" y="819.5" width="241" height="36"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZv-iO-ZIw">
                                                         <rect key="frame" x="0.0" y="0.0" width="88" height="36"/>
@@ -708,8 +708,64 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="ype-T1-ENM" userLabel="Details Stack View">
+                                                <rect key="frame" x="51" y="733" width="273" height="46.5"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="wE5-7u-HOs" userLabel="Runtime Stack View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="71.5" height="46.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RUNTIME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ilm-c9-OIQ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="71.5" height="22"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6J-YR-2G3">
+                                                                <rect key="frame" x="0.0" y="23" width="71.5" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jpy-RU-Eev" userLabel="Genre Stack View">
+                                                        <rect key="frame" x="89" y="0.0" width="54" height="46.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="GENRE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgj-5d-ivE">
+                                                                <rect key="frame" x="0.0" y="0.0" width="54" height="23"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGz-Si-doJ">
+                                                                <rect key="frame" x="0.0" y="23" width="54" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OLl-06-Fik" userLabel="Release Date Stack View">
+                                                        <rect key="frame" x="160.5" y="0.0" width="112.5" height="46.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="RELEASE DATE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isf-6C-UWq">
+                                                                <rect key="frame" x="0.0" y="0.0" width="112.5" height="23"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2004-12-24" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIs-it-V5W">
+                                                                <rect key="frame" x="0.0" y="23" width="112.5" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Sb5-ag-HTe">
-                                                <rect key="frame" x="0.0" y="791.5" width="375" height="123.5"/>
+                                                <rect key="frame" x="0.0" y="895" width="375" height="85"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <prototypes>
@@ -865,63 +921,11 @@
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="hyN-Ug-rmu" id="8Jq-vt-tAB"/>
+                                                    <outlet property="delegate" destination="hyN-Ug-rmu" id="uf4-uj-mrk"/>
+                                                </connections>
                                             </tableView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="ype-T1-ENM" userLabel="Details Stack View">
-                                                <rect key="frame" x="51" y="629" width="273" height="46.5"/>
-                                                <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="wE5-7u-HOs" userLabel="Runtime Stack View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="71.5" height="46.5"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RUNTIME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ilm-c9-OIQ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="71.5" height="22"/>
-                                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
-                                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6J-YR-2G3">
-                                                                <rect key="frame" x="0.0" y="23" width="71.5" height="23.5"/>
-                                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jpy-RU-Eev" userLabel="Genre Stack View">
-                                                        <rect key="frame" x="89" y="0.0" width="54" height="46.5"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="GENRE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgj-5d-ivE">
-                                                                <rect key="frame" x="0.0" y="0.0" width="54" height="23"/>
-                                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
-                                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGz-Si-doJ">
-                                                                <rect key="frame" x="0.0" y="23" width="54" height="23.5"/>
-                                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OLl-06-Fik" userLabel="Release Date Stack View">
-                                                        <rect key="frame" x="160.5" y="0.0" width="112.5" height="46.5"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="RELEASE DATE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isf-6C-UWq">
-                                                                <rect key="frame" x="0.0" y="0.0" width="112.5" height="23"/>
-                                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
-                                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2004-12-24" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIs-it-V5W">
-                                                                <rect key="frame" x="0.0" y="23" width="112.5" height="23.5"/>
-                                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                    </stackView>
-                                                </subviews>
-                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -942,12 +946,12 @@
                                             <constraint firstItem="g8i-NN-jh5" firstAttribute="width" secondItem="8pQ-CK-3Wb" secondAttribute="width" id="RsB-ST-0Gb"/>
                                             <constraint firstAttribute="trailing" secondItem="Sb5-ag-HTe" secondAttribute="trailing" id="TG5-bb-xrn"/>
                                             <constraint firstItem="hgR-Lh-ajU" firstAttribute="leading" secondItem="yyG-pn-xYB" secondAttribute="leading" id="Xbu-vb-gAd"/>
-                                            <constraint firstAttribute="bottom" secondItem="Sb5-ag-HTe" secondAttribute="bottom" constant="85" id="aJH-1O-oZl"/>
+                                            <constraint firstAttribute="bottom" secondItem="Sb5-ag-HTe" secondAttribute="bottom" constant="20" id="aJH-1O-oZl"/>
                                             <constraint firstAttribute="trailing" secondItem="ype-T1-ENM" secondAttribute="trailing" constant="51" id="ae4-ob-nMq"/>
                                             <constraint firstItem="hgR-Lh-ajU" firstAttribute="height" secondItem="Cis-Hv-0ZR" secondAttribute="height" id="bif-Bs-qkK"/>
                                             <constraint firstAttribute="trailing" secondItem="Cis-Hv-0ZR" secondAttribute="trailing" id="ebQ-Ig-cYz"/>
                                             <constraint firstItem="8es-35-jDz" firstAttribute="leading" secondItem="yyG-pn-xYB" secondAttribute="leading" constant="8" id="hyY-FB-czE"/>
-                                            <constraint firstItem="8pQ-CK-3Wb" firstAttribute="top" secondItem="8es-35-jDz" secondAttribute="bottom" constant="76" id="jQQ-uV-OUn"/>
+                                            <constraint firstItem="8pQ-CK-3Wb" firstAttribute="top" secondItem="8es-35-jDz" secondAttribute="bottom" constant="180" id="jQQ-uV-OUn"/>
                                             <constraint firstItem="Cis-Hv-0ZR" firstAttribute="leading" secondItem="yyG-pn-xYB" secondAttribute="leading" id="loY-sI-kmy"/>
                                             <constraint firstItem="Cis-Hv-0ZR" firstAttribute="top" secondItem="yyG-pn-xYB" secondAttribute="top" constant="-17" id="mJu-7K-ne5"/>
                                             <constraint firstItem="Lhx-Fc-een" firstAttribute="leading" secondItem="yyG-pn-xYB" secondAttribute="leading" constant="8" id="nNq-dB-gfe"/>
