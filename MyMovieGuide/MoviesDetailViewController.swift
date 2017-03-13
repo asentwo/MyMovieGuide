@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import ParticlesLoadingView
+import FadeButton
 
 enum segueController {
   case image
@@ -18,6 +19,7 @@ enum segueController {
 class MoviesDetailViewController: UIViewController {
   
   
+  @IBOutlet weak var lineImage: UIImageView!
   @IBOutlet weak var backgroundImage: UIImageView!
   @IBOutlet weak var movieTitle: UILabel!
   @IBOutlet weak var overview: UILabel!
@@ -30,9 +32,11 @@ class MoviesDetailViewController: UIViewController {
   @IBOutlet weak var titleTint: UIImageView!
   @IBOutlet weak var overivewTint: UIImageView!
   @IBOutlet weak var homepageButton: UIButton!
-  @IBOutlet weak var saveButton: UIButton!
-  @IBOutlet weak var videosButton: UIButton!
   @IBOutlet weak var imagesTableView: UITableView!
+  @IBOutlet weak var hompageButton: FadeButton!
+  @IBOutlet weak var saveButton: FadeButton!
+  @IBOutlet weak var videosButton: FadeButton!
+ 
   
   
   let networkManager = NetworkManager.sharedManager
@@ -85,7 +89,7 @@ class MoviesDetailViewController: UIViewController {
     super.viewDidLoad()
     
     
-    label.center = CGPoint(x: 160, y: 285)
+    label.center = CGPoint(x: 190, y: 365)
     label.textAlignment = .center
     label.text = "Loading"
     label.textColor = UIColor.white
@@ -163,9 +167,17 @@ class MoviesDetailViewController: UIViewController {
                       self.rating.text = USRating
                     }
                     
+                    if let genre = self.movieDetailsData?.genre {
+                    self.genre.text = genre[0].name
+                    }
+                    
+                    self.lineImage.image = #imageLiteral(resourceName: "Line")
                     self.runtimeCat.text = "RUNTIME"
                     self.genreCat.text = "GENRE"
                     self.ratingCat.text = "RATING"
+//                    self.homepageButton.titleLabel?.text = "Homepage"
+//                    self.saveButton.titleLabel?.text = "Save"
+//                    self.videosButton.titleLabel?.text = "Videos"
                     
                     self.label.isHidden = true
                     self.loadingView.isHidden = true
