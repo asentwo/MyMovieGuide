@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import ParticlesLoadingView
 
 
 enum DownloadPic {
@@ -43,6 +44,22 @@ class PeopleDetailViewController : UIViewController {
   
   var setionTitles = ["", "Bio", "Images", "Known For"]
   
+  //Particle loading screen
+  lazy var loadingView: ParticlesLoadingView = {
+    let x = self.view.frame.size.width/2
+    let y = self.view.frame.size.height/2
+    let view = ParticlesLoadingView(frame: CGRect(x: x - 50, y: y - 20, width: 100, height: 100))
+    view.particleEffect = .laser
+    view.duration = 1.5
+    view.particlesSize = 15.0
+    view.clockwiseRotation = true
+    view.layer.borderColor = UIColor.lightGray.cgColor
+    view.layer.borderWidth = 1.0
+    view.layer.cornerRadius = 15.0
+    return view
+  }()
+  
+  let label = UILabel(frame: CGRect(x: 0 + 20, y: 0, width: 200, height: 21))
   
   //Reuse Identifiers
   let profileCellIdentifier = "actorProfileCell"
@@ -53,90 +70,94 @@ class PeopleDetailViewController : UIViewController {
   let knownForCellIdentifier = "knownForCell"
   
   let peopleToDetailSegue = "peopleToMovieDetailSegue"
-
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     //keeps top of tableview from going under nav bar
     self.peopleDetailTableView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
-   
     
-      if let personID = self.id {
+    startLoadingScreen()
+    
+    if let personID = self.id {
+      
+      PeopleData.updateAllData(urlExtension: "\(personID)", completionHandler: { results in
         
-        PeopleData.updateAllData(urlExtension: "\(personID)", completionHandler: { results in
+        
+        guard let results = results else {
+          print("There was an error retrieving people data")
+          return
+        }
+        
+        self.profileData = results
+        
+        if self.profileData?.images != nil {
           
+          //Hide loading screen
+          DispatchQueue.main.async {
+            self.label.isHidden = true
+            self.loadingView.isHidden = true
+            self.loadingView.stopAnimating()
+            self.peopleDetailTableView.reloadData()
+          }
+          
+          
+          if let profileImages = self.profileData?.images{
+            
+            self.profileImagesArray = profileImages.images
+            
+            let profileImage = profileImages.images
+            
+            for profile in profileImage {
+              
+              self.updateImage(ImageType: DownloadPic.personal, ImageString: profile.filePath)
+              
+            }
+          }
+        }
+        if self.profileData?.bio != nil {
+          if let bio = self.profileData?.bio {
+            
+            self.bioArray.append(bio)
+          }
+        }
+        
+        if let actorProfileImage = self.profileData?.profile {
+          
+          self.updateImage(ImageType: DownloadPic.profile, ImageString: actorProfileImage)
+          
+        } else {
+          print("actor pic doesn't exist")
+        }
+        
+        CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
           
           guard let results = results else {
-            print("There was an error retrieving people data")
+            print("There was an error retrieving cast extended data")
             return
           }
           
-          self.profileData = results
+          self.knownForData = results
           
-          if self.profileData?.images != nil {
+          if self.knownForData?.castExtended != nil {
             
-            
-            
-            if let profileImages = self.profileData?.images{
+            if let knownFor = self.knownForData?.castExtended {
               
-              self.profileImagesArray = profileImages.images
+              self.knownForExtendedArray = knownFor
               
-              let profileImage = profileImages.images
-              
-              for profile in profileImage {
+              for knownForImage in knownFor {
                 
-                self.updateImage(ImageType: DownloadPic.personal, ImageString: profile.filePath)
-                
-              }
-            }
-          }
-          
-          if self.profileData?.bio != nil {
-            if let bio = self.profileData?.bio {
-              
-              self.bioArray.append(bio)
-            }
-            
-          }
-          
-          if let actorProfileImage = self.profileData?.profile {
-            
-            self.updateImage(ImageType: DownloadPic.profile, ImageString: actorProfileImage)
-            
-          } else {
-            print("actor pic doesn't exist")
-          }
-          
-          CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
-            
-            guard let results = results else {
-              print("There was an error retrieving cast extended data")
-              return
-            }
-            
-            self.knownForData = results
-      
-            
-            if self.knownForData?.castExtended != nil {
-              
-              if let knownFor = self.knownForData?.castExtended {
-                
-                self.knownForExtendedArray = knownFor
-              
-                for knownForImage in knownFor {
-                  
-                  if let poster = knownForImage.poster {
-                    
-                    self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster)
-                  }
+                if let poster = knownForImage.poster {
+                  self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster)
                 }
               }
             }
-          })
-        }
-        )
+          }
+        })
       }
+      )
+    }
   }
   
   func updateImage (ImageType: DownloadPic, ImageString: String) {
@@ -157,6 +178,17 @@ class PeopleDetailViewController : UIViewController {
       }
     })
   }
+  
+  func startLoadingScreen () {
+    label.center = CGPoint(x: 190, y: 365)
+    label.textAlignment = .center
+    label.text = "Loading"
+    label.textColor = UIColor.white
+    self.view.addSubview(label)
+    view.addSubview(loadingView)
+    loadingView.startAnimating()
+  }
+  
 }
 
 
@@ -223,7 +255,7 @@ extension PeopleDetailViewController : UITableViewDataSource {
       
     case 2:
       let cell = peopleDetailTableView.dequeueReusableCell(withIdentifier: imagesCellIdentifier) as! ImagesPeopleCell
-    
+      
       cell.extraPhotosArray = self.personalImagesArray
       cell.profileImagesArray = self.profileImagesArray
       
@@ -292,7 +324,7 @@ extension PeopleDetailViewController{
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let destinationVC = segue.destination as! MoviesDetailViewController
-   
+    
     destinationVC.iD = self.knownForID
   }
   

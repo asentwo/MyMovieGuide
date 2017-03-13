@@ -36,7 +36,7 @@ class MoviesDetailViewController: UIViewController {
   @IBOutlet weak var hompageButton: FadeButton!
   @IBOutlet weak var saveButton: FadeButton!
   @IBOutlet weak var videosButton: FadeButton!
- 
+  
   
   
   let networkManager = NetworkManager.sharedManager
@@ -88,25 +88,9 @@ class MoviesDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    
-    label.center = CGPoint(x: 190, y: 365)
-    label.textAlignment = .center
-    label.text = "Loading"
-    label.textColor = UIColor.white
-    self.view.addSubview(label)
-    
-    view.addSubview(loadingView)
-    loadingView.startAnimating()
-    
-    roundImageViewCorners(imageView: titleTint)
-    roundImageViewCorners(imageView: overivewTint)
-    roundButtonCornersAndAddBorderColor(button: homepageButton)
-    roundButtonCornersAndAddBorderColor(button: saveButton)
-    roundButtonCornersAndAddBorderColor(button: videosButton)
-    
-    homepageButton.setBackgroundColor(color: .white, forState: .highlighted)
-    saveButton.setBackgroundColor(color: .white, forState: .highlighted)
-    videosButton.setBackgroundColor(color: .white, forState: .highlighted)
+
+    startLoadingScreen()
+    setImagesAndButtonsUI()
     
     if let movieID = self.iD {
       
@@ -168,21 +152,17 @@ class MoviesDetailViewController: UIViewController {
                     }
                     
                     if let genre = self.movieDetailsData?.genre {
-                    self.genre.text = genre[0].name
+                      self.genre.text = genre[0].name
                     }
                     
                     self.lineImage.image = #imageLiteral(resourceName: "Line")
                     self.runtimeCat.text = "RUNTIME"
                     self.genreCat.text = "GENRE"
                     self.ratingCat.text = "RATING"
-//                    self.homepageButton.titleLabel?.text = "Homepage"
-//                    self.saveButton.titleLabel?.text = "Save"
-//                    self.videosButton.titleLabel?.text = "Videos"
                     
                     self.label.isHidden = true
                     self.loadingView.isHidden = true
                     self.loadingView.stopAnimating()
-                    
                     self.imagesTableView.reloadData()
                     
                   }
@@ -210,14 +190,41 @@ class MoviesDetailViewController: UIViewController {
     button.layer.borderColor = UIColor.white.cgColor
   }
   
+  func setImagesAndButtonsUI () {
+    
+    roundImageViewCorners(imageView: titleTint)
+    roundImageViewCorners(imageView: overivewTint)
+    roundButtonCornersAndAddBorderColor(button: homepageButton)
+    roundButtonCornersAndAddBorderColor(button: saveButton)
+    roundButtonCornersAndAddBorderColor(button: videosButton)
+    
+    homepageButton.setBackgroundColor(color: .white, forState: .highlighted)
+    saveButton.setBackgroundColor(color: .white, forState: .highlighted)
+    videosButton.setBackgroundColor(color: .white, forState: .highlighted)
+  }
+  
+  func startLoadingScreen () {
+    //Loading Screen starts
+    label.center = CGPoint(x: 190, y: 365)
+    label.textAlignment = .center
+    label.text = "Loading"
+    label.textColor = UIColor.white
+    self.view.addSubview(label)
+    view.addSubview(loadingView)
+    loadingView.startAnimating()
+  }
+  
   
   @IBAction func homepageButtonPressed(_ sender: Any) {
     
     if let homepage = self.homepage {
-      let url = URL(string: homepage)
-      UIApplication.shared.open(url!, options: [:])
+      if let url = URL(string: homepage) {
+        UIApplication.shared.open(url, options: [:])
+      }  else {
+        print("No Homepage available")
+      }
+      
     }
-    
   }
   
   @IBAction func saveButtonPressed(_ sender: Any) {
