@@ -359,7 +359,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RXt-7z-5Ki">
-                                <rect key="frame" x="1" y="20" width="373" height="980"/>
+                                <rect key="frame" x="1" y="64" width="373" height="936"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="zTC-NO-o2q">
@@ -638,10 +638,10 @@
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gOJ-IT-7ym" userLabel="Tint View">
-                                                <rect key="frame" x="0.0" y="6" width="308" height="98"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <rect key="frame" x="0.0" y="6" width="285" height="98"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Mif-Oe-yDr">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Mif-Oe-yDr" userLabel="Title Stack View">
                                                 <rect key="frame" x="8" y="6" width="267" height="98.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Movie Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lhx-Fc-een">
@@ -712,11 +712,11 @@
                                                 </subviews>
                                             </stackView>
                                             <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g8i-NN-jh5" userLabel="Tint View">
-                                                <rect key="frame" x="8" y="154" width="359" height="418"/>
+                                                <rect key="frame" x="8" y="240" width="359" height="418"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8pQ-CK-3Wb" userLabel="Overview">
-                                                <rect key="frame" x="8" y="154" width="359" height="418"/>
+                                                <rect key="frame" x="8" y="240" width="359" height="418"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <string key="text">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</string>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
@@ -725,48 +725,6 @@
                                                 <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j9V-sg-vGe" userLabel="Tint View">
-                                                <rect key="frame" x="67" y="612" width="241" height="36"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </imageView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="L2x-MH-Fho" userLabel="Buttons Stack View">
-                                                <rect key="frame" x="67" y="612" width="241" height="36"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZv-iO-ZIw">
-                                                        <rect key="frame" x="0.0" y="0.0" width="88" height="36"/>
-                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                        <state key="normal" title="Homepage">
-                                                            <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="homepageButtonPressed:" destination="hyN-Ug-rmu" eventType="touchUpInside" id="iNN-TP-1Qg"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWR-3o-IEO">
-                                                        <rect key="frame" x="119" y="0.0" width="37" height="36"/>
-                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                        <state key="normal" title="Save">
-                                                            <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="saveButtonPressed:" destination="hyN-Ug-rmu" eventType="touchUpInside" id="d5p-JS-lXk"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eL2-nx-ffL">
-                                                        <rect key="frame" x="187" y="0.0" width="54" height="36"/>
-                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                        <state key="normal" title="Videos">
-                                                            <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="videosButtonPressed:" destination="hyN-Ug-rmu" eventType="touchUpInside" id="oYf-cU-GEn"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
                                             <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WRa-bf-SpA" userLabel="Tint View">
                                                 <rect key="frame" x="0.0" y="688" width="375" height="300"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -784,7 +742,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Taf-jh-zKz" id="iW9-yd-f8X">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="W4V-CQ-EBB">
@@ -798,7 +756,7 @@
                                                                     </collectionViewFlowLayout>
                                                                     <cells>
                                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="castCollectCell" id="8Qm-5B-hqo" customClass="CastCollectionViewCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="-1" width="210" height="100"/>
+                                                                            <rect key="frame" x="0.0" y="-0.5" width="210" height="100"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="210" height="100"/>
@@ -876,7 +834,7 @@
                                                         <rect key="frame" x="0.0" y="128" width="375" height="190"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7tC-k0-glw" id="F73-WG-06B">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="189"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="189.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gRd-6u-CeH">
@@ -890,7 +848,7 @@
                                                                     </collectionViewFlowLayout>
                                                                     <cells>
                                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="extraImageCollectionViewCell" id="TbF-Rs-CKo" customClass="extraImagesCollectionViewCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="5" width="320" height="180"/>
+                                                                            <rect key="frame" x="0.0" y="4.5" width="320" height="180"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
@@ -937,41 +895,104 @@
                                                     <outlet property="delegate" destination="hyN-Ug-rmu" id="uf4-uj-mrk"/>
                                                 </connections>
                                             </tableView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nqM-uj-mfo" userLabel="Buttons Stack View">
+                                                <rect key="frame" x="20" y="174" width="335" height="36"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZv-iO-ZIw" customClass="FadeButton" customModule="FadeButton">
+                                                        <rect key="frame" x="0.0" y="0.0" width="105" height="36"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                        <state key="normal" title="  Homepage  ">
+                                                            <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <state key="selected">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="titleShadowColor" red="1" green="0.86444489010000003" blue="0.31050683839999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <state key="highlighted">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="fadeDuration">
+                                                                <real key="value" value="0.5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="homepageButtonPressed:" destination="hyN-Ug-rmu" eventType="touchUpInside" id="iNN-TP-1Qg"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWR-3o-IEO" customClass="FadeButton" customModule="FadeButton">
+                                                        <rect key="frame" x="115" y="0.0" width="105" height="36"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                        <state key="normal" title="  Save  ">
+                                                            <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <state key="highlighted">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="fadeDuration">
+                                                                <real key="value" value="0.5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="saveButtonPressed:" destination="hyN-Ug-rmu" eventType="touchUpInside" id="d5p-JS-lXk"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eL2-nx-ffL" customClass="FadeButton" customModule="FadeButton">
+                                                        <rect key="frame" x="230" y="0.0" width="105" height="36"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                        <state key="normal" title="  Videos  ">
+                                                            <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <state key="highlighted">
+                                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="fadeDuration">
+                                                                <real key="value" value="0.5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="videosButtonPressed:" destination="hyN-Ug-rmu" eventType="touchUpInside" id="oYf-cU-GEn"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="gOJ-IT-7ym" firstAttribute="centerY" secondItem="Mif-Oe-yDr" secondAttribute="centerY" id="0WW-hR-kmF"/>
                                             <constraint firstAttribute="trailing" secondItem="Mif-Oe-yDr" secondAttribute="trailing" constant="100" id="5bB-L1-EHr"/>
+                                            <constraint firstItem="Sb5-ag-HTe" firstAttribute="top" secondItem="8pQ-CK-3Wb" secondAttribute="bottom" constant="30" id="6a5-F6-Ge6"/>
                                             <constraint firstAttribute="height" constant="1000" id="BVV-Rx-YBn"/>
-                                            <constraint firstAttribute="trailing" secondItem="L2x-MH-Fho" secondAttribute="trailing" constant="67" id="CgG-7b-KRN"/>
-                                            <constraint firstItem="j9V-sg-vGe" firstAttribute="height" secondItem="L2x-MH-Fho" secondAttribute="height" id="E9S-ns-JMy"/>
+                                            <constraint firstItem="8pQ-CK-3Wb" firstAttribute="top" secondItem="nqM-uj-mfo" secondAttribute="bottom" constant="30" id="CdA-vA-nWB"/>
                                             <constraint firstItem="WRa-bf-SpA" firstAttribute="centerX" secondItem="Sb5-ag-HTe" secondAttribute="centerX" id="Hfe-rx-B6l"/>
-                                            <constraint firstItem="Sb5-ag-HTe" firstAttribute="top" secondItem="L2x-MH-Fho" secondAttribute="bottom" constant="40" id="Jhc-Ki-DaE"/>
                                             <constraint firstItem="Mif-Oe-yDr" firstAttribute="top" secondItem="yyG-pn-xYB" secondAttribute="top" constant="6" id="KKc-dz-Ncl"/>
-                                            <constraint firstItem="gOJ-IT-7ym" firstAttribute="trailing" secondItem="j9V-sg-vGe" secondAttribute="trailing" id="Kh2-P5-g6d"/>
                                             <constraint firstItem="g8i-NN-jh5" firstAttribute="height" secondItem="8pQ-CK-3Wb" secondAttribute="height" id="LS1-Ds-ELF"/>
                                             <constraint firstItem="gOJ-IT-7ym" firstAttribute="top" secondItem="yyG-pn-xYB" secondAttribute="top" constant="6" id="MYB-tt-BjW"/>
                                             <constraint firstItem="g8i-NN-jh5" firstAttribute="centerX" secondItem="8pQ-CK-3Wb" secondAttribute="centerX" id="NKx-lo-XRb"/>
                                             <constraint firstAttribute="trailing" secondItem="8pQ-CK-3Wb" secondAttribute="trailing" constant="8" id="OfV-Hq-hcN"/>
                                             <constraint firstItem="g8i-NN-jh5" firstAttribute="centerY" secondItem="8pQ-CK-3Wb" secondAttribute="centerY" id="PdG-AO-hHV"/>
-                                            <constraint firstItem="L2x-MH-Fho" firstAttribute="top" secondItem="8pQ-CK-3Wb" secondAttribute="bottom" constant="40" id="Rhy-Cj-hba"/>
                                             <constraint firstItem="g8i-NN-jh5" firstAttribute="width" secondItem="8pQ-CK-3Wb" secondAttribute="width" id="RsB-ST-0Gb"/>
                                             <constraint firstAttribute="trailing" secondItem="Sb5-ag-HTe" secondAttribute="trailing" id="TG5-bb-xrn"/>
                                             <constraint firstItem="gOJ-IT-7ym" firstAttribute="leading" secondItem="yyG-pn-xYB" secondAttribute="leading" id="X2H-fD-Ard"/>
+                                            <constraint firstAttribute="trailing" secondItem="gOJ-IT-7ym" secondAttribute="trailing" constant="90" id="XTf-26-FA8"/>
                                             <constraint firstItem="gOJ-IT-7ym" firstAttribute="height" secondItem="Mif-Oe-yDr" secondAttribute="height" id="YCM-u2-acO"/>
                                             <constraint firstItem="WRa-bf-SpA" firstAttribute="width" secondItem="Sb5-ag-HTe" secondAttribute="width" id="aCc-Fc-wPB"/>
                                             <constraint firstAttribute="bottom" secondItem="Sb5-ag-HTe" secondAttribute="bottom" constant="12" id="aJH-1O-oZl"/>
-                                            <constraint firstItem="j9V-sg-vGe" firstAttribute="centerX" secondItem="L2x-MH-Fho" secondAttribute="centerX" id="aNK-M8-rja"/>
                                             <constraint firstAttribute="trailing" secondItem="Cis-Hv-0ZR" secondAttribute="trailing" id="ebQ-Ig-cYz"/>
                                             <constraint firstItem="Sb5-ag-HTe" firstAttribute="top" secondItem="Cis-Hv-0ZR" secondAttribute="bottom" id="hLD-KL-P1T"/>
                                             <constraint firstItem="Mif-Oe-yDr" firstAttribute="leading" secondItem="yyG-pn-xYB" secondAttribute="leading" constant="8" id="k4F-yE-jex"/>
                                             <constraint firstItem="Cis-Hv-0ZR" firstAttribute="leading" secondItem="yyG-pn-xYB" secondAttribute="leading" id="loY-sI-kmy"/>
-                                            <constraint firstItem="j9V-sg-vGe" firstAttribute="centerY" secondItem="L2x-MH-Fho" secondAttribute="centerY" id="loa-Tp-XTK"/>
                                             <constraint firstItem="Cis-Hv-0ZR" firstAttribute="top" secondItem="yyG-pn-xYB" secondAttribute="top" constant="-17" id="mJu-7K-ne5"/>
+                                            <constraint firstItem="nqM-uj-mfo" firstAttribute="leading" secondItem="yyG-pn-xYB" secondAttribute="leading" constant="20" id="nvi-Cf-uLT"/>
                                             <constraint firstItem="Sb5-ag-HTe" firstAttribute="leading" secondItem="yyG-pn-xYB" secondAttribute="leading" id="ocP-jh-QZQ"/>
-                                            <constraint firstItem="L2x-MH-Fho" firstAttribute="leading" secondItem="yyG-pn-xYB" secondAttribute="leading" constant="67" id="ohc-CT-rGx"/>
                                             <constraint firstItem="WRa-bf-SpA" firstAttribute="centerY" secondItem="Sb5-ag-HTe" secondAttribute="centerY" id="qh3-hY-i9s"/>
+                                            <constraint firstAttribute="trailing" secondItem="nqM-uj-mfo" secondAttribute="trailing" constant="20" id="quh-5g-mac"/>
                                             <constraint firstItem="8pQ-CK-3Wb" firstAttribute="leading" secondItem="yyG-pn-xYB" secondAttribute="leading" constant="8" id="rNo-Yj-ixe"/>
-                                            <constraint firstItem="j9V-sg-vGe" firstAttribute="width" secondItem="L2x-MH-Fho" secondAttribute="width" id="wKJ-aR-ca4"/>
                                             <constraint firstItem="WRa-bf-SpA" firstAttribute="height" secondItem="Sb5-ag-HTe" secondAttribute="height" id="xNb-LV-VKx"/>
                                         </constraints>
                                     </view>
@@ -999,15 +1020,17 @@
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="backgroundImage" destination="Cis-Hv-0ZR" id="onc-wx-df6"/>
-                        <outlet property="buttonsTint" destination="j9V-sg-vGe" id="pwn-92-Fuf"/>
                         <outlet property="genre" destination="YGz-Si-doJ" id="Qk1-bU-SPg"/>
+                        <outlet property="homepageButton" destination="IZv-iO-ZIw" id="UCQ-eB-CD4"/>
                         <outlet property="imagesTableView" destination="Sb5-ag-HTe" id="cra-0y-ncr"/>
                         <outlet property="movieTitle" destination="Lhx-Fc-een" id="ffH-GZ-BqJ"/>
                         <outlet property="overivewTint" destination="g8i-NN-jh5" id="UCA-b9-fc0"/>
                         <outlet property="overview" destination="8pQ-CK-3Wb" id="zm0-Vo-FUE"/>
                         <outlet property="rating" destination="XIs-it-V5W" id="ibt-1I-5RN"/>
                         <outlet property="runtime" destination="G6J-YR-2G3" id="Ioc-wh-ASg"/>
+                        <outlet property="saveButton" destination="VWR-3o-IEO" id="8pT-nS-ls3"/>
                         <outlet property="titleTint" destination="gOJ-IT-7ym" id="GCi-5X-7B6"/>
+                        <outlet property="videosButton" destination="eL2-nx-ffL" id="wew-Rg-BsU"/>
                         <segue destination="iRy-cg-vpg" kind="show" identifier="detailToPeopleSegue" id="11A-rm-kap"/>
                         <segue destination="Clw-hW-zfu" kind="show" identifier="detailToImageSegue" id="6mH-ok-gI8"/>
                     </connections>

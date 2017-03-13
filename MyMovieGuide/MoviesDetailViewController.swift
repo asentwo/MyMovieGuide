@@ -27,7 +27,11 @@ class MoviesDetailViewController: UIViewController {
   @IBOutlet weak var titleTint: UIImageView!
   @IBOutlet weak var overivewTint: UIImageView!
   @IBOutlet weak var buttonsTint: UIImageView!
+  @IBOutlet weak var homepageButton: UIButton!
+  @IBOutlet weak var saveButton: UIButton!
+  @IBOutlet weak var videosButton: UIButton!
   @IBOutlet weak var imagesTableView: UITableView!
+  
   
   let networkManager = NetworkManager.sharedManager
   
@@ -45,6 +49,8 @@ class MoviesDetailViewController: UIViewController {
   var castArray: [CastData] = []
   var imageArray: [String] = []
   
+  var homepage : String?
+  
   //Segues
   let detailToImageSegue = "detailToImageSegue"
   let detailToPeopleSegue = "detailToPeopleSegue"
@@ -56,11 +62,15 @@ class MoviesDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //Round tint background
     roundImageViewCorners(imageView: titleTint)
     roundImageViewCorners(imageView: overivewTint)
-    roundImageViewCorners(imageView: buttonsTint)
+    roundButtonCornersAndAddBorderColor(button: homepageButton)
+    roundButtonCornersAndAddBorderColor(button: saveButton)
+    roundButtonCornersAndAddBorderColor(button: videosButton)
     
+    homepageButton.setBackgroundColor(color: .white, forState: .highlighted)
+    saveButton.setBackgroundColor(color: .white, forState: .highlighted)
+    videosButton.setBackgroundColor(color: .white, forState: .highlighted)
     
     if let movieID = self.iD {
       
@@ -76,6 +86,8 @@ class MoviesDetailViewController: UIViewController {
         if let images = self.movieDetailsData?.images {
           self.imageArray += images.backdropImages.map{ $0.filePath }
         }
+        
+        self.homepage = self.movieDetailsData?.homepage
         
         if let rating = self.movieDetailsData?.rating {
           
@@ -101,7 +113,7 @@ class MoviesDetailViewController: UIViewController {
             }
           }
         }
-        
+
         CastData.updateAllData(urlExtension: "\(movieID)/credits", completionHandler: { results in
           
           guard let results = results else {
@@ -109,7 +121,6 @@ class MoviesDetailViewController: UIViewController {
             return
           }
           self.castArray = results
-          
           
           DispatchQueue.main.async {
             
@@ -131,13 +142,29 @@ class MoviesDetailViewController: UIViewController {
     }
   }
   
-  //Round corners
+  //Round corners for tint background
   func roundImageViewCorners(imageView: UIImageView) {
     imageView.layer.cornerRadius = 8.0
     imageView.clipsToBounds = true
   }
   
+     //Round corners for button and border color
+  func roundButtonCornersAndAddBorderColor(button: UIButton) {
+  
+    button.backgroundColor = UIColor.black.withAlphaComponent(0.5)//black color
+    button.layer.cornerRadius = 5
+    button.layer.borderWidth = 1
+    button.layer.borderColor = UIColor.white.cgColor
+  }
+
+  
   @IBAction func homepageButtonPressed(_ sender: Any) {
+
+  if let homepage = self.homepage {
+  let url = URL(string: homepage)
+  UIApplication.shared.open(url!, options: [:])
+    }
+
   }
   
   @IBAction func saveButtonPressed(_ sender: Any) {
@@ -171,7 +198,6 @@ extension MoviesDetailViewController: UITableViewDataSource {
     case 0:
       let cell = imagesTableView.dequeueReusableCell(withIdentifier: castReuseIdentifier)
         as! CastCell
-      print("Cast Array Count:\(castArray.count)")
       cell.castPhotosArray = self.castArray
       cell.imageDelegate = self
       

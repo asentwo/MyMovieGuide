@@ -36,7 +36,7 @@ class NetworkManager {
     
     let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&region=US&append_to_response=videos,images,releases")! )
     
-    print(request)
+    //print(request)
     
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
@@ -62,7 +62,7 @@ class NetworkManager {
     
     let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=20&with_genres=\(genreID)")! )
     
-     print(request)
+ //    print(request)
     
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
