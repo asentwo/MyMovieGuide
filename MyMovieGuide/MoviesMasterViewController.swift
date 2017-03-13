@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 enum Selection: Int {
   case genres
   case inTheatres
