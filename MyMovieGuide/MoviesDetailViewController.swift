@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import ParticlesLoadingView
 
 enum segueController {
   case image
@@ -21,12 +21,14 @@ class MoviesDetailViewController: UIViewController {
   @IBOutlet weak var backgroundImage: UIImageView!
   @IBOutlet weak var movieTitle: UILabel!
   @IBOutlet weak var overview: UILabel!
+  @IBOutlet weak var runtimeCat: UILabel!
   @IBOutlet weak var runtime: UILabel!
+  @IBOutlet weak var genreCat: UILabel!
   @IBOutlet weak var genre: UILabel!
+  @IBOutlet weak var ratingCat: UILabel!
   @IBOutlet weak var rating: UILabel!
   @IBOutlet weak var titleTint: UIImageView!
   @IBOutlet weak var overivewTint: UIImageView!
-  @IBOutlet weak var buttonsTint: UIImageView!
   @IBOutlet weak var homepageButton: UIButton!
   @IBOutlet weak var saveButton: UIButton!
   @IBOutlet weak var videosButton: UIButton!
@@ -51,6 +53,26 @@ class MoviesDetailViewController: UIViewController {
   
   var homepage : String?
   
+  
+  //Particle loading screen
+  lazy var loadingView: ParticlesLoadingView = {
+    let x = self.view.frame.size.width/2
+    let y = self.view.frame.size.height/2
+    let view = ParticlesLoadingView(frame: CGRect(x: x - 50, y: y - 20, width: 100, height: 100))
+    view.particleEffect = .laser
+    view.duration = 1.5
+    view.particlesSize = 15.0
+    view.clockwiseRotation = true
+    view.layer.borderColor = UIColor.lightGray.cgColor
+    view.layer.borderWidth = 1.0
+    view.layer.cornerRadius = 15.0
+    return view
+  }()
+  
+  let label = UILabel(frame: CGRect(x: 0 + 20, y: 0, width: 200, height: 21))
+  
+  
+  
   //Segues
   let detailToImageSegue = "detailToImageSegue"
   let detailToPeopleSegue = "detailToPeopleSegue"
@@ -61,6 +83,16 @@ class MoviesDetailViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    
+    label.center = CGPoint(x: 160, y: 285)
+    label.textAlignment = .center
+    label.text = "Loading"
+    label.textColor = UIColor.white
+    self.view.addSubview(label)
+    
+    view.addSubview(loadingView)
+    loadingView.startAnimating()
     
     roundImageViewCorners(imageView: titleTint)
     roundImageViewCorners(imageView: overivewTint)
@@ -89,31 +121,7 @@ class MoviesDetailViewController: UIViewController {
         
         self.homepage = self.movieDetailsData?.homepage
         
-        if let rating = self.movieDetailsData?.rating {
-          
-          let allRatings = rating.releaseResults
-          
-          for country in allRatings {
-            
-            let countryCode = country.countryCode
-            
-            if countryCode == "US" {
-              
-              if let USRating = country.certification {
-                
-                DispatchQueue.main.async {
-                  
-                  if USRating == "" {
-                    self.rating.text = "N/A"
-                  } else {
-                    self.rating.text = USRating
-                  }
-                }
-              }
-            }
-          }
-        }
-
+        
         CastData.updateAllData(urlExtension: "\(movieID)/credits", completionHandler: { results in
           
           guard let results = results else {
@@ -122,20 +130,53 @@ class MoviesDetailViewController: UIViewController {
           }
           self.castArray = results
           
-          DispatchQueue.main.async {
+          if let rating = self.movieDetailsData?.rating {
             
-            if let poster = self.movieDetailsData?.poster{
-              self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(poster)"))
+            
+            
+            let allRatings = rating.releaseResults
+            
+            for country in allRatings {
+              
+              let countryCode = country.countryCode
+              
+              if countryCode == "US" {
+                
+                if let USRating = country.certification {
+                  
+                  DispatchQueue.main.async {
+                    
+                    if let poster = self.movieDetailsData?.poster{
+                      self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(poster)"))
+                    }
+                    
+                    self.movieTitle.text = self.movieDetailsData?.title
+                    self.overview.text = self.movieDetailsData?.overview
+                    
+                    if let runtime = self.movieDetailsData?.runtime {
+                      self.runtime.text = String(describing: runtime)
+                    }
+                    
+                    if USRating == "" {
+                      self.rating.text = "N/A"
+                    } else {
+                      self.rating.text = USRating
+                    }
+                    
+                    self.runtimeCat.text = "RUNTIME"
+                    self.genreCat.text = "GENRE"
+                    self.ratingCat.text = "RATING"
+                    
+                    self.label.isHidden = true
+                    self.loadingView.isHidden = true
+                    self.loadingView.stopAnimating()
+                    
+                    self.imagesTableView.reloadData()
+                    
+                  }
+                }
+              }
             }
-            
-            self.movieTitle.text = self.movieDetailsData?.title
-            self.overview.text = self.movieDetailsData?.overview
-            
-            if let runtime = self.movieDetailsData?.runtime {
-              self.runtime.text = String(describing: runtime)
-            }
-            
-            self.imagesTableView.reloadData()
           }
         })
       })
@@ -148,23 +189,23 @@ class MoviesDetailViewController: UIViewController {
     imageView.clipsToBounds = true
   }
   
-     //Round corners for button and border color
+  //Round corners for button and border color
   func roundButtonCornersAndAddBorderColor(button: UIButton) {
-  
+    
     button.backgroundColor = UIColor.black.withAlphaComponent(0.5)//black color
     button.layer.cornerRadius = 5
     button.layer.borderWidth = 1
     button.layer.borderColor = UIColor.white.cgColor
   }
-
+  
   
   @IBAction func homepageButtonPressed(_ sender: Any) {
-
-  if let homepage = self.homepage {
-  let url = URL(string: homepage)
-  UIApplication.shared.open(url!, options: [:])
+    
+    if let homepage = self.homepage {
+      let url = URL(string: homepage)
+      UIApplication.shared.open(url!, options: [:])
     }
-
+    
   }
   
   @IBAction func saveButtonPressed(_ sender: Any) {

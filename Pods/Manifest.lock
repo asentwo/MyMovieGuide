@@ -1,6 +1,7 @@
 PODS:
   - FadeButton (2.0.0)
   - Gloss (1.2.1)
+  - ParticlesLoadingView (0.4)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -8,13 +9,15 @@ PODS:
 DEPENDENCIES:
   - FadeButton (~> 2.0)
   - Gloss
+  - ParticlesLoadingView
   - SDWebImage
 
 SPEC CHECKSUMS:
   FadeButton: ff59c148ad6bf3b26f8012715ad4aade5f9c0006
   Gloss: 9ab33b8ede01e4232571d43a6bf9259b85d1de69
+  ParticlesLoadingView: 48e27632598bb27f23077fce88974729fca7b1d4
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
 
-PODFILE CHECKSUM: e500dce31c4834156c254412b158dab4f3992a8d
+PODFILE CHECKSUM: e568184f448e600bf0b0d68c2c0759179f6458cf
 
 COCOAPODS: 1.2.0.beta.1

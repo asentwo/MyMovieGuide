@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import ParticlesLoadingView
 
 
 
@@ -27,6 +28,24 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
   let reuseIdentifier = "genreCollectionViewCell"
   let segueIdentifier = "genreToDetailSegue"
   
+  //Particle loading screen
+  lazy var loadingView: ParticlesLoadingView = {
+    let x = self.view.frame.size.width/2
+    let y = self.view.frame.size.height/2
+    let view = ParticlesLoadingView(frame: CGRect(x: x - 50, y: y - 20, width: 100, height: 100))
+    view.particleEffect = .laser
+    view.duration = 1.5
+    view.particlesSize = 15.0
+    view.clockwiseRotation = true
+    view.layer.borderColor = UIColor.lightGray.cgColor
+    view.layer.borderWidth = 1.0
+    view.layer.cornerRadius = 15.0
+    return view
+  }()
+  
+  let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+  
+  
   //Layout
   let itemsPerRow: CGFloat = 3
   let sectionInsets = UIEdgeInsets(top: 35.0, left: 10.0, bottom: 35.0, right: 10.0)
@@ -34,6 +53,14 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
   //MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    label.center = CGPoint(x: 160, y: 285)
+    label.textAlignment = .center
+    label.text = "Loading"
+    self.view.addSubview(label)
+    
+    view.addSubview(loadingView)
+    loadingView.startAnimating()
     
     if let id = genreID {
       
@@ -53,6 +80,10 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
             continue
           }
           DispatchQueue.main.async {
+            self.label.isHidden = true
+            self.loadingView.isHidden = true
+            self.loadingView.stopAnimating()
+            
             self.genreCollectionView.reloadData()
           }
           
@@ -142,3 +173,5 @@ extension MoviesGenresCollectionViewController {
   }
   
 }
+
+

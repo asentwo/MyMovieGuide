@@ -8,9 +8,11 @@
 
 import Foundation
 import UIKit
+import ParticlesLoadingView
 
 
 
+//used to add blur to image
 extension UIImageView
 {
   func addBlurEffect()
@@ -24,7 +26,7 @@ extension UIImageView
   }
 }
 
-
+//used for making cast photos circular
 extension UIImage {
   var circleMask: UIImage {
     let square = CGSize(width: min(size.width, size.height), height: min(size.width, size.height))
@@ -43,6 +45,7 @@ extension UIImage {
   }
 }
 
+//used to change button color on the fly
 extension UIButton {
   func setBackgroundColor(color: UIColor, forState: UIControlState) {
     UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
@@ -52,3 +55,4 @@ extension UIButton {
     UIGraphicsEndImageContext()
     self.setBackgroundImage(colorImage, for: forState)
   }}
+
