@@ -260,8 +260,12 @@ class MoviesDetailViewController: UIViewController {
   @IBAction func videosButtonPressed(_ sender: Any) {
     
     if let videoInfo = self.videoInfo {
-      videoTapped(videoInfo: videoInfo, segueType: segueController.video)
-    } else {
+      if videoInfo.videoResults.count != 0 {
+      self.videoTapped(videoInfo: videoInfo, segueType: segueController.video)
+      } else {
+        CDAlertView(title: "Sorry", message: "No videos available!", type: .notification).show()
+      }
+    }else {
       CDAlertView(title: "Sorry", message: "No videos available!", type: .notification).show()
     }
   }

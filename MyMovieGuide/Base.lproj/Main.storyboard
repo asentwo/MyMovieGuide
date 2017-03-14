@@ -146,19 +146,30 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.0" green="0.079419953939999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Gp-IT-NUv">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="vft-za-HX3"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre Catagory" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="432-cG-3bP">
-                                                    <rect key="frame" x="8" y="8" width="121" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="8" y="8" width="124.5" height="23.5"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="0Gp-IT-NUv" secondAttribute="trailing" id="G5X-dw-TDr"/>
+                                                <constraint firstItem="0Gp-IT-NUv" firstAttribute="top" secondItem="yml-7N-3w3" secondAttribute="top" id="IVg-UO-Rjg"/>
                                                 <constraint firstItem="432-cG-3bP" firstAttribute="leading" secondItem="yml-7N-3w3" secondAttribute="leadingMargin" id="oSh-iP-1jv"/>
                                                 <constraint firstItem="432-cG-3bP" firstAttribute="top" secondItem="yml-7N-3w3" secondAttribute="topMargin" id="rii-Jp-vqc"/>
+                                                <constraint firstItem="0Gp-IT-NUv" firstAttribute="leading" secondItem="yml-7N-3w3" secondAttribute="leading" id="vbE-5W-ZER"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="backgroundTint" destination="0Gp-IT-NUv" id="vMG-LY-iFz"/>
                                             <outlet property="genreCatagoryLabel" destination="432-cG-3bP" id="3W7-nJ-Qc6"/>
                                             <outlet property="mainImageView" destination="fsn-S1-sol" id="Xde-s3-0BG"/>
                                         </connections>
@@ -186,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SXD-ef-Eon" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4438" y="-3147"/>
+            <point key="canvasLocation" x="4437.6000000000004" y="-3147.0764617691157"/>
         </scene>
         <!--Movies Genres Collection View Controller-->
         <scene sceneID="Dg8-2Q-VCx">
@@ -1572,7 +1583,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Koc-ZY-BD4" id="38M-Q2-K3v">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="219"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="219.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2dD-bm-vzL">

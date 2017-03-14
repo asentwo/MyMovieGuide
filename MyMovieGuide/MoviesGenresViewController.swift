@@ -88,10 +88,12 @@ extension MoviesGenresViewController:  UITableViewDataSource {
     let cell = genresTableView.dequeueReusableCell(withIdentifier: "GenresTableViewCell") as! GenresTableViewCell
     cell.genreCatagoryLabel.text = genreDataArray[indexPath.row].name
     cell.mainImageView.sd_setImage(with: URL(string: "\(baseImageURL)\(posterStringArray[indexPath.row])"))
+    cell.selectionStyle = UITableViewCellSelectionStyle.none
+    
     return cell
   }
-
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  
+   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 150.00
   }
 }
