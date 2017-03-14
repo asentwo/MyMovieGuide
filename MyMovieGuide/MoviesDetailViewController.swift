@@ -14,6 +14,7 @@ import FadeButton
 enum segueController {
   case image
   case cast
+  case video
 }
 
 class MoviesDetailViewController: UIViewController {
@@ -54,6 +55,7 @@ class MoviesDetailViewController: UIViewController {
   
   var castArray: [CastData] = []
   var imageArray: [String] = []
+  var videoInfo: VideoResults?
   
   var homepage : String?
   
@@ -80,6 +82,7 @@ class MoviesDetailViewController: UIViewController {
   //Segues
   let detailToImageSegue = "detailToImageSegue"
   let detailToPeopleSegue = "detailToPeopleSegue"
+  let detailToVideoSegue = "detailToVideoSegue"
   
   //TableViewCell Reuse Identifiers
   let castReuseIdentifier = "castCell"
@@ -88,7 +91,7 @@ class MoviesDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-
+    
     startLoadingScreen()
     setImagesAndButtonsUI()
     
@@ -108,7 +111,7 @@ class MoviesDetailViewController: UIViewController {
         }
         
         self.homepage = self.movieDetailsData?.homepage
-        
+        self.videoInfo = self.movieDetailsData?.videos
         
         CastData.updateAllData(urlExtension: "\(movieID)/credits", completionHandler: { results in
           
@@ -175,20 +178,6 @@ class MoviesDetailViewController: UIViewController {
     }
   }
   
-  //Round corners for tint background
-  func roundImageViewCorners(imageView: UIImageView) {
-    imageView.layer.cornerRadius = 8.0
-    imageView.clipsToBounds = true
-  }
-  
-  //Round corners for button and border color
-  func roundButtonCornersAndAddBorderColor(button: UIButton) {
-    
-    button.backgroundColor = UIColor.black.withAlphaComponent(0.5)//black color
-    button.layer.cornerRadius = 5
-    button.layer.borderWidth = 1
-    button.layer.borderColor = UIColor.white.cgColor
-  }
   
   func setImagesAndButtonsUI () {
     
@@ -204,7 +193,6 @@ class MoviesDetailViewController: UIViewController {
   }
   
   func startLoadingScreen () {
-    //Loading Screen starts
     label.center = CGPoint(x: 190, y: 365)
     label.textAlignment = .center
     label.text = "Loading"
@@ -231,8 +219,11 @@ class MoviesDetailViewController: UIViewController {
   }
   
   @IBAction func videosButtonPressed(_ sender: Any) {
+    
+    if let videoInfo = self.videoInfo {
+      videoTapped(videoInfo: videoInfo, segueType: segueController.video)
+    }
   }
-  
 }
 
 
@@ -289,7 +280,7 @@ extension MoviesDetailViewController: UITableViewDataSource {
 extension MoviesDetailViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print("row pressed: \(indexPath.row)")
+    // print("row pressed: \(indexPath.row)")
   }
 }
 
@@ -311,12 +302,21 @@ extension MoviesDetailViewController {
       
       imageVC.image = self.extraImage
     }
+      
+    else if self.segueType == segueController.video {
+      
+      let videoVC = segue.destination as! MoviesVideoTableViewController
+      
+      //  videoVC.videoIDArray = self.videoIDArray
+      videoVC.videoInfo = self.videoInfo
+      
+    }
   }
 }
 
 
 //Protocols
-extension MoviesDetailViewController : handleCastData, handleExtraImage  {
+extension MoviesDetailViewController : handleCastData, handleExtraImage, handleVideoData  {
   
   func imageTapped(ID castID: NSNumber, segueType: segueController) {
     self.castID = castID
@@ -328,4 +328,13 @@ extension MoviesDetailViewController : handleCastData, handleExtraImage  {
     self.extraImage = Image
     self.segueType = segueType
     performSegue(withIdentifier: detailToImageSegue, sender: self)
-  }}
+  }
+  
+  func videoTapped(videoInfo: VideoResults, segueType: segueController) {
+    // self.videoID = videoID
+    self.videoInfo = videoInfo
+    self.segueType = segueType
+    performSegue(withIdentifier: detailToVideoSegue, sender: self)
+  }
+  
+}

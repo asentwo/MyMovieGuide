@@ -9,13 +9,14 @@
 import Foundation
 import UIKit
 
-
+protocol handleVideoData {
+  func videoTapped(videoInfo: VideoResults, segueType: segueController)
+}
 
 class VideoCell: UITableViewCell {
   
-  
-  @IBOutlet weak var videoCatagoryLabel: UILabel!
-  
-  @IBOutlet weak var caratImage: UIImageView!
+  @IBOutlet weak var videoWebView: UIWebView!
+
+ 
   
 }

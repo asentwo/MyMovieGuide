@@ -56,3 +56,23 @@ extension UIButton {
     self.setBackgroundImage(colorImage, for: forState)
   }}
 
+
+extension UIViewController {
+  
+  //Round corners for button and border color
+  func roundButtonCornersAndAddBorderColor(button: UIButton) {
+    
+    button.backgroundColor = UIColor.black.withAlphaComponent(0.5)//black color
+    button.layer.cornerRadius = 5
+    button.layer.borderWidth = 1
+    button.layer.borderColor = UIColor.white.cgColor
+  }
+  
+  //Round corners for tint background
+  func roundImageViewCorners(imageView: UIImageView) {
+    imageView.layer.cornerRadius = 8.0
+    imageView.clipsToBounds = true
+  }
+  
+}
+

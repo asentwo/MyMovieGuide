@@ -138,7 +138,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wxB-oe-9lD" id="yml-7N-3w3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fsn-S1-sol">
@@ -369,10 +369,10 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="actorProfileCell" rowHeight="200" id="uZs-7M-jCu" customClass="ActorProfileCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uZs-7M-jCu" id="jsu-V1-XhU">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actor Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="4pa-J4-wIv">
@@ -440,10 +440,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bioCell" rowHeight="200" id="SXo-4H-vRB" customClass="BioCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="256" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="255.5" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SXo-4H-vRB" id="3qU-xx-7uc">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dTg-lZ-R4J">
@@ -468,10 +468,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="imagesCell" rowHeight="250" id="AvM-F4-cUw" customClass="ImagesPeopleCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="456" width="375" height="250"/>
+                                        <rect key="frame" x="0.0" y="455.5" width="375" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AvM-F4-cUw" id="LeI-1z-ICE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="249"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rm9-SC-mg6">
@@ -527,10 +527,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="knownForCell" rowHeight="250" id="BM5-gb-lkx" userLabel="knownForCell" customClass="KnownForCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="706" width="375" height="250"/>
+                                        <rect key="frame" x="0.0" y="705.5" width="375" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BM5-gb-lkx" id="nht-RL-BYq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="249"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="249.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qgf-2g-wSe" userLabel="KnownForCollectionView">
@@ -753,7 +753,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Taf-jh-zKz" id="iW9-yd-f8X">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="W4V-CQ-EBB">
@@ -767,7 +767,7 @@
                                                                     </collectionViewFlowLayout>
                                                                     <cells>
                                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="castCollectCell" id="8Qm-5B-hqo" customClass="CastCollectionViewCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="-1" width="210" height="100"/>
+                                                                            <rect key="frame" x="0.0" y="-0.5" width="210" height="100"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="210" height="100"/>
@@ -845,7 +845,7 @@
                                                         <rect key="frame" x="0.0" y="128" width="375" height="190"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7tC-k0-glw" id="F73-WG-06B">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="189"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="189.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gRd-6u-CeH">
@@ -859,7 +859,7 @@
                                                                     </collectionViewFlowLayout>
                                                                     <cells>
                                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="extraImageCollectionViewCell" id="TbF-Rs-CKo" customClass="extraImagesCollectionViewCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="5" width="320" height="180"/>
+                                                                            <rect key="frame" x="0.0" y="4.5" width="320" height="180"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
@@ -1049,6 +1049,7 @@
                         <outlet property="videosButton" destination="eL2-nx-ffL" id="wHf-k2-S4b"/>
                         <segue destination="iRy-cg-vpg" kind="show" identifier="detailToPeopleSegue" id="11A-rm-kap"/>
                         <segue destination="Clw-hW-zfu" kind="show" identifier="detailToImageSegue" id="6mH-ok-gI8"/>
+                        <segue destination="5eR-so-eKP" kind="show" identifier="detailToVideoSegue" id="8bx-OG-mqh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZUQ-Vq-cFo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1208,10 +1209,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="posterCell" rowHeight="400" id="TEa-m0-mdK" customClass="PosterCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="343" height="400"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="343" height="400"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TEa-m0-mdK" id="Wbo-Wp-JFe">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="399"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="399.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pEf-fA-hTO">
@@ -1240,10 +1241,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="overviewCell" rowHeight="125" id="p4U-NS-azH" customClass="OverviewCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="456" width="343" height="125"/>
+                                        <rect key="frame" x="0.0" y="455.5" width="343" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p4U-NS-azH" id="XJH-o4-saF">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="124"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="124.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="j1f-py-MAu">
@@ -1266,10 +1267,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieDetailCell" id="QFL-qq-Bf6" customClass="MovieDetailCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="581" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="580.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QFL-qq-Bf6" id="BZz-XW-WM8">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgF-L0-KvZ">
@@ -1304,10 +1305,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="castCell" rowHeight="100" id="1eQ-Jb-FYu" customClass="CastCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="625" width="343" height="100"/>
+                                        <rect key="frame" x="0.0" y="624.5" width="343" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1eQ-Jb-FYu" id="geo-7p-Fsg">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="99s-fL-YP4">
@@ -1321,7 +1322,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="castCollectCell" id="YFS-jG-0Cc" customClass="CastCollectionViewCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="210" height="100"/>
+                                                            <rect key="frame" x="0.0" y="-0.5" width="210" height="100"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="210" height="100"/>
@@ -1395,10 +1396,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="extraImagesCell" rowHeight="190" id="ee0-rk-nJU" customClass="ExtraImagesCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="725" width="343" height="190"/>
+                                        <rect key="frame" x="0.0" y="724.5" width="343" height="190"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ee0-rk-nJU" id="Wct-uO-Fm5">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="189"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="189.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="E2L-Ty-UNh">
@@ -1453,10 +1454,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="videoCell" id="5TZ-wr-6tV" customClass="VideoCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="915" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="914.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5TZ-wr-6tV" id="a44-0z-cWQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="   &gt;         " translatesAutoresizingMaskIntoConstraints="NO" id="VQ1-xC-JOP">
@@ -1548,7 +1549,106 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pX1-sE-6z0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6257" y="-2260"/>
+            <point key="canvasLocation" x="6193" y="-2997"/>
+        </scene>
+        <!--Movies Video Table View Controller-->
+        <scene sceneID="spg-dN-LJS">
+            <objects>
+                <viewController id="5eR-so-eKP" customClass="MoviesVideoTableViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="faG-fL-xXH"/>
+                        <viewControllerLayoutGuide type="bottom" id="StL-KK-dTn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iKf-Ig-wlf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jxj-zX-VVg">
+                                <rect key="frame" x="0.0" y="64" width="375" height="936"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="videoCell" rowHeight="220" id="Koc-ZY-BD4" customClass="VideoCell" customModule="MyMovieGuide" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="220"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Koc-ZY-BD4" id="38M-Q2-K3v">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="219"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2dD-bm-vzL">
+                                                    <rect key="frame" x="7" y="19" width="360" height="180"/>
+                                                    <color key="backgroundColor" red="0.74509803919999995" green="0.84705882349999995" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                </webView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="2dD-bm-vzL" secondAttribute="trailing" constant="8" id="8Je-Az-CUf"/>
+                                                <constraint firstAttribute="bottom" secondItem="2dD-bm-vzL" secondAttribute="bottom" constant="20" id="dUV-lY-nm2"/>
+                                                <constraint firstItem="2dD-bm-vzL" firstAttribute="top" secondItem="38M-Q2-K3v" secondAttribute="top" constant="19" id="maJ-Zp-ISi"/>
+                                                <constraint firstItem="2dD-bm-vzL" firstAttribute="leading" secondItem="38M-Q2-K3v" secondAttribute="leading" constant="7" id="z7Z-eh-Cbf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="videoWebView" destination="2dD-bm-vzL" id="QKS-tL-800"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="5eR-so-eKP" id="ans-aG-f3V"/>
+                                    <outlet property="delegate" destination="5eR-so-eKP" id="e6j-mO-180"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="jxj-zX-VVg" secondAttribute="trailing" id="0ry-ps-RMz"/>
+                            <constraint firstItem="jxj-zX-VVg" firstAttribute="top" secondItem="faG-fL-xXH" secondAttribute="bottom" id="77e-pq-y4m"/>
+                            <constraint firstItem="jxj-zX-VVg" firstAttribute="leading" secondItem="iKf-Ig-wlf" secondAttribute="leading" id="Zcu-jV-SY7"/>
+                            <constraint firstItem="StL-KK-dTn" firstAttribute="top" secondItem="jxj-zX-VVg" secondAttribute="bottom" id="nLU-BY-Uer"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="videoTableView" destination="jxj-zX-VVg" id="pkX-h2-1W6"/>
+                        <segue destination="HPC-2a-rxI" kind="show" identifier="videoTableViewToDetailSegue" id="COJ-zp-OUx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U7f-8m-n6I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6192.8000000000002" y="-1984.4077961019491"/>
+        </scene>
+        <!--Movies Video View Controller-->
+        <scene sceneID="MkN-lP-oGF">
+            <objects>
+                <viewController id="HPC-2a-rxI" customClass="MoviesVideoViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SZ9-0Q-BhM"/>
+                        <viewControllerLayoutGuide type="bottom" id="u3J-cN-8zQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dnu-fm-Hx9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zet-3R-qw9">
+                                <rect key="frame" x="16" y="64" width="343" height="936"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="u3J-cN-8zQ" firstAttribute="top" secondItem="zet-3R-qw9" secondAttribute="bottom" id="LBJ-65-NpO"/>
+                            <constraint firstItem="zet-3R-qw9" firstAttribute="top" secondItem="SZ9-0Q-BhM" secondAttribute="bottom" id="ehL-Ja-gG2"/>
+                            <constraint firstItem="zet-3R-qw9" firstAttribute="leading" secondItem="dnu-fm-Hx9" secondAttribute="leadingMargin" id="g58-mR-3Zo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zet-3R-qw9" secondAttribute="trailing" id="qwO-qu-jIS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="videoWebView" destination="zet-3R-qw9" id="Swd-rE-Cyw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WGy-BN-EMO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7033" y="-1984"/>
         </scene>
     </scenes>
     <resources>
