@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import CDAlertView
 
 
 class InTheatresMoviesViewController: UICollectionViewController {
@@ -36,7 +37,7 @@ class InTheatresMoviesViewController: UICollectionViewController {
     MovieData.updateAllData(type:"movie", urlExtension: "now_playing", completionHandler: {results in
       
       guard let results = results else {
-        print("There was an error retrieving in theatres movie data")
+        CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .notification).show()
         return
       }
       self.inTheatresDataArray = results

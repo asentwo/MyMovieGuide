@@ -51,6 +51,8 @@ extension CastCell: UICollectionViewDataSource {
     
     if let profilePic = self.castPhotosArray[indexPath.row].profilePic {
       cell.actorProfileImage.sd_setImage(with: URL(string:  "\(baseImageURL)\(profilePic)"), placeholderImage: UIImage(named: "placeholder.png"))
+    } else {
+      cell.actorProfileImage.image = UIImage(named: "placeholder.png")
     }
     cell.actorProfileImage.layer.cornerRadius = cell.actorProfileImage.frame.size.height/2
     cell.actorProfileImage.clipsToBounds = true

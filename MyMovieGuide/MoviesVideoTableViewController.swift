@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import ParticlesLoadingView
-
+import CDAlertView
 
 
 class MoviesVideoTableViewController: UIViewController {
@@ -51,6 +51,8 @@ class MoviesVideoTableViewController: UIViewController {
       for videoData in video {
         if let youtubeURL = URL(string: "https://www.youtube.com/embed/\(videoData.key)") {
           self.videoURLArray.append(youtubeURL)
+        } else {
+        CDAlertView(title: "Sorry", message: "No videos available!", type: .notification).show()
         }
         self.label.isHidden = true
         self.loadingView.isHidden = true

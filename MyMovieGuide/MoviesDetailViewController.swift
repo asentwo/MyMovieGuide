@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import ParticlesLoadingView
 import FadeButton
+import CDAlertView
+
 
 enum segueController {
   case image
@@ -76,9 +78,7 @@ class MoviesDetailViewController: UIViewController {
   }()
   
   let label = UILabel(frame: CGRect(x: 0 + 20, y: 0, width: 200, height: 21))
-  
-  
-  
+
   //Segues
   let detailToImageSegue = "detailToImageSegue"
   let detailToPeopleSegue = "detailToPeopleSegue"
@@ -91,7 +91,6 @@ class MoviesDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    
     startLoadingScreen()
     setImagesAndButtonsUI()
     
@@ -100,7 +99,7 @@ class MoviesDetailViewController: UIViewController {
       MovieDetailsData.updateAllData(urlExtension: "\(movieID)", completionHandler: { results in
         
         guard let results = results else {
-          print("There was an error retrieving upcoming movie data")
+          CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
           return
         }
         self.movieDetailsData = results
@@ -108,6 +107,8 @@ class MoviesDetailViewController: UIViewController {
         
         if let images = self.movieDetailsData?.images {
           self.imageArray += images.backdropImages.map{ $0.filePath }
+        } else {
+          CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
         }
         
         self.homepage = self.movieDetailsData?.homepage
@@ -116,14 +117,12 @@ class MoviesDetailViewController: UIViewController {
         CastData.updateAllData(urlExtension: "\(movieID)/credits", completionHandler: { results in
           
           guard let results = results else {
-            print("There was an error retrieving upcoming movie data")
+            CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .notification).show()
             return
           }
           self.castArray = results
           
           if let rating = self.movieDetailsData?.rating {
-            
-            
             
             let allRatings = rating.releaseResults
             
@@ -138,7 +137,9 @@ class MoviesDetailViewController: UIViewController {
                   DispatchQueue.main.async {
                     
                     if let poster = self.movieDetailsData?.poster{
-                      self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(poster)"))
+                      self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(poster)"),placeholderImage: UIImage(named: "placeholder.png"))
+                    } else {
+                      self.backgroundImage.image = UIImage(named: "placeholder.png")
                     }
                     
                     self.movieTitle.text = self.movieDetailsData?.title
@@ -170,11 +171,49 @@ class MoviesDetailViewController: UIViewController {
                     
                   }
                 }
+              } else {
+                
+                DispatchQueue.main.async {
+                  
+                  if let poster = self.movieDetailsData?.poster{
+                    self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(poster)"),placeholderImage: UIImage(named: "placeholder.png"))
+                  } else {
+                    self.backgroundImage.image = UIImage(named: "placeholder.png")
+                  }
+                  
+                  self.movieTitle.text = self.movieDetailsData?.title
+                  self.overview.text = self.movieDetailsData?.overview
+                  
+                  if let runtime = self.movieDetailsData?.runtime {
+                    self.runtime.text = String(describing: runtime)
+                  }
+                  
+                  if let genre = self.movieDetailsData?.genre {
+                    self.genre.text = genre[0].name
+                  }
+                  
+                  self.rating.text = "N/A"
+                  self.lineImage.image = #imageLiteral(resourceName: "Line")
+                  self.runtimeCat.text = "RUNTIME"
+                  self.genreCat.text = "GENRE"
+                  self.ratingCat.text = "RATING"
+                  
+                  self.label.isHidden = true
+                  self.loadingView.isHidden = true
+                  self.loadingView.stopAnimating()
+                  self.imagesTableView.reloadData()
+                  
+                }
               }
             }
           }
         })
       })
+    } else {
+      self.label.isHidden = true
+      self.loadingView.isHidden = true
+      self.loadingView.stopAnimating()
+      CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
     }
   }
   
@@ -209,7 +248,7 @@ class MoviesDetailViewController: UIViewController {
       if let url = URL(string: homepage) {
         UIApplication.shared.open(url, options: [:])
       }  else {
-        print("No Homepage available")
+        CDAlertView(title: "Sorry", message: "No web page available!", type: .notification).show()
       }
       
     }
@@ -222,6 +261,8 @@ class MoviesDetailViewController: UIViewController {
     
     if let videoInfo = self.videoInfo {
       videoTapped(videoInfo: videoInfo, segueType: segueController.video)
+    } else {
+      CDAlertView(title: "Sorry", message: "No videos available!", type: .notification).show()
     }
   }
 }
@@ -277,14 +318,6 @@ extension MoviesDetailViewController: UITableViewDataSource {
 }
 
 
-extension MoviesDetailViewController: UITableViewDelegate {
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    // print("row pressed: \(indexPath.row)")
-  }
-}
-
-
 //Segues
 extension MoviesDetailViewController {
   
@@ -293,21 +326,17 @@ extension MoviesDetailViewController {
     if self.segueType == segueController.cast {
       
       let peopleVC = segue.destination as! PeopleDetailViewController
-      
       peopleVC.id = self.castID
     }
     else if self.segueType == segueController.image {
       
       let imageVC = segue.destination as! MoviesMasterImageController
-      
       imageVC.image = self.extraImage
     }
       
     else if self.segueType == segueController.video {
       
       let videoVC = segue.destination as! MoviesVideoTableViewController
-      
-      //  videoVC.videoIDArray = self.videoIDArray
       videoVC.videoInfo = self.videoInfo
       
     }
@@ -331,7 +360,6 @@ extension MoviesDetailViewController : handleCastData, handleExtraImage, handleV
   }
   
   func videoTapped(videoInfo: VideoResults, segueType: segueController) {
-    // self.videoID = videoID
     self.videoInfo = videoInfo
     self.segueType = segueType
     performSegue(withIdentifier: detailToVideoSegue, sender: self)

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import ParticlesLoadingView
-
+import CDAlertView
 
 
 class MoviesGenresCollectionViewController: UICollectionViewController {
@@ -21,7 +21,7 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
   let networkManager = NetworkManager.sharedManager
   
   var genreDataArray: [MovieData] = []
-  var genrePosterArray: [String?] = []
+  //var genrePosterArray: [String?] = []
   var genreID: NSNumber?
   var movieID: NSNumber?
   
@@ -67,27 +67,28 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
       MovieData.updateAllData(type:"genre", urlExtension: "\(id)/movies", completionHandler: {results in
         
         guard let results = results else {
-          print("There was an error retrieving in theatres movie data")
+   CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .notification).show()
           return
         }
         self.genreDataArray = results
         
-        for movie in self.genreDataArray {
-          if movie.poster != nil {
-            self.genrePosterArray.append(movie.poster!)
-          } else {
-            print("poster does not exist: \(movie.title)")
-            continue
-          }
-          DispatchQueue.main.async {
-            self.label.isHidden = true
-            self.loadingView.isHidden = true
-            self.loadingView.stopAnimating()
-            
-            self.genreCollectionView.reloadData()
-          }
+        DispatchQueue.main.async {
+          self.label.isHidden = true
+          self.loadingView.isHidden = true
+          self.loadingView.stopAnimating()
           
+          self.genreCollectionView.reloadData()
         }
+        
+//        for movie in self.genreDataArray {
+//          if movie.poster != nil {
+//            self.genrePosterArray.append(movie.poster!)
+//          } else {
+//            print("poster does not exist: \(movie.title)")
+//            continue
+//          }
+//      
+//        }
       })
     }
   }
@@ -102,15 +103,18 @@ extension MoviesGenresCollectionViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return genrePosterArray.count
+    return genreDataArray.count
   }
   
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = genreCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! genreCollectionViewCell
     
-    if let genrePoster = genrePosterArray[indexPath.row] {
-      cell.genreImageView.sd_setImage(with: URL(string:"\(baseImageURL)\(genrePoster)"))
+   
+    if let genrePoster = genreDataArray[indexPath.row].poster {
+        cell.genreImageView.sd_setImage(with: URL(string:"\(baseImageURL)\(genrePoster)"), placeholderImage: UIImage(named: "placeholder.png"))
+    } else {
+      cell.genreImageView.image = UIImage(named: "placeholder.png")
     }
     return cell
   }

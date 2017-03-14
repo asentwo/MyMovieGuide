@@ -6,7 +6,6 @@ pod 'Gloss'
 pod 'SDWebImage'
 pod 'FadeButton', '~> 2.0'
 pod 'ParticlesLoadingView'
-
-
+pod 'CDAlertView'
 end
 

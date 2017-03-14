@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CDAlertView
 
 class UpcomingMoviesViewController: UICollectionViewController {
   
@@ -35,7 +36,7 @@ class UpcomingMoviesViewController: UICollectionViewController {
     MovieData.updateAllData(type: "movie", urlExtension: "upcoming", completionHandler: { results in
       
       guard let results = results else {
-        print("There was an error retrieving upcoming movie data")
+        CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .notification).show()
         return
       }
       self.upcomingDataArray = results

@@ -34,9 +34,12 @@ class NetworkManager {
   
   func getJSONData(type: String, urlExtension: String, completion: @escaping JSONData) {
     
+    configuration.timeoutIntervalForRequest = 5
+    configuration.timeoutIntervalForResource = 5
+    
     let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&region=US&append_to_response=videos,images,releases")! )
     
- //   print(request)
+   // print(request)
     
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       

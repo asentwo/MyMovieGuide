@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CDAlertView
 
 class MoviesGenresViewController: UIViewController {
   
@@ -18,7 +18,7 @@ class MoviesGenresViewController: UIViewController {
   
   var genreDataArray: [GenreData] = []
   var posterStringArray: [String] = []
-  var posterImageArray: [UIImage] = []
+  //var posterImageArray: [UIImage] = []
   
   var genreID: NSNumber?
   
@@ -45,40 +45,29 @@ class MoviesGenresViewController: UIViewController {
           GenrePosters.updateGenrePoster(genreID: movieGenreID, urlExtension: "movies", completionHandler: {posters in
             
             guard let posters = posters else {
-              print("There was an error retrieving poster data")
+          CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .notification).show()
               return
             }
             
             //Must iterate through multiple arrays with many containing the same poster strings
             for poster in posters {
-              
-              
+            
               if let newPoster = poster {
-                
+              
                 //Check to see if array already has the current poster string, if it does continue, if not append to array
                 if self.posterStringArray.contains(newPoster){
                   continue
                 } else {
                   self.posterStringArray.append(newPoster)
-                  
-                  //Use the poster string to download the corresponding poster
-                  self.networkManager.downloadImage(imageExtension: "\(newPoster)",
-                    { (imageData) //imageData = Image data downloaded from web
-                      in
-                      if let image = UIImage(data: imageData as Data){
-                        self.posterImageArray.append(image)
-                        
-                        DispatchQueue.main.async {
-                          self.genresTableView.reloadData()
-                        }
-                      }
-                  })
                   break// Use to exit out of array after appending the corresponding poster string
                 }
               } else {
                 print("There was a problem retrieving poster images: \(poster)")
                 continue// if the poster returned is nil, continue to iterate through arrays until there is one that is not nil
               }
+            }
+            DispatchQueue.main.async {
+              self.genresTableView.reloadData()
             }
           })
         }
@@ -92,14 +81,13 @@ class MoviesGenresViewController: UIViewController {
 extension MoviesGenresViewController:  UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return posterImageArray.count
+    return posterStringArray.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = genresTableView.dequeueReusableCell(withIdentifier: "GenresTableViewCell") as! GenresTableViewCell
     cell.genreCatagoryLabel.text = genreDataArray[indexPath.row].name
-    cell.mainImageView.image = posterImageArray[indexPath.row]
-    
+    cell.mainImageView.sd_setImage(with: URL(string: "\(baseImageURL)\(posterStringArray[indexPath.row])"))
     return cell
   }
 
