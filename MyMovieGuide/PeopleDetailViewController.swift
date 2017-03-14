@@ -9,13 +9,20 @@
 import Foundation
 import UIKit
 import ParticlesLoadingView
-
+import CDAlertView
 
 enum DownloadPic {
   
   case profile
   case personal
   case knownFor
+  
+}
+
+enum PeopleSegue {
+  
+  case knownFor
+  case extraImage
   
 }
 
@@ -29,6 +36,8 @@ class PeopleDetailViewController : UIViewController {
   
   var id: NSNumber?
   var knownForID: NSNumber?
+  var currentImage: UIImage?
+  var currentSegue: PeopleSegue?
   
   var profileImage: UIImage?
   var profileData: PeopleData?
@@ -70,7 +79,7 @@ class PeopleDetailViewController : UIViewController {
   let knownForCellIdentifier = "knownForCell"
   
   let peopleToDetailSegue = "peopleToMovieDetailSegue"
-  
+  let peopleDetailToImageSegue = "peopleDetailToImageSegue"
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -83,7 +92,6 @@ class PeopleDetailViewController : UIViewController {
     if let personID = self.id {
       
       PeopleData.updateAllData(urlExtension: "\(personID)", completionHandler: { results in
-        
         
         guard let results = results else {
           print("There was an error retrieving people data")
@@ -223,15 +231,26 @@ extension PeopleDetailViewController : UITableViewDataSource {
         cell.actorNameLabel.text = name
       }
       
-      if let birthday = profileData?.birthDay{
-        cell.birthdayLabel.text = birthday
+      if profileData?.birthDay != nil {
+        if let birthday = profileData?.birthDay{
+          cell.birthdayLabel.text = birthday
+        }
+      }else {
+        cell.birthdayLabel.text = "N/A"
       }
       
-      if let birthplace = profileData?.birthPlace {
-        cell.birthPlaceLabel.text = birthplace
+      if profileData?.birthPlace != nil {
+        if let birthplace = profileData?.birthPlace {
+          cell.birthPlaceLabel.text = birthplace
+        }
+      } else {
+        cell.birthPlaceLabel.text = "N/A"
       }
       
-      cell.actorProfileImage.image = profileImage
+      if let profile = profileData?.profile {
+        cell.actorProfileImage.sd_setImage(with: URL(string: "\(baseImageURL)\(profile)"))
+      }
+      
       cell.actorProfileImage.layer.cornerRadius =
         cell.actorProfileImage.frame.size.height/2
       cell.actorProfileImage.layer.masksToBounds = true
@@ -245,8 +264,12 @@ extension PeopleDetailViewController : UITableViewDataSource {
     case 1:
       let cell = peopleDetailTableView.dequeueReusableCell(withIdentifier: bioCellIdentifier) as! BioCell
       
-      if let bio = profileData?.bio {
-        cell.bioText.text = bio
+      if profileData?.bio != nil {
+        if let bio = profileData?.bio {
+          cell.bioText.text = bio
+        }
+      } else {
+        cell.bioText.text = "N/A"
       }
       
       self.peopleDetailTableView.rowHeight = 200
@@ -256,6 +279,7 @@ extension PeopleDetailViewController : UITableViewDataSource {
     case 2:
       let cell = peopleDetailTableView.dequeueReusableCell(withIdentifier: imagesCellIdentifier) as! ImagesPeopleCell
       
+      cell.imageDelegate = self
       cell.extraPhotosArray = self.personalImagesArray
       cell.profileImagesArray = self.profileImagesArray
       
@@ -323,23 +347,36 @@ extension PeopleDetailViewController {
 extension PeopleDetailViewController{
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    let destinationVC = segue.destination as! MoviesDetailViewController
     
-    destinationVC.iD = self.knownForID
+    if self.currentSegue == PeopleSegue.knownFor {
+      
+      let destinationVC = segue.destination as! MoviesDetailViewController
+      
+      destinationVC.iD = self.knownForID
+    } else if self.currentSegue == PeopleSegue.extraImage {
+      
+      let destinationVC = segue.destination as! PeopleDetailImageViewController
+      
+      destinationVC.personImage = currentImage
+    }
   }
-  
 }
 
-
 //Protocol
-extension PeopleDetailViewController: handleKnownForImage {
+extension PeopleDetailViewController: handleKnownForImage, handleExtraCastImage {
   
-  func knownForImageTapped(movieID: NSNumber) {
+  func knownForImageTapped(movieID: NSNumber, segue: PeopleSegue) {
     self.knownForID = movieID
+    self.currentSegue = PeopleSegue.knownFor
     performSegue(withIdentifier: peopleToDetailSegue, sender: self)
   }
   
-  
+  func extraCastImageTapped(image: UIImage, segue: PeopleSegue) {
+    self.currentImage = image
+    self.currentSegue = PeopleSegue.extraImage
+    performSegue(withIdentifier: peopleDetailToImageSegue, sender: self)
+    
+  }
 }
 
 

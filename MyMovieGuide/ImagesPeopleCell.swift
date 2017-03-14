@@ -9,11 +9,18 @@
 import Foundation
 import UIKit
 
+protocol handleExtraCastImage {
+  func extraCastImageTapped(image: UIImage, segue: PeopleSegue)
+}
+
 
 class ImagesPeopleCell : UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
   
+  var imageDelegate : handleExtraCastImage?
   var extraPhotosArray: [UIImage] = []
   var profileImagesArray: [ImageData] = []
+  var currentImage: UIImage?
+  
   
   let extraPeopleImageReuseIdentifier = "imagesCollectCell"
   
@@ -37,4 +44,13 @@ class ImagesPeopleCell : UITableViewCell, UICollectionViewDelegate, UICollection
     }
     return cell
   }
-}
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    self.currentImage = extraPhotosArray[indexPath.row]
+    
+    guard let currentImage = currentImage else {return}
+    imageDelegate?.extraCastImageTapped(image: currentImage, segue: PeopleSegue.extraImage)
+  }
+  
+  }
+

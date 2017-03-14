@@ -68,8 +68,8 @@ extension CastCell: UICollectionViewDataSource {
 extension CastCell: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    self.castID = castPhotosArray[indexPath.row].id
     
+    self.castID = castPhotosArray[indexPath.row].id
     guard let castID = castID else { return }
     imageDelegate?.imageTapped(ID: castID, segueType: segueController.cast)
     

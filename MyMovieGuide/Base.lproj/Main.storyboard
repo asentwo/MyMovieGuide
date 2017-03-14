@@ -620,11 +620,44 @@
                     <connections>
                         <outlet property="peopleDetailTableView" destination="zTC-NO-o2q" id="cTa-LW-1oc"/>
                         <segue destination="hyN-Ug-rmu" kind="show" identifier="peopleToMovieDetailSegue" id="H1L-4T-sKG"/>
+                        <segue destination="he1-4O-AWG" kind="show" identifier="peopleDetailToImageSegue" id="TRN-h1-69V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GiP-wZ-NPf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5332" y="-901"/>
+        </scene>
+        <!--People Detail Image View Controller-->
+        <scene sceneID="DjT-MH-OAq">
+            <objects>
+                <viewController id="he1-4O-AWG" customClass="PeopleDetailImageViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3gd-yt-nb5"/>
+                        <viewControllerLayoutGuide type="bottom" id="W5S-Uy-yOx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Yri-dY-xOZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zrE-h8-7NQ">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="W5S-Uy-yOx" firstAttribute="top" secondItem="zrE-h8-7NQ" secondAttribute="bottom" id="Wgh-4P-4K7"/>
+                            <constraint firstItem="zrE-h8-7NQ" firstAttribute="leading" secondItem="Yri-dY-xOZ" secondAttribute="leading" id="aPH-Y2-0Cb"/>
+                            <constraint firstAttribute="trailing" secondItem="zrE-h8-7NQ" secondAttribute="trailing" id="cQJ-SR-kl4"/>
+                            <constraint firstItem="zrE-h8-7NQ" firstAttribute="top" secondItem="3gd-yt-nb5" secondAttribute="bottom" id="iOT-xP-hnl"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="peopleDetailImage" destination="zrE-h8-7NQ" id="vCy-qn-xfn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lEg-kf-v3E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6229.6000000000004" y="-901.79910044977521"/>
         </scene>
         <!--Movies Detail View Controller-->
         <scene sceneID="JBG-Wn-Bzh">
@@ -1571,11 +1604,11 @@
                         <viewControllerLayoutGuide type="bottom" id="StL-KK-dTn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iKf-Ig-wlf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jxj-zX-VVg">
-                                <rect key="frame" x="0.0" y="64" width="375" height="936"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1637,11 +1670,11 @@
                         <viewControllerLayoutGuide type="bottom" id="u3J-cN-8zQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dnu-fm-Hx9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zet-3R-qw9">
-                                <rect key="frame" x="16" y="64" width="343" height="936"/>
+                                <rect key="frame" x="16" y="20" width="343" height="647"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
@@ -1666,6 +1699,6 @@
         <image name="   &gt;         " width="11" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iL8-G6-C1K"/>
+        <segue reference="H1L-4T-sKG"/>
     </inferredMetricsTieBreakers>
 </document>

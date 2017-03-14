@@ -11,7 +11,7 @@ import UIKit
 
 
 protocol handleKnownForImage {
-  func knownForImageTapped(movieID: NSNumber)
+  func knownForImageTapped(movieID: NSNumber, segue: PeopleSegue)
 }
 
 class KnownForCell : UITableViewCell {
@@ -60,26 +60,12 @@ extension KnownForCell: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
-    print("Known For Cell Has Been Pressed")
     
     self.movieID = knownForExtendedArray[indexPath.row].id
     
     
     guard let movieID = movieID else {return}
-    imageDelegete?.knownForImageTapped(movieID: movieID)
+    imageDelegete?.knownForImageTapped(movieID: movieID, segue: PeopleSegue.knownFor)
   }
 }
 
-////MARK: Segue
-//extension KnownForCell {
-//  
-//  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//    let destinationVC = segue.destination as! MoviesMasterDetailViewController
-//    
-//    destinationVC.iD = self.movieID
-//    
-//  }
-//  
-
-//  
-//}
