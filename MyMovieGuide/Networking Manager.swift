@@ -28,6 +28,8 @@ class NetworkManager {
   //Movie Detail: https://api.themoviedb.org/3/movie/14564?api_key=edd0a1862823ffe4afff6c230daf2c92&region=US&append_to_response=videos,images
   //Genre: https://api.themoviedb.org/3/genre/28/movies?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&include_adult=false&sort_by=created_at.asc
   //Discover: https://api.themoviedb.org/3/discover/movie?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=20&with_genres=28
+  //People: https://api.themoviedb.org/3/person/popular?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&page=1
+  
   
   //Network session creater
   typealias JSONData = ((Data) -> Void)
@@ -65,7 +67,7 @@ class NetworkManager {
     
     let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=20&with_genres=\(genreID)")! )
     
- //    print(request)
+   //  print(request)
     
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       

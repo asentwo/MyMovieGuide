@@ -121,6 +121,9 @@ class PeopleDetailViewController : UIViewController {
               
               self.updateImage(ImageType: DownloadPic.personal, ImageString: profile.filePath)
               
+              DispatchQueue.main.async {
+                self.peopleDetailTableView.reloadData()
+              }
             }
           }
         }
@@ -131,13 +134,13 @@ class PeopleDetailViewController : UIViewController {
           }
         }
         
-        if let actorProfileImage = self.profileData?.profile {
-          
-          self.updateImage(ImageType: DownloadPic.profile, ImageString: actorProfileImage)
-          
-        } else {
-          print("actor pic doesn't exist")
-        }
+//        if let actorProfileImage = self.profileData?.profile {
+//          
+//          self.updateImage(ImageType: DownloadPic.profile, ImageString: actorProfileImage)
+//          
+//        } else {
+//          print("actor pic doesn't exist")
+//        }
         
         CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
           
@@ -158,6 +161,11 @@ class PeopleDetailViewController : UIViewController {
                 
                 if let poster = knownForImage.poster {
                   self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster)
+                  
+                  DispatchQueue.main.async {
+                    self.peopleDetailTableView.reloadData()
+                  }
+
                 }
               }
             }
@@ -180,9 +188,9 @@ class PeopleDetailViewController : UIViewController {
         case DownloadPic.knownFor: if let image = UIImage(data: imageData as Data){self.knownForArray.append(image)}
           break
         }
-        DispatchQueue.main.async {
-          self.peopleDetailTableView.reloadData()
-        }
+//        DispatchQueue.main.async {
+//          self.peopleDetailTableView.reloadData()
+//        }
       }
     })
   }

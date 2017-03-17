@@ -89,6 +89,9 @@ class MoviesMasterViewController: UIViewController {
   //Setup segmentedController catagories
   private func setupSegmentedController() {
     
+    let newFont = NSDictionary(object: UIFont(name: "Avenir Next", size: 16.0)!, forKey: NSFontAttributeName as NSCopying)
+    segmentedController.setTitleTextAttributes(newFont as [NSObject : AnyObject] , for: .normal)
+    
     segmentedController.removeAllSegments()
     segmentedController.insertSegment(withTitle: "Genres", at: 0, animated: false)
     segmentedController.insertSegment(withTitle: "In Theatres", at: 1, animated: false)
