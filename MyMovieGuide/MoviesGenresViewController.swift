@@ -28,6 +28,7 @@ class MoviesGenresViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    
     GenreData.updateAllData(urlExtension:"list", completionHandler: { results in
       
       guard let results = results else {

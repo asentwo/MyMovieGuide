@@ -17,7 +17,7 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
   
   //MARK: Properties
   @IBOutlet var genreCollectionView: UICollectionView!
-  
+
   let networkManager = NetworkManager.sharedManager
   
   var genreDataArray: [MovieData] = []
@@ -53,6 +53,8 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
   //MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+      self.navigationController?.navigationBar.tintColor = UIColor.white
     
     label.center = CGPoint(x: 160, y: 285)
     label.textAlignment = .center
@@ -142,11 +144,11 @@ extension MoviesGenresCollectionViewController: UICollectionViewDelegateFlowLayo
     let paddingSpaceWidth = sectionInsets.left * (itemsPerRow + 1)
     let paddingSpaceHeight = sectionInsets.top * (itemsPerRow + 2)
     let availableWidth = view.frame.width - paddingSpaceWidth
-    let availableHeight = view.frame.height - paddingSpaceHeight
+    let availableHeight = view.frame.height - paddingSpaceHeight 
     let widthPerItem = availableWidth / itemsPerRow
     let heightPerItem = availableHeight / itemsPerRow
     
-    return CGSize(width: widthPerItem, height: heightPerItem)
+    return CGSize(width: widthPerItem, height: heightPerItem + 40)
   }
   
   //Returns space in between cells

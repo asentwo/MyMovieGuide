@@ -111,7 +111,7 @@ extension UpcomingMoviesViewController: UICollectionViewDelegateFlowLayout {
     let widthPerItem = availableWidth / itemsPerRow
     let heightPerItem = availableHeight / itemsPerRow
     
-    return CGSize(width: widthPerItem, height: heightPerItem)
+    return CGSize(width: widthPerItem, height: heightPerItem + 40)
   }
   
   //Returns space in between cells

@@ -66,7 +66,7 @@ class MoviesDetailViewController: UIViewController {
   lazy var loadingView: ParticlesLoadingView = {
     let x = self.view.frame.size.width/2
     let y = self.view.frame.size.height/2
-    let view = ParticlesLoadingView(frame: CGRect(x: x - 50, y: y - 20, width: 100, height: 100))
+    let view = ParticlesLoadingView(frame: CGRect(x: x - 50, y: y - 100, width: 100, height: 100))
     view.particleEffect = .laser
     view.duration = 1.5
     view.particlesSize = 15.0
@@ -78,7 +78,7 @@ class MoviesDetailViewController: UIViewController {
   }()
   
   let label = UILabel(frame: CGRect(x: 0 + 20, y: 0, width: 200, height: 21))
-
+  
   //Segues
   let detailToImageSegue = "detailToImageSegue"
   let detailToPeopleSegue = "detailToPeopleSegue"
@@ -168,7 +168,6 @@ class MoviesDetailViewController: UIViewController {
                     self.loadingView.isHidden = true
                     self.loadingView.stopAnimating()
                     self.imagesTableView.reloadData()
-                    
                   }
                 }
               } else {
@@ -232,9 +231,10 @@ class MoviesDetailViewController: UIViewController {
   }
   
   func startLoadingScreen () {
-    label.center = CGPoint(x: 190, y: 365)
+    label.center = CGPoint(x: 187, y: 285)
     label.textAlignment = .center
     label.text = "Loading"
+    label.font = UIFont(name: "Avenir Next Medium", size: 17)
     label.textColor = UIColor.white
     self.view.addSubview(label)
     view.addSubview(loadingView)
@@ -261,7 +261,7 @@ class MoviesDetailViewController: UIViewController {
     
     if let videoInfo = self.videoInfo {
       if videoInfo.videoResults.count != 0 {
-      self.videoTapped(videoInfo: videoInfo, segueType: segueController.video)
+        self.videoTapped(videoInfo: videoInfo, segueType: segueController.video)
       } else {
         CDAlertView(title: "Sorry", message: "No videos available!", type: .notification).show()
       }

@@ -57,7 +57,7 @@ class PeopleDetailViewController : UIViewController {
   lazy var loadingView: ParticlesLoadingView = {
     let x = self.view.frame.size.width/2
     let y = self.view.frame.size.height/2
-    let view = ParticlesLoadingView(frame: CGRect(x: x - 50, y: y - 20, width: 100, height: 100))
+    let view = ParticlesLoadingView(frame: CGRect(x: x - 50, y: y - 100, width: 100, height: 100))
     view.particleEffect = .laser
     view.duration = 1.5
     view.particlesSize = 15.0
@@ -83,6 +83,8 @@ class PeopleDetailViewController : UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    self.navigationController?.navigationBar.tintColor = UIColor.white
     
     //keeps top of tableview from going under nav bar
     self.peopleDetailTableView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
@@ -134,14 +136,6 @@ class PeopleDetailViewController : UIViewController {
           }
         }
         
-//        if let actorProfileImage = self.profileData?.profile {
-//          
-//          self.updateImage(ImageType: DownloadPic.profile, ImageString: actorProfileImage)
-//          
-//        } else {
-//          print("actor pic doesn't exist")
-//        }
-        
         CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
           
           guard let results = results else {
@@ -165,7 +159,7 @@ class PeopleDetailViewController : UIViewController {
                   DispatchQueue.main.async {
                     self.peopleDetailTableView.reloadData()
                   }
-
+                  
                 }
               }
             }
@@ -188,17 +182,15 @@ class PeopleDetailViewController : UIViewController {
         case DownloadPic.knownFor: if let image = UIImage(data: imageData as Data){self.knownForArray.append(image)}
           break
         }
-//        DispatchQueue.main.async {
-//          self.peopleDetailTableView.reloadData()
-//        }
       }
     })
   }
   
   func startLoadingScreen () {
-    label.center = CGPoint(x: 190, y: 365)
+    label.center = CGPoint(x: 187, y: 285)
     label.textAlignment = .center
     label.text = "Loading"
+    label.font = UIFont(name: "Avenir Next Medium", size: 17)
     label.textColor = UIColor.white
     self.view.addSubview(label)
     view.addSubview(loadingView)
