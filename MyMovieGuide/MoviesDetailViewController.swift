@@ -156,7 +156,9 @@ class MoviesDetailViewController: UIViewController {
                     }
                     
                     if let genre = self.movieDetailsData?.genre {
+                      if genre.count != 0 {
                       self.genre.text = genre[0].name
+                      }
                     }
                     
                     self.lineImage.image = #imageLiteral(resourceName: "Line")
@@ -329,7 +331,7 @@ extension MoviesDetailViewController {
     
     if self.segueType == segueController.cast {
       
-      let peopleVC = segue.destination as! PeopleDetailViewController
+      let peopleVC = segue.destination as! PeopleDetailedViewController
       peopleVC.id = self.castID
     }
     else if self.segueType == segueController.image {

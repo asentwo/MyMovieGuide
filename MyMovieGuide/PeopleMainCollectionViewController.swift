@@ -120,7 +120,7 @@ extension  PeopleMainCollectionViewController: UICollectionViewDelegateFlowLayou
 extension PeopleMainCollectionViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    let peopleDetailVC = segue.destination as! PeopleDetailViewController
+    let peopleDetailVC = segue.destination as! PeopleDetailedViewController
     peopleDetailVC.id = self.peopleID
   }
 }
