@@ -91,18 +91,9 @@ class PeopleDetailedViewController : UIViewController {
         
         if self.profileData?.images != nil {
           
-          //Hide loading screen
-//          DispatchQueue.main.async {
-//            self.label.isHidden = true
-//            self.loadingView.isHidden = true
-//            self.loadingView.stopAnimating()
-//            self.peopleImagesTableView.reloadData()
-//          }
-          
           if let profilePic = self.profileData?.profile {
             self.profilePic.sd_setImage(with: URL(string: "\(baseImageURL)\(profilePic)"),placeholderImage: UIImage(named: "placeholder.png"))
           }
-          
           
           if let birthday = self.profileData?.birthDay {
             
@@ -134,7 +125,6 @@ class PeopleDetailedViewController : UIViewController {
             }
           }
           
-          
           CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
             
             guard let results = results else {
@@ -147,19 +137,15 @@ class PeopleDetailedViewController : UIViewController {
             if let knownFor = self.knownForData?.castExtended {
               
               self.knownForExtendedArray = knownFor
-            
-              if let bg = knownFor[0].poster {
-               self.backgroundPic.sd_setImage(with: URL(string: "\(baseImageURL)\(bg)"))
               
-                
-                
+              if let bg = knownFor[0].poster {
+                self.backgroundPic.sd_setImage(with: URL(string: "\(baseImageURL)\(bg)"))
               }
               
               for knownForImage in knownFor {
                 
                 if let poster = knownForImage.poster {
                   self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster, completion: {_ in
-                    
                     
                     DispatchQueue.main.async {
                       
@@ -168,20 +154,14 @@ class PeopleDetailedViewController : UIViewController {
                       self.loadingView.stopAnimating()
                       self.peopleImagesTableView.reloadData()
                     }
-                    
                   })
-                  
-                  }
+                }
               }
             }
           })
         }
       }
       )
-
- 
-   
-
     }
   }
   
@@ -213,18 +193,7 @@ class PeopleDetailedViewController : UIViewController {
     view.addSubview(loadingView)
     loadingView.startAnimating()
   }
-  
-  private func convertToGrayScale(image: CGImage) -> CGImage {
-    let height = image.height
-    let width = image.width
-    let colorSpace = CGColorSpaceCreateDeviceGray();
-    let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue)
-    let context = CGContext.init(data: nil, width: Int(width), height: Int(height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)!
-    let rect = CGRect(x: 0, y: 0, width: width, height: height)
-    context.draw(image, in: rect)
-    return context.makeImage()!
-  }
-  
+
 }
 
 extension PeopleDetailedViewController : UITableViewDataSource {
