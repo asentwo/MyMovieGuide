@@ -11,25 +11,18 @@ import Gloss
 
 
 
-//public struct knownForArray : Decodable {
-//  
-//  public let poster : String?
-//  public let overview : String?
-//  public let releaseDate : String?
-//  public let title : String?
-//  public let id : NSNumber?
-//  public let backdrop : String?
-//  
-//  public init?(json: JSON) {
-//    
-//    self.poster  = "poster_path" <~~ json
-//    self.overview  = "overview" <~~ json
-//    self.releaseDate = "release_date" <~~ json
-//    self.title = "title" <~~ json
-//    self.id = "id" <~~ json
-//    self.backdrop = "backdrop_path" <~~ json
-//  }
-//}
+//Used for search results
+public struct ResultsSearchPeopleData: Decodable {
+  
+  public let results: [PeopleData]?
+  
+  public init?(json: JSON) {
+    
+    results = "results" <~~ json
+  }
+}
+
+
 
 //MARK: Image Data
 public struct PeopleImageResults : Decodable {
@@ -75,7 +68,6 @@ public struct PeopleData: Decodable {
   
   public let profile : String?
   public let id : NSNumber?
- // public let knownFor : [knownForArray]?
   public let name : String?
   public let birthPlace : String?
   public let birthDay : String?
@@ -86,7 +78,6 @@ public struct PeopleData: Decodable {
     
     self.profile = "profile_path" <~~ json
     self.id = "id" <~~ json
-   // self.knownFor = "known_for" <~~ json
     self.name = "name" <~~ json
     self.birthPlace = "place_of_birth" <~~ json
     self.birthDay = "birthday" <~~ json
@@ -113,6 +104,44 @@ public struct PeopleData: Decodable {
         completionHandler(peopleResults)
       }
     })
+  }
+  
+  static func updateSearchData(name: String,completionHandler:@escaping (_ details: [PeopleData]?) -> Void){
+    
+    let nm = NetworkManager.sharedManager
+    
+    nm.getPeopleSearchData(name: name, completion: {
+      
+      
+      data in
+      
+      if let jsonDictionary = nm.parseJSONData(data)
+      {
+        guard let peopleResults = ResultsSearchPeopleData(json: jsonDictionary)
+          
+          else {
+            print("Error initializing object")
+            return
+        }
+        
+        
+        guard let peopleData = peopleResults.results
+          else {
+            print("No such item")
+            return
+        }
+        
+        
+
+      //   print(peopleData)
+        
+        completionHandler(peopleData)
+      }
+      
+      
+    })
+    
+    
   }
   
 }

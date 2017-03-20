@@ -29,6 +29,8 @@ class NetworkManager {
   //Genre: https://api.themoviedb.org/3/genre/28/movies?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&include_adult=false&sort_by=created_at.asc
   //Discover: https://api.themoviedb.org/3/discover/movie?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=20&with_genres=28
   //People: https://api.themoviedb.org/3/person/popular?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&page=1
+  //SearchMovie:https://api.themoviedb.org/3/search/multi?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&query=spiderman&page=1&include_adult=false
+  //SearchPeople: https://api.themoviedb.org/3/search/person?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&query=johnny%20depp&page=1&include_adult=false
   
   
   //Network session creater
@@ -89,6 +91,78 @@ class NetworkManager {
     dataTask.resume()
   }
 
+  
+  //Search Requests
+  func getPeopleSearchData (name: String, completion: @escaping JSONData) {
+    
+    configuration.timeoutIntervalForRequest = 5
+    configuration.timeoutIntervalForResource = 5
+    
+    if let url = URL(string:"\(baseURL)search/person?api_key=\(apiKey)&language=en-US&query=\(name)&page=1&include_adult=false") {
+    
+   let request = URLRequest(url: url )
+      
+         print(request)
+      
+      let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+        
+        if error == nil {
+          if let httpResponse = response as? HTTPURLResponse {
+            switch (httpResponse.statusCode) {
+            case 200:
+              if let data = data {
+                completion(data)
+              }
+            default:
+              print(httpResponse.statusCode)
+            }
+          }
+        } else {
+          print("Error: \(error?.localizedDescription)")
+        }
+      })
+      dataTask.resume()
+    } else {
+    
+      print("There was an error")
+    }
+  }
+  
+  
+  func getMovieSearchData (name: String, completion: @escaping JSONData) {
+    
+    configuration.timeoutIntervalForRequest = 5
+    configuration.timeoutIntervalForResource = 5
+    
+    if let url = URL(string:"\(baseURL)search/multi?api_key=\(apiKey)&language=en-US&query=\(name)&page=1&include_adult=false") {
+      
+      let request = URLRequest(url: url )
+      
+      //   print(request)
+      
+      let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+        
+        if error == nil {
+          if let httpResponse = response as? HTTPURLResponse {
+            switch (httpResponse.statusCode) {
+            case 200:
+              if let data = data {
+                completion(data)
+              }
+            default:
+              print(httpResponse.statusCode)
+            }
+          }
+        } else {
+          print("Error: \(error?.localizedDescription)")
+        }
+      })
+      dataTask.resume()
+    } else {
+      
+      print("There was an error")
+    }
+  }
   
   
   //JSON Parser

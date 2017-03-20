@@ -75,4 +75,38 @@ public struct MovieData: Decodable, Equatable {
       }
     })
   }
+  
+  static func updateSearchData(name: String,completionHandler:@escaping (_ details: [MovieData]?) -> Void){
+    
+    let nm = NetworkManager.sharedManager
+    
+    nm.getMovieSearchData(name: name, completion: {
+    
+      
+      data in
+      
+      if let jsonDictionary = nm.parseJSONData(data)
+      {
+        guard let movieResults = ResultsMovieData(json: jsonDictionary)
+          
+          else {
+            print("Error initializing object")
+            return
+        }
+        
+        guard let movieData = movieResults.results
+          else {
+            print("No such item")
+            return
+        }
+         //  print(movieData)
+        
+        completionHandler(movieData)
+      }
+
+    
+    })
+    
+    
+  }
 }

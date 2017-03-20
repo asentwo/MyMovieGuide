@@ -111,6 +111,8 @@ class MoviesDetailViewController: UIViewController {
           CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
         }
         
+        
+        
         self.homepage = self.movieDetailsData?.homepage
         self.videoInfo = self.movieDetailsData?.videos
         
