@@ -130,18 +130,12 @@ public struct PeopleData: Decodable {
             print("No such item")
             return
         }
-        
-        
 
-      //   print(peopleData)
+    //   print(peopleData)
         
         completionHandler(peopleData)
       }
-      
-      
     })
-    
-    
   }
   
 }

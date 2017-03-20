@@ -9,18 +9,42 @@
 import UIKit
 import SDWebImage
 import CDAlertView
+import ParticlesLoadingView
 
 class PeopleMainCollectionViewController : UIViewController {
   
+  
+  @IBOutlet weak var peopleSearchTextFieldInput: UITextField!
   @IBOutlet weak var peopleCollectionView: UICollectionView!
+  @IBOutlet weak var tintLoadingView: UIImageView!
   
   let networkManager = NetworkManager.sharedManager
   
+  var peopleData: [PeopleData]?
   var peopleArray: [PeopleMainData] = []
+  var peopleIDArray: [NSNumber] = []
   var peopleID: NSNumber?
   
   let peopleToDetailSegue = "peopleToDetailSegue"
   let peopleMainReuseIdentifier = "peopleMainReuseIdentifier"
+  
+  //Particle loading screen
+  lazy var loadingView: ParticlesLoadingView = {
+    let x = self.view.frame.size.width/2
+    let y = self.view.frame.size.height/2
+    let view = ParticlesLoadingView(frame: CGRect(x: x - 50, y: y - 100, width: 100, height: 100))
+    view.particleEffect = .laser
+    view.duration = 1.5
+    view.particlesSize = 15.0
+    view.clockwiseRotation = true
+    view.layer.borderColor = UIColor.lightGray.cgColor
+    view.layer.borderWidth = 1.0
+    view.layer.cornerRadius = 15.0
+    return view
+  }()
+  
+  let label = UILabel(frame: CGRect(x: 0 + 20, y: 0, width: 200, height: 21))
+  
   
   //Layout
   let itemsPerRow: CGFloat = 2
@@ -28,6 +52,10 @@ class PeopleMainCollectionViewController : UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    self.tintLoadingView.isHidden = true
+    
+    self.startLoadingScreen()
     
     PeopleMainData.updateAllData(urlExtension: "popular", completionHandler: {results in
       
@@ -38,9 +66,82 @@ class PeopleMainCollectionViewController : UIViewController {
       self.peopleArray = results
       
       DispatchQueue.main.async {
+        self.hideLoadingScreen()
         self.peopleCollectionView.reloadData()
       }
     })
+  }
+  
+  func startLoadingScreen () {
+    label.center = CGPoint(x: 187, y: 285)
+    label.textAlignment = .center
+    label.text = "Loading"
+    label.font = UIFont(name: "Avenir Next Medium", size: 17)
+    label.textColor = UIColor.white
+    self.view.addSubview(label)
+    view.addSubview(loadingView)
+    loadingView.startAnimating()
+  }
+  
+  func hideLoadingScreen() {
+    self.label.isHidden = true
+    self.loadingView.isHidden = true
+    self.tintLoadingView.isHidden = true
+    self.loadingView.stopAnimating()
+  }
+  
+  @IBAction func searchButtonTapped(_ sender: Any) {
+    
+    DispatchQueue.main.async {
+      
+      self.loadingView.isHidden = false
+      self.label.isHidden = false
+      self.loadingView.startAnimating()
+      self.tintLoadingView.isHidden = false
+      
+      PeopleData.updateSearchData(name: (self.peopleSearchTextFieldInput.text?.replacingOccurrences(of: " ", with: "+").lowercased())!, completionHandler: {results in
+        
+        guard let results = results else {
+          CDAlertView(title: "Sorry", message: "No results found", type: .notification).show()
+          
+          return
+        }
+        self.peopleData = results
+        
+        if let peopleInfoArray = self.peopleData {
+          
+          for people in peopleInfoArray {
+            
+            if let id = people.id {
+              
+              self.peopleIDArray.append(id)
+            }
+          }
+          if self.peopleIDArray.count != 0 {
+            
+            self.peopleID = self.peopleIDArray.first
+            DispatchQueue.main.async {
+              self.hideLoadingScreen()
+              self.peopleSearchTextFieldInput.text = ""
+              self.performSegue(withIdentifier: self.peopleToDetailSegue, sender: self)
+            }
+            
+          } else {
+            
+            DispatchQueue.main.async {
+              self.hideLoadingScreen()
+              CDAlertView(title: "Sorry", message: "No results found", type: .notification).show()
+            }
+            
+          }
+        }else {
+          DispatchQueue.main.async {
+            self.hideLoadingScreen()
+            CDAlertView(title: "Sorry", message: "No results found", type: .notification).show()
+          }
+        }
+      })
+    }
   }
 }
 
@@ -121,6 +222,7 @@ extension PeopleMainCollectionViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let peopleDetailVC = segue.destination as! PeopleDetailedViewController
+    print(self.peopleID)
     peopleDetailVC.id = self.peopleID
   }
 }

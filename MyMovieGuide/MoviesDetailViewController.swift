@@ -275,7 +275,7 @@ class MoviesDetailViewController: UIViewController {
   }
 }
 
-
+//Mark: TableView
 extension MoviesDetailViewController: UITableViewDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {

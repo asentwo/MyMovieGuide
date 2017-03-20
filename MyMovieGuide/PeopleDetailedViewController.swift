@@ -30,10 +30,13 @@ class PeopleDetailedViewController : UIViewController {
   
   @IBOutlet weak var peopleImagesTableView: UITableView!
   @IBOutlet weak var profilePic: UIImageView!
+  @IBOutlet weak var birthdayCatLabel: UILabel!
   @IBOutlet weak var birthdayLabel: UILabel!
+  @IBOutlet weak var birthplaceCatLabel: UILabel!
   @IBOutlet weak var birthplaceLabel: UILabel!
   @IBOutlet weak var bioLabel: UILabel!
   @IBOutlet weak var backgroundPic: UIImageView!
+  @IBOutlet weak var backgroundTintView: UIImageView!
   
   let networkManager = NetworkManager.sharedManager
   
@@ -74,6 +77,7 @@ class PeopleDetailedViewController : UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.hideAllLabels()
     self.navigationController?.navigationBar.tintColor = UIColor.white
     startLoadingScreen()
     roundImageViewCorners(imageView:profilePic)
@@ -125,40 +129,44 @@ class PeopleDetailedViewController : UIViewController {
             }
           }
           
-          CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
+          DispatchQueue.main.async {
             
-            guard let results = results else {
-              print("There was an error retrieving cast extended data")
-              return
-            }
-            
-            self.knownForData = results
-            
-            if let knownFor = self.knownForData?.castExtended {
+            CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
               
-              self.knownForExtendedArray = knownFor
-              
-              if let bg = knownFor[0].poster {
-                self.backgroundPic.sd_setImage(with: URL(string: "\(baseImageURL)\(bg)"))
+              guard let results = results else {
+                print("There was an error retrieving cast extended data")
+                return
               }
               
-              for knownForImage in knownFor {
+              self.knownForData = results
+              
+              if let knownFor = self.knownForData?.castExtended {
                 
-                if let poster = knownForImage.poster {
-                  self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster, completion: {_ in
-                    
+                self.knownForExtendedArray = knownFor
+                
+                for knownForImage in knownFor {
+                  
+                  if let bg = knownForImage.poster {
                     DispatchQueue.main.async {
-                      
-                      self.label.isHidden = true
-                      self.loadingView.isHidden = true
-                      self.loadingView.stopAnimating()
-                      self.peopleImagesTableView.reloadData()
+                      self.backgroundPic.sd_setImage(with: URL(string: "\(baseImageURL)\(bg)"))
                     }
-                  })
+                  }
+                  
+                  
+                  if let poster = knownForImage.poster {
+                    self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster, completion: {_ in
+                      
+                      DispatchQueue.main.async {
+                        self.hideLoadingScreen()
+                        self.showAllLabels()
+                        self.peopleImagesTableView.reloadData()
+                      }
+                    })
+                  }
                 }
               }
-            }
-          })
+            })
+          }
         }
       }
       )
@@ -193,7 +201,31 @@ class PeopleDetailedViewController : UIViewController {
     view.addSubview(loadingView)
     loadingView.startAnimating()
   }
-
+  
+  func hideLoadingScreen() {
+    self.label.isHidden = true
+    self.loadingView.isHidden = true
+    self.loadingView.stopAnimating()
+  }
+  
+  func hideAllLabels() {
+    self.peopleImagesTableView.isHidden = true
+    self.backgroundPic.isHidden = true
+    self.profilePic.isHidden = true
+    self.backgroundTintView.isHidden = true
+    self.birthdayCatLabel.isHidden = true
+    self.birthplaceCatLabel.isHidden = true
+  }
+  
+  func showAllLabels() {
+    self.peopleImagesTableView.isHidden = false
+    self.backgroundPic.isHidden = false
+    self.profilePic.isHidden = false
+    self.backgroundTintView.isHidden = false
+    self.birthdayCatLabel.isHidden = false
+    self.birthplaceCatLabel.isHidden = false
+  }
+  
 }
 
 extension PeopleDetailedViewController : UITableViewDataSource {

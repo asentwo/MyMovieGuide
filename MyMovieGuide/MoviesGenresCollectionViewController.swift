@@ -21,7 +21,6 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
   let networkManager = NetworkManager.sharedManager
   
   var genreDataArray: [MovieData] = []
-  //var genrePosterArray: [String?] = []
   var genreID: NSNumber?
   var movieID: NSNumber?
   
@@ -81,16 +80,6 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
           
           self.genreCollectionView.reloadData()
         }
-        
-//        for movie in self.genreDataArray {
-//          if movie.poster != nil {
-//            self.genrePosterArray.append(movie.poster!)
-//          } else {
-//            print("poster does not exist: \(movie.title)")
-//            continue
-//          }
-//      
-//        }
       })
     }
   }
