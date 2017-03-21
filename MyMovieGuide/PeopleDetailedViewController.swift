@@ -205,7 +205,6 @@ class PeopleDetailedViewController : UIViewController {
     self.birthdayCatLabel.isHidden = false
     self.birthplaceCatLabel.isHidden = false
   }
-  
 }
 
 extension PeopleDetailedViewController : UITableViewDataSource {

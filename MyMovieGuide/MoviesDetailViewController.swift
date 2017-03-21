@@ -192,7 +192,9 @@ class MoviesDetailViewController: UIViewController {
                   }
                   
                   if let genre = self.movieDetailsData?.genre {
+                    if  genre.count != 0 {
                     self.genre.text = genre[0].name
+                    }
                   }
                   
                   self.rating.text = "N/A"
@@ -245,6 +247,7 @@ class MoviesDetailViewController: UIViewController {
     loadingView.startAnimating()
   }
   
+
   
   @IBAction func homepageButtonPressed(_ sender: Any) {
     

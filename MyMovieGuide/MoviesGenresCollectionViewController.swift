@@ -12,12 +12,13 @@ import ParticlesLoadingView
 import CDAlertView
 
 
-class MoviesGenresCollectionViewController: UICollectionViewController {
+class MoviesGenresCollectionViewController: UIViewController {
   
   
   //MARK: Properties
+  @IBOutlet weak var searchMoviesBar: UITextField!
   @IBOutlet var genreCollectionView: UICollectionView!
-
+  
   let networkManager = NetworkManager.sharedManager
   
   var genreDataArray: [MovieData] = []
@@ -53,7 +54,7 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-      self.navigationController?.navigationBar.tintColor = UIColor.white
+    self.navigationController?.navigationBar.tintColor = UIColor.white
     
     label.center = CGPoint(x: 160, y: 285)
     label.textAlignment = .center
@@ -68,10 +69,11 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
       MovieData.updateAllData(type:"genre", urlExtension: "\(id)/movies", completionHandler: {results in
         
         guard let results = results else {
-   CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .notification).show()
+          CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .notification).show()
           return
         }
         self.genreDataArray = results
+        
         
         DispatchQueue.main.async {
           self.label.isHidden = true
@@ -83,27 +85,45 @@ class MoviesGenresCollectionViewController: UICollectionViewController {
       })
     }
   }
+  
+  @IBAction func searchButtonTapped(_ sender: Any) {
+    
+    MovieData.updateSearchData(name:(self.searchMoviesBar.text?.replacingOccurrences(of: " ", with: "+").lowercased())!, completionHandler: {results in
+      
+      guard let results = results else {
+        CDAlertView(title: "Sorry", message: "No results found", type: .notification).show()
+        
+        return
+      }
+      self.genreDataArray = results
+      
+      DispatchQueue.main.async {
+        self.genreCollectionView.reloadData()
+      }
+    })
+  }
 }
 
 
 //MARK: CollectionView Datasource
-extension MoviesGenresCollectionViewController {
+extension MoviesGenresCollectionViewController: UICollectionViewDataSource {
   
-  override func numberOfSections(in collectionView: UICollectionView) -> Int {
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
   }
   
-  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
     return genreDataArray.count
   }
   
   
-  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = genreCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! genreCollectionViewCell
     
-   
+    
     if let genrePoster = genreDataArray[indexPath.row].poster {
-        cell.genreImageView.sd_setImage(with: URL(string:"\(baseImageURL)\(genrePoster)"), placeholderImage: UIImage(named: "placeholder.png"))
+      cell.genreImageView.sd_setImage(with: URL(string:"\(baseImageURL)\(genrePoster)"), placeholderImage: UIImage(named: "placeholder.png"))
     } else {
       cell.genreImageView.image = UIImage(named: "placeholder.png")
     }
@@ -115,9 +135,9 @@ extension MoviesGenresCollectionViewController {
 
 //MARK: CollectionView Delegate
 
-extension MoviesGenresCollectionViewController {
+extension MoviesGenresCollectionViewController: UICollectionViewDelegate {
   
-  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     self.movieID = genreDataArray[indexPath.row].id
     performSegue(withIdentifier: segueIdentifier, sender: self)
   }
@@ -133,7 +153,7 @@ extension MoviesGenresCollectionViewController: UICollectionViewDelegateFlowLayo
     let paddingSpaceWidth = sectionInsets.left * (itemsPerRow + 1)
     let paddingSpaceHeight = sectionInsets.top * (itemsPerRow + 2)
     let availableWidth = view.frame.width - paddingSpaceWidth
-    let availableHeight = view.frame.height - paddingSpaceHeight 
+    let availableHeight = view.frame.height - paddingSpaceHeight
     let widthPerItem = availableWidth / itemsPerRow
     let heightPerItem = availableHeight / itemsPerRow
     
@@ -164,9 +184,7 @@ extension MoviesGenresCollectionViewController {
     let destinationVC = segue.destination as! MoviesDetailViewController
     
     destinationVC.iD = self.movieID
-    
   }
-  
 }
 
 
