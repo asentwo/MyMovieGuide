@@ -87,78 +87,60 @@ class PeopleDetailedViewController : UIViewController {
       PeopleData.updateAllData(urlExtension: "\(personID)", completionHandler: { results in
         
         guard let results = results else {
-          print("There was an error retrieving people data")
+          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
           return
         }
-        
-        self.profileData = results
+       self.profileData = results
         
         if self.profileData?.images != nil {
           
           if let profilePic = self.profileData?.profile {
             self.profilePic.sd_setImage(with: URL(string: "\(baseImageURL)\(profilePic)"),placeholderImage: UIImage(named: "placeholder.png"))
           }
-          
           if let birthday = self.profileData?.birthDay {
-            
             self.birthdayLabel.text = birthday
           }
-          
           if let birthplace = self.profileData?.birthPlace {
-            
             self.birthplaceLabel.text = birthplace
           }
-          
           if self.profileData?.bio != nil {
             if let bio = self.profileData?.bio {
-              
               self.bioLabel.text = bio
             }
           }
-          
           if let extraImages = self.profileData?.images{
-            
             self.extraImagesArray = extraImages.images
-            
             let extraImages = extraImages.images
-            
             for image in extraImages {
               
               self.updateImage(ImageType: DownloadPic.personal, ImageString: image.filePath, completion: {_ in
               })
             }
           }
-          
           DispatchQueue.main.async {
-            
             CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
-              
               guard let results = results else {
-                print("There was an error retrieving cast extended data")
+                CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
                 return
               }
-              
               self.knownForData = results
-              
               if let knownFor = self.knownForData?.castExtended {
-                
                 self.knownForExtendedArray = knownFor
-                
                 for knownForImage in knownFor {
-                  
-                  if let bg = knownForImage.poster {
-                    DispatchQueue.main.async {
-                      self.backgroundPic.sd_setImage(with: URL(string: "\(baseImageURL)\(bg)"))
-                    }
-                  }
-                  
-                  
+//                  if let bg = knownForImage.poster {
+//                      self.backgroundPic.sd_setImage(with: URL(string: "\(baseImageURL)\(bg)"))
+//                  }
                   if let poster = knownForImage.poster {
                     self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster, completion: {_ in
-                      
                       DispatchQueue.main.async {
+                        
+                        if let bg = self.knownForArray.first {
+                          self.backgroundPic.image = bg
+                        }
+                        
                         self.hideLoadingScreen()
                         self.showAllLabels()
+                   
                         self.peopleImagesTableView.reloadData()
                       }
                     })
@@ -178,7 +160,6 @@ class PeopleDetailedViewController : UIViewController {
     self.networkManager.downloadImage(imageExtension: "\(ImageString)", { (imageData) in
       
       if let image = UIImage(data: imageData as Data) {
-        
         switch ImageType {
         case DownloadPic.profile: self.profileImage = image
         case DownloadPic.personal: if let image = UIImage(data: imageData as Data){ self.personalImagesArray.append(image)}
@@ -186,7 +167,6 @@ class PeopleDetailedViewController : UIViewController {
           break
         }
       }
-      
       completion()
     })
   }
@@ -240,7 +220,6 @@ extension PeopleDetailedViewController : UITableViewDataSource {
     case 0: return min(1, personalImagesArray.count)
     case 1: return min(1, knownForArray.count)
     default: fatalError("Unknown Selection")
-      
     }
   }
   
@@ -260,10 +239,13 @@ extension PeopleDetailedViewController : UITableViewDataSource {
       
     case 1:
       let cell = peopleImagesTableView.dequeueReusableCell(withIdentifier: knownForCellIdentifier) as! KnownForCell
-      
+
       cell.imageDelegete = self
       cell.knownForExtendedArray = self.knownForExtendedArray
       cell.knownForArray = self.knownForArray
+      DispatchQueue.main.async {
+      cell.knownForCollectionView.reloadData()
+      }
       self.peopleImagesTableView.rowHeight = 150
       
       return cell

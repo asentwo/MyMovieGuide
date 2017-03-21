@@ -39,7 +39,7 @@ class KnownForCell : UITableViewCell {
 extension KnownForCell:  UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return knownForArray.count
+     return knownForArray.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -50,7 +50,6 @@ extension KnownForCell:  UICollectionViewDelegate {
       DispatchQueue.main.async {
         cell.knownForImages.sd_setImage(with: URL(string: "\(baseImageURL)\(knownPoster)"))
       }
-      
     }
     return cell
   }

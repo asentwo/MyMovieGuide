@@ -60,8 +60,9 @@ class PeopleMainCollectionViewController : UIViewController {
     PeopleMainData.updateAllData(urlExtension: "popular", completionHandler: {results in
       
       guard let results = results else {
-        print("There was an error retrieving people data")
-        return
+        CDAlertView(title: "Sorry", message: "There was an error retrieving data", type: .notification).show()
+
+      return
       }
       self.peopleArray = results
       
@@ -121,6 +122,7 @@ class PeopleMainCollectionViewController : UIViewController {
             
             self.peopleID = self.peopleIDArray.first
             DispatchQueue.main.async {
+              self.peopleIDArray.removeAll()
               self.hideLoadingScreen()
               self.peopleSearchTextFieldInput.text = ""
               self.performSegue(withIdentifier: self.peopleToDetailSegue, sender: self)
@@ -129,6 +131,7 @@ class PeopleMainCollectionViewController : UIViewController {
           } else {
             
             DispatchQueue.main.async {
+              self.peopleIDArray.removeAll()
               self.hideLoadingScreen()
               CDAlertView(title: "Sorry", message: "No results found", type: .notification).show()
             }
@@ -136,6 +139,7 @@ class PeopleMainCollectionViewController : UIViewController {
           }
         }else {
           DispatchQueue.main.async {
+            self.peopleIDArray.removeAll()
             self.hideLoadingScreen()
             CDAlertView(title: "Sorry", message: "No results found", type: .notification).show()
           }
@@ -222,7 +226,6 @@ extension PeopleMainCollectionViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let peopleDetailVC = segue.destination as! PeopleDetailedViewController
-    print(self.peopleID)
     peopleDetailVC.id = self.peopleID
   }
 }

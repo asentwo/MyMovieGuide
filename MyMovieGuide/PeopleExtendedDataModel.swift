@@ -61,15 +61,7 @@ public struct CastExtendedData : Decodable {
             print("Error initializing object")
             return
         }
-        
-        // print(jsonDictionary)
-        
-        //        guard let castData = cast.castExtended
-        //          else {
-        //            print("No cast data exists")
-        //            return
-        //        }
-        //
+
         completionHandler(cast)
       }
     })
