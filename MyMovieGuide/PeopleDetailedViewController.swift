@@ -12,21 +12,17 @@ import ParticlesLoadingView
 import CDAlertView
 
 enum DownloadPic {
-  
   case profile
   case personal
-  case knownFor
-  
+  case knownFor  
 }
 
 enum PeopleSegue {
-  
   case knownFor
   case extraImage
-  
 }
 
-class PeopleDetailedViewController : UIViewController {
+class PeopleDetailedViewController : MasterViewController {
   
   @IBOutlet weak var peopleImagesTableView: UITableView!
   @IBOutlet weak var profilePic: UIImageView!
@@ -51,24 +47,6 @@ class PeopleDetailedViewController : UIViewController {
   var personalImagesArray: [UIImage] = []
   var knownForArray: [UIImage] = []
   var knownForExtendedArray: [CastExtendedData] = []
-  
-  //Particle loading screen
-  lazy var loadingView: ParticlesLoadingView = {
-    let x = self.view.frame.size.width/2
-    let y = self.view.frame.size.height/2
-    let view = ParticlesLoadingView(frame: CGRect(x: x - 50, y: y - 100, width: 100, height: 100))
-    view.particleEffect = .laser
-    view.duration = 1.5
-    view.particlesSize = 15.0
-    view.clockwiseRotation = true
-    view.layer.borderColor = UIColor.lightGray.cgColor
-    view.layer.borderWidth = 1.0
-    view.layer.cornerRadius = 15.0
-    return view
-  }()
-  
-  let label = UILabel(frame: CGRect(x: 0 + 20, y: 0, width: 200, height: 21))
-  
   let imagesCellIdentifier = "imagesCell"
   let knownForCellIdentifier = "knownForCell"
   let peopleToDetailSegue = "peopleToMovieDetailSegue"
@@ -132,15 +110,13 @@ class PeopleDetailedViewController : UIViewController {
 //                  }
                   if let poster = knownForImage.poster {
                     self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster, completion: {_ in
+                      
                       DispatchQueue.main.async {
-                        
                         if let bg = self.knownForArray.first {
                           self.backgroundPic.image = bg
                         }
-                        
                         self.hideLoadingScreen()
                         self.showAllLabels()
-                   
                         self.peopleImagesTableView.reloadData()
                       }
                     })
@@ -169,23 +145,6 @@ class PeopleDetailedViewController : UIViewController {
       }
       completion()
     })
-  }
-  
-  func startLoadingScreen () {
-    label.center = CGPoint(x: 187, y: 285)
-    label.textAlignment = .center
-    label.text = "Loading"
-    label.font = UIFont(name: "Avenir Next Medium", size: 17)
-    label.textColor = UIColor.white
-    self.view.addSubview(label)
-    view.addSubview(loadingView)
-    loadingView.startAnimating()
-  }
-  
-  func hideLoadingScreen() {
-    self.label.isHidden = true
-    self.loadingView.isHidden = true
-    self.loadingView.stopAnimating()
   }
   
   func hideAllLabels() {
@@ -254,6 +213,7 @@ extension PeopleDetailedViewController : UITableViewDataSource {
     }
     return cell
   }
+
 }
 
 //Segue
@@ -262,12 +222,10 @@ extension PeopleDetailedViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     
     if self.currentSegue == PeopleSegue.knownFor {
-      
       let destinationVC = segue.destination as! MoviesDetailViewController
       
       destinationVC.iD = self.knownForID
     } else if self.currentSegue == PeopleSegue.extraImage {
-      
       let destinationVC = segue.destination as! PeopleDetailImageViewController
       
       destinationVC.personImage = currentImage

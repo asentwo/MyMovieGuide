@@ -39,15 +39,14 @@ class KnownForCell : UITableViewCell {
 extension KnownForCell:  UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-     return knownForArray.count
+    return knownForArray.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = knownForCollectionView.dequeueReusableCell(withReuseIdentifier: knownForReuseIdentifier, for: indexPath) as! KnownForCollectionViewCell
     
-    if let knownPoster = knownForExtendedArray[indexPath.row].poster{
-      
-      DispatchQueue.main.async {
+    DispatchQueue.main.async {
+      if let knownPoster = self.knownForExtendedArray[indexPath.row].poster{
         cell.knownForImages.sd_setImage(with: URL(string: "\(baseImageURL)\(knownPoster)"))
       }
     }
@@ -58,11 +57,9 @@ extension KnownForCell:  UICollectionViewDelegate {
 extension KnownForCell: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
-    
+
     self.movieID = knownForExtendedArray[indexPath.row].id
-    
-    
+      
     guard let movieID = movieID else {return}
     imageDelegete?.knownForImageTapped(movieID: movieID, segue: PeopleSegue.knownFor)
   }

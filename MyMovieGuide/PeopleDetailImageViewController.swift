@@ -11,8 +11,7 @@ import UIKit
 
 
 
-class PeopleDetailImageViewController: UIViewController {
-  
+class PeopleDetailImageViewController: MasterViewController {
   
   @IBOutlet weak var peopleDetailImage: UIImageView!
   
@@ -21,7 +20,6 @@ class PeopleDetailImageViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    
     if let image = personImage {
     peopleDetailImage.image = image
     }
@@ -29,12 +27,9 @@ class PeopleDetailImageViewController: UIViewController {
   }
 }
 
-
 extension PeopleDetailImageViewController : handleExtraCastImage {
   
   func extraCastImageTapped(image: UIImage, segue: PeopleSegue) {
     self.personImage = image
   }
-  
-  
 }

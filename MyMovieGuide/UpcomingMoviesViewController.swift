@@ -9,7 +9,7 @@
 import UIKit
 import CDAlertView
 
-class UpcomingMoviesViewController: UICollectionViewController {
+class UpcomingMoviesViewController: MasterCollectionViewController {
   
   //MARK: Properties
   @IBOutlet var upcomingCollectionView: UICollectionView!
@@ -22,17 +22,12 @@ class UpcomingMoviesViewController: UICollectionViewController {
   
   let reuseIdentifier = "upcomingCollectionViewCell"
   let segueIdentifier = "upcomingToDetailSegue"
-  
-  //Layout
-  let itemsPerRow: CGFloat = 2
-  let sectionInsets = UIEdgeInsets(top: 35.0, left: 10.0, bottom: 35.0, right: 10.0)
-  
-  
+
   //MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    
+    startLoadingScreen()
     MovieData.updateAllData(type: "movie", urlExtension: "upcoming", completionHandler: { results in
       
       guard let results = results else {
@@ -53,8 +48,8 @@ class UpcomingMoviesViewController: UICollectionViewController {
           continue
         }
       }
-      
       DispatchQueue.main.async {
+        self.hideLoadingScreen()
         self.upcomingCollectionView.reloadData()
       }
     })
@@ -77,13 +72,14 @@ extension UpcomingMoviesViewController {
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = upcomingCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UpcomingCollectionViewCell
     
-    if let upcomingImage = upcomingImageArray[indexPath.row] {
-      cell.posterImage.sd_setImage(with: URL(string:"\(baseImageURL)\(upcomingImage)"))
+    DispatchQueue.main.async {
+      if let upcomingImage = self.upcomingImageArray[indexPath.row] {
+        cell.posterImage.sd_setImage(with: URL(string:"\(baseImageURL)\(upcomingImage)"))
+      }
     }
+   
     return cell
   }
-  
-  
 }
 
 // MARK: - UICollectionViewDelegate
@@ -95,41 +91,6 @@ extension UpcomingMoviesViewController {
     performSegue(withIdentifier: segueIdentifier, sender: self)
   }
 }
-
-
-
-// MARK: - UICollectionViewDelegateFlowLayout
-extension UpcomingMoviesViewController: UICollectionViewDelegateFlowLayout {
-  
-  //Height and width of cells
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
-    let paddingSpaceWidth = sectionInsets.left * (itemsPerRow + 1)
-    let paddingSpaceHeight = sectionInsets.top * (itemsPerRow + 2)
-    let availableWidth = view.frame.width - paddingSpaceWidth
-    let availableHeight = view.frame.height - paddingSpaceHeight
-    let widthPerItem = availableWidth / itemsPerRow
-    let heightPerItem = availableHeight / itemsPerRow
-    
-    return CGSize(width: widthPerItem, height: heightPerItem + 40)
-  }
-  
-  //Returns space in between cells
-  func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      insetForSectionAt section: Int) -> UIEdgeInsets {
-    return sectionInsets
-  }
-  
-  //Returns spacing in between each line
-  func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return sectionInsets.left
-  }
-  
-}
-
 
 //MARK: Segue
 extension UpcomingMoviesViewController {

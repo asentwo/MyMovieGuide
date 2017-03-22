@@ -9,26 +9,22 @@
 import UIKit
 import CDAlertView
 
-class MoviesGenresViewController: UIViewController {
+class MoviesGenresViewController: MasterViewController {
   
   //MARK: Properties
   @IBOutlet weak var genresTableView: UITableView!
   
   let networkManager = NetworkManager.sharedManager
-  
+  let segueIdentifier = "genreToCollectSegue"
   var genreDataArray: [GenreData] = []
   var posterStringArray: [String] = []
-  //var posterImageArray: [UIImage] = []
-  
   var genreID: NSNumber?
-  
-  let segueIdentifier = "genreToCollectSegue"
   
   //MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    
+    startLoadingScreen()
     GenreData.updateAllData(urlExtension:"list", completionHandler: { results in
       
       guard let results = results else {
@@ -38,23 +34,19 @@ class MoviesGenresViewController: UIViewController {
       self.genreDataArray = results
       
       for movie in self.genreDataArray {
-        
         if let movieGenreID = movie.id
         {
-          
           //Update posters based on genreID
           GenrePosters.updateGenrePoster(genreID: movieGenreID, urlExtension: "movies", completionHandler: {posters in
             
             guard let posters = posters else {
-          CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .notification).show()
+              CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .notification).show()
               return
             }
-            
             //Must iterate through multiple arrays with many containing the same poster strings
             for poster in posters {
-            
-              if let newPoster = poster {
               
+              if let newPoster = poster {
                 //Check to see if array already has the current poster string, if it does continue, if not append to array
                 if self.posterStringArray.contains(newPoster){
                   continue
@@ -68,12 +60,26 @@ class MoviesGenresViewController: UIViewController {
               }
             }
             DispatchQueue.main.async {
+              self.hideLoadingScreen()
               self.genresTableView.reloadData()
             }
           })
         }
       }
     })
+  }
+  
+  //Parallax
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    let offsetY =  genresTableView.contentOffset.y
+    for cell in  genresTableView.visibleCells as! [GenresTableViewCell] {
+      let x = cell.mainImageView.frame.origin.x
+      let w = cell.mainImageView.bounds.width
+      let h = cell.mainImageView.bounds.height
+      let y = ((offsetY - cell.frame.origin.y) / h) * 25
+      cell.mainImageView.frame = CGRect(x: x, y: y, width: w, height: h)
+      cell.contentMode = UIViewContentMode.scaleAspectFill
+    }
   }
 }
 
@@ -90,12 +96,13 @@ extension MoviesGenresViewController:  UITableViewDataSource {
     cell.genreCatagoryLabel.text = genreDataArray[indexPath.row].name
     cell.mainImageView.sd_setImage(with: URL(string: "\(baseImageURL)\(posterStringArray[indexPath.row])"))
     cell.selectionStyle = UITableViewCellSelectionStyle.none
+    cell.genreCatagoryLabel.adjustsFontSizeToFitWidth = true
     
     return cell
   }
   
-   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 150.00
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 200.00
   }
 }
 
@@ -105,12 +112,8 @@ extension MoviesGenresViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
     if let id = genreDataArray[indexPath.row].id {
-      
       self.genreID = id
-      
-    //  print(self.genreID)
     }
-    
     self.performSegue(withIdentifier: segueIdentifier, sender: self)
   }
   
@@ -120,10 +123,8 @@ extension MoviesGenresViewController: UITableViewDelegate {
 //MARK: Segue
 extension MoviesGenresViewController {
   
-
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let genreCollectVC = segue.destination as! MoviesGenresCollectionViewController
     genreCollectVC.genreID = self.genreID
-   
   }
 }

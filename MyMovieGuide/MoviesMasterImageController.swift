@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class MoviesMasterImageController: UIViewController {
+class MoviesMasterImageController: MasterViewController {
   
   
   var image: String?
@@ -21,7 +21,10 @@ class MoviesMasterImageController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    startLoadingScreen()
+    
     DispatchQueue.main.async {
+      self.hideLoadingScreen()
       if let imagePic = self.image {
         self.detailImage.sd_setImage(with: URL(string:"\(baseImageURL)\(imagePic)"))
       }

@@ -16,6 +16,6 @@ class GenresTableViewCell : UITableViewCell {
   
   @IBOutlet weak var mainImageView: UIImageView!
   @IBOutlet weak var genreCatagoryLabel: UILabel!
-  @IBOutlet weak var backgroundTint: UIImageView!
+  @IBOutlet weak var imageWrapper: UIView!
 
 }

@@ -11,7 +11,7 @@ import SDWebImage
 import CDAlertView
 import ParticlesLoadingView
 
-class PeopleMainCollectionViewController : UIViewController {
+class PeopleMainCollectionViewController : MasterViewController {
   
   
   @IBOutlet weak var peopleSearchTextFieldInput: UITextField!
@@ -24,27 +24,8 @@ class PeopleMainCollectionViewController : UIViewController {
   var peopleArray: [PeopleMainData] = []
   var peopleIDArray: [NSNumber] = []
   var peopleID: NSNumber?
-  
   let peopleToDetailSegue = "peopleToDetailSegue"
   let peopleMainReuseIdentifier = "peopleMainReuseIdentifier"
-  
-  //Particle loading screen
-  lazy var loadingView: ParticlesLoadingView = {
-    let x = self.view.frame.size.width/2
-    let y = self.view.frame.size.height/2
-    let view = ParticlesLoadingView(frame: CGRect(x: x - 50, y: y - 100, width: 100, height: 100))
-    view.particleEffect = .laser
-    view.duration = 1.5
-    view.particlesSize = 15.0
-    view.clockwiseRotation = true
-    view.layer.borderColor = UIColor.lightGray.cgColor
-    view.layer.borderWidth = 1.0
-    view.layer.cornerRadius = 15.0
-    return view
-  }()
-  
-  let label = UILabel(frame: CGRect(x: 0 + 20, y: 0, width: 200, height: 21))
-  
   
   //Layout
   let itemsPerRow: CGFloat = 2
@@ -54,14 +35,12 @@ class PeopleMainCollectionViewController : UIViewController {
     super.viewDidLoad()
     
     self.tintLoadingView.isHidden = true
-    
     self.startLoadingScreen()
     
     PeopleMainData.updateAllData(urlExtension: "popular", completionHandler: {results in
       
       guard let results = results else {
         CDAlertView(title: "Sorry", message: "There was an error retrieving data", type: .notification).show()
-
       return
       }
       self.peopleArray = results
@@ -71,24 +50,6 @@ class PeopleMainCollectionViewController : UIViewController {
         self.peopleCollectionView.reloadData()
       }
     })
-  }
-  
-  func startLoadingScreen () {
-    label.center = CGPoint(x: 187, y: 285)
-    label.textAlignment = .center
-    label.text = "Loading"
-    label.font = UIFont(name: "Avenir Next Medium", size: 17)
-    label.textColor = UIColor.white
-    self.view.addSubview(label)
-    view.addSubview(loadingView)
-    loadingView.startAnimating()
-  }
-  
-  func hideLoadingScreen() {
-    self.label.isHidden = true
-    self.loadingView.isHidden = true
-    self.tintLoadingView.isHidden = true
-    self.loadingView.stopAnimating()
   }
   
   @IBAction func searchButtonTapped(_ sender: Any) {

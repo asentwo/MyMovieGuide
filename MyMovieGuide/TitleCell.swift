@@ -12,7 +12,6 @@ import UIKit
 
 class TitleCell: UITableViewCell {
   
-  
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var titleLine: UIImageView!
   

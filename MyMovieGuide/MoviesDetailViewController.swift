@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import ParticlesLoadingView
 import FadeButton
 import CDAlertView
 
@@ -19,7 +18,7 @@ enum segueController {
   case video
 }
 
-class MoviesDetailViewController: UIViewController {
+class MoviesDetailViewController: MasterViewController {
   
   
   @IBOutlet weak var lineImage: UIImageView!
@@ -40,44 +39,19 @@ class MoviesDetailViewController: UIViewController {
   @IBOutlet weak var saveButton: FadeButton!
   @IBOutlet weak var videosButton: FadeButton!
   
-  
-  
   let networkManager = NetworkManager.sharedManager
-  
   var iD: NSNumber?
-  
   var segueType: segueController?
   var castID: NSNumber?
   var extraImage: String?
   var extraImagesArray: [BackdropData]?
-  
   var movieDetailsData: MovieDetailsData?
   var movieDetailsPoster: UIImage?
   var actorProfileImage: UIImage?
-  
   var castArray: [CastData] = []
   var imageArray: [String] = []
   var videoInfo: VideoResults?
-  
   var homepage : String?
-  
-  
-  //Particle loading screen
-  lazy var loadingView: ParticlesLoadingView = {
-    let x = self.view.frame.size.width/2
-    let y = self.view.frame.size.height/2
-    let view = ParticlesLoadingView(frame: CGRect(x: x - 50, y: y - 100, width: 100, height: 100))
-    view.particleEffect = .laser
-    view.duration = 1.5
-    view.particlesSize = 15.0
-    view.clockwiseRotation = true
-    view.layer.borderColor = UIColor.lightGray.cgColor
-    view.layer.borderWidth = 1.0
-    view.layer.cornerRadius = 15.0
-    return view
-  }()
-  
-  let label = UILabel(frame: CGRect(x: 0 + 20, y: 0, width: 200, height: 21))
   
   //Segues
   let detailToImageSegue = "detailToImageSegue"
@@ -88,6 +62,8 @@ class MoviesDetailViewController: UIViewController {
   let castReuseIdentifier = "castCell"
   let extraReuseIdentifier = "extraImagesCell"
   
+  
+  //MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -110,9 +86,6 @@ class MoviesDetailViewController: UIViewController {
         } else {
           CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
         }
-        
-        
-        
         self.homepage = self.movieDetailsData?.homepage
         self.videoInfo = self.movieDetailsData?.videos
         
@@ -143,14 +116,12 @@ class MoviesDetailViewController: UIViewController {
                     } else {
                       self.backgroundImage.image = UIImage(named: "placeholder.png")
                     }
-                    
                     self.movieTitle.text = self.movieDetailsData?.title
                     self.overview.text = self.movieDetailsData?.overview
                     
                     if let runtime = self.movieDetailsData?.runtime {
                       self.runtime.text = String(describing: runtime)
                     }
-                    
                     if USRating == "" {
                       self.rating.text = "N/A"
                     } else {
@@ -159,18 +130,14 @@ class MoviesDetailViewController: UIViewController {
                     
                     if let genre = self.movieDetailsData?.genre {
                       if genre.count != 0 {
-                      self.genre.text = genre[0].name
+                        self.genre.text = genre[0].name
                       }
                     }
-                    
                     self.lineImage.image = #imageLiteral(resourceName: "Line")
                     self.runtimeCat.text = "RUNTIME"
                     self.genreCat.text = "GENRE"
                     self.ratingCat.text = "RATING"
-                    
-                    self.label.isHidden = true
-                    self.loadingView.isHidden = true
-                    self.loadingView.stopAnimating()
+                    self.hideLoadingScreen()
                     self.imagesTableView.reloadData()
                   }
                 }
@@ -183,31 +150,24 @@ class MoviesDetailViewController: UIViewController {
                   } else {
                     self.backgroundImage.image = UIImage(named: "placeholder.png")
                   }
-                  
                   self.movieTitle.text = self.movieDetailsData?.title
                   self.overview.text = self.movieDetailsData?.overview
                   
                   if let runtime = self.movieDetailsData?.runtime {
                     self.runtime.text = String(describing: runtime)
                   }
-                  
                   if let genre = self.movieDetailsData?.genre {
                     if  genre.count != 0 {
-                    self.genre.text = genre[0].name
+                      self.genre.text = genre[0].name
                     }
                   }
-                  
                   self.rating.text = "N/A"
                   self.lineImage.image = #imageLiteral(resourceName: "Line")
                   self.runtimeCat.text = "RUNTIME"
                   self.genreCat.text = "GENRE"
                   self.ratingCat.text = "RATING"
-                  
-                  self.label.isHidden = true
-                  self.loadingView.isHidden = true
-                  self.loadingView.stopAnimating()
+                  self.hideLoadingScreen()
                   self.imagesTableView.reloadData()
-                  
                 }
               }
             }
@@ -215,39 +175,21 @@ class MoviesDetailViewController: UIViewController {
         })
       })
     } else {
-      self.label.isHidden = true
-      self.loadingView.isHidden = true
-      self.loadingView.stopAnimating()
+      hideLoadingScreen()
       CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
     }
-  }
-  
+  }  
   
   func setImagesAndButtonsUI () {
-    
     roundImageViewCorners(imageView: titleTint)
     roundImageViewCorners(imageView: overivewTint)
     roundButtonCornersAndAddBorderColor(button: homepageButton)
     roundButtonCornersAndAddBorderColor(button: saveButton)
     roundButtonCornersAndAddBorderColor(button: videosButton)
-    
     homepageButton.setBackgroundColor(color: .white, forState: .highlighted)
     saveButton.setBackgroundColor(color: .white, forState: .highlighted)
     videosButton.setBackgroundColor(color: .white, forState: .highlighted)
   }
-  
-  func startLoadingScreen () {
-    label.center = CGPoint(x: 187, y: 285)
-    label.textAlignment = .center
-    label.text = "Loading"
-    label.font = UIFont(name: "Avenir Next Medium", size: 17)
-    label.textColor = UIColor.white
-    self.view.addSubview(label)
-    view.addSubview(loadingView)
-    loadingView.startAnimating()
-  }
-  
-
   
   @IBAction func homepageButtonPressed(_ sender: Any) {
     
@@ -257,7 +199,6 @@ class MoviesDetailViewController: UIViewController {
       }  else {
         CDAlertView(title: "Sorry", message: "No web page available!", type: .notification).show()
       }
-      
     }
   }
   
