@@ -52,7 +52,7 @@ class MasterViewController: UIViewController {
 }
 
 
-class MasterCollectionViewController: UICollectionViewController,  UICollectionViewDelegateFlowLayout {
+class MasterCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
   
   //Particle loading screen
   lazy var loadingView: ParticlesLoadingView = {

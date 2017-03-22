@@ -61,11 +61,11 @@ class MoviesGenresCollectionViewController: MasterViewController {
       
       guard let results = results else {
         CDAlertView(title: "Sorry", message: "No results found", type: .notification).show()
-        
         return
       }
+      self.genreDataArray.removeAll()
       self.genreDataArray = results
-      
+
       DispatchQueue.main.async {
         self.genreCollectionView.reloadData()
       }
@@ -90,10 +90,20 @@ extension MoviesGenresCollectionViewController: UICollectionViewDataSource {
     let cell = genreCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! genreCollectionViewCell
     
     DispatchQueue.main.async {
+      
+      if self.genreDataArray[indexPath.row].poster != nil {
       if let genrePoster = self.genreDataArray[indexPath.row].poster {
+        
         cell.genreImageView.sd_setImage(with: URL(string:"\(baseImageURL)\(genrePoster)"), placeholderImage: UIImage(named: "placeholder.png"))
+      }
+      }else if self.genreDataArray[indexPath.row].backdrop != nil {
+        
+       if let backdrop = self.genreDataArray[indexPath.row].backdrop {
+            cell.genreImageView.sd_setImage(with: URL(string:"\(baseImageURL)\(backdrop)"), placeholderImage: UIImage(named: "placeholder.png"))
+        }
       } else {
-        cell.genreImageView.image = UIImage(named: "placeholder.png")
+        
+        cell.genreImageView.image = #imageLiteral(resourceName: "placeholder")
       }
     }
     return cell
@@ -106,6 +116,7 @@ extension MoviesGenresCollectionViewController: UICollectionViewDataSource {
 extension MoviesGenresCollectionViewController: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
     self.movieID = genreDataArray[indexPath.row].id
     performSegue(withIdentifier: segueIdentifier, sender: self)
   }
@@ -150,6 +161,7 @@ extension MoviesGenresCollectionViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let destinationVC = segue.destination as! MoviesDetailViewController
+    print(self.movieID)
     destinationVC.iD = self.movieID
   }
 }

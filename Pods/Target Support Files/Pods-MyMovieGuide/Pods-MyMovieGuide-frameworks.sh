@@ -92,6 +92,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/CDAlertView/CDAlertView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FadeButton/FadeButton.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Gloss/Gloss.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ParticlesLoadingView/ParticlesLoadingView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
 fi
@@ -99,6 +100,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/CDAlertView/CDAlertView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FadeButton/FadeButton.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Gloss/Gloss.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ParticlesLoadingView/ParticlesLoadingView.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
 fi

@@ -7,9 +7,9 @@
 //
 
 import Foundation
+import CDAlertView
 
 public let baseImageURL = "https://image.tmdb.org/t/p/w500"
-
 
 class NetworkManager {
   
@@ -43,7 +43,7 @@ class NetworkManager {
     
     let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&region=US&append_to_response=videos,images,releases")! )
     
-  // print(request)
+ //  print(request)
     
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
@@ -59,7 +59,11 @@ class NetworkManager {
           }
         }
       } else {
-        print("Error: \(error?.localizedDescription)")
+        
+        DispatchQueue.main.async {
+          
+          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
+          print("XXXXXError: \(error?.localizedDescription)XXXXXXXX") }
       }
     })
     dataTask.resume()
@@ -69,7 +73,7 @@ class NetworkManager {
     
     let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=20&with_genres=\(genreID)")! )
     
-   //  print(request)
+    //  print(request)
     
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
@@ -85,12 +89,15 @@ class NetworkManager {
           }
         }
       } else {
-        print("Error: \(error?.localizedDescription)")
+        DispatchQueue.main.async {
+          
+          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
+          print("XXXXXError: \(error?.localizedDescription)XXXXXXXX") }
       }
     })
     dataTask.resume()
   }
-
+  
   
   //Search Requests
   func getPeopleSearchData (name: String, completion: @escaping JSONData) {
@@ -99,10 +106,10 @@ class NetworkManager {
     configuration.timeoutIntervalForResource = 5
     
     if let url = URL(string:"\(baseURL)search/person?api_key=\(apiKey)&language=en-US&query=\(name)&page=1&include_adult=false") {
-    
-   let request = URLRequest(url: url )
       
-       //  print(request)
+      let request = URLRequest(url: url )
+      
+      //  print(request)
       
       let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
         
@@ -118,12 +125,15 @@ class NetworkManager {
             }
           }
         } else {
-          print("Error: \(error?.localizedDescription)")
+          DispatchQueue.main.async {
+            
+            CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
+            print("XXXXXError: \(error?.localizedDescription)XXXXXXXX") }
         }
       })
       dataTask.resume()
     } else {
-    
+      
       print("There was an error")
     }
   }
@@ -134,11 +144,11 @@ class NetworkManager {
     configuration.timeoutIntervalForRequest = 5
     configuration.timeoutIntervalForResource = 5
     
-    if let url = URL(string:"\(baseURL)search/multi?api_key=\(apiKey)&language=en-US&query=\(name)&page=1&include_adult=false") {
+    if let url = URL(string:"\(baseURL)search/movie?api_key=\(apiKey)&language=en-US&query=\(name)&page=1&include_adult=false") {
       
       let request = URLRequest(url: url )
       
-   // print(request)
+      // print(request)
       
       let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
         
@@ -154,14 +164,18 @@ class NetworkManager {
             }
           }
         } else {
-          print("Error: \(error?.localizedDescription)")
-        }
+          DispatchQueue.main.async {
+            
+            CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
+            print("XXXXXError: \(error?.localizedDescription)XXXXXXXX") }        }
       })
       dataTask.resume()
     } else {
       
-      print("There was an error")
-    }
+      DispatchQueue.main.async {
+        
+        CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
+        print("There was an error") }    }
   }
   
   
@@ -173,12 +187,15 @@ class NetworkManager {
       do {
         let jsonDictionary = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String : AnyObject]//Parses data into a dictionary
         
-     //   print(jsonDictionary)
+        //   print(jsonDictionary)
         
         return jsonDictionary
         
       } catch let error as NSError {
-        print("error processing json data: \(error.localizedDescription)")
+        DispatchQueue.main.async {
+          
+          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
+          print("XXXXXError: \(error.localizedDescription)XXXXXXXX") }
       }
     }
     return nil
@@ -194,7 +211,7 @@ class NetworkManager {
     let request = URLRequest(url: URL(string: "\(baseImageURL)\(imageExtension)" )!)
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
-       // print(request)
+      // print(request)
       
       if error == nil {
         if let httpResponse = response as? HTTPURLResponse {
@@ -208,8 +225,10 @@ class NetworkManager {
           }
         }
       } else {
-        print("Error: \(error?.localizedDescription)")
-      }
+        DispatchQueue.main.async {
+          
+          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
+          print("XXXXXError: \(error?.localizedDescription)XXXXXXXX") }      }
     })
     dataTask.resume()
   }
@@ -237,8 +256,10 @@ class NetworkManager {
           }
         }
       } else {
-        print("Error: \(error?.localizedDescription)")
-      }
+        DispatchQueue.main.async {
+          
+          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
+          print("XXXXXError: \(error?.localizedDescription)XXXXXXXX") }      }
     })
     dataTask.resume()
   }

@@ -7,5 +7,6 @@ pod 'SDWebImage'
 pod 'FadeButton', '~> 2.0'
 pod 'ParticlesLoadingView'
 pod 'CDAlertView'
+pod 'IQKeyboardManagerSwift'
 end
 

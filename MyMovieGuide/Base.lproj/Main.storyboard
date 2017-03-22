@@ -699,11 +699,11 @@
                         <viewControllerLayoutGuide type="bottom" id="iSI-8i-KAe"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7QH-9r-Be8">
-                        <rect key="frame" x="0.0" y="64" width="375" height="936"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="887"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NG6-Zq-zAY">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="936"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="887"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yyG-pn-xYB" userLabel="ContainerView">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
@@ -1259,11 +1259,11 @@
                         <viewControllerLayoutGuide type="bottom" id="sSl-Nu-H2w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bm5-24-4kF">
-                        <rect key="frame" x="0.0" y="64" width="375" height="936"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="887"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Blc-6f-zae">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="936"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="887"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                         </subviews>
@@ -1292,11 +1292,11 @@
                         <viewControllerLayoutGuide type="bottom" id="StL-KK-dTn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iKf-Ig-wlf">
-                        <rect key="frame" x="0.0" y="64" width="375" height="936"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="887"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jxj-zX-VVg">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="936"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="887"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1383,7 +1383,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="som-es-tqS" userLabel="Birthday Stack View">
                                                                 <rect key="frame" x="0.0" y="0.0" width="127.5" height="23.5"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="OXl-C3-cu1">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXl-C3-cu1">
                                                                         <rect key="frame" x="0.0" y="0.0" width="70" height="23.5"/>
                                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                                         <nil key="highlightedColor"/>
@@ -1398,7 +1398,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="2or-J2-BUt" userLabel="Birthplace Stack View">
                                                                 <rect key="frame" x="0.0" y="23.5" width="158.5" height="23.5"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthplace:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="RDA-a3-Z0E">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthplace:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDA-a3-Z0E">
                                                                         <rect key="frame" x="0.0" y="0.0" width="84" height="23.5"/>
                                                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                                         <nil key="highlightedColor"/>
@@ -1746,6 +1746,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ih4-rt-hIY"/>
-        <segue reference="eEf-Gp-gv2"/>
+        <segue reference="37y-2W-P8g"/>
     </inferredMetricsTieBreakers>
 </document>

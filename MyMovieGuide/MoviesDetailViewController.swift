@@ -72,19 +72,21 @@ class MoviesDetailViewController: MasterViewController {
     
     if let movieID = self.iD {
       
+    //  print(movieID)
+      
       MovieDetailsData.updateAllData(urlExtension: "\(movieID)", completionHandler: { results in
         
         guard let results = results else {
-          CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
-          return
+          DispatchQueue.main.async {
+            CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
+          }
+         return
         }
         self.movieDetailsData = results
         self.extraImagesArray = self.movieDetailsData?.images?.backdropImages
         
         if let images = self.movieDetailsData?.images {
           self.imageArray += images.backdropImages.map{ $0.filePath }
-        } else {
-          CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
         }
         self.homepage = self.movieDetailsData?.homepage
         self.videoInfo = self.movieDetailsData?.videos
@@ -111,11 +113,18 @@ class MoviesDetailViewController: MasterViewController {
                   
                   DispatchQueue.main.async {
                     
+                    if self.movieDetailsData?.poster != nil {
+               
                     if let poster = self.movieDetailsData?.poster{
                       self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(poster)"),placeholderImage: UIImage(named: "placeholder.png"))
-                    } else {
-                      self.backgroundImage.image = UIImage(named: "placeholder.png")
                     }
+                    
+                    } else {
+                      if let backDrop = self.movieDetailsData?.backdrop{
+                        self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(backDrop)"),placeholderImage: UIImage(named: "placeholder.png"))
+                      }
+                    }
+                 
                     self.movieTitle.text = self.movieDetailsData?.title
                     self.overview.text = self.movieDetailsData?.overview
                     
@@ -175,9 +184,12 @@ class MoviesDetailViewController: MasterViewController {
         })
       })
     } else {
-      hideLoadingScreen()
-      CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
-    }
+      DispatchQueue.main.async {
+        self.hideLoadingScreen()
+        CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
+
+      }
+       }
   }  
   
   func setImagesAndButtonsUI () {

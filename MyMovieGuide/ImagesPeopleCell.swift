@@ -40,7 +40,6 @@ class ImagesPeopleCell : UITableViewCell, UICollectionViewDelegate, UICollection
     
     DispatchQueue.main.async {
       cell.extraImages.sd_setImage(with: URL(string: "\(baseImageURL)\(self.profileImagesArray[indexPath.row].filePath)"))
-      
     }
     return cell
   }

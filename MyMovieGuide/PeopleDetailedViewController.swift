@@ -105,9 +105,6 @@ class PeopleDetailedViewController : MasterViewController {
               if let knownFor = self.knownForData?.castExtended {
                 self.knownForExtendedArray = knownFor
                 for knownForImage in knownFor {
-//                  if let bg = knownForImage.poster {
-//                      self.backgroundPic.sd_setImage(with: URL(string: "\(baseImageURL)\(bg)"))
-//                  }
                   if let poster = knownForImage.poster {
                     self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster, completion: {_ in
                       
@@ -213,7 +210,6 @@ extension PeopleDetailedViewController : UITableViewDataSource {
     }
     return cell
   }
-
 }
 
 //Segue
