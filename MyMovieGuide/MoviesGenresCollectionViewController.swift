@@ -89,23 +89,25 @@ extension MoviesGenresCollectionViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = genreCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! genreCollectionViewCell
     
-    DispatchQueue.main.async {
-      
       if self.genreDataArray[indexPath.row].poster != nil {
       if let genrePoster = self.genreDataArray[indexPath.row].poster {
-        
+            DispatchQueue.main.async {
         cell.genreImageView.sd_setImage(with: URL(string:"\(baseImageURL)\(genrePoster)"), placeholderImage: UIImage(named: "placeholder.png"))
+        }
       }
       }else if self.genreDataArray[indexPath.row].backdrop != nil {
         
        if let backdrop = self.genreDataArray[indexPath.row].backdrop {
+            DispatchQueue.main.async {
             cell.genreImageView.sd_setImage(with: URL(string:"\(baseImageURL)\(backdrop)"), placeholderImage: UIImage(named: "placeholder.png"))
         }
+        }
       } else {
-        
+            DispatchQueue.main.async {
         cell.genreImageView.image = #imageLiteral(resourceName: "placeholder")
       }
     }
+  
     return cell
   }
 }

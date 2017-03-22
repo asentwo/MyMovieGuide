@@ -279,6 +279,14 @@ extension MoviesDetailViewController: UITableViewDataSource {
     }
     return cell
   }
+  
+  private func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 5
+  }
+  
+  private func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    return 5
+  }
 }
 
 

@@ -48,6 +48,7 @@ extension ExtraImagesCell : UICollectionViewDataSource {
       
       DispatchQueue.main.async {
         cell.extraImages.sd_setImage(with: URL(string: "\(baseImageURL)\(xtraImage[indexPath.row].filePath)"))
+        
       }
     }
     return cell
