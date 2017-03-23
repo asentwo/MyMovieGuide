@@ -69,10 +69,11 @@ class MoviesDetailViewController: MasterViewController {
     
     startLoadingScreen()
     setImagesAndButtonsUI()
+    hideButtons()
     
     if let movieID = self.iD {
       
-    //  print(movieID)
+      print(movieID)
       
       MovieDetailsData.updateAllData(urlExtension: "\(movieID)", completionHandler: { results in
         
@@ -80,7 +81,7 @@ class MoviesDetailViewController: MasterViewController {
           DispatchQueue.main.async {
             CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
           }
-         return
+          return
         }
         self.movieDetailsData = results
         self.extraImagesArray = self.movieDetailsData?.images?.backdropImages
@@ -99,49 +100,76 @@ class MoviesDetailViewController: MasterViewController {
           }
           self.castArray = results
           
-          if let rating = self.movieDetailsData?.rating {
+          if (self.movieDetailsData?.rating?.releaseResults.count)! > 0 {
             
-            let allRatings = rating.releaseResults
-            
-            for country in allRatings {
-              
-              let countryCode = country.countryCode
-              
-              if countryCode == "US" {
-                
-                if let USRating = country.certification {
+            if let rating = self.movieDetailsData?.rating {
+              let allRatings = rating.releaseResults
+              for country in allRatings {
+                let countryCode = country.countryCode
+                if countryCode == "US" {
+                  if let USRating = country.certification {
+                    
+                    DispatchQueue.main.async {
+                      
+                      if self.movieDetailsData?.poster != nil {
+                        if let poster = self.movieDetailsData?.poster{
+                          self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(poster)"),placeholderImage: UIImage(named: "placeholder.png"))
+                        }
+                        
+                      } else {
+                        if let backDrop = self.movieDetailsData?.backdrop{
+                          self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(backDrop)"),placeholderImage: UIImage(named: "placeholder.png"))
+                        }
+                      }
+                      
+                      self.movieTitle.text = self.movieDetailsData?.title
+                      self.overview.text = self.movieDetailsData?.overview
+                      
+                      if let runtime = self.movieDetailsData?.runtime {
+                        self.runtime.text = String(describing: runtime)
+                      }
+                      if USRating == "" {
+                        self.rating.text = "N/A"
+                      } else {
+                        self.rating.text = USRating
+                      }
+                      
+                      if let genre = self.movieDetailsData?.genre {
+                        if genre.count != 0 {
+                          self.genre.text = genre[0].name
+                        }
+                      }
+                      self.showButtons()
+                      self.lineImage.image = #imageLiteral(resourceName: "Line")
+                      self.runtimeCat.text = "RUNTIME"
+                      self.genreCat.text = "GENRE"
+                      self.ratingCat.text = "RATING"
+                      self.hideLoadingScreen()
+                      self.imagesTableView.reloadData()
+                    }
+                  }
+                } else {
                   
                   DispatchQueue.main.async {
                     
-                    if self.movieDetailsData?.poster != nil {
-               
                     if let poster = self.movieDetailsData?.poster{
                       self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(poster)"),placeholderImage: UIImage(named: "placeholder.png"))
-                    }
-                    
                     } else {
-                      if let backDrop = self.movieDetailsData?.backdrop{
-                        self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(backDrop)"),placeholderImage: UIImage(named: "placeholder.png"))
-                      }
+                      self.backgroundImage.image = UIImage(named: "placeholder.png")
                     }
-                 
                     self.movieTitle.text = self.movieDetailsData?.title
                     self.overview.text = self.movieDetailsData?.overview
                     
                     if let runtime = self.movieDetailsData?.runtime {
                       self.runtime.text = String(describing: runtime)
                     }
-                    if USRating == "" {
-                      self.rating.text = "N/A"
-                    } else {
-                      self.rating.text = USRating
-                    }
-                    
                     if let genre = self.movieDetailsData?.genre {
-                      if genre.count != 0 {
+                      if  genre.count != 0 {
                         self.genre.text = genre[0].name
                       }
                     }
+                    self.showButtons()
+                    self.rating.text = "N/A"
                     self.lineImage.image = #imageLiteral(resourceName: "Line")
                     self.runtimeCat.text = "RUNTIME"
                     self.genreCat.text = "GENRE"
@@ -150,47 +178,60 @@ class MoviesDetailViewController: MasterViewController {
                     self.imagesTableView.reloadData()
                   }
                 }
+              }
+            }
+          } else {
+            DispatchQueue.main.async {
+              
+              if let poster = self.movieDetailsData?.poster{
+                self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(poster)"),placeholderImage: UIImage(named: "placeholder.png"))
               } else {
-                
-                DispatchQueue.main.async {
-                  
-                  if let poster = self.movieDetailsData?.poster{
-                    self.backgroundImage.sd_setImage(with: URL(string: "\(baseImageURL)\(poster)"),placeholderImage: UIImage(named: "placeholder.png"))
-                  } else {
-                    self.backgroundImage.image = UIImage(named: "placeholder.png")
-                  }
-                  self.movieTitle.text = self.movieDetailsData?.title
-                  self.overview.text = self.movieDetailsData?.overview
-                  
-                  if let runtime = self.movieDetailsData?.runtime {
-                    self.runtime.text = String(describing: runtime)
-                  }
-                  if let genre = self.movieDetailsData?.genre {
-                    if  genre.count != 0 {
-                      self.genre.text = genre[0].name
-                    }
-                  }
-                  self.rating.text = "N/A"
-                  self.lineImage.image = #imageLiteral(resourceName: "Line")
-                  self.runtimeCat.text = "RUNTIME"
-                  self.genreCat.text = "GENRE"
-                  self.ratingCat.text = "RATING"
-                  self.hideLoadingScreen()
-                  self.imagesTableView.reloadData()
+                self.backgroundImage.image = UIImage(named: "placeholder.png")
+              }
+              self.movieTitle.text = self.movieDetailsData?.title
+              self.overview.text = self.movieDetailsData?.overview
+              
+              if let runtime = self.movieDetailsData?.runtime {
+                self.runtime.text = String(describing: runtime)
+              }
+              if let genre = self.movieDetailsData?.genre {
+                if  genre.count != 0 {
+                  self.genre.text = genre[0].name
                 }
               }
+              self.showButtons()
+              self.rating.text = "N/A"
+              self.lineImage.image = #imageLiteral(resourceName: "Line")
+              self.runtimeCat.text = "RUNTIME"
+              self.genreCat.text = "GENRE"
+              self.ratingCat.text = "RATING"
+              self.hideLoadingScreen()
+              self.imagesTableView.reloadData()
             }
           }
         })
       })
-    } else {
+    }
+    else {
       DispatchQueue.main.async {
         self.hideLoadingScreen()
         CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
-
       }
-       }
-  }  
+    }
+  }
+  
+  func hideButtons () {
+    hompageButton.isHidden = true
+    saveButton.isHidden = true
+    videosButton.isHidden = true
+  }
+  
+  func showButtons () {
+    hompageButton.isHidden =  false
+    saveButton.isHidden = false
+    videosButton.isHidden = false
+  }
+  
   
   func setImagesAndButtonsUI () {
     roundImageViewCorners(imageView: titleTint)
@@ -211,6 +252,8 @@ class MoviesDetailViewController: MasterViewController {
       }  else {
         CDAlertView(title: "Sorry", message: "No web page available!", type: .notification).show()
       }
+    } else {
+      CDAlertView(title: "Sorry", message: "No web page available!", type: .notification).show()
     }
   }
   
