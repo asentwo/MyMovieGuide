@@ -14,7 +14,7 @@ import CDAlertView
 enum DownloadPic {
   case profile
   case personal
-  case knownFor  
+  case knownFor
 }
 
 enum PeopleSegue {
@@ -55,6 +55,7 @@ class PeopleDetailedViewController : MasterViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+
     self.hideAllLabels()
     self.navigationController?.navigationBar.tintColor = UIColor.white
     startLoadingScreen()
@@ -68,7 +69,7 @@ class PeopleDetailedViewController : MasterViewController {
           CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
           return
         }
-       self.profileData = results
+        self.profileData = results
         
         if self.profileData?.images != nil {
           
@@ -95,33 +96,31 @@ class PeopleDetailedViewController : MasterViewController {
               })
             }
           }
-          DispatchQueue.main.async {
-            CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
-              guard let results = results else {
-                CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
-                return
-              }
-              self.knownForData = results
-              if let knownFor = self.knownForData?.castExtended {
-                self.knownForExtendedArray = knownFor
-                for knownForImage in knownFor {
-                  if let poster = knownForImage.poster {
-                    self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster, completion: {_ in
-                      
-                      DispatchQueue.main.async {
-                        if let bg = self.knownForArray.first {
-                          self.backgroundPic.image = bg
-                        }
-                        self.hideLoadingScreen()
-                        self.showAllLabels()
-                        self.peopleImagesTableView.reloadData()
+          CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
+            guard let results = results else {
+              CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
+              return
+            }
+            self.knownForData = results
+            if let knownFor = self.knownForData?.castExtended {
+              self.knownForExtendedArray = knownFor
+              for knownForImage in knownFor {
+                if let poster = knownForImage.poster {
+                  self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster, completion: {_ in
+                    
+                    DispatchQueue.main.async {
+                      if let bg = self.knownForArray.first {
+                        self.backgroundPic.image = bg
                       }
-                    })
-                  }
+                      self.hideLoadingScreen()
+                      self.showAllLabels()
+                      self.peopleImagesTableView.reloadData()
+                    }
+                  })
                 }
               }
-            })
-          }
+            }
+          })
         }
       }
       )
@@ -172,8 +171,17 @@ extension PeopleDetailedViewController : UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
     switch section {
-    case 0: return min(1, personalImagesArray.count)
-    case 1: return min(1, knownForArray.count)
+    case 0:
+      if self.personalImagesArray.count > 0 {
+        return min(1, personalImagesArray.count)
+      } else {
+        return 0
+      }
+    case 1: if self.knownForArray.count > 0 {
+      return min(1, knownForArray.count)
+    } else {
+      return 0
+      }
     default: fatalError("Unknown Selection")
     }
   }
@@ -189,20 +197,19 @@ extension PeopleDetailedViewController : UITableViewDataSource {
       cell.imageDelegate = self
       cell.extraPhotosArray = self.personalImagesArray
       cell.profileImagesArray = self.extraImagesArray
-      self.peopleImagesTableView.rowHeight = 150
+      
       return cell
       
     case 1:
       let cell = peopleImagesTableView.dequeueReusableCell(withIdentifier: knownForCellIdentifier) as! KnownForCell
-
+      
       cell.imageDelegete = self
       cell.knownForExtendedArray = self.knownForExtendedArray
       cell.knownForArray = self.knownForArray
       DispatchQueue.main.async {
-      cell.knownForCollectionView.reloadData()
+        cell.knownForCollectionView.reloadData()
       }
-      self.peopleImagesTableView.rowHeight = 150
-      
+
       return cell
       
     default:

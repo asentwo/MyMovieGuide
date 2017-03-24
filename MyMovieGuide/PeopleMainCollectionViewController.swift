@@ -52,6 +52,10 @@ class PeopleMainCollectionViewController : MasterViewController {
     })
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    self.tintLoadingView.isHidden = true
+  }
+  
   @IBAction func searchButtonTapped(_ sender: Any) {
     
     DispatchQueue.main.async {
