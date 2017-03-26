@@ -28,7 +28,7 @@ class MoviesGenresCollectionViewController: MasterViewController {
   let segueIdentifier = "genreToDetailSegue"
   
   //Layout
-  let itemsPerRow: CGFloat = 3
+  let itemsPerRow: CGFloat = 2
   let sectionInsets = UIEdgeInsets(top: 35.0, left: 10.0, bottom: 35.0, right: 10.0)
   
   //MARK: Lifecycle
@@ -122,7 +122,13 @@ extension MoviesGenresCollectionViewController: UICollectionViewDelegate {
     self.movieID = genreDataArray[indexPath.row].id
     performSegue(withIdentifier: segueIdentifier, sender: self)
   }
+  
 }
+
+
+
+
+
 
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -163,7 +169,6 @@ extension MoviesGenresCollectionViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let destinationVC = segue.destination as! MoviesDetailViewController
-    print(self.movieID)
     destinationVC.iD = self.movieID
   }
 }

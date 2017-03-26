@@ -159,6 +159,7 @@ public struct MovieDetailsData: Decodable {
   public let videoAvailable : Bool
   public let averageRating : NSNumber?
   public let title : String?
+  public let userRatings : NSNumber?
   public let genre : [GenreData]?
   public let videos : VideoResults?
   public let images : ImageResults?
@@ -183,6 +184,7 @@ public struct MovieDetailsData: Decodable {
     self.averageRating = "vote_average" <~~ json
     self.videoAvailable = videoAvailable
     self.title = "title" <~~ json
+    self.userRatings = "vote_average" <~~ json
     self.genre = "genres" <~~ json
     self.videos = "videos" <~~ json
     self.images = "images" <~~ json

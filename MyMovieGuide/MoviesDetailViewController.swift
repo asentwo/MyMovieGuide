@@ -31,6 +31,7 @@ class MoviesDetailViewController: MasterViewController {
   @IBOutlet weak var genre: UILabel!
   @IBOutlet weak var ratingCat: UILabel!
   @IBOutlet weak var rating: UILabel!
+  @IBOutlet weak var userRatingsCat: UILabel!
   @IBOutlet weak var titleTint: UIImageView!
   @IBOutlet weak var overivewTint: UIImageView!
   @IBOutlet weak var homepageButton: UIButton!
@@ -38,6 +39,8 @@ class MoviesDetailViewController: MasterViewController {
   @IBOutlet weak var hompageButton: FadeButton!
   @IBOutlet weak var saveButton: FadeButton!
   @IBOutlet weak var videosButton: FadeButton!
+  @IBOutlet weak var userRatings: UILabel!
+  
   
   let networkManager = NetworkManager.sharedManager
   var iD: NSNumber?
@@ -128,19 +131,28 @@ class MoviesDetailViewController: MasterViewController {
                       if let runtime = self.movieDetailsData?.runtime {
                         self.runtime.text = String(describing: runtime)
                       }
-                      if USRating == "" {
-                        self.rating.text = "N/A"
-                      } else {
+                      if USRating != "" {
                         self.rating.text = USRating
+                      } else {
+                        self.rating.text = "N/A"
                       }
+                      
                       
                       if let genre = self.movieDetailsData?.genre {
                         if genre.count != 0 {
                           self.genre.text = genre[0].name
                         }
                       }
+                      
+                      if let userRating = self.movieDetailsData?.userRatings {
+                        self.userRatings.text = String(describing:userRating)
+                      } else {
+                        self.userRatings.text = "N/A"
+                      }
+                      
                       self.showButtons()
                       self.lineImage.image = #imageLiteral(resourceName: "Line")
+                      self.userRatingsCat.text = "USER RATINGS"
                       self.runtimeCat.text = "RUNTIME"
                       self.genreCat.text = "GENRE"
                       self.ratingCat.text = "RATING"
@@ -169,8 +181,9 @@ class MoviesDetailViewController: MasterViewController {
                       }
                     }
                     self.showButtons()
-                    self.rating.text = "N/A"
+//                    self.rating.text = "N/A"
                     self.lineImage.image = #imageLiteral(resourceName: "Line")
+                      self.userRatingsCat.text = "USER RATINGS"
                     self.runtimeCat.text = "RUNTIME"
                     self.genreCat.text = "GENRE"
                     self.ratingCat.text = "RATING"
@@ -200,11 +213,12 @@ class MoviesDetailViewController: MasterViewController {
                 }
               }
               self.showButtons()
-              self.rating.text = "N/A"
+//              self.rating.text = "N/A"
               self.lineImage.image = #imageLiteral(resourceName: "Line")
               self.runtimeCat.text = "RUNTIME"
               self.genreCat.text = "GENRE"
               self.ratingCat.text = "RATING"
+              self.userRatingsCat.text = "USER RATINGS"
               self.hideLoadingScreen()
               self.imagesTableView.reloadData()
             }
@@ -227,6 +241,9 @@ class MoviesDetailViewController: MasterViewController {
   }
   
   func showButtons () {
+    
+
+    hompageButton.titleLabel?.minimumScaleFactor = 0.5
     hompageButton.isHidden =  false
     saveButton.isHidden = false
     videosButton.isHidden = false
