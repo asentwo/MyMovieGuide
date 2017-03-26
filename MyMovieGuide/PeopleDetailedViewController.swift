@@ -78,10 +78,15 @@ class PeopleDetailedViewController : MasterViewController {
           }
           if let birthday = self.profileData?.birthDay {
             self.birthdayLabel.text = birthday
+          } else {
+            self.birthdayLabel.text = "N/A"
           }
           if let birthplace = self.profileData?.birthPlace {
             self.birthplaceLabel.text = birthplace
+          } else {
+            self.birthplaceLabel.text = "N/A"
           }
+          
           if self.profileData?.bio != nil {
             if let bio = self.profileData?.bio {
               self.bioLabel.text = bio

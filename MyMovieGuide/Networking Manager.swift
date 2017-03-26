@@ -98,6 +98,88 @@ class NetworkManager {
     dataTask.resume()
   }
   
+//  //Log in account
+//  func createAccount (completion:@escaping JSONData) {
+//    
+//    configuration.timeoutIntervalForRequest = 5
+//    configuration.timeoutIntervalForResource = 5
+//    
+//    if let url = URL(string:"\(baseURL)authentication/token/new?api_key=\(apiKey)") {
+//      
+//      let request = URLRequest(url: url )
+//      
+//        print(request)
+//      
+//      let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+//        
+//        if error == nil {
+//          if let httpResponse = response as? HTTPURLResponse {
+//            switch (httpResponse.statusCode) {
+//            case 200:
+//              if let data = data {
+//                completion(data)
+//              }
+//            default:
+//              print(httpResponse.statusCode)
+//            }
+//          }
+//        } else {
+//          DispatchQueue.main.async {
+//            
+//            CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
+//            print("XXXXXError: \(error?.localizedDescription)XXXXXXXX") }
+//        }
+//      })
+//      
+//      dataTask.resume()
+//    } else {
+//      
+//      print("There was an error")
+//    }
+//  }
+//  
+//  func loginAccount(token: String, completion: @escaping JSONData) {
+//    
+//    configuration.timeoutIntervalForRequest = 5
+//    configuration.timeoutIntervalForResource = 5
+//    
+//    if let url = URL(string:"https://www.themoviedb.org/authenticate/\(token)") {
+//      
+//      let request = URLRequest(url: url )
+//      
+//      print(request)
+//      
+//      let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+//        
+//        if error == nil {
+//          if let httpResponse = response as? HTTPURLResponse {
+//            switch (httpResponse.statusCode) {
+//            case 200:
+//              if let data = data {
+//                completion(data)
+//              }
+//            default:
+//              print(httpResponse.statusCode)
+//            }
+//          }
+//        } else {
+//          DispatchQueue.main.async {
+//            
+//            CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
+//            print("XXXXXError: \(error?.localizedDescription)XXXXXXXX") }
+//        }
+//      })
+//      dataTask.resume()
+//    } else {
+//      
+//      print("There was an error")
+//    }
+//    
+//    
+//    
+//  }
+//  
+  
   
   //Search Requests
   func getPeopleSearchData (name: String, completion: @escaping JSONData) {
