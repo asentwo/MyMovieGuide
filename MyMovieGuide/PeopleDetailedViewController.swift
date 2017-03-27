@@ -24,6 +24,7 @@ enum PeopleSegue {
 
 class PeopleDetailedViewController : MasterViewController {
   
+  @IBOutlet weak var knownForTableView: UITableView!
   @IBOutlet weak var peopleImagesTableView: UITableView!
   @IBOutlet weak var profilePic: UIImageView!
   @IBOutlet weak var birthdayCatLabel: UILabel!
@@ -33,6 +34,7 @@ class PeopleDetailedViewController : MasterViewController {
   @IBOutlet weak var bioLabel: UILabel!
   @IBOutlet weak var backgroundPic: UIImageView!
   @IBOutlet weak var backgroundTintView: UIImageView!
+  @IBOutlet weak var filmographyLabel: UILabel!
   
   let networkManager = NetworkManager.sharedManager
   
@@ -55,7 +57,7 @@ class PeopleDetailedViewController : MasterViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-
+    
     self.hideAllLabels()
     self.navigationController?.navigationBar.tintColor = UIColor.white
     startLoadingScreen()
@@ -98,6 +100,7 @@ class PeopleDetailedViewController : MasterViewController {
             for image in extraImages {
               
               self.updateImage(ImageType: DownloadPic.personal, ImageString: image.filePath, completion: {_ in
+                
               })
             }
           }
@@ -120,6 +123,7 @@ class PeopleDetailedViewController : MasterViewController {
                       self.hideLoadingScreen()
                       self.showAllLabels()
                       self.peopleImagesTableView.reloadData()
+                      self.knownForTableView.reloadData()
                     }
                   })
                 }
@@ -149,6 +153,8 @@ class PeopleDetailedViewController : MasterViewController {
   }
   
   func hideAllLabels() {
+    self.knownForTableView.isHidden = true
+    self.filmographyLabel.isHidden = true
     self.peopleImagesTableView.isHidden = true
     self.backgroundPic.isHidden = true
     self.profilePic.isHidden = true
@@ -158,6 +164,8 @@ class PeopleDetailedViewController : MasterViewController {
   }
   
   func showAllLabels() {
+    self.knownForTableView.isHidden = false
+    self.filmographyLabel.isHidden = false
     self.peopleImagesTableView.isHidden = false
     self.backgroundPic.isHidden = false
     self.profilePic.isHidden = false
@@ -170,57 +178,71 @@ class PeopleDetailedViewController : MasterViewController {
 extension PeopleDetailedViewController : UITableViewDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return 2
+    
+    return 1
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-    switch section {
-    case 0:
+    if tableView.tag == 0 {
+      
       if self.personalImagesArray.count > 0 {
-        return min(1, personalImagesArray.count)
-      } else {
-        return 0
+        return 1
+        
       }
-    case 1: if self.knownForArray.count > 0 {
-      return min(1, knownForArray.count)
-    } else {
-      return 0
+    } else if tableView.tag == 1 {
+      if self.knownForArray.count > 0 {
+        return 1
       }
-    default: fatalError("Unknown Selection")
     }
+    return 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = UITableViewCell()
     
-    switch indexPath.section {
-    case 0:
-      let cell = peopleImagesTableView.dequeueReusableCell(withIdentifier: imagesCellIdentifier) as! ImagesPeopleCell
+    if tableView.tag == 0 {
       
-      cell.imageDelegate = self
-      cell.extraPhotosArray = self.personalImagesArray
-      cell.profileImagesArray = self.extraImagesArray
-      
-      return cell
-      
-    case 1:
-      let cell = peopleImagesTableView.dequeueReusableCell(withIdentifier: knownForCellIdentifier) as! KnownForCell
-      
-      cell.imageDelegete = self
-      cell.knownForExtendedArray = self.knownForExtendedArray
-      cell.knownForArray = self.knownForArray
-      DispatchQueue.main.async {
-        cell.knownForCollectionView.reloadData()
+      if personalImagesArray.count > 0 {
+        let cell = peopleImagesTableView.dequeueReusableCell(withIdentifier: imagesCellIdentifier) as! ImagesPeopleCell
+        
+        cell.imageDelegate = self
+        cell.extraPhotosArray = self.personalImagesArray
+        cell.profileImagesArray = self.extraImagesArray
+        
+        DispatchQueue.main.async {
+          cell.extraPeopleImagesCollectionView.reloadData()
+        }
+        
+        return cell
+     
+      } else {
+        self.peopleImagesTableView.isHidden = true
       }
-
-      return cell
       
-    default:
-      _ = ""
+      return cell
+  
+    } else {
+      
+      if knownForArray.count > 0 {
+        let cell = knownForTableView.dequeueReusableCell(withIdentifier: knownForCellIdentifier) as! KnownForCell
+        
+        cell.imageDelegete = self
+        cell.knownForExtendedArray = self.knownForExtendedArray
+        cell.knownForArray = self.knownForArray
+        DispatchQueue.main.async {
+          cell.knownForCollectionView.reloadData()
+        }
+  
+        return cell
+     
+      } else {
+        self.filmographyLabel.isHidden = true
+        self.knownForTableView.isHidden = true
+      }
+      return cell
     }
-    return cell
   }
 }
 

@@ -13,7 +13,7 @@ import UIKit
 
 class MyMovieCollectionViewController : MasterCollectionViewController {
   
-  var movieID: String!
+  var movieID: NSNumber!
   var sampleIDArray:[NSNumber] = [263115, 127380, 321612, 293167, 135397, 335797]
   var myMovieDataArray:[MovieDetailsData] = []
   
@@ -22,6 +22,9 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    self.navigationItem.title = "Saved Movies"
+    self.navigationController?.navigationBar.tintColor = UIColor.white
     
     startLoadingScreen()
     
@@ -62,19 +65,23 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
         DispatchQueue.main.async {
           cell.imageView.sd_setImage(with: URL(string:"\(baseImageURL)\(poster)"), placeholderImage: UIImage(named: "placeholder.png"))
           
-          print("\(baseImageURL)\(poster)")
         }
       }
     }
     
     return cell
   }
-
+  
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     self.movieID = myMovieDataArray[indexPath.row].id
     performSegue(withIdentifier: myMovieToDetailSegue, sender: self)
     
   }
   
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    let detailedVC = segue.destination as! MoviesDetailViewController
+    detailedVC.iD = self.movieID
+    
+  }
   
 }

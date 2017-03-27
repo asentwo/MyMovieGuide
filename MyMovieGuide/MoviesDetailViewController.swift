@@ -181,7 +181,6 @@ class MoviesDetailViewController: MasterViewController {
                       }
                     }
                     self.showButtons()
-//                    self.rating.text = "N/A"
                     self.lineImage.image = #imageLiteral(resourceName: "Line")
                       self.userRatingsCat.text = "USER RATINGS"
                     self.runtimeCat.text = "RUNTIME"
@@ -213,7 +212,6 @@ class MoviesDetailViewController: MasterViewController {
                 }
               }
               self.showButtons()
-//              self.rating.text = "N/A"
               self.lineImage.image = #imageLiteral(resourceName: "Line")
               self.runtimeCat.text = "RUNTIME"
               self.genreCat.text = "GENRE"

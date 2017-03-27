@@ -23,12 +23,14 @@ class InTheatresMoviesViewController: MasterCollectionViewController {
   let reuseIdentifier = "inTheatresCollectionViewCell"
   let segueIdentifier = "inTheatresToDetailSegue"
   
-
+  
   
   
   //MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    self.navigationController?.navigationBar.tintColor = UIColor.white
     
     startLoadingScreen()
     MovieData.updateAllData(type:"movie", urlExtension: "now_playing", completionHandler: {results in

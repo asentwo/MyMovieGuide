@@ -27,6 +27,8 @@ class UpcomingMoviesViewController: MasterCollectionViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+     self.navigationController?.navigationBar.tintColor = UIColor.white
+    
     startLoadingScreen()
     MovieData.updateAllData(type: "movie", urlExtension: "upcoming", completionHandler: { results in
       

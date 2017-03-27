@@ -148,7 +148,7 @@ public struct MovieDetailsData: Decodable {
   public let backdrop : String?
   public let budget : NSNumber?
   public let homepage : String?
-  public let id : String?
+  public let id : NSNumber?
   public let overview: String?
   public let poster : String?
   public let releaseData : String?
