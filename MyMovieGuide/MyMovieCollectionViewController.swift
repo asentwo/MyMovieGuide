@@ -60,7 +60,8 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
     }
 
     }
-    self.navigationItem.title = "Saved Movies"
+    self.navigationItem.title = "My Movies"
+   self.navigationController!.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Avenir Next", size: 20.0)!, NSForegroundColorAttributeName : UIColor.white];
     self.navigationController?.navigationBar.tintColor = UIColor.white
     
     startLoadingScreen()
