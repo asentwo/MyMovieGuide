@@ -8,13 +8,16 @@
 
 import Foundation
 import UIKit
+import CoreData
+import CDAlertView
 
 
 
 class MyMovieCollectionViewController : MasterCollectionViewController {
   
   var movieID: NSNumber!
-  var sampleIDArray:[NSNumber] = [263115, 127380, 321612, 293167, 135397, 335797]
+  var retrievedCoreDataIdArray: [NSManagedObject] = []
+  var movieIDArray: [NSNumber] = []
   var myMovieDataArray:[MovieDetailsData] = []
   
   let myMovieReuseIdentifier = "myMovieReuseIdentifier"
@@ -22,31 +25,77 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+  }
+  
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    guard let appDelegate =
+      UIApplication.shared.delegate as? AppDelegate else {
+        return
+    }
     
+    let managedContext =
+      appDelegate.persistentContainer.viewContext
+    
+    let fetchRequest =
+      NSFetchRequest<NSManagedObject>(entityName: "Movie")
+    
+    do {
+      retrievedCoreDataIdArray = try managedContext.fetch(fetchRequest)
+    } catch let error as NSError {
+      print("Could not fetch. \(error), \(error.userInfo)")
+    }
+    
+    for movie in retrievedCoreDataIdArray {
+      
+      self.movieID = movie.value(forKey: "id") as? NSNumber
+      
+      if self.movieIDArray.contains(self.movieID){
+        print(self.movieIDArray.count)
+      continue
+      } else {
+      
+      self.movieIDArray.append(self.movieID)
+    }
+
+    }
     self.navigationItem.title = "Saved Movies"
     self.navigationController?.navigationBar.tintColor = UIColor.white
     
     startLoadingScreen()
     
-    for sample in sampleIDArray {
-      MovieDetailsData.updateAllData(urlExtension: String(describing:sample), completionHandler: {results
-        in
-        
-        guard let results = results else {
-          return
-        }
-        
-        self.myMovieDataArray.append(results)
-        
-        DispatchQueue.main.async {
+    if movieIDArray.count > 0 {
+      
+      self.myMovieDataArray = []
+     
+      for id in movieIDArray {
+        MovieDetailsData.updateAllData(urlExtension: String(describing:id), completionHandler: {results
+          in
           
-          self.hideLoadingScreen()
-          self.collectionView?.reloadData()
-        }
-        
-      })
+          guard let results = results else {
+            return
+          }
+          
+          self.myMovieDataArray.append(results)
+          
+          DispatchQueue.main.async {
+            
+            self.hideLoadingScreen()
+            self.collectionView?.reloadData()
+          }
+        })
+      }
+    } else {
+      
+      DispatchQueue.main.async {
+        self.hideLoadingScreen()
+        CDAlertView(title: "Sorry", message: "No saved movies", type: .notification).show()
+      }
+      
     }
   }
+  
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
@@ -83,5 +132,4 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
     detailedVC.iD = self.movieID
     
   }
-  
 }

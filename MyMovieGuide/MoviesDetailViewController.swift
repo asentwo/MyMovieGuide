@@ -10,13 +10,16 @@ import Foundation
 import UIKit
 import FadeButton
 import CDAlertView
-
+import CoreData
 
 enum segueController {
   case image
   case cast
   case video
 }
+
+//used to save to core data
+
 
 class MoviesDetailViewController: MasterViewController {
   
@@ -55,6 +58,8 @@ class MoviesDetailViewController: MasterViewController {
   var imageArray: [String] = []
   var videoInfo: VideoResults?
   var homepage : String?
+  var savedCoreDataMovieIdArray: [NSManagedObject] = []
+  
   
   //Segues
   let detailToImageSegue = "detailToImageSegue"
@@ -75,8 +80,6 @@ class MoviesDetailViewController: MasterViewController {
     hideButtons()
     
     if let movieID = self.iD {
-      
-      print(movieID)
       
       MovieDetailsData.updateAllData(urlExtension: "\(movieID)", completionHandler: { results in
         
@@ -259,6 +262,36 @@ class MoviesDetailViewController: MasterViewController {
     videosButton.setBackgroundColor(color: .white, forState: .highlighted)
   }
   
+//MARK: CoreData
+  func saveToCoreData(movieId: Double) {
+    
+    guard let appDelegate =
+      UIApplication.shared.delegate as? AppDelegate else {
+        return
+    }
+
+    let managedContext =
+      appDelegate.persistentContainer.viewContext
+
+    let entity =
+      NSEntityDescription.entity(forEntityName: "Movie",
+                                 in: managedContext)!
+    
+    let id = NSManagedObject(entity: entity,
+                                 insertInto: managedContext)
+
+    id.setValue(movieId, forKeyPath: "id")
+
+    
+    do {
+      try managedContext.save()
+      savedCoreDataMovieIdArray.append(id)
+    } catch let error as NSError {
+      print("Could not save. \(error), \(error.userInfo)")
+    }
+  }
+  
+  
   @IBAction func homepageButtonPressed(_ sender: Any) {
     
     if let homepage = self.homepage {
@@ -273,6 +306,9 @@ class MoviesDetailViewController: MasterViewController {
   }
   
   @IBAction func saveButtonPressed(_ sender: Any) {
+ 
+    saveToCoreData(movieId:Double(self.iD!))
+    
   }
   
   @IBAction func videosButtonPressed(_ sender: Any) {
