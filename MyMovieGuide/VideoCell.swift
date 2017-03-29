@@ -16,7 +16,5 @@ protocol handleVideoData {
 class VideoCell: UITableViewCell {
   
   @IBOutlet weak var videoWebView: UIWebView!
-
- 
   
 }

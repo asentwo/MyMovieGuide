@@ -33,7 +33,7 @@ class UpcomingMoviesViewController: MasterCollectionViewController {
     MovieData.updateAllData(type: "movie", urlExtension: "upcoming", completionHandler: { results in
       
       guard let results = results else {
-        CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .notification).show()
+        CDAlertView(title: "Sorry", message: "There was an error retrieving data", type: .error).show()
         return
       }
       self.upcomingDataArray = results

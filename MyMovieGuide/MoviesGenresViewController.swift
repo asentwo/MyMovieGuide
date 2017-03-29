@@ -29,6 +29,7 @@ class MoviesGenresViewController: MasterViewController {
       
       guard let results = results else {
         print("There was an error retrieving genre data")
+          CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
         return
       }
       self.genreDataArray = results
@@ -40,7 +41,7 @@ class MoviesGenresViewController: MasterViewController {
           GenrePosters.updateGenrePoster(genreID: movieGenreID, urlExtension: "movies", completionHandler: {posters in
             
             guard let posters = posters else {
-              CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .notification).show()
+              CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
               return
             }
             //Must iterate through multiple arrays with many containing the same poster strings

@@ -8,6 +8,7 @@
 
 import Foundation
 import Gloss
+import CDAlertView
 
 public struct Cast: Decodable {
   
@@ -53,14 +54,16 @@ public struct CastData : Decodable {
           
           else {
             print("Error initializing object")
+            CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
         }
         
-       //  print(jsonDictionary)
+        //  print(jsonDictionary)
         
         guard let castData = cast.cast
           else {
             print("No cast data exists")
+            CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
         }
         

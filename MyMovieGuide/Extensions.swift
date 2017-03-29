@@ -73,6 +73,12 @@ extension UIViewController {
     imageView.layer.cornerRadius = 8.0
     imageView.clipsToBounds = true
   }
+  
+  //Used to delay a function
+  func delay(_ delay:Double, closure:@escaping ()->()) {
+    let when = DispatchTime.now() + delay
+    DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
+  }
 }
 
 //Used to determine selected cell in collectionview

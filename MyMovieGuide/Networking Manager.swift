@@ -62,8 +62,8 @@ class NetworkManager {
         
         DispatchQueue.main.async {
           
-          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
-          print("XXXXXError: \(error?.localizedDescription)XXXXXXXX") }
+          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
+          print("Error: \(error?.localizedDescription)") }
       }
     })
     dataTask.resume()
@@ -91,8 +91,8 @@ class NetworkManager {
       } else {
         DispatchQueue.main.async {
           
-          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
-          print("XXXXXError: \(error?.localizedDescription)XXXXXXXX") }
+          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
+          print("Error: \(error?.localizedDescription)") }
       }
     })
     dataTask.resume()
@@ -209,8 +209,8 @@ class NetworkManager {
         } else {
           DispatchQueue.main.async {
             
-            CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
-            print("XXXXXError: \(error?.localizedDescription)XXXXXXXX") }
+            CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
+            print("Error: \(error?.localizedDescription)") }
         }
       })
       dataTask.resume()
@@ -248,15 +248,15 @@ class NetworkManager {
         } else {
           DispatchQueue.main.async {
             
-            CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
-            print("XXXXXError: \(error?.localizedDescription)XXXXXXXX") }        }
+            CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
+            print("Error: \(error?.localizedDescription)") }        }
       })
       dataTask.resume()
     } else {
       
       DispatchQueue.main.async {
         
-        CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
+        CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
         print("There was an error") }    }
   }
   
@@ -276,8 +276,8 @@ class NetworkManager {
       } catch let error as NSError {
         DispatchQueue.main.async {
           
-          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
-          print("XXXXXError: \(error.localizedDescription)XXXXXXXX") }
+          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
+          print("Error: \(error.localizedDescription)") }
       }
     }
     return nil
@@ -309,8 +309,8 @@ class NetworkManager {
       } else {
         DispatchQueue.main.async {
           
-          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
-          print("XXXXXError: \(error?.localizedDescription)XXXXXXXX") }      }
+          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
+          print("Error: \(error?.localizedDescription)") }      }
     })
     dataTask.resume()
   }
@@ -340,8 +340,8 @@ class NetworkManager {
       } else {
         DispatchQueue.main.async {
           
-          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
-          print("XXXXXError: \(error?.localizedDescription)XXXXXXXX") }      }
+          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
+          print("Error: \(error?.localizedDescription)") }      }
     })
     dataTask.resume()
   }

@@ -85,7 +85,7 @@ class MoviesDetailViewController: MasterViewController {
         
         guard let results = results else {
           DispatchQueue.main.async {
-            CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
+            CDAlertView(title: "Sorry", message: "No info available!", type: .error).show()
           }
           return
         }
@@ -101,7 +101,7 @@ class MoviesDetailViewController: MasterViewController {
         CastData.updateAllData(urlExtension: "\(movieID)/credits", completionHandler: { results in
           
           guard let results = results else {
-            CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .notification).show()
+            CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
           }
           self.castArray = results
@@ -230,7 +230,7 @@ class MoviesDetailViewController: MasterViewController {
     else {
       DispatchQueue.main.async {
         self.hideLoadingScreen()
-        CDAlertView(title: "Sorry", message: "No info available!", type: .notification).show()
+        CDAlertView(title: "Sorry", message: "No info available!", type: .error).show()
       }
     }
   }
@@ -304,21 +304,23 @@ class MoviesDetailViewController: MasterViewController {
         do {
           try managedContext.save()
           savedCoreDataMovieIdArray.append(id)
-          CDAlertView(title: "Sucess!", message: "Movie is saved to My Movies!", type: .notification).show()
+          CDAlertView(title: "Sucess", message: "Movie is saved to My Movies!", type: .success).show()
           
         } catch let error as NSError {
           print("Could not save. \(error), \(error.userInfo)")
+            CDAlertView(title: "Sorry", message: "There was an error saving movie!", type: .error).show()
         }
         
       }
       else{
         
         // at least one matching object exists
-        CDAlertView(title: "Sorry", message: "Movie is already saved to My Movies!", type: .notification).show()
+        CDAlertView(title: "Sorry", message: "Movie is already saved to My Movies!", type: .warning).show()
       }
     }
     catch let error as NSError {
       print("Could not fetch \(error), \(error.userInfo)")
+      CDAlertView(title: "Sorry", message: "There was an error!", type: .error).show()
     }
   }
   
@@ -329,10 +331,10 @@ class MoviesDetailViewController: MasterViewController {
       if let url = URL(string: homepage) {
         UIApplication.shared.open(url, options: [:])
       }  else {
-        CDAlertView(title: "Sorry", message: "No web page available!", type: .notification).show()
+        CDAlertView(title: "Sorry", message: "No web page available!", type: .error).show()
       }
     } else {
-      CDAlertView(title: "Sorry", message: "No web page available!", type: .notification).show()
+      CDAlertView(title: "Sorry", message: "No web page available!", type: .error).show()
     }
   }
   
@@ -348,10 +350,10 @@ class MoviesDetailViewController: MasterViewController {
       if videoInfo.videoResults.count != 0 {
         self.videoTapped(videoInfo: videoInfo, segueType: segueController.video)
       } else {
-        CDAlertView(title: "Sorry", message: "No videos available!", type: .notification).show()
+        CDAlertView(title: "Sorry", message: "No videos available!", type: .error).show()
       }
     }else {
-      CDAlertView(title: "Sorry", message: "No videos available!", type: .notification).show()
+      CDAlertView(title: "Sorry", message: "No videos available!", type: .error).show()
     }
   }
 }

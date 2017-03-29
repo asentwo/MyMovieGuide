@@ -45,8 +45,8 @@ extension KnownForCell:  UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = knownForCollectionView.dequeueReusableCell(withReuseIdentifier: knownForReuseIdentifier, for: indexPath) as! KnownForCollectionViewCell
     
-    DispatchQueue.main.async {
       if let knownPoster = self.knownForExtendedArray[indexPath.row].poster{
+        DispatchQueue.main.async {
         cell.knownForImages.sd_setImage(with: URL(string: "\(baseImageURL)\(knownPoster)"))
       }
     }

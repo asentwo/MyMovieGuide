@@ -8,6 +8,7 @@
 
 import Foundation
 import Gloss
+import CDAlertView
 
 
 public struct Genres: Decodable {
@@ -36,7 +37,7 @@ public struct GenreData : Decodable {
     self.name = name
     
   }
-
+  
   
   //urlExtension for Genres: "list"
   static func updateAllData(urlExtension: String, completionHandler:@escaping (_ details: [GenreData]?) -> Void){
@@ -52,6 +53,7 @@ public struct GenreData : Decodable {
           
           else {
             print("Error initializing object")
+            CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
         }
         
@@ -60,6 +62,7 @@ public struct GenreData : Decodable {
         guard let genreData = genres.genres
           else {
             print("No genre data exists")
+            CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
         }
         
@@ -90,11 +93,11 @@ public struct GenrePosters: Decodable, Equatable{
     poster  = "poster_path" <~~ json
   }
   public static func ==(lhs: GenrePosters, rhs: GenrePosters) -> Bool {
-   return lhs.backdrop == rhs.backdrop
+    return lhs.backdrop == rhs.backdrop
     
   }
   
-
+  
   //urlExtension for GenrePosters: "movies"
   static func updateGenrePoster(genreID: NSNumber, urlExtension: String, completionHandler:@escaping (_ details: [String?]?) -> Void){
     
@@ -102,23 +105,25 @@ public struct GenrePosters: Decodable, Equatable{
     
     nm.getJSONData(type:"genre/\(genreID)", urlExtension: urlExtension, completion: {
       data in
-    
+      
       if let jsonDictionary = nm.parseJSONData(data)
       {
         guard let genrePosters = ResultsGenrePosters(json: jsonDictionary)
           
           else {
             print("Error initializing object")
+            CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
         }
-
+        
         guard let posters = genrePosters.results
           
           else {
             print("No data exists for genre: \(genreID)")
+            CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
         }
-     
+        
         let postersArray = posters.map {$0.backdrop} // converts custom object "GenrePosters" to String(backdrop value)
         completionHandler(postersArray)
       }

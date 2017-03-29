@@ -8,7 +8,7 @@
 
 import Foundation
 import Gloss
-
+import CDAlertView
 
 
 // Used for Popular/ Now Playing and Upcoming Movie Objects
@@ -34,7 +34,7 @@ public struct MovieData: Decodable, Equatable {
     
     self.poster  = "poster_path" <~~ json
     self.overView = "overview" <~~ json
-    self.title = "title" <~~ json 
+    self.title = "title" <~~ json
     self.backdrop = "backdrop_path" <~~ json
     self.id = "id" <~~ json
   }
@@ -61,16 +61,18 @@ public struct MovieData: Decodable, Equatable {
           
           else {
             print("Error initializing object")
+            CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
         }
-
-          guard let movieData = movieResults.results
-            else {
+        
+        guard let movieData = movieResults.results
+          else {
             print("No such item")
+            CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
         }
-     //   print(movieData)
-
+        //   print(movieData)
+        
         completionHandler(movieData)
       }
     })
@@ -81,7 +83,7 @@ public struct MovieData: Decodable, Equatable {
     let nm = NetworkManager.sharedManager
     
     nm.getMovieSearchData(name: name, completion: {
-    
+      
       
       data in
       
@@ -91,20 +93,22 @@ public struct MovieData: Decodable, Equatable {
           
           else {
             print("Error initializing object")
+            CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
         }
         
         guard let movieData = movieResults.results
           else {
             print("No such item")
+            CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
         }
-         //  print(movieData)
+        //  print(movieData)
         
         completionHandler(movieData)
       }
-
-    
+      
+      
     })
     
     

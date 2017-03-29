@@ -56,7 +56,10 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
       retrievedCoreDataIdArray = try managedContext.fetch(fetchRequest)
     } catch let error as NSError {
       print("Could not fetch. \(error), \(error.userInfo)")
+      CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
     }
+    
+    self.movieIDArray = []
     
     for movie in retrievedCoreDataIdArray {
       
@@ -84,7 +87,6 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
           guard let results = results else {
             return
           }
-          
           self.myMovieDataArray.append(results)
           
           DispatchQueue.main.async {
@@ -98,9 +100,8 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
       
       DispatchQueue.main.async {
         self.hideLoadingScreen()
-        CDAlertView(title: "Sorry", message: "No saved movies", type: .notification).show()
+        CDAlertView(title: "Sorry", message: "No saved movies", type: .error).show()
       }
-      
     }
   }
   
@@ -166,22 +167,23 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
     
     do {
       try moc.save()
-   //   print("core data delete saved!")
+      //   print("core data delete saved!")
     } catch let error as NSError  {
       print("Could not save \(error), \(error.userInfo)")
+      CDAlertView(title: "Sorry", message: "There was an error!", type: .error).show()
     } catch {
       
     }
     
   }
   
-
+  
   @IBAction func deleteButtonPressed(_ sender: Any) {
     
     //Find index path of current cell (NOTE: a UICollectionView extentsion is in use)
     var indexPath:IndexPath? = nil
     indexPath = self.collectionView?.indexPathForView(view: sender as AnyObject)
-  //  print("index path : \(indexPath)")
+    //  print("index path : \(indexPath)")
     
     //Find the id of the movie that will be deleted
     movieToDelete = myMovieDataArray[(indexPath?.row)!]
@@ -190,8 +192,8 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
     deleteFromCoreData(movieId: Double((movieToDelete?.id)!))
     
     //filter out deleted movie from array
-   myMovieDataArray = myMovieDataArray.filter({$0.id != movieToDelete!.id})
-
+    myMovieDataArray = myMovieDataArray.filter({$0.id != movieToDelete!.id})
+    
     
     DispatchQueue.main.async {
       self.collectionView?.reloadData()

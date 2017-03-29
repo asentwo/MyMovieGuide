@@ -34,7 +34,7 @@ class MoviesVideoTableViewController: MasterViewController {
         if let youtubeURL = URL(string: "https://www.youtube.com/embed/\(videoData.key)") {
           self.videoURLArray.append(youtubeURL)
         } else {
-        CDAlertView(title: "Sorry", message: "No videos available!", type: .notification).show()
+        CDAlertView(title: "Sorry", message: "No videos available!", type: .error).show()
         }
          hideLoadingScreen()
         videoTableView.reloadData()

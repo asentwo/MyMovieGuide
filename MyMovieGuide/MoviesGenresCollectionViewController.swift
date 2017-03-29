@@ -42,7 +42,7 @@ class MoviesGenresCollectionViewController: MasterViewController {
       
       MovieData.updateAllData(type:"genre", urlExtension: "\(id)/movies", completionHandler: {results in
         guard let results = results else {
-          CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .notification).show()
+          CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
           return
         }
         self.genreDataArray = results
@@ -60,7 +60,7 @@ class MoviesGenresCollectionViewController: MasterViewController {
     MovieData.updateSearchData(name:(self.searchMoviesBar.text?.replacingOccurrences(of: " ", with: "+").lowercased())!, completionHandler: {results in
       
       guard let results = results else {
-        CDAlertView(title: "Sorry", message: "No results found", type: .notification).show()
+        CDAlertView(title: "Sorry", message: "No results found!", type: .error).show()
         return
       }
       self.genreDataArray.removeAll()

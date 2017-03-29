@@ -68,7 +68,7 @@ class PeopleDetailedViewController : MasterViewController {
       PeopleData.updateAllData(urlExtension: "\(personID)", completionHandler: { results in
         
         guard let results = results else {
-          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
+          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
           return
         }
         self.profileData = results
@@ -88,7 +88,6 @@ class PeopleDetailedViewController : MasterViewController {
           } else {
             self.birthplaceLabel.text = "N/A"
           }
-          
           if self.profileData?.bio != nil {
             if let bio = self.profileData?.bio {
               self.bioLabel.text = bio
@@ -98,41 +97,39 @@ class PeopleDetailedViewController : MasterViewController {
             self.extraImagesArray = extraImages.images
             let extraImages = extraImages.images
             for image in extraImages {
-              
               self.updateImage(ImageType: DownloadPic.personal, ImageString: image.filePath, completion: {_ in
-                
               })
             }
           }
-          CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
-            guard let results = results else {
-              CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .notification).show()
-              return
-            }
-            self.knownForData = results
-            if let knownFor = self.knownForData?.castExtended {
-              self.knownForExtendedArray = knownFor
-              for knownForImage in knownFor {
-                if let poster = knownForImage.poster {
-                  self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster, completion: {_ in
-                    
-                    DispatchQueue.main.async {
-                      if let bg = self.knownForArray.first {
-                        self.backgroundPic.image = bg
-                      }
-                      self.hideLoadingScreen()
-                      self.showAllLabels()
-                      self.peopleImagesTableView.reloadData()
-                      self.knownForTableView.reloadData()
-                    }
-                  })
-                }
-              }
-            }
-          })
         }
       }
       )
+      
+      CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
+        guard let results = results else {
+          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
+          return
+        }
+        self.knownForData = results
+        if let knownFor = self.knownForData?.castExtended {
+          self.knownForExtendedArray = knownFor
+          for knownForImage in knownFor {
+            if let poster = knownForImage.poster {
+              self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster, completion: {_ in
+                DispatchQueue.main.async {
+                  if let bg = self.knownForArray.first {
+                    self.backgroundPic.image = bg
+                  }
+                  self.hideLoadingScreen()
+                  self.showAllLabels()
+                  self.knownForTableView.reloadData()
+                  self.peopleImagesTableView.reloadData()
+                }
+              })
+            }
+          }
+        }
+      })
     }
   }
   

@@ -36,7 +36,7 @@ class InTheatresMoviesViewController: MasterCollectionViewController {
     MovieData.updateAllData(type:"movie", urlExtension: "now_playing", completionHandler: {results in
       
       guard let results = results else {
-        CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .notification).show()
+        CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
         return
       }
       self.inTheatresDataArray = results

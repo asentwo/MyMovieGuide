@@ -8,6 +8,7 @@
 
 import Foundation
 import Gloss
+import CDAlertView
 
 
 //MARK: Release (Ratings)
@@ -50,7 +51,7 @@ public struct VideoResults : Decodable {
     
     self.videoResults = videoResults
   }
- }
+}
 
 
 public struct VideoData : Decodable {
@@ -83,7 +84,7 @@ public struct ImageResults : Decodable {
   public let backdropImages : [BackdropData]
   
   public init? (json: JSON) {
-  
+    
     guard let posterImages : [PosterData] = "posters" <~~ json,
       let backdropImages : [BackdropData] = "backdrops" <~~ json
       else {return nil}
@@ -208,6 +209,7 @@ public struct MovieDetailsData: Decodable {
           
           else {
             print("Error initializing object")
+            CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
         }
         

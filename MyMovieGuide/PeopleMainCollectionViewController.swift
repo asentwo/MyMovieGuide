@@ -40,7 +40,7 @@ class PeopleMainCollectionViewController : MasterViewController {
     PeopleMainData.updateAllData(urlExtension: "popular", completionHandler: {results in
       
       guard let results = results else {
-        CDAlertView(title: "Sorry", message: "There was an error retrieving data", type: .notification).show()
+        CDAlertView(title: "Sorry", message: "There was an error retrieving data", type: .error).show()
       return
       }
       self.peopleArray = results
@@ -68,7 +68,7 @@ class PeopleMainCollectionViewController : MasterViewController {
       PeopleData.updateSearchData(name: (self.peopleSearchTextFieldInput.text?.replacingOccurrences(of: " ", with: "+").lowercased())!, completionHandler: {results in
         
         guard let results = results else {
-          CDAlertView(title: "Sorry", message: "No results found", type: .notification).show()
+          CDAlertView(title: "Sorry", message: "No results found", type: .error).show()
           
           return
         }
@@ -98,7 +98,7 @@ class PeopleMainCollectionViewController : MasterViewController {
             DispatchQueue.main.async {
               self.peopleIDArray.removeAll()
               self.hideLoadingScreen()
-              CDAlertView(title: "Sorry", message: "No results found", type: .notification).show()
+              CDAlertView(title: "Sorry", message: "No results found", type: .error).show()
             }
             
           }
@@ -106,7 +106,7 @@ class PeopleMainCollectionViewController : MasterViewController {
           DispatchQueue.main.async {
             self.peopleIDArray.removeAll()
             self.hideLoadingScreen()
-            CDAlertView(title: "Sorry", message: "No results found", type: .notification).show()
+            CDAlertView(title: "Sorry", message: "No results found", type: .error).show()
           }
         }
       })
