@@ -50,7 +50,6 @@ class MasterViewController: UIViewController {
     self.loadingView.isHidden = true
     self.loadingView.stopAnimating()
   }
-  
 }
 
 

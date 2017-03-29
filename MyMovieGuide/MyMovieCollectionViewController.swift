@@ -59,6 +59,7 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
       CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
     }
     
+    //clear array each time to avoid duplcates
     self.movieIDArray = []
     
     for movie in retrievedCoreDataIdArray {
@@ -66,21 +67,20 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
       self.movieID = movie.value(forKey: "id") as? NSNumber
       
       if self.movieIDArray.contains(self.movieID){
-        print(self.movieIDArray.count)
         continue
       } else {
-        
         self.movieIDArray.append(self.movieID)
       }
-      
     }
     
     if movieIDArray.count > 0 {
       
       //clear array each time to avoid duplcates
       self.myMovieDataArray = []
-      
-      for id in movieIDArray {
+    
+      let group = DispatchGroup()
+       for id in movieIDArray {
+        group.enter()
         MovieDetailsData.updateAllData(urlExtension: String(describing:id), completionHandler: {results
           in
           
@@ -88,13 +88,13 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
             return
           }
           self.myMovieDataArray.append(results)
-          
-          DispatchQueue.main.async {
-            
-            self.hideLoadingScreen()
-            self.collectionView?.reloadData()
-          }
+
+          group.leave()
         })
+      }
+      group.notify(queue: DispatchQueue.main) {
+        self.hideLoadingScreen()
+        self.collectionView?.reloadData()
       }
     } else {
       

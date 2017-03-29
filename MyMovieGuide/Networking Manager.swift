@@ -38,8 +38,8 @@ class NetworkManager {
   
   func getJSONData(type: String, urlExtension: String, completion: @escaping JSONData) {
     
-    configuration.timeoutIntervalForRequest = 5
-    configuration.timeoutIntervalForResource = 5
+    configuration.timeoutIntervalForRequest = 10
+    configuration.timeoutIntervalForResource = 10
     
     let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&region=US&append_to_response=videos,images,releases")! )
     
@@ -101,8 +101,8 @@ class NetworkManager {
   //Search Requests
   func getPeopleSearchData (name: String, completion: @escaping JSONData) {
     
-    configuration.timeoutIntervalForRequest = 5
-    configuration.timeoutIntervalForResource = 5
+    configuration.timeoutIntervalForRequest = 10
+    configuration.timeoutIntervalForResource = 10
     
     if let url = URL(string:"\(baseURL)search/person?api_key=\(apiKey)&language=en-US&query=\(name)&page=1&include_adult=false") {
       
@@ -140,8 +140,8 @@ class NetworkManager {
   
   func getMovieSearchData (name: String, completion: @escaping JSONData) {
     
-    configuration.timeoutIntervalForRequest = 5
-    configuration.timeoutIntervalForResource = 5
+    configuration.timeoutIntervalForRequest = 10
+    configuration.timeoutIntervalForResource = 10
     
     if let url = URL(string:"\(baseURL)search/movie?api_key=\(apiKey)&language=en-US&query=\(name)&page=1&include_adult=false") {
       
