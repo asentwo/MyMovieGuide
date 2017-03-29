@@ -185,7 +185,7 @@ class MoviesDetailViewController: MasterViewController {
                     }
                     self.showButtons()
                     self.lineImage.image = #imageLiteral(resourceName: "Line")
-                      self.userRatingsCat.text = "USER RATINGS"
+                    self.userRatingsCat.text = "USER RATINGS"
                     self.runtimeCat.text = "RUNTIME"
                     self.genreCat.text = "GENRE"
                     self.ratingCat.text = "RATING"
@@ -243,7 +243,7 @@ class MoviesDetailViewController: MasterViewController {
   
   func showButtons () {
     
-
+    
     hompageButton.titleLabel?.minimumScaleFactor = 0.5
     hompageButton.isHidden =  false
     saveButton.isHidden = false
@@ -262,32 +262,63 @@ class MoviesDetailViewController: MasterViewController {
     videosButton.setBackgroundColor(color: .white, forState: .highlighted)
   }
   
-//MARK: CoreData
+  //MARK: CoreData
+  func getContext () -> NSManagedObjectContext {
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    return appDelegate.persistentContainer.viewContext
+  }
+  
   func saveToCoreData(movieId: Double) {
     
-    guard let appDelegate =
-      UIApplication.shared.delegate as? AppDelegate else {
-        return
-    }
-
-    let managedContext =
-      appDelegate.persistentContainer.viewContext
-
-    let entity =
-      NSEntityDescription.entity(forEntityName: "Movie",
-                                 in: managedContext)!
+    let managedObjectContext = getContext()
+    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Movie")
+    let predicate = NSPredicate(format: "id == \(movieId)", movieId)
+    request.predicate = predicate
+    request.fetchLimit = 1
     
-    let id = NSManagedObject(entity: entity,
+    do{
+      let count = try managedObjectContext.count(for: request)
+      
+      //Check to see if current object is already saved to coreData
+      if(count == 0){
+        
+        // no matching object currently saved
+        guard let appDelegate =
+          UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext =
+          appDelegate.persistentContainer.viewContext
+        
+        let entity =
+          NSEntityDescription.entity(forEntityName: "Movie",
+                                     in: managedContext)!
+        
+        let id = NSManagedObject(entity: entity,
                                  insertInto: managedContext)
-
-    id.setValue(movieId, forKeyPath: "id")
-
-    
-    do {
-      try managedContext.save()
-      savedCoreDataMovieIdArray.append(id)
-    } catch let error as NSError {
-      print("Could not save. \(error), \(error.userInfo)")
+        
+        id.setValue(movieId, forKeyPath: "id")
+        
+        
+        do {
+          try managedContext.save()
+          savedCoreDataMovieIdArray.append(id)
+          CDAlertView(title: "Sucess!", message: "Movie is saved to My Movies!", type: .notification).show()
+          
+        } catch let error as NSError {
+          print("Could not save. \(error), \(error.userInfo)")
+        }
+        
+      }
+      else{
+        
+        // at least one matching object exists
+        CDAlertView(title: "Sorry", message: "Movie is already saved to My Movies!", type: .notification).show()
+      }
+    }
+    catch let error as NSError {
+      print("Could not fetch \(error), \(error.userInfo)")
     }
   }
   
@@ -306,7 +337,7 @@ class MoviesDetailViewController: MasterViewController {
   }
   
   @IBAction func saveButtonPressed(_ sender: Any) {
- 
+    
     saveToCoreData(movieId:Double(self.iD!))
     
   }
