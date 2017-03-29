@@ -110,8 +110,6 @@ class PeopleDetailedViewController : MasterViewController {
             }
             group.notify(queue: DispatchQueue.main) {
               self.peopleImagesTableView.reloadData()
-              self.knownForTableView.reloadData()
-              
             }
           }
         }
@@ -141,10 +139,7 @@ class PeopleDetailedViewController : MasterViewController {
               }
               self.hideLoadingScreen()
               self.showAllLabels()
-              
-              self.peopleImagesTableView.reloadData()
               self.knownForTableView.reloadData()
-              
             }
           }
         }

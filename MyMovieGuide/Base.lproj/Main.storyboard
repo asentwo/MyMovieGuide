@@ -369,11 +369,11 @@
                         <viewControllerLayoutGuide type="bottom" id="W5S-Uy-yOx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Yri-dY-xOZ">
-                        <rect key="frame" x="0.0" y="64" width="375" height="1187"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="887"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zrE-h8-7NQ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="1187"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="887"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -922,12 +922,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94n-CP-Dwu">
-                                            <rect key="frame" x="9" y="0.0" width="36" height="36"/>
+                                            <rect key="frame" x="11" y="0.0" width="36" height="36"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="94n-CP-Dwu" secondAttribute="height" multiplier="1:1" id="YyL-La-dga"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                             <size key="titleShadowOffset" width="1" height="0.0"/>
                                             <state key="normal" title="  X">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -943,7 +943,7 @@
                                 <constraints>
                                     <constraint firstItem="94n-CP-Dwu" firstAttribute="top" secondItem="izV-aY-Brn" secondAttribute="top" id="9ri-cv-bxU"/>
                                     <constraint firstItem="gWx-qW-rL9" firstAttribute="top" secondItem="izV-aY-Brn" secondAttribute="top" id="Ec7-kD-vh4"/>
-                                    <constraint firstAttribute="trailing" secondItem="94n-CP-Dwu" secondAttribute="trailing" constant="5" id="UXx-Q3-9Yl"/>
+                                    <constraint firstAttribute="trailing" secondItem="94n-CP-Dwu" secondAttribute="trailing" constant="3" id="UXx-Q3-9Yl"/>
                                     <constraint firstAttribute="bottom" secondItem="gWx-qW-rL9" secondAttribute="bottom" id="eyd-df-6y0"/>
                                     <constraint firstAttribute="trailing" secondItem="gWx-qW-rL9" secondAttribute="trailing" id="tNQ-Pt-cyx"/>
                                     <constraint firstItem="gWx-qW-rL9" firstAttribute="leading" secondItem="izV-aY-Brn" secondAttribute="leading" id="xwR-xt-TD3"/>
@@ -1089,20 +1089,20 @@
                         <viewControllerLayoutGuide type="bottom" id="StL-KK-dTn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iKf-Ig-wlf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="987"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="jxj-zX-VVg">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="987"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="videoCell" rowHeight="220" id="Koc-ZY-BD4" customClass="VideoCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="220"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Koc-ZY-BD4" id="38M-Q2-K3v">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="219"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="219.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2dD-bm-vzL">
@@ -1203,7 +1203,7 @@
                                                         <rect key="frame" x="0.0" y="10" width="335" height="150"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nhy-Nd-T5V" id="8YV-m8-xH9">
-                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="149"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="149.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9rm-sT-wAu" userLabel="KnownForCollectionView">
@@ -1217,7 +1217,7 @@
                                                                     </collectionViewFlowLayout>
                                                                     <cells>
                                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="knownForCollectCell" id="VHa-4k-YDa" userLabel="knownForCollectCell" customClass="KnownForCollectionViewCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                                                                            <rect key="frame" x="0.0" y="-0.5" width="100" height="150"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
@@ -1322,10 +1322,10 @@
                                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="imagesCell" rowHeight="150" id="cmt-HZ-Ag5" customClass="ImagesPeopleCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="56" width="335" height="150"/>
+                                                        <rect key="frame" x="0.0" y="55.5" width="335" height="150"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cmt-HZ-Ag5" id="PwQ-5Y-w7Y">
-                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="149"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="149.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7je-ZN-Upz">
@@ -1339,7 +1339,7 @@
                                                                     </collectionViewFlowLayout>
                                                                     <cells>
                                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imagesCollectCell" id="luF-w7-OXJ" customClass="PeopleImagesCollectionViewCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                                                                            <rect key="frame" x="0.0" y="-0.5" width="100" height="150"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
@@ -1574,7 +1574,7 @@
         <image name="woman-man-7 white" width="29" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="FRr-Ru-zVP"/>
         <segue reference="SqG-CW-LsE"/>
-        <segue reference="37y-2W-P8g"/>
     </inferredMetricsTieBreakers>
 </document>
