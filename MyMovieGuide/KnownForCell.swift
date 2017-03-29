@@ -39,6 +39,7 @@ class KnownForCell : UITableViewCell {
 extension KnownForCell:  UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
     return knownForArray.count
   }
   

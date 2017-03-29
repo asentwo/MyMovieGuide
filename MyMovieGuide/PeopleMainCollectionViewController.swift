@@ -137,7 +137,6 @@ extension  PeopleMainCollectionViewController : UICollectionViewDataSource {
     if let name = peopleArray[indexPath.row].name {
       cell.peopleMainLabel.text = name
     }
-    
     return cell
   }
 }
@@ -148,8 +147,7 @@ extension PeopleMainCollectionViewController : UICollectionViewDelegate{
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     self.peopleID = peopleArray[indexPath.row].id
-    performSegue(withIdentifier: peopleToDetailSegue, sender: self)
-    
+    performSegue(withIdentifier: peopleToDetailSegue, sender: self)    
   }
 }
 

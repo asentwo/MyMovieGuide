@@ -45,11 +45,7 @@ extension ExtraImagesCell : UICollectionViewDataSource {
     let cell = extraImagesCollectionView.dequeueReusableCell(withReuseIdentifier: extraImageReuseIdentifier, for: indexPath) as! extraImagesCollectionViewCell
     
     if let xtraImage = extraImagesArray {
-      
-      DispatchQueue.main.async {
-        cell.extraImages.sd_setImage(with: URL(string: "\(baseImageURL)\(xtraImage[indexPath.row].filePath)"))
-        
-      }
+      cell.extraImages.sd_setImage(with: URL(string: "\(baseImageURL)\(xtraImage[indexPath.row].filePath)"))
     }
     return cell
   }

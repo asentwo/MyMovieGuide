@@ -58,6 +58,10 @@ class PeopleDetailedViewController : MasterViewController {
     super.viewDidLoad()
     
     
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    
     self.hideAllLabels()
     self.navigationController?.navigationBar.tintColor = UIColor.white
     startLoadingScreen()
@@ -95,10 +99,19 @@ class PeopleDetailedViewController : MasterViewController {
           }
           if let extraImages = self.profileData?.images{
             self.extraImagesArray = extraImages.images
-            let extraImages = extraImages.images
-            for image in extraImages {
+            let extraMovieImages = extraImages.images
+            
+            let group = DispatchGroup()
+            for image in extraMovieImages {
+              group.enter()
               self.updateImage(ImageType: DownloadPic.personal, ImageString: image.filePath, completion: {_ in
+                group.leave()
               })
+            }
+            group.notify(queue: DispatchQueue.main) {
+              self.peopleImagesTableView.reloadData()
+              self.knownForTableView.reloadData()
+              
             }
           }
         }
@@ -113,19 +126,25 @@ class PeopleDetailedViewController : MasterViewController {
         self.knownForData = results
         if let knownFor = self.knownForData?.castExtended {
           self.knownForExtendedArray = knownFor
+          
+          let group = DispatchGroup()
           for knownForImage in knownFor {
             if let poster = knownForImage.poster {
+              group.enter()
               self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster, completion: {_ in
-                DispatchQueue.main.async {
-                  if let bg = self.knownForArray.first {
-                    self.backgroundPic.image = bg
-                  }
-                  self.hideLoadingScreen()
-                  self.showAllLabels()
-                  self.knownForTableView.reloadData()
-                  self.peopleImagesTableView.reloadData()
-                }
+                group.leave()
               })
+            }
+            group.notify(queue: DispatchQueue.main) {
+              if let bg = self.knownForArray.first {
+                self.backgroundPic.image = bg
+              }
+              self.hideLoadingScreen()
+              self.showAllLabels()
+              
+              self.peopleImagesTableView.reloadData()
+              self.knownForTableView.reloadData()
+              
             }
           }
         }
@@ -149,6 +168,7 @@ class PeopleDetailedViewController : MasterViewController {
     })
   }
   
+  
   func hideAllLabels() {
     self.knownForTableView.isHidden = true
     self.filmographyLabel.isHidden = true
@@ -170,6 +190,18 @@ class PeopleDetailedViewController : MasterViewController {
     self.birthdayCatLabel.isHidden = false
     self.birthplaceCatLabel.isHidden = false
   }
+  
+  
+  func loopThroughImages(ImageType: DownloadPic, ImageString: String,  completion: () -> Void ) {
+    for i in 0 ..< 40 {
+      self.updateImage(ImageType: ImageType, ImageString: ImageString, completion: {_ in
+        print(i)
+      })
+    }
+    completion()
+  }
+  
+  
 }
 
 extension PeopleDetailedViewController : UITableViewDataSource {
@@ -207,19 +239,14 @@ extension PeopleDetailedViewController : UITableViewDataSource {
         cell.imageDelegate = self
         cell.extraPhotosArray = self.personalImagesArray
         cell.profileImagesArray = self.extraImagesArray
-        
-        DispatchQueue.main.async {
-          cell.extraPeopleImagesCollectionView.reloadData()
-        }
-        
         return cell
-     
+        
       } else {
         self.peopleImagesTableView.isHidden = true
       }
       
       return cell
-  
+      
     } else {
       
       if knownForArray.count > 0 {
@@ -228,12 +255,9 @@ extension PeopleDetailedViewController : UITableViewDataSource {
         cell.imageDelegete = self
         cell.knownForExtendedArray = self.knownForExtendedArray
         cell.knownForArray = self.knownForArray
-        DispatchQueue.main.async {
-          cell.knownForCollectionView.reloadData()
-        }
-  
+        
         return cell
-     
+        
       } else {
         self.filmographyLabel.isHidden = true
         self.knownForTableView.isHidden = true

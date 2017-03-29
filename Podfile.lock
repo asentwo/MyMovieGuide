@@ -1,9 +1,10 @@
 PODS:
   - CDAlertView (0.6.0)
   - FadeButton (2.0.0)
-  - Gloss (1.2.1)
+  - Gloss (1.2.2)
   - IQKeyboardManagerSwift (4.0.8)
   - ParticlesLoadingView (0.4)
+  - RAMAnimatedTabBarController (2.0.13)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -14,16 +15,18 @@ DEPENDENCIES:
   - Gloss
   - IQKeyboardManagerSwift
   - ParticlesLoadingView
+  - RAMAnimatedTabBarController (~> 2.0.13)
   - SDWebImage
 
 SPEC CHECKSUMS:
   CDAlertView: e6f365fa0fac7349197e7ea4bd7810c069215cf4
   FadeButton: ff59c148ad6bf3b26f8012715ad4aade5f9c0006
-  Gloss: 9ab33b8ede01e4232571d43a6bf9259b85d1de69
+  Gloss: 2888941ffde93ae173da737414ba7193e4347d86
   IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
   ParticlesLoadingView: 48e27632598bb27f23077fce88974729fca7b1d4
+  RAMAnimatedTabBarController: 2510f3b66954c3f77ea1042a35d34df8f5f3b604
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
 
-PODFILE CHECKSUM: 43f8d1db78ff1a58160d27d040822cfdfb919a1e
+PODFILE CHECKSUM: 92feccb780b54550794ff33e52f3cc5f3df088ed
 
 COCOAPODS: 1.2.0.beta.1
