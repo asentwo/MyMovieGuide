@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AnimatedSegmentSwitch
+
 
 
 enum Selection: Int {
@@ -21,7 +23,7 @@ class MoviesMasterViewController: UIViewController {
   
   @IBOutlet weak var segmentedController: UISegmentedControl!
   
-  
+   let segmentedSwitch = AnimatedSegmentSwitch()
   let networkSessionCreator = NetworkManager.sharedManager
   private var viewControllers = [Selection: UIViewController]()// referencing enum "Selection"
   
@@ -89,19 +91,39 @@ class MoviesMasterViewController: UIViewController {
   //Setup segmentedController catagories
   private func setupSegmentedController() {
     
-    let newFont = NSDictionary(object: UIFont(name: "Avenir Next", size: 15.0)!, forKey: NSFontAttributeName as NSCopying)
-    segmentedController.setTitleTextAttributes(newFont as [NSObject : AnyObject] , for: .normal)
+    segmentedSwitch.frame = CGRect(x: 50.0, y: 20.0, width: self.view.bounds.width - 100.0, height: 30.0)
+    segmentedSwitch.autoresizingMask = [.FlexibleWidth]
+    segmentedSwitch.backgroundColor = UIColor(red: 85.0/255.0, green: 172.0/255.0, blue: 238.0/255.0, alpha: 1)
+    segmentedSwitch.selectedTitleColor = UIColor(red: 85.0/255.0, green: 172.0/255.0, blue: 238.0/255.0, alpha: 1)
+    segmentedSwitch.titleColor = .whiteColor()
+    segmentedSwitch.font = UIFont(name: "Avenir Next", size:15.0)
+    segmentedSwitch.thumbColor = .whiteColor()
+    segmentedSwitch.items = ["Genres", "In Theatres", "Upcoming"]
+    segmentedSwitch.addTarget(self, action: "segmentValueDidChange:", forControlEvents: .ValueChanged)
     
-    segmentedController.removeAllSegments()
-    segmentedController.insertSegment(withTitle: "Genres", at: 0, animated: false)
-    segmentedController.insertSegment(withTitle: "In Theatres", at: 1, animated: false)
-    segmentedController.insertSegment(withTitle: "Upcoming", at: 2, animated: false)
-    segmentedController.addTarget(self, action: #selector(selectionDidChange(_:)), for: .valueChanged)
-    
-    //Select initial segment (Home View)
-    segmentedController.selectedSegmentIndex = 0
+    view.addSubview(segmentedSwitch)
+//    let newFont = NSDictionary(object: UIFont(name: "Avenir Next", size: 15.0)!, forKey: NSFontAttributeName as NSCopying)
+//    segmentedController.setTitleTextAttributes(newFont as [NSObject : AnyObject] , for: .normal)
+//    
+//    segmentedController.removeAllSegments()
+//    segmentedController.insertSegment(withTitle: "Genres", at: 0, animated: false)
+//    segmentedController.insertSegment(withTitle: "In Theatres", at: 1, animated: false)
+//    segmentedController.insertSegment(withTitle: "Upcoming", at: 2, animated: false)
+//    segmentedController.addTarget(self, action: #selector(selectionDidChange(_:)), for: .valueChanged)
+//    
+//    //Select initial segment (Home View)
+//    segmentedController.selectedSegmentIndex = 0
     
   }
+  
+  
+ 
+
+  
+  
+  
+  
+  
   
   //MARK: Actions
   func selectionDidChange(_ sender: UISegmentedControl) {
