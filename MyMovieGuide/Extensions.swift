@@ -73,9 +73,14 @@ extension UIViewController {
     imageView.layer.cornerRadius = 8.0
     imageView.clipsToBounds = true
   }
-  
-  
-  
+}
+
+//Used to determine selected cell in collectionview
+extension UICollectionView {
+  func indexPathForView(view: AnyObject) -> IndexPath? {
+    let originInCollectioView = self.convert(CGPoint.zero, from: (view as! UIView))
+    return self.indexPathForItem(at: originInCollectioView) as IndexPath?
+  }
 }
 
 

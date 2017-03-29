@@ -19,6 +19,7 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
   var retrievedCoreDataIdArray: [NSManagedObject] = []
   var movieIDArray: [NSNumber] = []
   var myMovieDataArray:[MovieDetailsData] = []
+  var movieToDelete: MovieDetailsData?
   
   let myMovieReuseIdentifier = "myMovieReuseIdentifier"
   let myMovieToDetailSegue = "myMovieToDetailSegue"
@@ -30,6 +31,16 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    
+    startLoadingScreen()
+    
+    //Modify Navigation Bar
+    self.navigationItem.title = "My Movies"
+    self.navigationController!.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Avenir Next", size: 20.0)!, NSForegroundColorAttributeName : UIColor.white];
+    self.navigationController?.navigationBar.tintColor = UIColor.white
+    
+    
+    //Retrieve saved movie ids from coreData
     guard let appDelegate =
       UIApplication.shared.delegate as? AppDelegate else {
         return
@@ -53,23 +64,19 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
       
       if self.movieIDArray.contains(self.movieID){
         print(self.movieIDArray.count)
-      continue
+        continue
       } else {
+        
+        self.movieIDArray.append(self.movieID)
+      }
       
-      self.movieIDArray.append(self.movieID)
     }
-
-    }
-    self.navigationItem.title = "My Movies"
-   self.navigationController!.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Avenir Next", size: 20.0)!, NSForegroundColorAttributeName : UIColor.white];
-    self.navigationController?.navigationBar.tintColor = UIColor.white
-    
-    startLoadingScreen()
     
     if movieIDArray.count > 0 {
       
+      //clear array each time to avoid duplcates
       self.myMovieDataArray = []
-     
+      
       for id in movieIDArray {
         MovieDetailsData.updateAllData(urlExtension: String(describing:id), completionHandler: {results
           in
@@ -133,4 +140,62 @@ class MyMovieCollectionViewController : MasterCollectionViewController {
     detailedVC.iD = self.movieID
     
   }
+  
+  
+  // MARK: CoreData
+  func getContext () -> NSManagedObjectContext {
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    return appDelegate.persistentContainer.viewContext
+  }
+  
+  func deleteFromCoreData(movieId: Double) -> Void {
+    let moc = getContext()
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Movie")
+    
+    let result = try? moc.fetch(fetchRequest)
+    let resultData = result as! [Movie]
+    
+    for object in resultData {
+      
+      if movieId == object.id {
+        
+        moc.delete(object)
+        print(object)
+      }
+    }
+    
+    do {
+      try moc.save()
+   //   print("core data delete saved!")
+    } catch let error as NSError  {
+      print("Could not save \(error), \(error.userInfo)")
+    } catch {
+      
+    }
+    
+  }
+  
+
+  @IBAction func deleteButtonPressed(_ sender: Any) {
+    
+    //Find index path of current cell (NOTE: a UICollectionView extentsion is in use)
+    var indexPath:IndexPath? = nil
+    indexPath = self.collectionView?.indexPathForView(view: sender as AnyObject)
+  //  print("index path : \(indexPath)")
+    
+    //Find the id of the movie that will be deleted
+    movieToDelete = myMovieDataArray[(indexPath?.row)!]
+    
+    //Delete the movie based on id from coreData
+    deleteFromCoreData(movieId: Double((movieToDelete?.id)!))
+    
+    //filter out deleted movie from array
+   myMovieDataArray = myMovieDataArray.filter({$0.id != movieToDelete!.id})
+
+    
+    DispatchQueue.main.async {
+      self.collectionView?.reloadData()
+    }
+  }
+  
 }
