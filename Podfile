@@ -9,5 +9,6 @@ pod 'ParticlesLoadingView'
 pod 'CDAlertView'
 pod 'IQKeyboardManagerSwift'
 pod 'RAMAnimatedTabBarController', '~> 2.0.13'
+pod 'AnimatedSegmentSwitch'
 end
 

@@ -860,7 +860,11 @@
         <scene sceneID="SIh-l3-jmA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GDN-5t-Sqn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="People" image="woman-man-7 white" selectedImage="woman-man-7 white" id="RDM-yM-e9Q"/>
+                    <tabBarItem key="tabBarItem" title="People" image="woman-man-7 white" selectedImage="woman-man-7 white" id="RDM-yM-e9Q" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
+                        <connections>
+                            <outlet property="animation" destination="VGO-vW-G8x" id="9ki-FU-xEJ"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="dnF-36-dMZ">
@@ -873,6 +877,13 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PZY-m7-mFv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="VGO-vW-G8x" customClass="RAMFumeAnimation" customModule="RAMAnimatedTabBarController">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                            <real key="value" value="0.80000000000000004"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="1801" y="-555"/>
         </scene>
@@ -880,7 +891,11 @@
         <scene sceneID="zO2-LE-8cs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rf3-2F-bC4" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="MyMovies" image="star-7white" selectedImage="star-7white" id="xXc-P2-pve"/>
+                    <tabBarItem key="tabBarItem" title="MyMovies" image="star-7white" selectedImage="star-7white" id="xXc-P2-pve" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
+                        <connections>
+                            <outlet property="animation" destination="0xd-uQ-6su" id="bUd-pT-O7b"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="lSs-Vn-qG4">
@@ -893,6 +908,13 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="clJ-38-eg1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="0xd-uQ-6su" customClass="RAMRotationAnimation" customModule="RAMAnimatedTabBarController">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                            <real key="value" value="0.80000000000000004"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="1801" y="251"/>
         </scene>
@@ -972,7 +994,11 @@
         <scene sceneID="OfS-mW-LJc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="m9a-uu-M6o" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Movies" image="video-player-7 white" selectedImage="video-player-7 white" id="zrM-JM-Zjh"/>
+                    <tabBarItem key="tabBarItem" title="Movies" image="video-player-7 white" selectedImage="video-player-7 white" id="zrM-JM-Zjh" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
+                        <connections>
+                            <outlet property="animation" destination="czl-Ug-yRP" id="q0P-CN-hVc"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="Dym-Ws-pIj">
@@ -985,13 +1011,20 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bg1-Si-K8I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="czl-Ug-yRP" customClass="RAMBounceAnimation" customModule="RAMAnimatedTabBarController">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                            <real key="value" value="0.80000000000000004"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="1801" y="-1433"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Animated Tab Bar Controller-->
         <scene sceneID="TCx-m8-fhE">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="tkq-yc-fHM" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="tkq-yc-fHM" customClass="RAMAnimatedTabBarController" customModule="RAMAnimatedTabBarController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black" translucent="NO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="cDm-xw-1TG">

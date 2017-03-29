@@ -1,4 +1,5 @@
 PODS:
+  - AnimatedSegmentSwitch (0.1.0)
   - CDAlertView (0.6.0)
   - FadeButton (2.0.0)
   - Gloss (1.2.2)
@@ -10,6 +11,7 @@ PODS:
   - SDWebImage/Core (4.0.0)
 
 DEPENDENCIES:
+  - AnimatedSegmentSwitch
   - CDAlertView
   - FadeButton (~> 2.0)
   - Gloss
@@ -19,6 +21,7 @@ DEPENDENCIES:
   - SDWebImage
 
 SPEC CHECKSUMS:
+  AnimatedSegmentSwitch: 7bc126b7b433f4a1b4fb6546abe405cd4b5163ae
   CDAlertView: e6f365fa0fac7349197e7ea4bd7810c069215cf4
   FadeButton: ff59c148ad6bf3b26f8012715ad4aade5f9c0006
   Gloss: 2888941ffde93ae173da737414ba7193e4347d86
@@ -27,6 +30,6 @@ SPEC CHECKSUMS:
   RAMAnimatedTabBarController: 2510f3b66954c3f77ea1042a35d34df8f5f3b604
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
 
-PODFILE CHECKSUM: 92feccb780b54550794ff33e52f3cc5f3df088ed
+PODFILE CHECKSUM: d21d795cd877f17e7b930ac6092bc45200054abf
 
 COCOAPODS: 1.2.0.beta.1
