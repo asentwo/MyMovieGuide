@@ -38,6 +38,8 @@ class PeopleDetailedViewController : MasterViewController {
   
   let networkManager = NetworkManager.sharedManager
   
+  
+  var connectedToNetwork: Bool = false
   var id: NSNumber?
   var knownForID: NSNumber?
   var currentImage: UIImage?
@@ -70,6 +72,8 @@ class PeopleDetailedViewController : MasterViewController {
     if let personID = self.id {
       
       PeopleData.updateAllData(urlExtension: "\(personID)", completionHandler: { results in
+       
+       //   self.connectedToNetwork = true
         
         guard let results = results else {
           CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
@@ -113,14 +117,18 @@ class PeopleDetailedViewController : MasterViewController {
             }
           }
         }
-      }
-      )
+      })
       
       CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
+     
         guard let results = results else {
           CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
           return
         }
+        
+      //  self.connectedToNetwork = true
+
+        
         self.knownForData = results
         if let knownFor = self.knownForData?.castExtended {
           self.knownForExtendedArray = knownFor
@@ -144,8 +152,12 @@ class PeopleDetailedViewController : MasterViewController {
           }
         }
       })
+//      if self.connectedToNetwork == false {
+//        CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
+//      }
+//
     }
-  }
+     }
   
   func updateImage (ImageType: DownloadPic, ImageString: String, completion: @escaping () -> Void) {
     

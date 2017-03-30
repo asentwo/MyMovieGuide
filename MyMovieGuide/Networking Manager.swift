@@ -43,7 +43,7 @@ class NetworkManager {
     
     let request = URLRequest(url: URL(string:"\(baseURL)\(type)/\(urlExtension)?api_key=\(apiKey)&region=US&append_to_response=videos,images,releases")! )
     
-//  print(request)
+    //  print(request)
     
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
@@ -62,8 +62,11 @@ class NetworkManager {
         
         DispatchQueue.main.async {
           
-          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
-          print("Error: \(error?.localizedDescription)") }
+          if let error = error {
+          CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
+            print("Error: \(error.localizedDescription)") }
+          return
+        }
       }
     })
     dataTask.resume()
@@ -91,8 +94,10 @@ class NetworkManager {
       } else {
         DispatchQueue.main.async {
           
-          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
-          print("Error: \(error?.localizedDescription)") }
+          if let error = error {
+            CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
+            print("Error: \(error.localizedDescription)") }
+        }
       }
     })
     dataTask.resume()
@@ -125,14 +130,15 @@ class NetworkManager {
           }
         } else {
           DispatchQueue.main.async {
-            
-            CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
-            print("Error: \(error?.localizedDescription)") }
+            if let error = error {
+              CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
+              print("Error: \(error.localizedDescription)") }
+          }
         }
       })
       dataTask.resume()
     } else {
-      
+
       print("There was an error")
     }
   }
@@ -165,17 +171,24 @@ class NetworkManager {
         } else {
           DispatchQueue.main.async {
             
-            CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
-            print("Error: \(error?.localizedDescription)") }        }
+            if let error = error {
+              CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
+              print("Error: \(error.localizedDescription)") }
+          }
+        }
       })
       dataTask.resume()
-    } else {
-      
-      DispatchQueue.main.async {
-        
-        CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
-        print("There was an error") }    }
+    }
   }
+  //
+  //    else {
+  //
+  //      DispatchQueue.main.async {
+  //        if let error = error {
+  //        CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
+  //        print("Error: \(error.localizedDescription)") }
+  //    }
+  //  }
   
   
   //JSON Parser
@@ -192,46 +205,49 @@ class NetworkManager {
         
       } catch let error as NSError {
         DispatchQueue.main.async {
-          
-          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
-          print("Error: \(error.localizedDescription)") }
+          CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
+          print("Error: \(error.localizedDescription)")
+        }
+     
       }
     }
-    return nil
+       return nil
   }
   
-  //Image extension https://image.tmdb.org/t/p/w500/
-  
-  //Image Downloader
-  typealias ImageDataHandler = ((Data) -> Void)
-  
-  func downloadImage(imageExtension: String, _ completion: @escaping ImageDataHandler)  {
-    
-    let request = URLRequest(url: URL(string: "\(baseImageURL)\(imageExtension)" )!)
-    let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+      //Image extension https://image.tmdb.org/t/p/w500/
       
-      // print(request)
+      //Image Downloader
+      typealias ImageDataHandler = ((Data) -> Void)
       
-      if error == nil {
-        if let httpResponse = response as? HTTPURLResponse {
-          switch (httpResponse.statusCode) {
-          case 200:
-            if let data = data {
-              completion(data)
-            }
-          default:
-            print(httpResponse.statusCode)
-          }
-        }
-      } else {
-        DispatchQueue.main.async {
+      func downloadImage(imageExtension: String, _ completion: @escaping ImageDataHandler)  {
+        
+        let request = URLRequest(url: URL(string: "\(baseImageURL)\(imageExtension)" )!)
+        let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
           
-          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
-          print("Error: \(error?.localizedDescription)") }      }
-    })
-    dataTask.resume()
-  }
-  
+          // print(request)
+          
+          if error == nil {
+            if let httpResponse = response as? HTTPURLResponse {
+              switch (httpResponse.statusCode) {
+              case 200:
+                if let data = data {
+                  completion(data)
+                }
+              default:
+                print(httpResponse.statusCode)
+              }
+            }
+          } else {
+            DispatchQueue.main.async {
+              
+              if let error = error {
+                CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
+                print("Error: \(error.localizedDescription)") }
+            }
+          }
+        })
+        dataTask.resume()
+      }
   
   //Video Downloader
   typealias VideoDataHandler = ((Data) -> Void)
@@ -257,8 +273,11 @@ class NetworkManager {
       } else {
         DispatchQueue.main.async {
           
-          CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
-          print("Error: \(error?.localizedDescription)") }      }
+          if let error = error {
+            CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
+            print("Error: \(error.localizedDescription)") }
+        }
+      }
     })
     dataTask.resume()
   }
