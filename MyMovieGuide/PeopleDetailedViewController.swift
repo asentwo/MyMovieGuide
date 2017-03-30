@@ -38,8 +38,9 @@ class PeopleDetailedViewController : MasterViewController {
   
   let networkManager = NetworkManager.sharedManager
   
+  let alert = CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error)
   
-  var connectedToNetwork: Bool = false
+  var connectedToNetwork: Bool = true
   var id: NSNumber?
   var knownForID: NSNumber?
   var currentImage: UIImage?
@@ -72,8 +73,6 @@ class PeopleDetailedViewController : MasterViewController {
     if let personID = self.id {
       
       PeopleData.updateAllData(urlExtension: "\(personID)", completionHandler: { results in
-       
-       //   self.connectedToNetwork = true
         
         guard let results = results else {
           CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
@@ -108,8 +107,19 @@ class PeopleDetailedViewController : MasterViewController {
             let group = DispatchGroup()
             for image in extraMovieImages {
               group.enter()
-              self.updateImage(ImageType: DownloadPic.personal, ImageString: image.filePath, completion: {_ in
+              self.updateImage(ImageType: DownloadPic.personal, ImageString: image.filePath, onSucceed: {_ in
                 group.leave()
+                
+              }, onFailure: {_ in
+                
+                print(self.alert.isAlertShowing)
+                
+                if self.alert.isAlertShowing == false {
+                  DispatchQueue.main.async {
+                    self.alert.show()
+                    _ = self.navigationController?.popViewController(animated: true)
+                  }
+                }
               })
             }
             group.notify(queue: DispatchQueue.main) {
@@ -119,15 +129,13 @@ class PeopleDetailedViewController : MasterViewController {
         }
       })
       
+      
       CastExtendedData.updateAllData(urlExtension: "\(personID)/movie_credits", completionHandler: {results in
-     
+        
         guard let results = results else {
           CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
           return
         }
-        
-      //  self.connectedToNetwork = true
-
         
         self.knownForData = results
         if let knownFor = self.knownForData?.castExtended {
@@ -137,8 +145,19 @@ class PeopleDetailedViewController : MasterViewController {
           for knownForImage in knownFor {
             if let poster = knownForImage.poster {
               group.enter()
-              self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster, completion: {_ in
+              self.updateImage(ImageType: DownloadPic.knownFor, ImageString: poster, onSucceed: {_ in
                 group.leave()
+              }, onFailure: {_ in
+                
+                if self.alert.isAlertShowing == false {
+                  print(self.alert.isAlertShowing)
+                  
+                  DispatchQueue.main.async {
+                    self.alert.show()
+                    _ = self.navigationController?.popViewController(animated: true)
+                  }
+                }
+                
               })
             }
             group.notify(queue: DispatchQueue.main) {
@@ -152,16 +171,15 @@ class PeopleDetailedViewController : MasterViewController {
           }
         }
       })
-//      if self.connectedToNetwork == false {
-//        CDAlertView(title: "Sorry", message: "There was a problem retrieving data", type: .error).show()
-//      }
-//
     }
-     }
+  }
   
-  func updateImage (ImageType: DownloadPic, ImageString: String, completion: @escaping () -> Void) {
+  func updateImage (ImageType: DownloadPic, ImageString: String, onSucceed: @escaping () -> Void, onFailure: @escaping (_ error:NSError)-> Void) {
     
-    self.networkManager.downloadImage(imageExtension: "\(ImageString)", { (imageData) in
+    
+    self.networkManager.downloadImage(imageExtension: "\(ImageString)", onSucceed: {
+      
+      (imageData) in
       
       if let image = UIImage(data: imageData as Data) {
         switch ImageType {
@@ -171,7 +189,10 @@ class PeopleDetailedViewController : MasterViewController {
           break
         }
       }
-      completion()
+      onSucceed()
+      
+    }, onFailure: {(error) in
+      onFailure(error)
     })
   }
   
@@ -197,18 +218,6 @@ class PeopleDetailedViewController : MasterViewController {
     self.birthdayCatLabel.isHidden = false
     self.birthplaceCatLabel.isHidden = false
   }
-  
-  
-  func loopThroughImages(ImageType: DownloadPic, ImageString: String,  completion: () -> Void ) {
-    for i in 0 ..< 40 {
-      self.updateImage(ImageType: ImageType, ImageString: ImageString, completion: {_ in
-        print(i)
-      })
-    }
-    completion()
-  }
-  
-  
 }
 
 extension PeopleDetailedViewController : UITableViewDataSource {

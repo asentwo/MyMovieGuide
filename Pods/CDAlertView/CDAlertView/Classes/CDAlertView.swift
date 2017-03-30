@@ -8,6 +8,9 @@
 
 import Foundation
 
+
+
+
 public enum CDAlertViewType {
     case error, warning, success, notification, alarm, custom(image: UIImage)
 }
@@ -17,6 +20,9 @@ fileprivate protocol CDAlertViewActionDelegate: class {
 }
 
 open class CDAlertViewAction: NSObject {
+  
+  
+  
     public var buttonTitle: String?
     public var buttonTextColor: UIColor?
     public var buttonFont: UIFont?
@@ -49,6 +55,9 @@ open class CDAlertViewAction: NSObject {
 
 open class CDAlertView: UIView {
 
+  public var isAlertShowing: Bool = false
+  
+  
     public var actionSeparatorColor: UIColor = UIColor(red: 50/255,
                                                        green: 51/255,
                                                        blue: 53/255,
@@ -286,12 +295,16 @@ open class CDAlertView: UIView {
         createViews()
         loadActionButtons()
         popupViewInitialFrame = popupView.frame
-
+      
+      isAlertShowing = true
         completionBlock = completion
     }
 
     public func hide(animations: CDAlertAnimationBlock? = nil,
                      isPopupAnimated: Bool) {
+      
+      isAlertShowing = false
+      
         if !isTextFieldHidden {
             textField.resignFirstResponder()
             NotificationCenter.default.removeObserver(self)

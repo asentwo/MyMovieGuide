@@ -105,6 +105,7 @@ public struct PeopleData: Decodable {
       }
     })
   }
+
   
   static func updateSearchData(name: String,completionHandler:@escaping (_ details: [PeopleData]?) -> Void){
     

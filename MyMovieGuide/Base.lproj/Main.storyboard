@@ -548,7 +548,7 @@
                                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="castCell" rowHeight="100" id="Taf-jh-zKz" customClass="CastCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="56" width="375" height="100"/>
+                                                        <rect key="frame" x="0.0" y="55.5" width="375" height="100"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Taf-jh-zKz" id="iW9-yd-f8X">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
@@ -640,7 +640,7 @@
                                                         </connections>
                                                     </tableViewCell>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="extraImagesCell" rowHeight="190" id="7tC-k0-glw" customClass="ExtraImagesCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="156" width="375" height="190"/>
+                                                        <rect key="frame" x="0.0" y="155.5" width="375" height="190"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7tC-k0-glw" id="F73-WG-06B">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
@@ -1132,10 +1132,10 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="videoCell" rowHeight="220" id="Koc-ZY-BD4" customClass="VideoCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="220"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Koc-ZY-BD4" id="38M-Q2-K3v">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="219"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="219.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2dD-bm-vzL">
@@ -1198,15 +1198,15 @@
                                         <rect key="frame" x="0.0" y="-100" width="375" height="1000"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="bIT-SA-8t1">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="566"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="565.5"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vpf-Ku-xPd" userLabel="Tint View">
-                                                <rect key="frame" x="20" y="286" width="335" height="498"/>
+                                                <rect key="frame" x="20" y="285.5" width="335" height="496.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wdj-0c-AHO" userLabel="Profile Stack View">
-                                                <rect key="frame" x="40" y="200" width="100" height="131"/>
+                                                <rect key="frame" x="40" y="200" width="100" height="130.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="jmO-Yp-5aK">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
@@ -1217,7 +1217,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filmography:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="m7K-uu-WIk">
-                                                        <rect key="frame" x="0.0" y="110" width="71" height="21"/>
+                                                        <rect key="frame" x="0.0" y="110" width="70.5" height="20.5"/>
                                                         <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -1226,7 +1226,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </stackView>
                                             <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="1QG-AR-gQl" userLabel="Know For Table View">
-                                                <rect key="frame" x="20" y="341" width="335" height="170"/>
+                                                <rect key="frame" x="20" y="340.5" width="335" height="170"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="170" id="w7g-Jh-9BZ"/>
@@ -1236,7 +1236,7 @@
                                                         <rect key="frame" x="0.0" y="10" width="335" height="150"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nhy-Nd-T5V" id="8YV-m8-xH9">
-                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="149"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="149.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9rm-sT-wAu" userLabel="KnownForCollectionView">
@@ -1250,7 +1250,7 @@
                                                                     </collectionViewFlowLayout>
                                                                     <cells>
                                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="knownForCollectCell" id="VHa-4k-YDa" userLabel="knownForCollectCell" customClass="KnownForCollectionViewCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                                                                            <rect key="frame" x="0.0" y="-0.5" width="100" height="150"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
@@ -1298,36 +1298,36 @@
                                                 </connections>
                                             </tableView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="yd9-4d-ph5">
-                                                <rect key="frame" x="25" y="516" width="325" height="83"/>
+                                                <rect key="frame" x="25" y="515.5" width="325" height="81.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="f3x-ZH-kYo" userLabel="Birth Info Stack View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="42"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="41"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="som-es-tqS" userLabel="Birthday Stack View">
-                                                                <rect key="frame" x="0.0" y="0.0" width="105" height="21"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="105" height="20.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     Birthday:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="OXl-C3-cu1">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="62" height="21"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="62" height="20.5"/>
                                                                         <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="15"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="          " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ich-Pf-f3p">
-                                                                        <rect key="frame" x="77" y="0.0" width="28" height="21"/>
+                                                                        <rect key="frame" x="77" y="0.0" width="28" height="20.5"/>
                                                                         <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="15"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="2or-J2-BUt" userLabel="Birthplace Stack View">
-                                                                <rect key="frame" x="0.0" y="21" width="125" height="21"/>
+                                                                <rect key="frame" x="0.0" y="20.5" width="125" height="20.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     Birthplace:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="RDA-a3-Z0E">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="71" height="21"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="71" height="20.5"/>
                                                                         <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="15"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="              " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="DIb-LE-zi5">
-                                                                        <rect key="frame" x="86" y="0.0" width="39" height="21"/>
+                                                                        <rect key="frame" x="86" y="0.0" width="39" height="20.5"/>
                                                                         <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="15"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
@@ -1336,7 +1336,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="           " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1PK-dK-Nyg" userLabel="Overview">
-                                                        <rect key="frame" x="0.0" y="62" width="31" height="21"/>
+                                                        <rect key="frame" x="0.0" y="61" width="31" height="20.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="15"/>
                                                         <nil key="highlightedColor"/>
@@ -1346,7 +1346,7 @@
                                                 </subviews>
                                             </stackView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="150" sectionHeaderHeight="1" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="6CQ-g4-cx7">
-                                                <rect key="frame" x="20" y="604" width="335" height="170"/>
+                                                <rect key="frame" x="20" y="602" width="335" height="170"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="170" id="tsn-bp-PP3"/>
@@ -1355,10 +1355,10 @@
                                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="imagesCell" rowHeight="150" id="cmt-HZ-Ag5" customClass="ImagesPeopleCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="56" width="335" height="150"/>
+                                                        <rect key="frame" x="0.0" y="55.5" width="335" height="150"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cmt-HZ-Ag5" id="PwQ-5Y-w7Y">
-                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="149"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="149.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7je-ZN-Upz">
@@ -1372,7 +1372,7 @@
                                                                     </collectionViewFlowLayout>
                                                                     <cells>
                                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imagesCollectCell" id="luF-w7-OXJ" customClass="PeopleImagesCollectionViewCell" customModule="MyMovieGuide" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                                                                            <rect key="frame" x="0.0" y="-0.5" width="100" height="150"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
@@ -1500,13 +1500,14 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="300" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2Bh-Su-ibc">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GenresTableViewCell" rowHeight="400" id="J5z-2o-WgN" customClass="GenresTableViewCell" customModule="MyMovieGuide" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="400"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" tableViewCell="J5z-2o-WgN" id="URD-qe-zOY">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="399"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="399.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="JS2-F1-wJj">

@@ -63,7 +63,7 @@ class NetworkManager {
         DispatchQueue.main.async {
           
           if let error = error {
-          CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
+        CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
             print("Error: \(error.localizedDescription)") }
           return
         }
@@ -180,15 +180,6 @@ class NetworkManager {
       dataTask.resume()
     }
   }
-  //
-  //    else {
-  //
-  //      DispatchQueue.main.async {
-  //        if let error = error {
-  //        CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
-  //        print("Error: \(error.localizedDescription)") }
-  //    }
-  //  }
   
   
   //JSON Parser
@@ -219,7 +210,7 @@ class NetworkManager {
       //Image Downloader
       typealias ImageDataHandler = ((Data) -> Void)
       
-      func downloadImage(imageExtension: String, _ completion: @escaping ImageDataHandler)  {
+      func downloadImage(imageExtension: String, onSucceed : @escaping ImageDataHandler ,  onFailure: @escaping (_ error:NSError)-> Void)  {
         
         let request = URLRequest(url: URL(string: "\(baseImageURL)\(imageExtension)" )!)
         let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
@@ -231,23 +222,53 @@ class NetworkManager {
               switch (httpResponse.statusCode) {
               case 200:
                 if let data = data {
-                  completion(data)
+                  onSucceed(data)
                 }
               default:
                 print(httpResponse.statusCode)
               }
             }
           } else {
-            DispatchQueue.main.async {
+          onFailure(error! as NSError)
               
               if let error = error {
-                CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
+           //     CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
                 print("Error: \(error.localizedDescription)") }
-            }
           }
         })
         dataTask.resume()
       }
+  
+//  func downloadImage(imageExtension: String, _ completion: @escaping ImageDataHandler)  {
+//    
+//    let request = URLRequest(url: URL(string: "\(baseImageURL)\(imageExtension)" )!)
+//    let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+//      
+//      // print(request)
+//      
+//      if error == nil {
+//        if let httpResponse = response as? HTTPURLResponse {
+//          switch (httpResponse.statusCode) {
+//          case 200:
+//            if let data = data {
+//              completion(data)
+//            }
+//          default:
+//            print(httpResponse.statusCode)
+//          }
+//        }
+//      } else {
+//        DispatchQueue.main.async {
+//          
+//          if let error = error {
+//            //     CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
+//            print("Error: \(error.localizedDescription)") }
+//        }
+//      }
+//    })
+//    dataTask.resume()
+//  }
+
   
   //Video Downloader
   typealias VideoDataHandler = ((Data) -> Void)
