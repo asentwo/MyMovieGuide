@@ -46,7 +46,7 @@ class UpcomingMoviesViewController: MasterCollectionViewController {
             self.upcomingImageArray.append(posterImage)
           }
         } else {
-          print("poster does not exist: \(movie.title)")
+          print("poster does not exist: \(String(describing: movie.title))")
           continue
         }
       }

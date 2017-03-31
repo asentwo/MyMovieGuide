@@ -127,6 +127,7 @@
 		6EE891AA1E85F2F80007586E /* MyMovieCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMovieCollectionViewController.swift; sourceTree = "<group>"; };
 		6EE891AC1E85F5040007586E /* MyMovieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		6EF740391E4A7E8500BDA5BE /* MoviesGenresCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesGenresCollectionViewController.swift; sourceTree = "<group>"; };
+		6EFD919F1E8EDF2B00F97104 /* MyMovieGuide.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyMovieGuide.entitlements; sourceTree = "<group>"; };
 		6EFD9FC21E4D02A00030D8AA /* UpcomingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingCollectionViewCell.swift; sourceTree = "<group>"; };
 		6EFD9FC41E4D02D80030D8AA /* InTheatresCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InTheatresCollectionViewCell.swift; sourceTree = "<group>"; };
 		77F69CF55E68B6BC26EA39C9 /* Pods-MyMovieGuide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMovieGuide.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyMovieGuide/Pods-MyMovieGuide.release.xcconfig"; sourceTree = "<group>"; };
@@ -197,6 +198,7 @@
 		6E1A0B561E391CFE00F18892 /* MyMovieGuide */ = {
 			isa = PBXGroup;
 			children = (
+				6EFD919F1E8EDF2B00F97104 /* MyMovieGuide.entitlements */,
 				6E1A0B811E3BF9A600F18892 /* Model */,
 				6E1A0B7F1E3BF96F00F18892 /* View */,
 				6E1A0B801E3BF97B00F18892 /* Controllers */,
@@ -470,6 +472,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 8W3UY4SPV9;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					6E1A0B671E391CFE00F18892 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -755,10 +762,11 @@
 			baseConfigurationReference = 64E1EFCDF65B0FE905661928 /* Pods-MyMovieGuide.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MyMovieGuide/MyMovieGuide.entitlements;
 				DEVELOPMENT_TEAM = 8W3UY4SPV9;
 				INFOPLIST_FILE = MyMovieGuide/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.justindoo.MyMovieGuide;
+				PRODUCT_BUNDLE_IDENTIFIER = com.justindoo.MyMovieGuide1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -770,10 +778,11 @@
 			baseConfigurationReference = 77F69CF55E68B6BC26EA39C9 /* Pods-MyMovieGuide.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MyMovieGuide/MyMovieGuide.entitlements;
 				DEVELOPMENT_TEAM = 8W3UY4SPV9;
 				INFOPLIST_FILE = MyMovieGuide/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.justindoo.MyMovieGuide;
+				PRODUCT_BUNDLE_IDENTIFIER = com.justindoo.MyMovieGuide1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

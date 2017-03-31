@@ -56,7 +56,7 @@ class MoviesGenresViewController: MasterViewController {
                   break// Use to exit out of array after appending the corresponding poster string
                 }
               } else {
-                print("There was a problem retrieving poster images: \(poster)")
+                print("There was a problem retrieving poster images: \(String(describing: poster))")
                 continue// if the poster returned is nil, continue to iterate through arrays until there is one that is not nil
               }
             }

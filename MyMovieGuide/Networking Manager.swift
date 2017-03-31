@@ -36,6 +36,7 @@ class NetworkManager {
   //Network session creater
   typealias JSONData = ((Data) -> Void)
   
+  
   func getJSONData(type: String, urlExtension: String, completion: @escaping JSONData) {
     
     configuration.timeoutIntervalForRequest = 10

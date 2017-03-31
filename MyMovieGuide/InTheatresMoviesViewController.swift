@@ -45,7 +45,7 @@ class InTheatresMoviesViewController: MasterCollectionViewController {
         if movie.poster != nil {
           self.inTheatresPosterArray.append(movie.poster!)
         } else {
-          print("poster does not exist: \(movie.title)")
+          print("poster does not exist: \(String(describing: movie.title))")
           continue
         }
       }

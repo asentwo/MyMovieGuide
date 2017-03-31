@@ -112,9 +112,7 @@ class PeopleDetailedViewController : MasterViewController {
                 
               }, onFailure: {_ in
                 
-                print(self.alert.isAlertShowing)
-                
-                if self.alert.isAlertShowing == false {
+                  if self.alert.isAlertShowing == false {
                   DispatchQueue.main.async {
                     self.alert.show()
                     _ = self.navigationController?.popViewController(animated: true)
@@ -150,7 +148,6 @@ class PeopleDetailedViewController : MasterViewController {
               }, onFailure: {_ in
                 
                 if self.alert.isAlertShowing == false {
-                  print(self.alert.isAlertShowing)
                   
                   DispatchQueue.main.async {
                     self.alert.show()
