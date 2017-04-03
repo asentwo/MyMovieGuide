@@ -233,43 +233,11 @@ class NetworkManager {
           onFailure(error! as NSError)
               
               if let error = error {
-           //     CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
                 print("Error: \(error.localizedDescription)") }
           }
         })
         dataTask.resume()
       }
-  
-//  func downloadImage(imageExtension: String, _ completion: @escaping ImageDataHandler)  {
-//    
-//    let request = URLRequest(url: URL(string: "\(baseImageURL)\(imageExtension)" )!)
-//    let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
-//      
-//      // print(request)
-//      
-//      if error == nil {
-//        if let httpResponse = response as? HTTPURLResponse {
-//          switch (httpResponse.statusCode) {
-//          case 200:
-//            if let data = data {
-//              completion(data)
-//            }
-//          default:
-//            print(httpResponse.statusCode)
-//          }
-//        }
-//      } else {
-//        DispatchQueue.main.async {
-//          
-//          if let error = error {
-//            //     CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
-//            print("Error: \(error.localizedDescription)") }
-//        }
-//      }
-//    })
-//    dataTask.resume()
-//  }
-
   
   //Video Downloader
   typealias VideoDataHandler = ((Data) -> Void)
@@ -302,5 +270,41 @@ class NetworkManager {
       }
     })
     dataTask.resume()
+  }
+  
+  //In App purchases
+  func connectToItunes (searchTerm: String, completion: @escaping JSONData) {
+   
+    let request = URLRequest(url: URL(string:"https://itunes.apple.com/search?term=\(searchTerm)&at=1001lmK9")! )
+    
+    // print(request)
+    
+    let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+      
+      if error == nil {
+        if let httpResponse = response as? HTTPURLResponse {
+          switch (httpResponse.statusCode) {
+          case 200:
+            if let data = data {
+              completion(data)
+            }
+          default:
+            print(httpResponse.statusCode)
+          }
+        }
+      } else {
+        
+        DispatchQueue.main.async {
+          
+          if let error = error {
+            CDAlertView(title: "Sorry", message: "\(error.localizedDescription)", type: .error).show()
+            print("Error: \(error.localizedDescription)") }
+          return
+        }
+      }
+    })
+    dataTask.resume()
+    
+    
   }
 }
