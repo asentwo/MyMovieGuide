@@ -69,6 +69,7 @@ class MoviesDetailViewController: MasterViewController {
   //TableViewCell Reuse Identifiers
   let castReuseIdentifier = "castCell"
   let extraReuseIdentifier = "extraImagesCell"
+  let itunesReuseIdentifier = "itunesCell"
   
   
   //MARK: Lifecycle
@@ -362,13 +363,14 @@ class MoviesDetailViewController: MasterViewController {
 extension MoviesDetailViewController: UITableViewDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return 2
+    return 3
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch section {
     case 0: return min(1, castArray.count)
     case 1: return min(1, imageArray.count)
+    case 2: return 1
     default: fatalError("Unknown Selection")
     }
   }
@@ -399,6 +401,14 @@ extension MoviesDetailViewController: UITableViewDataSource {
       
       self.imagesTableView.rowHeight = 200
       imagesTableView.allowsSelection = true
+      
+      return cell
+      
+    case 2:
+      let cell = imagesTableView.dequeueReusableCell(withIdentifier: itunesReuseIdentifier) as!
+      ItunesCell
+      
+       self.imagesTableView.rowHeight = 44
       
       return cell
       
