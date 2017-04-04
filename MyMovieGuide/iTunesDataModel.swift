@@ -25,16 +25,19 @@ public struct ItunesData: Decodable {
   public let artwork: URL?
   public let buyPriceHD: Double
   public let rentPriceHD: Double?
+  public let itunesLink: URL
   public init?(json: JSON) {
     
     guard let name: String = "trackName" <~~ json,
-      let buyPriceHD: Double = "trackHdPrice" <~~ json
+      let buyPriceHD: Double = "trackHdPrice" <~~ json,
+      let itunesLink: URL = "trackViewUrl" <~~ json
     else {return nil}
     
     self.name = name
     self.buyPriceHD = buyPriceHD
     self.artwork = "artworkUrl100" <~~ json
     self.rentPriceHD = "trackHdRentalPrice" <~~ json
+    self.itunesLink = itunesLink
   }
   
   static func updateItunesData(searchTerm: String,completionHandler:@escaping (_ details: [ItunesData]?) -> Void){
