@@ -72,6 +72,7 @@ extension UpcomingMoviesViewController {
   
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+   
     let cell = upcomingCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UpcomingCollectionViewCell
     
     DispatchQueue.main.async {

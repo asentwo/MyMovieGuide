@@ -8,6 +8,8 @@
 
 import Foundation
 import Gloss
+import CDAlertView
+
 
 
 public struct ItunesSearchResultsDataModel: Decodable {
@@ -16,28 +18,38 @@ public struct ItunesSearchResultsDataModel: Decodable {
   
   public init?(json: JSON) {
     
-    results = "results" <~~ json
+    self.results = "results" <~~ json
   }
 }
+
+
 public struct ItunesData: Decodable {
   
-  public let name : String
+  public let name : String?
+  public let kindOfMedia: String?
   public let artwork: URL?
-  public let buyPriceHD: Double
+  public let collectionName : String?
+  public let buyPriceHD: Double?
   public let rentPriceHD: Double?
-  public let itunesLink: URL
+  public let collectionPriceHD: Double?
+  public let collectionPriceNonHD: Double?
+  public let trackPriceNonHD: Double?
+  public let itunesLink: URL?
+  public let countryType: String?
+
   public init?(json: JSON) {
-    
-    guard let name: String = "trackName" <~~ json,
-      let buyPriceHD: Double = "trackHdPrice" <~~ json,
-      let itunesLink: URL = "trackViewUrl" <~~ json
-    else {return nil}
-    
-    self.name = name
-    self.buyPriceHD = buyPriceHD
+
+    self.name = "trackName" <~~ json
+    self.kindOfMedia = "kind" <~~ json
     self.artwork = "artworkUrl100" <~~ json
+    self.collectionName = "collectionName" <~~ json
+    self.buyPriceHD = "trackHdPrice" <~~ json
     self.rentPriceHD = "trackHdRentalPrice" <~~ json
-    self.itunesLink = itunesLink
+    self.collectionPriceHD = "collectionHdPrice" <~~ json
+    self.collectionPriceNonHD = "collectionPrice" <~~ json
+    self.trackPriceNonHD = "trackPrice" <~~ json
+    self.itunesLink = "trackViewUrl" <~~ json
+    self.countryType = "country" <~~ json
   }
   
   static func updateItunesData(searchTerm: String,completionHandler:@escaping (_ details: [ItunesData]?) -> Void){
@@ -50,19 +62,26 @@ public struct ItunesData: Decodable {
       
       if let jsonDictionary = nm.parseJSONData(data)
       {
+        
+     //   print(jsonDictionary)
+        
         guard let itunesResults = ItunesSearchResultsDataModel(json: jsonDictionary)
           
           else {
             print("Error initializing object")
+             CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
         }
+        
+     //   print(itunesResults)
         
         guard let itunesData = itunesResults.results
           else {
             print("No such item")
+             CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
         }
-          print(itunesData)
+        //  print(itunesData)
         
         completionHandler(itunesData)
       }

@@ -44,44 +44,10 @@ public struct MovieData: Decodable, Equatable {
     
   }
   
-  
-  
-  
   //urlExtensions: "popular", "upcoming", "now_playing"
   static func updateAllData(type: String, urlExtension: String,completionHandler:@escaping (_ details: [MovieData]?) -> Void){
     
     let nm = NetworkManager.sharedManager
-//    
-//    nm.getJSONData(type: type, urlExtension: urlExtension, onSucceed: {
-//      data in
-//      
-//            if let jsonDictionary = nm.parseJSONData(data)
-//            {
-//              guard let movieResults = ResultsMovieData(json: jsonDictionary)
-//      
-//                else {
-//                  print("Error initializing object")
-//                  CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
-//                  return
-//              }
-//      
-//              guard let movieData = movieResults.results
-//                else {
-//                  print("No such item")
-//                  CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
-//                  return
-//              }
-//              //   print(movieData)
-//              
-//              completionHandler(movieData)
-//            }
-//
-//    
-//    }, onFailure: {_ in
-//    
-//    
-//    
-//    })
     
     nm.getJSONData(type:type, urlExtension: urlExtension, completion: {
       data in
@@ -102,7 +68,7 @@ public struct MovieData: Decodable, Equatable {
             CDAlertView(title: "Sorry", message: "There was an error retrieving data!", type: .error).show()
             return
         }
-        //   print(movieData)
+      //   print(movieData)
         
         completionHandler(movieData)
       }

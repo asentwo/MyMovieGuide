@@ -16,6 +16,7 @@ enum segueController {
   case image
   case cast
   case video
+  case itunes
 }
 
 //used to save to core data
@@ -44,7 +45,7 @@ class MoviesDetailViewController: MasterViewController {
   @IBOutlet weak var videosButton: FadeButton!
   @IBOutlet weak var userRatings: UILabel!
   
-  
+  var currentMovieTitle: String?
   let networkManager = NetworkManager.sharedManager
   var iD: NSNumber?
   var segueType: segueController?
@@ -65,6 +66,7 @@ class MoviesDetailViewController: MasterViewController {
   let detailToImageSegue = "detailToImageSegue"
   let detailToPeopleSegue = "detailToPeopleSegue"
   let detailToVideoSegue = "detailToVideoSegue"
+  let detailToItunesSegue = "detailToItunesSegue"
   
   //TableViewCell Reuse Identifiers
   let castReuseIdentifier = "castCell"
@@ -91,6 +93,10 @@ class MoviesDetailViewController: MasterViewController {
           return
         }
         self.movieDetailsData = results
+        
+        if let movieTitle = self.movieDetailsData?.title?.replacingOccurrences(of: " ", with: "+").lowercased(){
+        self.currentMovieTitle = movieTitle
+        }
         self.extraImagesArray = self.movieDetailsData?.images?.backdropImages
         
         if let images = self.movieDetailsData?.images {
@@ -325,6 +331,7 @@ class MoviesDetailViewController: MasterViewController {
     }
   }
   
+  //MARK: IBActions
   
   @IBAction func homepageButtonPressed(_ sender: Any) {
     
@@ -387,7 +394,6 @@ extension MoviesDetailViewController: UITableViewDataSource {
       cell.imageDelegate = self
       
       self.imagesTableView.rowHeight = 100
-      imagesTableView.allowsSelection = true
       
       return cell
       
@@ -400,7 +406,6 @@ extension MoviesDetailViewController: UITableViewDataSource {
       cell.imageDelegate = self
       
       self.imagesTableView.rowHeight = 200
-      imagesTableView.allowsSelection = true
       
       return cell
       
@@ -409,7 +414,8 @@ extension MoviesDetailViewController: UITableViewDataSource {
       ItunesCell
       
        self.imagesTableView.rowHeight = 44
-      
+      cell.selectionStyle = UITableViewCellSelectionStyle.none
+     
       return cell
       
     default: _ = ""
@@ -423,6 +429,16 @@ extension MoviesDetailViewController: UITableViewDataSource {
   
   private func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
     return 5
+  }
+}
+
+//Delegate
+extension MoviesDetailViewController: UITableViewDelegate {
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      
+      print("indexpath:\(indexPath.row)")
+      self.performSegue(withIdentifier: detailToItunesSegue, sender: self)
   }
 }
 
@@ -442,19 +458,23 @@ extension MoviesDetailViewController {
       let imageVC = segue.destination as! MoviesMasterImageController
       imageVC.image = self.extraImage
     }
-      
     else if self.segueType == segueController.video {
       
       let videoVC = segue.destination as! MoviesVideoTableViewController
       videoVC.videoInfo = self.videoInfo
-      
+    }
+  //  else if self.segueType == segueController.itunes {
+    else {
+      let itunesVC = segue.destination as! ItunesCollectionViewController
+      itunesVC.itunesSearchTerm = self.currentMovieTitle
     }
   }
 }
 
 
 //Protocols
-extension MoviesDetailViewController : handleCastData, handleExtraImage, handleVideoData  {
+extension MoviesDetailViewController : handleCastData, handleExtraImage, handleVideoData //handleItunesData
+{
   
   func imageTapped(ID castID: NSNumber, segueType: segueController) {
     self.castID = castID
@@ -473,5 +493,11 @@ extension MoviesDetailViewController : handleCastData, handleExtraImage, handleV
     self.segueType = segueType
     performSegue(withIdentifier: detailToVideoSegue, sender: self)
   }
+  
+//  func itunesTapped(currentMovieTitle: String, segueType: segueController) {
+//    self.currentMovieTitle = currentMovieTitle
+//    self.segueType = segueType
+//    performSegue(withIdentifier: detailToItunesSegue, sender: self)
+//  }
   
 }

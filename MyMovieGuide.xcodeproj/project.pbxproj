@@ -55,6 +55,8 @@
 		6ED250FC1E57AC5A008BE813 /* CastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED250FB1E57AC5A008BE813 /* CastCell.swift */; };
 		6EE891AB1E85F2F80007586E /* MyMovieCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE891AA1E85F2F80007586E /* MyMovieCollectionViewController.swift */; };
 		6EE891AD1E85F5040007586E /* MyMovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE891AC1E85F5040007586E /* MyMovieCollectionViewCell.swift */; };
+		6EE898891E94334C00F317FE /* ItunesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE898881E94334C00F317FE /* ItunesCollectionViewController.swift */; };
+		6EE8988B1E94396500F317FE /* ItunesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8988A1E94396500F317FE /* ItunesCollectionViewCell.swift */; };
 		6EF7403A1E4A7E8500BDA5BE /* MoviesGenresCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF740391E4A7E8500BDA5BE /* MoviesGenresCollectionViewController.swift */; };
 		6EFD9FC31E4D02A00030D8AA /* UpcomingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD9FC21E4D02A00030D8AA /* UpcomingCollectionViewCell.swift */; };
 		6EFD9FC51E4D02D80030D8AA /* InTheatresCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD9FC41E4D02D80030D8AA /* InTheatresCollectionViewCell.swift */; };
@@ -124,6 +126,8 @@
 		6ED250FB1E57AC5A008BE813 /* CastCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastCell.swift; sourceTree = "<group>"; };
 		6EE891AA1E85F2F80007586E /* MyMovieCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMovieCollectionViewController.swift; sourceTree = "<group>"; };
 		6EE891AC1E85F5040007586E /* MyMovieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		6EE898881E94334C00F317FE /* ItunesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesCollectionViewController.swift; sourceTree = "<group>"; };
+		6EE8988A1E94396500F317FE /* ItunesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesCollectionViewCell.swift; sourceTree = "<group>"; };
 		6EF740391E4A7E8500BDA5BE /* MoviesGenresCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesGenresCollectionViewController.swift; sourceTree = "<group>"; };
 		6EFD919F1E8EDF2B00F97104 /* MyMovieGuide.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyMovieGuide.entitlements; sourceTree = "<group>"; };
 		6EFD9FC21E4D02A00030D8AA /* UpcomingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -377,6 +381,7 @@
 				6E2CDCF51E66122F006E58EF /* MoviesVideoTableViewController.swift */,
 				6E250C241E6E5CC300EB4D3A /* MoviesMasterImageController.swift */,
 				6E8F13151E73A0ED0073897A /* MoviesDetailViewController.swift */,
+				6EE898881E94334C00F317FE /* ItunesCollectionViewController.swift */,
 			);
 			name = Master;
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 				6E250C221E6E282000EB4D3A /* CastCollectionViewCell.swift */,
 				6E94B7D91E7B7C1F00AE2630 /* PeopleMainCollectionViewCell.swift */,
 				6EE891AC1E85F5040007586E /* MyMovieCollectionViewCell.swift */,
+				6EE8988A1E94396500F317FE /* ItunesCollectionViewCell.swift */,
 			);
 			name = CollectionViewCells;
 			sourceTree = "<group>";
@@ -578,6 +584,7 @@
 			files = (
 				6E64D0801E9326E6005A7D84 /* ItunesCell.swift in Sources */,
 				6EF7403A1E4A7E8500BDA5BE /* MoviesGenresCollectionViewController.swift in Sources */,
+				6EE898891E94334C00F317FE /* ItunesCollectionViewController.swift in Sources */,
 				6EE891AB1E85F2F80007586E /* MyMovieCollectionViewController.swift in Sources */,
 				6E1A0B5A1E391CFE00F18892 /* MoviesMasterViewController.swift in Sources */,
 				6E79F2CE1E4019EF00DF6F6E /* PeopleMainCollectionViewController.swift in Sources */,
@@ -613,6 +620,7 @@
 				6EFD9FC31E4D02A00030D8AA /* UpcomingCollectionViewCell.swift in Sources */,
 				6E2CDCF41E650360006E58EF /* GenreCollectionViewCell.swift in Sources */,
 				6E6D7C891E5CE414002E3A56 /* TitleCell.swift in Sources */,
+				6EE8988B1E94396500F317FE /* ItunesCollectionViewCell.swift in Sources */,
 				6E1A0B781E39209700F18892 /* Networking Manager.swift in Sources */,
 				6E3D621C1E89B75300BE8650 /* MyMovieGuideModel.xcdatamodeld in Sources */,
 				6E6D7C971E5E4E4F002E3A56 /* Extensions.swift in Sources */,
