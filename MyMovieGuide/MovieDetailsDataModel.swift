@@ -206,7 +206,7 @@ public struct MovieDetailsData: Decodable {
       if let jsonDictionary = nm.parseJSONData(data)
       {
         
-        print(jsonDictionary)
+       // print(jsonDictionary)
         
         guard let movieDetails = MovieDetailsData(json: jsonDictionary)
           

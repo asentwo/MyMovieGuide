@@ -463,7 +463,6 @@ extension MoviesDetailViewController {
       let videoVC = segue.destination as! MoviesVideoTableViewController
       videoVC.videoInfo = self.videoInfo
     }
-  //  else if self.segueType == segueController.itunes {
     else {
       let itunesVC = segue.destination as! ItunesCollectionViewController
       itunesVC.itunesSearchTerm = self.currentMovieTitle
