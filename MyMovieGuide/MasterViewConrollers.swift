@@ -71,10 +71,12 @@ class MasterCollectionViewController: UICollectionViewController, UICollectionVi
   }()
   
   let label = UILabel(frame: CGRect(x: 0 + 20, y: 0, width: 200, height: 21))
-  
+  let w = UIScreen.main.bounds.width
+  let h = UIScreen.main.bounds.height
   
   func startLoadingScreen () {
-    label.center = CGPoint(x: 187, y: 285)
+    view.center = CGPoint(x: w / 2, y: h / 2)
+    label.center = CGPoint(x: w / 2, y: h / 2 - 50)
     label.textAlignment = .center
     label.text = "Loading"
     label.font = UIFont(name: "Avenir Next Medium", size: 17)
