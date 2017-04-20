@@ -1722,11 +1722,45 @@
                     <navigationItem key="navigationItem" id="oHt-Pu-jgR"/>
                     <connections>
                         <outlet property="itunesCollectionView" destination="Uge-X9-IQD" id="uy7-Ju-Fdt"/>
+                        <segue destination="tlw-a5-fxA" kind="show" identifier="itunesToPreviewSegue" id="4xT-XQ-oaY"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MOS-hh-geO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7200.8000000000002" y="-941.82908545727139"/>
+        </scene>
+        <!--Itunes Preview View Controller-->
+        <scene sceneID="9g9-5V-U6q">
+            <objects>
+                <viewController id="tlw-a5-fxA" customClass="itunesPreviewViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bcl-lD-DxQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="uBf-zE-ZHv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KZt-uX-8Hj">
+                        <rect key="frame" x="0.0" y="64" width="375" height="1136"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BEj-lk-kFi">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="1136"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="BEj-lk-kFi" secondAttribute="trailing" id="BZM-0j-Mfd"/>
+                            <constraint firstItem="BEj-lk-kFi" firstAttribute="leading" secondItem="KZt-uX-8Hj" secondAttribute="leading" id="iFz-Qg-gBB"/>
+                            <constraint firstItem="BEj-lk-kFi" firstAttribute="top" secondItem="bcl-lD-DxQ" secondAttribute="bottom" id="iav-Ep-UiC"/>
+                            <constraint firstItem="uBf-zE-ZHv" firstAttribute="top" secondItem="BEj-lk-kFi" secondAttribute="bottom" id="lUB-aE-dtl"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="itunesPreview" destination="BEj-lk-kFi" id="rp7-FL-hGz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P6g-uJ-1Yz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8192.7999999999993" y="-942.72863568215894"/>
         </scene>
     </scenes>
     <resources>

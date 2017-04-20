@@ -10,9 +10,6 @@ import UIKit
 import CDAlertView
 import ParticlesLoadingView
 
-//protocol handleItunesData {
-//  func itunesTapped(currentMovieTitle: String, segueType: segueController)
-//}
 
 class ItunesCollectionViewController: UICollectionViewController {
   
@@ -23,7 +20,9 @@ class ItunesCollectionViewController: UICollectionViewController {
   var itunesSearchTerm: String?
   var searchResults: [ItunesData] = []
   var filteredSearchResults: [ItunesData] = []
+  var itunesPreview: URL?
   
+  let itunesToPreviewSegue = "itunesToPreviewSegue"
   let itunesReuseIdentifier = "itunesCollectionViewCell"
   
   //Layout
@@ -59,7 +58,7 @@ class ItunesCollectionViewController: UICollectionViewController {
       })
     }
   }
-
+  
   //Particle loading screen
   lazy var loadingView: ParticlesLoadingView = {
     let x = self.view.frame.size.width/2
@@ -100,7 +99,7 @@ class ItunesCollectionViewController: UICollectionViewController {
 
 
 
-//CollectionView Datasource
+//CollectionView Datasource/ Delegate
 extension ItunesCollectionViewController {
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -125,7 +124,12 @@ extension ItunesCollectionViewController {
     }
     
     if let price = filteredSearchResults[indexPath.row].buyPriceHD{
-      cell.price.text = String(describing: price)
+      
+      if price == 0.0 {
+        cell.price.text = "Free"
+      } else {
+        cell.price.text = String(describing: price)
+      }
     }
     
     if let mediaType = filteredSearchResults[indexPath.row].kindOfMedia {
@@ -134,11 +138,20 @@ extension ItunesCollectionViewController {
     
     return cell
   }
+  
+  //DidSelectItem
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+    if let preview = filteredSearchResults[indexPath.row].itunesLink
+    {
+      UIApplication.shared.open(preview, options: [:], completionHandler: {_ in})
+    }
+  }
 }
+
 
 extension ItunesCollectionViewController: UICollectionViewDelegateFlowLayout  {
   
-
   
   //Height and width of cells
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

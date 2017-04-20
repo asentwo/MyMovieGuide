@@ -277,7 +277,7 @@ class NetworkManager {
    
     let request = URLRequest(url: URL(string:"https://itunes.apple.com/search?term=\(searchTerm)&at=1001lmK9")! )
     
-     print(request)
+    // print(request)
     
     let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
       
