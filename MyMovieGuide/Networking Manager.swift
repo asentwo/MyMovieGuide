@@ -33,7 +33,7 @@ class NetworkManager {
   //SearchPeople: https://api.themoviedb.org/3/search/person?api_key=edd0a1862823ffe4afff6c230daf2c92&language=en-US&query=johnny%20depp&page=1&include_adult=false
   
   
-  //Network session creater
+  //MARK: Network session creater
   typealias JSONData = ((Data) -> Void)
   
   
@@ -104,7 +104,7 @@ class NetworkManager {
     dataTask.resume()
   }
   
-  //Search Requests
+  //MARK: Search Requests
   func getPeopleSearchData (name: String, completion: @escaping JSONData) {
     
     configuration.timeoutIntervalForRequest = 10
@@ -183,7 +183,7 @@ class NetworkManager {
   }
   
   
-  //JSON Parser
+  //MARK: JSON Parser
   func parseJSONData(_ jsonData: Data?) -> [String : AnyObject]?
   {
     if let data = jsonData {
@@ -239,7 +239,7 @@ class NetworkManager {
         dataTask.resume()
       }
   
-  //Video Downloader
+  //MARK: Video Downloader
   typealias VideoDataHandler = ((Data) -> Void)
   
   func downloadVideo(videoKey: String, _ completion: @escaping VideoDataHandler)  {
@@ -272,7 +272,7 @@ class NetworkManager {
     dataTask.resume()
   }
   
-  //In App purchases
+  //MARK: In App purchases
   func connectToItunes (searchTerm: String, completion: @escaping JSONData) {
    
     let request = URLRequest(url: URL(string:"https://itunes.apple.com/search?term=\(searchTerm)&at=1001lmK9")! )

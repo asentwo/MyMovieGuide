@@ -235,7 +235,6 @@
                             <constraint firstItem="qQE-6r-Sfd" firstAttribute="top" secondItem="o5J-Ae-kaO" secondAttribute="bottom" id="JZ5-SU-wWV"/>
                             <constraint firstAttribute="trailing" secondItem="FbB-rJ-3MC" secondAttribute="trailing" id="Ooc-3X-QNx"/>
                             <constraint firstItem="FbB-rJ-3MC" firstAttribute="top" secondItem="RBj-rw-lcb" secondAttribute="bottom" constant="8" id="P21-i9-ago"/>
-                            <constraint firstItem="RBj-rw-lcb" firstAttribute="width" secondItem="RBj-rw-lcb" secondAttribute="height" multiplier="59:6" id="PlR-lA-icS"/>
                             <constraint firstItem="FbB-rJ-3MC" firstAttribute="leading" secondItem="YJV-Hf-Nz7" secondAttribute="leading" id="Sih-zc-KyT"/>
                             <constraint firstItem="qQE-6r-Sfd" firstAttribute="width" secondItem="qQE-6r-Sfd" secondAttribute="height" multiplier="1:1" id="XXY-yw-SJH"/>
                             <constraint firstItem="RBj-rw-lcb" firstAttribute="leading" secondItem="YJV-Hf-Nz7" secondAttribute="leadingMargin" id="gpW-YQ-puL"/>
@@ -1647,7 +1646,7 @@
         <scene sceneID="W5K-13-eg9">
             <objects>
                 <collectionViewController title="ItunesCollectionViewController" clearsSelectionOnViewWillAppear="NO" id="YvP-EO-zu8" customClass="ItunesCollectionViewController" customModule="MyMovieGuide" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Uge-X9-IQD">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="Uge-X9-IQD">
                         <rect key="frame" x="0.0" y="64" width="375" height="1136"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1825,6 +1824,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ih4-rt-hIY"/>
-        <segue reference="sLg-p9-FX2"/>
+        <segue reference="eEf-Gp-gv2"/>
     </inferredMetricsTieBreakers>
 </document>

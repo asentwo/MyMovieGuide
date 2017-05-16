@@ -29,6 +29,7 @@ class InTheatresMoviesViewController: MasterCollectionViewController {
   //MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+  
     
     self.navigationController?.navigationBar.tintColor = UIColor.white
     
