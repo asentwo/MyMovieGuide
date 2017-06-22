@@ -191,7 +191,7 @@ class NetworkManager {
       do {
         let jsonDictionary = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String : AnyObject]//Parses data into a dictionary
         
-        //   print(jsonDictionary)
+          // print(jsonDictionary)
         
         return jsonDictionary
         

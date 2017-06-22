@@ -62,13 +62,22 @@ class MoviesGenresViewController: MasterViewController {
             }
             DispatchQueue.main.async {
               self.hideLoadingScreen()
-              self.genresTableView.reloadData()
+              self.animateTableView()
             }
           })
         }
       }
     })
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    animateTableView()
+  }
+  
+
+  
   
   //Parallax
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -127,5 +136,37 @@ extension MoviesGenresViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let genreCollectVC = segue.destination as! MoviesGenresCollectionViewController
     genreCollectVC.genreID = self.genreID
+  }
+}
+
+
+//MARK: Animate in cells
+extension MoviesGenresViewController {
+  
+  func animateTableView () {
+    genresTableView.reloadData()
+    
+    let cells = genresTableView.visibleCells
+    
+    let tableViewHeight = genresTableView.bounds.size.height
+    
+    var delayCounter: Double = 0// Delay for when tableview cells will appear on screen
+    
+    for cell in cells {
+      //Moves tableview down based on size of the height
+      cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+      
+    }
+    
+    for cell in cells {
+      
+      UIView.animate(withDuration: 1.75, delay: delayCounter * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+        
+        cell.transform = CGAffineTransform.identity// identity stands for transform origin
+        
+      }, completion: nil)
+      
+      delayCounter += 1
+    }
   }
 }
